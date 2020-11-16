@@ -804,7 +804,7 @@
                     <ul id="customer">
                         <li class="navigation-divider">Customer</li>
                         <li>
-                            <a  class="active" href="dropdownlist">
+                            <a  class="active" href="customerindex">
                                 <span class="nav-link-icon">
                                     <i class="fa fa-user-o"></i>
                                 </span>
@@ -827,7 +827,7 @@
                         <li class="navigation-divider">Paket Wisata</li>
                         <li>
                             <a  class="active" href="dropdownlist">
-                                <span class="nav-link-icon" data-feather="plus"></span>
+                                <span class="nav-link-icon" data-feather="calendar"></span>
                                 <span>Paket Wisata</span>
                             </a>
                         </li>
@@ -837,13 +837,21 @@
                         <li class="navigation-divider">Category Armada</li>
                         <li>
                             <a  class="active" href="dropdownlist">
-                                <span class="nav-link-icon" data-feather="plus"></span>
+                                <span class="nav-link-icon" data-feather="menu"></span>
+                                <span>Daftar Category Armada</span>
+                            </a>
+                        </li>
+                        
+                        <li class="navigation-divider">Armada</li>
+                        <li>
+                            <a  class="active" href="dropdownlist">
+                                <span class="nav-link-icon" data-feather="truck"></span>
                                 <span>Bus Besar</span>
                             </a>
                         </li>
                         <li>
                             <a  class="active" href="dropdownlist">
-                                <span class="nav-link-icon" data-feather="plus"></span>
+                                <span class="nav-link-icon" data-feather="truck"></span>
                                 <span>Mini Bus</span>
                             </a>
                         </li>
@@ -854,16 +862,14 @@
                         <li class="navigation-divider">Sewa</li>
                         <li>
                             <a class="active" href="barcodetoko">
-                            <span class="nav-link-icon">
-                                    <i class="fa fa-upload"></i>
+                            <span class="nav-link-icon" data-feather="truck">
                                 </span>
                                 <span>Sewa Armada</span>
                             </a>
                         </li>
                         <li>
                             <a class="active" href="geolocation">
-                            <span class="nav-link-icon">
-                                    <i class="fa fa-chevron-down"></i>
+                            <span class="nav-link-icon" data-feather="calendar">
                                 </span>
                                 <span>Sewa Paket Wisata</span>
                             </a>

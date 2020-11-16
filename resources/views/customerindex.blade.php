@@ -23,32 +23,33 @@
     
 <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title mb-0">Table Barang</h6>
+                    <h6 class="card-title mb-0">Table Customer</h6>
                 </div>
                 <div class="table-responsive">
                     <table id="myTable" class="table table-striped table-bordered">
                         <thead>
                         <tr>
-                            <th>Id Barang</th>
-                            <th>Nama Barang</th>
-                            <th>Stock Barang</th>
-                            <th>Deskripsi Barang</th>
-                            <th>Cetak Barcode</th>
+                            <th>Id Customer</th>
+                            <th>Nama Customer</th>
+                            <th>Email Customer</th>
+                            <th>Telephone Customer</th>
+                            <th>Alamat Customer</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                        @foreach($barang as $brg)
+                        @foreach($customer as $cus)
                                     <!-- <tr class="table-light"> -->
-                                    <td>{{ $brg -> ID_BARANG }}</td>
-                                    <td>{{ $brg -> NAMA_BARANG }}</td>
-                                    <td>{{ $brg -> STOCK_BARANG }}</td>
-                                    <td>{{ $brg -> DESKRIPSI }}</td>
+                                    <td>{{ $cus -> ID_CUSTOMER }}</td>
+                                    <td>{{ $cus -> NAMA_CUSTOMER }}</td>
+                                    <td>{{ $cus -> EMAIL }}</td>
+                                    <td>{{ $cus -> TELEPHONE }}</td>
+                                    <td>{{ $cus -> ALAMAT }}</td>
                                     <td>
-                                    <a href="pdf-barcode/{{$brg->ID_BARANG}}">
+                                    <!-- <a href="pdf-barcode/{{$brg->ID_BARANG}}">
                                     <button type="button" class="btn btn-outline-info btn-uppercase">
                                         <i class="ti-plus mr-2"></i>Cetak barcode
-                                    </button></a>
+                                    </button></a> -->
                                     </td>
                                     </tr>
                                     @endforeach
@@ -56,11 +57,11 @@
                                     </tbody>
                                     <tfoot>
                         <tr>
-                            <th>Id Barang</th>
-                            <th>Nama Barang</th>
-                            <th>Stock Barang</th>
-                            <th>Deskripsi Barang</th>
-                            <th>Cetak Barcode</th>
+                            <th>Id Customer</th>
+                            <th>Nama Customer</th>
+                            <th>Email Customer</th>
+                            <th>Telephone Customer</th>
+                            <th>Alamat Customer</th>
                         </tr>
                         </tfoot>
                     </table>

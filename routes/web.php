@@ -41,6 +41,11 @@ Route::get('user-manual', 'Data2Controller@user_manual');
 Route::get('/','OtentifikasiController@index');
 Route::post('login','OtentifikasiController@login');
 
+//Customer
+Route::get('customerindex','CustomerController@index');
+
+
+
 Route::get('dropdownlist/getstates/{id}','Data2Controller@getStates');
 Route::get('dropdownlist/getkecamatan/{id}','Data2Controller@getKecamatan');
 Route::get('dropdownlist/getkelurahan/{id}','Data2Controller@getKelurahan');
