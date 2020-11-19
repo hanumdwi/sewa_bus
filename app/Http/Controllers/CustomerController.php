@@ -40,7 +40,26 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // DB::table('customer')->insert([
+        //     'NAMA_CUSTOMER'   => $request->nama,
+        //     'EMAIL'           => $request->email,
+        //     'TELEPHONE'       => $request->telephone,
+        //     'ALAMAT'          => $request->alamat
+        //      ]);
+     
+        // return redirect('customerindex');
+        $customer = new Customer;
+
+        $customer->fill([
+            'NAMA_CUSTOMER'   => $request->nama,
+            'EMAIL'           => $request->email,
+            'TELEPHONE'       => $request->telephone,
+            'ALAMAT'          => $request->alamat
+        ]);
+
+        $customer->save();
+
+        return redirect('customerindex');
     }
 
     /**

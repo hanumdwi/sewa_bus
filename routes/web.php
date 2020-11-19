@@ -43,6 +43,7 @@ Route::post('login','OtentifikasiController@login');
 
 //Customer
 Route::get('customerindex','CustomerController@index');
+Route::post('customerstore', 'CustomerController@store');
 
 
 

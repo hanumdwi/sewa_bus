@@ -43,31 +43,31 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                <form>
+                                <form action="customerstore" method="post">
                                 @csrf
                                 <div class="form-group">
                                     <label for="nama" class="col-form-label">Nama :</label>
-                                    <input type="text" class="form-control" id="nama">
+                                    <input type="text" class="form-control" id="nama" name="nama">
                                 </div>
                                 <div class="form-group">
                                     <label for="email" class="col-form-label">Email :</label>
-                                    <input type="email" class="form-control" id="email">
+                                    <input type="email" class="form-control" id="email" name="email">
                                     </div>
                                 <div class="form-group">
                                     <label for="telephone" class="col-form-label">Telephone :</label>
-                                    <input type="telephone" class="form-control" id="telephone">
+                                    <input type="telephone" class="form-control" id="telephone" name="telephone">
                                     </div>
                                 <div class="form-group">
                                     <label for="alamat" class="col-form-label">Alamat :</label>
-                                    <input type="alamat" class="form-control" id="alamat">
+                                    <input type="alamat" class="form-control" id="alamat" name="alamat">
                                     </div>
-                                </form>
+                                
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                </button>
-                                <button type="button" class="btn btn-primary" id="berhasil">Add Customer</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary" id="berhasil">Add Customer</button>
                             </div>
+                            </form>
                             </div>
                         </div>
                         </div>
