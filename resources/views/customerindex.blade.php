@@ -26,6 +26,51 @@
                     <h6 class="card-title mb-0">Table Customer</h6>
                 </div>
                 <div class="table-responsive">
+                <center>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
+                Tambah Data Customer
+                    </button>
+                    </center>
+                        <!-- modal -->
+                        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModal1Label" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModal1Label">Tambah Data Customer</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <i class="ti-close"></i>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                <form>
+                                @csrf
+                                <div class="form-group">
+                                    <label for="nama" class="col-form-label">Nama :</label>
+                                    <input type="text" class="form-control" id="nama">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="col-form-label">Email :</label>
+                                    <input type="email" class="form-control" id="email">
+                                    </div>
+                                <div class="form-group">
+                                    <label for="telephone" class="col-form-label">Telephone :</label>
+                                    <input type="telephone" class="form-control" id="telephone">
+                                    </div>
+                                <div class="form-group">
+                                    <label for="alamat" class="col-form-label">Alamat :</label>
+                                    <input type="alamat" class="form-control" id="alamat">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                </button>
+                                <button type="button" class="btn btn-primary" id="berhasil">Add Customer</button>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
                     <table id="myTable" class="table table-striped table-bordered">
                         <thead>
                         <tr>
@@ -34,6 +79,7 @@
                             <th>Email Customer</th>
                             <th>Telephone Customer</th>
                             <th>Alamat Customer</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -46,10 +92,16 @@
                                     <td>{{ $cus -> TELEPHONE }}</td>
                                     <td>{{ $cus -> ALAMAT }}</td>
                                     <td>
-                                    <!-- <a href="pdf-barcode/{{$brg->ID_BARANG}}">
-                                    <button type="button" class="btn btn-outline-info btn-uppercase">
-                                        <i class="ti-plus mr-2"></i>Cetak barcode
-                                    </button></a> -->
+                                    <a href="customeredit{{$cus -> ID_CUSTOMER}}">
+                                    <button type="button" class="btn btn-success btn-square btn-uppercase">
+                                        <i class="ti-settings mr-2"></i>Edit
+                                    </button>
+                                    </a>
+                                    <a href="customeredit{{$cus -> ID_CUSTOMER}}">
+                                    <button type="button" class="btn btn-danger btn-square btn-uppercase">
+                                        <i class="ti-trash mr-2"></i>Delete
+                                    </button>
+                                    </a>
                                     </td>
                                     </tr>
                                     @endforeach
@@ -62,6 +114,7 @@
                             <th>Email Customer</th>
                             <th>Telephone Customer</th>
                             <th>Alamat Customer</th>
+                            <th>Action</th>
                         </tr>
                         </tfoot>
                     </table>
@@ -106,4 +159,9 @@
 
 toastr.success('Successfully completed');
     </script>
+
+<script> 
+swal(berhasil,"Good job!", "You clicked the button!", "success");
+</script>
+
 @endsection
