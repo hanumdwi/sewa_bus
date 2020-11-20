@@ -44,8 +44,10 @@ Route::post('login','OtentifikasiController@login');
 //Customer
 Route::get('customerindex','CustomerController@index');
 Route::post('customerstore', 'CustomerController@store');
-
-
+Route::get('customeredit/{id}', 'CustomerController@edit');
+Route::post('customerupdate', 'CustomerController@update');
+Route::get('customerdestroy/{id}', 'CustomerController@destroy');
+//================================================================================
 
 Route::get('dropdownlist/getstates/{id}','Data2Controller@getStates');
 Route::get('dropdownlist/getkecamatan/{id}','Data2Controller@getKecamatan');

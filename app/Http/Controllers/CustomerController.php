@@ -79,9 +79,12 @@ class CustomerController extends Controller
      * @param  \App\customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function edit(customer $customer)
+    public function edit($id)
     {
-        //
+        // mengambil data customer berdasarkan id yang dipilih
+		$customer = DB::table('customer')->where('ID_CUSTOMER',$id)->get();
+		// passing data customer yang didapat ke view edit.blade.php
+		return view('customerindex',['customer' => $customer]);
     }
 
     /**
@@ -91,9 +94,16 @@ class CustomerController extends Controller
      * @param  \App\customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, customer $customer)
+    public function update(Request $request)
     {
-        //
+        DB::table('customer')->where('ID_CUSTOMER',$request->id)->update([
+			'NAMA_CUSTOMER'   => $request->nama,
+            'EMAIL'           => $request->email,
+            'TELEPHONE'       => $request->telephone,
+            'ALAMAT'          => $request->alamat
+		]);
+		// alihkan halaman ke halaman customer
+		return redirect('customerindex');
     }
 
     /**
@@ -102,8 +112,11 @@ class CustomerController extends Controller
      * @param  \App\customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(customer $customer)
+    public function destroy($id)
     {
-        //
+        DB::table('customer')->where('ID_CUSTOMER',$id)->delete();
+		
+		// alihkan halaman ke halaman customer
+		return redirect('customerindex');
     }
 }
