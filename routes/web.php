@@ -55,6 +55,7 @@ Route::post('armadastore', 'ArmadaController@store');
 Route::get('armadaedit/{id}', 'ArmadaController@edit');
 Route::post('armadaupdate', 'ArmadaController@update');
 Route::get('armadadestroy/{id}', 'ArmadaController@destroy');
+Route::post('armadaupdateswitch', 'ArmadaController@update_switch');
 //================================================================================
 
 //Category Armada
@@ -72,6 +73,12 @@ Route::get('paketwisataedit/{id}', 'PaketWisataController@edit');
 Route::post('paketwisataupdate', 'PaketWisataController@update');
 Route::get('paketwisatadestroy/{id}', 'PaketWisataController@destroy');
 //================================================================================
+
+//Sewa Bus
+Route::get('sewa_bus','SewaBusController@index');
+Route::post('sewa_busstore', 'SewaBusController@store');
+Route::get('schedulesewa', 'SewaBusController@getAllSchedule');
+Route::get('schedulesewa/{id}', 'SewaBusController@getScheduleById');
 
 Route::get('dropdownlist/getstates/{id}','Data2Controller@getStates');
 Route::get('dropdownlist/getkecamatan/{id}','Data2Controller@getKecamatan');

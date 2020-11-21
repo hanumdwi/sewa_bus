@@ -855,14 +855,14 @@
                     <ul id="sewa">
                         <li class="navigation-divider">Sewa</li>
                         <li>
-                            <a class="active" href="barcodetoko">
+                            <a class="active" href="sewa_bus">
                             <span class="nav-link-icon" data-feather="truck">
                                 </span>
                                 <span>Sewa Armada</span>
                             </a>
                         </li>
                         <li>
-                            <a class="active" href="geolocation">
+                            <a class="active" href="sewa_paket">
                             <span class="nav-link-icon" data-feather="calendar">
                                 </span>
                                 <span>Sewa Paket Wisata</span>

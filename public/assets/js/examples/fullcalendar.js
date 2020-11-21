@@ -95,20 +95,20 @@ $(document).ready(function () {
         },
         weekNumbers: true,
         eventLimit: true, // allow "more" link when too many events
-        events: events,
+        events: {
+            url:'http://127.0.0.1:8000/schedulesewa'
+        },
         eventRender: function (event, element) {
             if (event.icon) {
                 element.find(".fc-title").prepend("<i class='mr-1 fa fa-" + event.icon + "'></i>");
             }
         },
         dayClick: function () {
-            $('#createEventModal').modal();
+            $('#viewEventModal').modal();
         },
         eventClick: function (event, jsEvent, view) {
             var modal = $('#viewEventModal');
-            modal.find('.event-icon').html("<i class='fa fa-" + event.icon + "'></i>");
-            modal.find('.event-title').html(event.title);
-            modal.find('.event-body').html(event.description);
+            modal.find('.event-title').html("update");
             modal.modal();
         },
     });

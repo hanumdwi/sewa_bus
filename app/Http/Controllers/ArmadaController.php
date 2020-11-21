@@ -19,7 +19,7 @@ class ArmadaController extends Controller
         $category_armada = DB::table('category_armada')->get();
         $armada = DB::table('armada')
         ->join('category_armada','armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
-        ->select('category_armada.NAMA_CATEGORY','armada.ID_ARMADA','armada.NAMA_ARMADA', 'armada.PLAT_NOMOR', 'armada.KAPASITAS', 'armada.FASILITAS','armada.HARGA')
+        ->select('category_armada.NAMA_CATEGORY','armada.ID_ARMADA','armada.NAMA_ARMADA', 'armada.PLAT_NOMOR', 'armada.KAPASITAS', 'armada.FASILITAS','armada.HARGA','armada.STATUS')
         ->get();
 
         return view ('armadaindex',['armada' =>$armada,'category_armada' =>$category_armada]);
@@ -52,7 +52,8 @@ class ArmadaController extends Controller
             'PLAT_NOMOR'      => $request->platnomor,
             'KAPASITAS'       => $request->kapasitas,
             'FASILITAS'       => $request->fasilitas,
-            'HARGA'           => $request->harga
+            'HARGA'           => $request->harga,
+            'STATUS'          => $request->status
         ]);
 
         $armada->save();
@@ -97,13 +98,31 @@ class ArmadaController extends Controller
             'PLAT_NOMOR'      => $request->platnomor,
             'KAPASITAS'       => $request->kapasitas,
             'FASILITAS'       => $request->fasilitas,
-            'HARGA'           => $request->harga
+            'HARGA'           => $request->harga,
+            'STATUS'          => $request->status
 		]);
 		// alihkan halaman ke halaman armada
 		return redirect('armadaindex');
     }
 
+    public function update_switch(Request $request)
+    {
+        $armada=DB::table('armada')->where('ID_ARMADA',$request->id)->value('status','=','1');
+        if($armada){
+            DB::table('armada')
+                ->where('ID_ARMADA',$request->id)
+                ->update(['status'=>0]);
+        }
+        else{
+            DB::table('armada')
+                ->where('ID_ARMADA',$request->id)
+                ->update(['status'=>1]);
+        }
+        return redirect('armadaindex');
+    }
+
     /**
+     * 
      * Remove the specified resource from storage.
      *
      * @param  \App\armada  $armada

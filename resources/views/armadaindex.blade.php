@@ -88,6 +88,7 @@
                     <table id="myTable" class="table table-striped table-bordered">
                         <thead>
                         <tr>
+                            <th>Status</th>
                             <th>Id Armada</th>
                             <th>Category Armada</th>
                             <th>Nama Armada</th>
@@ -101,6 +102,23 @@
                         <tbody>
                         <tr>
                             @foreach($armada as $ar)
+                                    <td>
+                                        <form class="post0" method="post" action="armadaupdateswitch">
+                                        @csrf
+                                            <input type="hidden" name="id" value="{{$ar->ID_ARMADA}}">
+                                            @if($ar -> STATUS == 1)
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" id="customSwitch1" checked>
+                                                <label class="custom-control-label" for="switch{{$ar->ID_ARMADA}}">Active</label>
+                                            </div>
+                                            @else 
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" id="switch{{$ar->ID_ARMADA}}">
+                                                <label class="custom-control-label" for="switch{{$ar->ID_ARMADA}}">Non-Active</label>
+                                            </div>
+                                        @endif
+                                        </form>
+                                    </td>
                                     <!-- <tr class="table-light"> -->
                                     <td>{{ $ar -> ID_ARMADA }}</td>
                                     <td>{{ $ar -> NAMA_CATEGORY }}</td>
@@ -210,6 +228,7 @@
                                     </tbody>
                                     <tfoot>
                         <tr>
+                            <th>Status</th>
                             <th>Id Armada</th>
                             <th>Category Armada</th>
                             <th>Nama Armada</th>
