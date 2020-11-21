@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\category;
 use Illuminate\Http\Request;
+use DB;
 
 class CategoryController extends Controller
 {
@@ -14,7 +15,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $category_armada=DB::table('category_armada')->get();
+
+
+        return view('category_armadaindex', ['category_armada' =>$category_armada]);
     }
 
     /**
@@ -35,7 +39,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category_armada = new Category;
+
+        $category_armada->fill([
+            'NAMA_CATEGORY'   => $request->namacategory
+        ]);
+
+        $category_armada->save();
+
+        return redirect('category_armadaindex');
     }
 
     /**
@@ -67,9 +79,13 @@ class CategoryController extends Controller
      * @param  \App\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, category $category)
+    public function update(Request $request)
     {
-        //
+        DB::table('category_armada')->where('ID_CATEGORY',$request->id)->update([
+            'NAMA_CATEGORY'   => $request->namacategory
+        ]);
+
+        return redirect('category_armadaindex');
     }
 
     /**
@@ -78,8 +94,11 @@ class CategoryController extends Controller
      * @param  \App\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(category $category)
+    public function destroy($id)
     {
-        //
+        DB::table('category_armada')->where('ID_CATEGORY',$id)->delete();
+		
+		// alihkan halaman ke halaman category
+		return redirect('category_armadaindex');
     }
 }

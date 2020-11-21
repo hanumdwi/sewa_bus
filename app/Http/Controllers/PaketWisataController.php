@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\paket_wisata;
+use App\armada;
 use Illuminate\Http\Request;
+use\DB;
 
 class PaketWisataController extends Controller
 {
@@ -14,7 +16,13 @@ class PaketWisataController extends Controller
      */
     public function index()
     {
-        //
+        $armada = DB::table('armada')->get();
+        $paket_wisata = DB::table('paket_wisata')
+        ->join('armada','paket_wisata.ID_ARMADA', '=', 'armada.ID_ARMADA')
+        ->select('armada.NAMA_ARMADA','paket_wisata.ID_PAKET','paket_wisata.NAMA_PAKET', 'paket_wisata.TIPE_PAKET', 'paket_wisata.HARGA_DASAR', 'paket_wisata.HARGA_JUAL','paket_wisata.FASILITAS')
+        ->get();
+
+        return view ('paketwisataindex',['paket_wisata' =>$paket_wisata,'armada' =>$armada]);
     }
 
     /**
@@ -35,7 +43,21 @@ class PaketWisataController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $paket_wisata = new Paket_Wisata;
+        $armada = new Armada;
+
+        $paket_wisata->fill([
+            'ID_ARMADA'     => $request->ID_ARMADA,
+            'NAMA_PAKET'    => $request->namapaket,
+            'TIPE_PAKET'    => $request->tipepaket,
+            'HARGA_DASAR'   => $request->hargadasar,
+            'HARGA_JUAL'    => $request->hargajual,
+            'FASILITAS'     => $request->fasilitas
+        ]);
+
+        $paket_wisata->save();
+
+        return redirect('paketwisataindex');
     }
 
     /**
@@ -69,7 +91,16 @@ class PaketWisataController extends Controller
      */
     public function update(Request $request, paket_wisata $paket_wisata)
     {
-        //
+        DB::table('paket_wisata')->where('ID_PAKET',$request->id)->update([
+            'ID_ARMADA'     => $request->ID_ARMADA,
+            'NAMA_PAKET'    => $request->namapaket,
+            'TIPE_PAKET'    => $request->tipepaket,
+            'HARGA_DASAR'   => $request->hargadasar,
+            'HARGA_JUAL'    => $request->hargajual,
+            'FASILITAS'     => $request->fasilitas
+        ]);
+
+            return redirect('paketwisataindex');
     }
 
     /**
@@ -78,8 +109,11 @@ class PaketWisataController extends Controller
      * @param  \App\paket_wisata  $paket_wisata
      * @return \Illuminate\Http\Response
      */
-    public function destroy(paket_wisata $paket_wisata)
+    public function destroy($id)
     {
-        //
+        DB::table('paketwisata')->where('ID_PAKET',$id)->delete();
+		
+		// alihkan halaman ke halaman paketwisata
+		return redirect('paketwisataindex');
     }
 }

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\armada;
+use App\category;
 use Illuminate\Http\Request;
+use DB;
 
 class ArmadaController extends Controller
 {
@@ -14,7 +16,13 @@ class ArmadaController extends Controller
      */
     public function index()
     {
-        //
+        $category_armada = DB::table('category_armada')->get();
+        $armada = DB::table('armada')
+        ->join('category_armada','armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
+        ->select('category_armada.NAMA_CATEGORY','armada.ID_ARMADA','armada.NAMA_ARMADA', 'armada.PLAT_NOMOR', 'armada.KAPASITAS', 'armada.FASILITAS','armada.HARGA')
+        ->get();
+
+        return view ('armadaindex',['armada' =>$armada,'category_armada' =>$category_armada]);
     }
 
     /**
@@ -35,7 +43,21 @@ class ArmadaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $armada = new Armada;
+        $category_armada = new Category;
+
+        $armada->fill([
+            'ID_CATEGORY'     => $request->ID_CATEGORY,
+            'NAMA_ARMADA'     => $request->namaarmada,
+            'PLAT_NOMOR'      => $request->platnomor,
+            'KAPASITAS'       => $request->kapasitas,
+            'FASILITAS'       => $request->fasilitas,
+            'HARGA'           => $request->harga
+        ]);
+
+        $armada->save();
+
+        return redirect('armadaindex');
     }
 
     /**
@@ -67,9 +89,18 @@ class ArmadaController extends Controller
      * @param  \App\armada  $armada
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, armada $armada)
+    public function update(Request $request)
     {
-        //
+        DB::table('armada')->where('ID_ARMADA',$request->id)->update([
+			'ID_CATEGORY'     => $request->ID_CATEGORY,
+            'NAMA_ARMADA'     => $request->namaarmada,
+            'PLAT_NOMOR'      => $request->platnomor,
+            'KAPASITAS'       => $request->kapasitas,
+            'FASILITAS'       => $request->fasilitas,
+            'HARGA'           => $request->harga
+		]);
+		// alihkan halaman ke halaman armada
+		return redirect('armadaindex');
     }
 
     /**
@@ -78,8 +109,11 @@ class ArmadaController extends Controller
      * @param  \App\armada  $armada
      * @return \Illuminate\Http\Response
      */
-    public function destroy(armada $armada)
+    public function destroy($id)
     {
-        //
+        DB::table('armada')->where('ID_ARMADA',$id)->delete();
+		
+		// alihkan halaman ke halaman armada
+		return redirect('armadaindex');
     }
 }

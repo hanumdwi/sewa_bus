@@ -826,7 +826,7 @@
                     <ul id="paketwisata">
                         <li class="navigation-divider">Paket Wisata</li>
                         <li>
-                            <a  class="active" href="dropdownlist">
+                            <a  class="active" href="paketwisataindex">
                                 <span class="nav-link-icon" data-feather="calendar"></span>
                                 <span>Paket Wisata</span>
                             </a>
@@ -836,7 +836,7 @@
                     <ul id="armada">
                         <li class="navigation-divider">Category Armada</li>
                         <li>
-                            <a  class="active" href="dropdownlist">
+                            <a  class="active" href="category_armadaindex">
                                 <span class="nav-link-icon" data-feather="menu"></span>
                                 <span>Daftar Category Armada</span>
                             </a>
@@ -844,15 +844,9 @@
                         
                         <li class="navigation-divider">Armada</li>
                         <li>
-                            <a  class="active" href="dropdownlist">
+                            <a  class="active" href="armadaindex">
                                 <span class="nav-link-icon" data-feather="truck"></span>
-                                <span>Bus Besar</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a  class="active" href="dropdownlist">
-                                <span class="nav-link-icon" data-feather="truck"></span>
-                                <span>Mini Bus</span>
+                                <span>Armada Bus</span>
                             </a>
                         </li>
                     

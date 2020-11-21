@@ -49,6 +49,30 @@ Route::post('customerupdate', 'CustomerController@update');
 Route::get('customerdestroy/{id}', 'CustomerController@destroy');
 //================================================================================
 
+//Armada
+Route::get('armadaindex','ArmadaController@index');
+Route::post('armadastore', 'ArmadaController@store');
+Route::get('armadaedit/{id}', 'ArmadaController@edit');
+Route::post('armadaupdate', 'ArmadaController@update');
+Route::get('armadadestroy/{id}', 'ArmadaController@destroy');
+//================================================================================
+
+//Category Armada
+Route::get('category_armadaindex','CategoryController@index');
+Route::post('category_armadastore', 'CategoryController@store');
+Route::get('category_armadaedit/{id}', 'CategoryController@edit');
+Route::post('category_armadaupdate', 'CategoryController@update');
+Route::get('category_armadadestroy/{id}', 'CategoryController@destroy');
+//================================================================================
+
+//Category Armada
+Route::get('paketwisataindex','PaketWisataController@index');
+Route::post('paketwisatastore', 'PaketWisataController@store');
+Route::get('paketwisataedit/{id}', 'PaketWisataController@edit');
+Route::post('paketwisataupdate', 'PaketWisataController@update');
+Route::get('paketwisatadestroy/{id}', 'PaketWisataController@destroy');
+//================================================================================
+
 Route::get('dropdownlist/getstates/{id}','Data2Controller@getStates');
 Route::get('dropdownlist/getkecamatan/{id}','Data2Controller@getKecamatan');
 Route::get('dropdownlist/getkelurahan/{id}','Data2Controller@getKelurahan');
