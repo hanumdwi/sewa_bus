@@ -103,12 +103,19 @@
                         <tr>
                             @foreach($armada as $ar)
                                     <td>
+                                        @php $x=0; @endphp
+                                            @foreach($sewa_bus as $sb)
+                                                @if($ar->ID_ARMADA == $sb->ID_ARMADA)
+                                        @php $x=1; @endphp
+                                                @endif
+                                            @endforeach
+                                    @if($x==0)
                                         <form class="post0" method="post" action="armadaupdateswitch">
                                         @csrf
                                             <input type="hidden" name="id" value="{{$ar->ID_ARMADA}}">
                                             @if($ar -> STATUS == 1)
                                             <div class="custom-control custom-switch">
-                                                <input type="checkbox" class="custom-control-input" id="customSwitch1" checked>
+                                                <input type="checkbox" class="custom-control-input" checked id="switch{{$ar->ID_ARMADA}}">
                                                 <label class="custom-control-label" for="switch{{$ar->ID_ARMADA}}">Active</label>
                                             </div>
                                             @else 
@@ -116,8 +123,25 @@
                                                 <input type="checkbox" class="custom-control-input" id="switch{{$ar->ID_ARMADA}}">
                                                 <label class="custom-control-label" for="switch{{$ar->ID_ARMADA}}">Non-Active</label>
                                             </div>
-                                        @endif
+                                            @endif
                                         </form>
+                                    @else
+                                        <form id="modal{{$ar->ID_ARMADA}}" onclick="modal(id)" method="post" action="#">
+                                            @csrf
+                                                <input type="hidden" name="id" value="{{$ar->ID_ARMADA}}">
+                                                @if($ar -> STATUS == 1)
+                                                <div class="custom-control custom-switch">
+                                                    <input type="checkbox" class="custom-control-input" checked id="switch{{$ar->ID_ARMADA}}">
+                                                    <label class="custom-control-label" for="switch{{$ar->ID_ARMADA}}">Active</label>
+                                                </div>
+                                                @else 
+                                                <div class="custom-control custom-switch">
+                                                    <input type="checkbox" class="custom-control-input" id="switch{{$ar->ID_ARMADA}}">
+                                                    <label class="custom-control-label" for="switch{{$ar->ID_ARMADA}}">Non-Active</label>
+                                                </div>
+                                                @endif
+                                            </form>
+                                    @endif
                                     </td>
                                     <!-- <tr class="table-light"> -->
                                     <td>{{ $ar -> ID_ARMADA }}</td>
@@ -128,11 +152,35 @@
                                     <td>{{ $ar -> FASILITAS }}</td>
                                     <td>{{ $ar -> HARGA }}</td>
                                     <td>
-                                    
-                                    <button type="button" class="btn btn-success btn-square btn-uppercase" data-toggle="modal" data-target="#exampleModal12{{$ar -> ID_ARMADA}}">
-                                        <i class="ti-settings mr-2"></i>Edit
+                                    @if($ar -> STATUS == 1)
+                                    <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit" data-toggle="modal" data-target="#exampleModal12{{$ar -> ID_ARMADA}}">
+                                        <i class="ti-pencil"></i>
                                     </button>
-                                    
+                                    @else
+                                    <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit" data-toggle="modal" data-target="#tampil">
+                                        <i class="ti-pencil"></i>
+                                    </button>
+
+                                        <div class="modal" id="tampil" tabindex="-1" role="dialog">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content border">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Modal title</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <i class="ti-close"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Sorry, Data Non-Active</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
                                     <!-- modal -->
                                         <div class="modal fade" id="exampleModal12{{$ar -> ID_ARMADA}}" tabindex="-1" role="dialog"
                                         aria-labelledby="exampleModal12Label" aria-hidden="true">
@@ -191,8 +239,8 @@
                                         </div>
                                         </div>
                                     
-                                    <button type="button" class="btn btn-danger btn-square btn-uppercase" data-toggle="modal" data-target="#exampleModal13{{$ar -> ID_ARMADA}}">
-                                        <i class="ti-trash mr-2"></i>Delete
+                                    <button type="button" class="btn btn-outline-danger btn-sm btn-floating ml-2" title="Delete" data-toggle="modal" data-target="#exampleModal13{{$ar -> ID_ARMADA}}">
+                                        <i class="ti-trash"></i>
                                     </button>
                                     
                                         <!-- modal -->
@@ -256,10 +304,24 @@
     $('#myTable').DataTable();
 });
 
-    function modal(id){
-        const y=document.getElementById(id);
-            $("#exampleModal12").modal();
-        }
+    
+
+        console.log('x : ')
+            const x = document.getElementsByClassName('post0');
+            for(let i=0;i<x.length;i++){
+                x[i].addEventListener('click',function(){
+                    x[i].submit();
+                });
+            }
+
+            function modal(id){
+                const y=document.getElementById(id);
+                $("#tampil").modal();
+            }
+
+            function tampil(id){
+             const y=document.getElementById(id);
+            }
 
 </script>
     <!-- Sweet alert -->
@@ -288,8 +350,5 @@
 toastr.success('Successfully completed');
     </script>
 
-<script> 
-swal(berhasil,"Good job!", "You clicked the button!", "success");
-</script>
 
 @endsection

@@ -93,8 +93,8 @@
                                     <td>{{ $cus -> ALAMAT }}</td>
                                     <td>
                                     
-                                    <button type="button" class="btn btn-success btn-square btn-uppercase" data-toggle="modal" data-target="#exampleModal12{{$cus -> ID_CUSTOMER}}">
-                                        <i class="ti-settings mr-2"></i>Edit
+                                    <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit" data-toggle="modal" data-target="#exampleModal12{{$cus -> ID_CUSTOMER}}">
+                                        <i class="ti-pencil"></i>
                                     </button>
                                     
                                     <!-- modal -->
@@ -141,8 +141,8 @@
                                         </div>
                                         </div>
                                     
-                                    <button type="button" class="btn btn-danger btn-square btn-uppercase" data-toggle="modal" data-target="#exampleModal13{{$cus -> ID_CUSTOMER}}">
-                                        <i class="ti-trash mr-2"></i>Delete
+                                    <button type="button" class="btn btn-outline-danger btn-sm btn-floating ml-2" title="Delete" data-toggle="modal" data-target="#exampleModal13{{$cus -> ID_CUSTOMER}}">
+                                        <i class="ti-trash"></i>
                                     </button>
                                     
                                         <!-- modal -->

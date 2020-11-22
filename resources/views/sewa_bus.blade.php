@@ -13,6 +13,7 @@
 
 @section('content')
 
+
     <div class="page-header">
         <div class="page-title">
             <h3>Sewa Bus</h3>
@@ -24,7 +25,7 @@
             </div>
         </div>
     </div>
-
+    
     <div class="row app-block mb-4">
         <div class="col-md-3 app-sidebar">
             <div class="card">
@@ -58,7 +59,7 @@
             </div>
         </div>
     </div>
-
+    
     <!-- begin::Create Event Modal -->
     <div class="modal fade" id="createEventModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -161,6 +162,7 @@
                             </div>
                         </div>
                     </form>
+                    
                 </div>
                 
             </div>
@@ -179,7 +181,7 @@
                 </div>
                 
                 <div class="modal-body">
-                
+                @foreach($sewa_bus as $sb)
                     <form autocomplete="off" action="sewa_busupdate" method="post">
                     @csrf
                         <div class="form-group row">
@@ -194,7 +196,7 @@
                         
                             <label class="col-sm-3 col-form-label">Nama Customer</label>
                             <div class="col-sm-9">
-                            <select name="ID_CUSTOMER" class="form-control" id="ID_CUSTOMER" value="{{ $cus->ID_CUSTOMER }}">
+                            <select name="ID_CUSTOMER" class="form-control" id="ID_CUSTOMER" value="{{ $cus->NAMA_CUSTOMER }}">
                                         @foreach($customer as $cus)
                                        
                                         <option value="{{$cus->ID_CUSTOMER}}">{{$cus->NAMA_CUSTOMER}}</option>
@@ -207,7 +209,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Nama Armada</label>
                             <div class="col-sm-9">
-                            <select name="ID_ARMADA" class="form-control" id="ID_ARMADA" value="{{ $ar->ID_ARMADA }}">
+                            <select name="ID_ARMADA" class="form-control" id="ID_ARMADA" value="{{ $ar->NAMA_ARMADA }}">
                                         @foreach($armada as $ar)
                                        
                                         <option value="{{$ar->ID_ARMADA}}">{{$ar->NAMA_ARMADA}}</option>
@@ -232,7 +234,7 @@
                             <label class="col-sm-3 col-form-label">Selesai Sewa</label>
                             <div class="col-sm-5">
                                 <input id="tglakhirsewa" type="text" class="form-control create-event-datepicker"
-                                       placeholder="Date" value="{{ $sb->TGL_AKHIR }}">
+                                       placeholder="Date" value="{{ $sb->TGL_AKHIR_SEWA }}">
                             </div>
                             <div class="col-sm-4">
                                 <input id="jamakhirsewa" type="text" class="form-control create-event-demo"
@@ -259,14 +261,34 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Status</label>
+                            <div class="col-sm-9">
+                            <form class="post0" method="post" action="updateswitch">
+                                @csrf
+                                    <input type="hidden" name="id" value="{{$sb->ID_SEWA_BUS}}">
+                                        @if($ar -> STATUS == 1)
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" checked id="switch{{$sb->ID_SEWA_BUS}}">
+                                                <label class="custom-control-label" for="switch{{$sb->ID_SEWA_BUS}}">Berlangsung</label>
+                                            </div>
+                                        @else 
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" id="switch{{$sb->ID_SEWA_BUS}}">
+                                                <label class="custom-control-label" for="switch{{$sb->ID_SEWA_BUS}}">Selesai</label>
+                                            </div>
+                                        @endif
+                            </form>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-sm-3"></label>
                             <div class="col-sm-9">
-                           <button type="submit" id="btn-save" class="btn btn-primary">Edit1</button>
-                                <button type="submit" id="btn-save" class="btn btn-primary">Edit</button>
+                           <button type="submit" id="btn-save" class="btn btn-primary">Update</button>
                               
                             </div>
                         </div>
                     </form>
+                    @endforeach
                 </div>
                 
             </div>
@@ -298,6 +320,17 @@
 @endsection
 
 @section('script')
+<script>
+
+    console.log('x : ')
+        const x = document.getElementsByClassName('post0');
+            for(let i=0;i<x.length;i++){
+                x[i].addEventListener('click',function(){
+                    x[i].submit();
+                    });
+                }
+
+</script>
 <!-- Fullcalendar -->
 <script src="{{ url('vendors/fullcalendar/moment.min.js') }}"></script>
 <script src="{{ url('vendors/fullcalendar/fullcalendar.min.js') }}"></script>

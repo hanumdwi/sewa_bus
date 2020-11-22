@@ -17,12 +17,13 @@ class ArmadaController extends Controller
     public function index()
     {
         $category_armada = DB::table('category_armada')->get();
+        $sewa_bus = DB::table('sewa_bus')->get();
         $armada = DB::table('armada')
         ->join('category_armada','armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
         ->select('category_armada.NAMA_CATEGORY','armada.ID_ARMADA','armada.NAMA_ARMADA', 'armada.PLAT_NOMOR', 'armada.KAPASITAS', 'armada.FASILITAS','armada.HARGA','armada.STATUS')
         ->get();
 
-        return view ('armadaindex',['armada' =>$armada,'category_armada' =>$category_armada]);
+        return view ('armadaindex',['armada' =>$armada,'category_armada' =>$category_armada], ['sewa_bus'=>$sewa_bus]);
     }
 
     /**

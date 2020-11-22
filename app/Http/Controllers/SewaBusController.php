@@ -21,7 +21,7 @@ class SewaBusController extends Controller
         ->join('armada','sewa_bus.ID_ARMADA', '=', 'armada.ID_ARMADA')
         ->join('customer','sewa_bus.ID_CUSTOMER', '=', 'customer.ID_CUSTOMER')
         ->select('sewa_bus.ID_SEWA_BUS','sewa_bus.TGL_SEWA_BUS',
-        'sewa_bus.TGL_AKHIR_SEWA','sewa_bus.LAMA_SEWA','customer.ID_CUSTOMER','armada.NAMA_ARMADA',
+        'sewa_bus.TGL_AKHIR_SEWA','sewa_bus.LAMA_SEWA','customer.NAMA_CUSTOMER','armada.NAMA_ARMADA',
         'sewa_bus.HARGA_SEWA_BUS','sewa_bus.FINISH','sewa_bus.JAM_SEWA','sewa_bus.JAM_AKHIR_SEWA')
         ->get();
 
@@ -144,7 +144,23 @@ class SewaBusController extends Controller
      */
     public function update(Request $request, sewa_bus $sewa_bus)
     {
-        //
+        
+    }
+
+    public function update_switch(Request $request)
+    {
+        $sewa_bus=DB::table('sewa_bus')->where('ID_SEWA_BUS',$request->id)->value('status','=','1');
+        if($sewa_bus){
+            DB::table('sewa_bus')
+                ->where('ID_SEWA_BUS',$request->id)
+                ->update(['status'=>0]);
+        }
+        else{
+            DB::table('sewa_bus')
+                ->where('ID_SEWA_BUS',$request->id)
+                ->update(['status'=>1]);
+        }
+        return redirect('sewa_busindex');
     }
 
     /**

@@ -23,19 +23,7 @@ Route::get('ecommerce-dashboard', function () {
 // Download File
 // user-manual
 Route::get('user-manual', 'Data2Controller@user_manual');
-// Route::get('/download', function () {
-// 	$filepath=public_path()."/UTS_Implementasi_DS_151811513016.pdf";
-// 	$filename="Dokumentasi dan User Manual.pdf";
-// 	$headers=array('Content-Type' => 'application/pdf');
 
-// 	if(file_exists($filepath)){
-//         // Send Download
-//         return \Response::download( $filepath, $filename, $headers );
-//     } else {
-//         // Error
-//         exit( 'Requested file does not exist on our server!' );
-//     }
-// });
 
 //login
 Route::get('/','OtentifikasiController@index');
@@ -79,33 +67,10 @@ Route::get('sewa_bus','SewaBusController@index');
 Route::post('sewa_busstore', 'SewaBusController@store');
 Route::get('schedulesewa', 'SewaBusController@getAllSchedule');
 Route::get('schedulesewa/{id}', 'SewaBusController@getScheduleById');
+Route::post('updateswitch', 'SewaBusController@update_switch');
 
-Route::get('dropdownlist/getstates/{id}','Data2Controller@getStates');
-Route::get('dropdownlist/getkecamatan/{id}','Data2Controller@getKecamatan');
-Route::get('dropdownlist/getkelurahan/{id}','Data2Controller@getKelurahan');
-Route::get('dropdownlist/getkodepos/{id}','Data2Controller@getKodepos');
 
-///tampil
-Route::get('dropdownlist','Data2Controller@getCountries');
-Route::get('dropdownlist1','Data2Controller@getCountries1');
-//save
-Route::post('customerstore1', 'Data2Controller@customer_store1');
-Route::post('customerstore2', 'Data2Controller@customer_store2');
-
-Route::get('indexdropdown', 'Data2Controller@index');
-Route::get('indexdropdown1', 'Data2Controller@index1');
-
-Route::get('barcode','BarcodeController@barcode');
-Route::get('pdf-barcode/{id}', 'BarcodeController@pdf_barcode');
-Route::get('test-barcode', 'BarcodeController@test_barcode');
-
-//TOKO
-Route::get('barcodetoko','BarcodeTokoController@barcode');
-Route::get('cetakbarcodetoko/{id}', 'BarcodeTokoController@pdf_barcode');
-Route::get('scanbarcodetoko', 'BarcodeTokoController@test_barcode');
-Route::post('insertlokasi', 'BarcodeTokoController@insert');
-Route::get('geolocation', 'GeolocationController@index');
-Route::get('barcode/getbarcode/{id}','BarcodeTokoController@getBarcode');
+//====================================================================================
 
 Route::get('orders', function () {
     return view('orders');
