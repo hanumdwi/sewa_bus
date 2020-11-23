@@ -19,6 +19,6 @@ class Paket_Wisata extends Model
         'TIPE_PAKET',
         'HARGA_DASAR',
         'HARGA_JUAL',
-        'FASILITAS'
+        'FASILITAS_PAKET'
     ];
 }

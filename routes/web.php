@@ -37,6 +37,14 @@ Route::post('customerupdate', 'CustomerController@update');
 Route::get('customerdestroy/{id}', 'CustomerController@destroy');
 //================================================================================
 
+//Customer
+Route::get('penggunaindex','PenggunaController@index');
+Route::post('penggunastore', 'PenggunaController@store');
+Route::get('penggunaedit/{id}', 'PenggunaController@edit');
+Route::post('penggunaupdate', 'PenggunaController@update');
+Route::get('penggunadestroy/{id}', 'PenggunaController@destroy');
+//================================================================================
+
 //Armada
 Route::get('armadaindex','ArmadaController@index');
 Route::post('armadastore', 'ArmadaController@store');
@@ -65,6 +73,7 @@ Route::get('paketwisatadestroy/{id}', 'PaketWisataController@destroy');
 //Sewa Bus
 Route::get('sewa_bus','SewaBusController@index');
 Route::post('sewa_busstore', 'SewaBusController@store');
+Route::post('sewa_busupdate', 'SewaBusController@update');
 Route::get('schedulesewa', 'SewaBusController@getAllSchedule');
 Route::get('schedulesewa/{id}', 'SewaBusController@getScheduleById');
 Route::post('updateswitch', 'SewaBusController@update_switch');

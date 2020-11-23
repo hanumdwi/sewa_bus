@@ -23,12 +23,12 @@
     
 <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title mb-0">Table Paket Wisata</h6>
+                    <h6 class="card-title mb-0">Table User</h6>
                 </div>
                 <div class="table-responsive">
                 <center>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
-                Tambah Data Paket Wisata
+                Tambah Data User
                     </button>
                     </center>
                         <!-- modal -->
@@ -37,53 +37,51 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModal1Label">Tambah Data Paket Wisata</h5>
+                                    <h5 class="modal-title" id="exampleModal1Label">Tambah Data User</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <i class="ti-close"></i>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                <form action="paketwisatastore" method="post">
+                                <form action="penggunastore" method="post">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="nama" class="col-form-label">Armada :</label>
-                                    <select name="ID_ARMADA" class="form-control" id="ID_ARMADA">
-                                        @foreach($armada as $ar)
-                                       
-                                        <option value="{{$ar->ID_ARMADA}}">{{$ar->NAMA_ARMADA}}</option>
-                                       
-                                        @endforeach                 
-                                </select>
+                                    <label for="nama" class="col-form-label">Nama :</label>
+                                    <input type="text" class="form-control" id="nama" name="nama">
                                 </div>
                                 <div class="form-group">
-                                    <label for="namapaket" class="col-form-label">Nama Paket Wisata :</label>
-                                    <input type="namapaket" class="form-control" id="namapaket" name="namapaket">
+                                    <label for="username" class="col-form-label">Username :</label>
+                                    <input type="text" class="form-control" id="username" name="username">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="col-form-label">Email :</label>
+                                    <input type="email" class="form-control" id="email" name="email">
                                     </div>
                                 <div class="form-group">
-                                    <label for="tipepaket" class="col-form-label">Tipe Paket :</label>
-                                    <select name="tipepaket" class="form-control" id="tipepaket">
-                                        <option selected="selected">--Pilih Paket--</option>
-                                            <option>Normal</option>
-                                            <option>Promo</option>
-                                    </select>
-                                    </div>
+                                    <label for="telephone" class="col-form-label">Telephone :</label>
+                                    <input type="telephone" class="form-control" id="telephone" name="telephone">
+                                </div>
                                 <div class="form-group">
-                                    <label for="hargadasar" class="col-form-label">Harga Dasar :</label>
-                                    <input type="hargadasar" class="form-control" id="hargadasar" name="hargadasar">
-                                    </div>
+                                    <label for="alamat" class="col-form-label">Alamat :</label>
+                                    <input type="alamat" class="form-control" id="alamat" name="alamat">
+                                </div>
                                 <div class="form-group">
-                                    <label for="hargajual" class="col-form-label">Harga Jual :</label>
-                                    <input type="hargajual" class="form-control" id="hargajual" name="hargajual">
-                                    </div>
+                                    <label for="password" class="col-form-label">Password :</label>
+                                    <input type="password" class="form-control" id="password" name="password">
+                                </div>
                                 <div class="form-group">
-                                    <label for="fasilitas" class="col-form-label">Fasilitas :</label>
-                                    <input type="fasilitas" class="form-control" id="fasilitas" name="fasilitas">
-                                    </div>
+                                    <label for="jobstatus" class="col-form-label">Job Status :</label>
+                                    <select name="jobstatus" class="form-control" id="jobstatus">
+                                        <option selected="selected">--Pilih Job Status--</option>
+                                            <option>Admin</option>
+                                            <option>Kasir</option>
+                                    </select> 
+                                </div>
                                 
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary" id="berhasil">Add Paket</button>
+                                <button type="submit" class="btn btn-primary" id="berhasil">Add pengguna</button>
                             </div>
                             </form>
                             </div>
@@ -92,83 +90,83 @@
                     <table id="myTable" class="table table-striped table-bordered">
                         <thead>
                         <tr>
-                            <th>Id Paket</th>
-                            <th>Armada</th>
-                            <th>Nama Paket Wisata</th>
-                            <th>Tipe Paket</th>
-                            <th>Harga Dasar</th>
-                            <th>Harga Jual</th>
-                            <th>Fasilitas</th>
+                            <th>Id User</th>
+                            <th>Nama User</th>
+                            <th>Username</th>
+                            <th>Email User</th>
+                            <th>Telephone User</th>
+                            <th>Alamat User</th>
+                            <th>Password</th>
+                            <th>Job Status</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            @foreach($paket_wisata as $pw)
+                        @foreach($pengguna as $png)
                                     <!-- <tr class="table-light"> -->
-                                    <td>{{ $pw -> ID_PAKET }}</td>
-                                    <td>{{ $pw -> NAMA_ARMADA }}</td>
-                                    <td>{{ $pw -> NAMA_PAKET }}</td>
-                                    <td>{{ $pw -> TIPE_PAKET }}</td>
-                                    <td>{{ $pw -> HARGA_DASAR }}</td>
-                                    <td>{{ $pw -> HARGA_JUAL }}</td>
-                                    <td>{{ $pw -> FASILITAS_PAKET }}</td>
+                                    <td>{{ $png -> ID_PENGGUNA }}</td>
+                                    <td>{{ $png -> NAMA_PENGGUNA }}</td>
+                                    <td>{{ $png -> USERNAME }}</td>
+                                    <td>{{ $png -> EMAIL_PENGGUNA }}</td>
+                                    <td>{{ $png -> TELEPHONE_PENGGUNA }}</td>
+                                    <td>{{ $png -> ALAMAT_PENGGUNA }}</td>
+                                    <td>{{ $png -> PASSWORD }}</td>
+                                    <td>{{ $png -> JOB_STATUS }}</td>
                                     <td>
                                     
-                                    <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit" data-toggle="modal" data-target="#exampleModal12{{$pw -> ID_PAKET}}">
+                                    <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit" data-toggle="modal" data-target="#exampleModal12{{$png -> ID_PENGGUNA}}">
                                         <i class="ti-pencil"></i>
                                     </button>
                                     
                                     <!-- modal -->
-                                        <div class="modal fade" id="exampleModal12{{$pw -> ID_PAKET}}" tabindex="-1" role="dialog"
+                                        <div class="modal fade" id="exampleModal12{{$png -> ID_PENGGUNA}}" tabindex="-1" role="dialog"
                                         aria-labelledby="exampleModal12Label" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModal12Label">Edit Data Paket</h5>
+                                                    <h5 class="modal-title" id="exampleModal12Label">Edit Data pengguna</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <i class="ti-close"></i>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
                                                 
-                                                <form action="paketwisataupdate" method="post">
+                                                <form action="penggunaupdate" method="post">
                                                 {{ csrf_field() }}
-                                                <input type="hidden" name="id" value="{{ $pw->ID_PAKET }}"> <br/>
+                                                <input type="hidden" name="id" value="{{ $png->ID_PENGGUNA }}"> <br/>
                                                 <div class="form-group">
-                                                <label for="nama" class="col-form-label">Armada :</label>
-                                                <select name="ID_ARMADA" class="form-control" id="ID_ARMADA">
-                                                    @foreach($armada as $ar)
-                                                
-                                                    <option value="{{$ar->ID_ARMADA}}">{{$ar->NAMA_ARMADA}}</option>
-                                                
-                                                    @endforeach                     
-                                                </select>
+                                                    <label for="nama" class="col-form-label">Nama :</label>
+                                                    <input type="text" class="form-control" id="nama" name="nama" value="{{ $png->NAMA_PENGGUNA }}">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="namapaket" class="col-form-label">Nama Paket Wisata :</label>
-                                                        <input type="namapaket" class="form-control" id="namapaket" name="namapaket" value="{{ $pw->NAMA_PAKET }}">
-                                                        </div>
-                                                    <div class="form-group">
-                                                        <label for="tipepaket" class="col-form-label">Tipe Paket :</label>
-                                                        <select name="tipepaket" class="form-control" id="tipepaket" value="{{ $pw->TIPE_PAKET }}">
-                                                            <option selected="selected">{{ $pw->TIPE_PAKET }}</option>
-                                                                <option>Normal</option>
-                                                                <option>Promo</option>
+                                                    <label for="username" class="col-form-label">Username :</label>
+                                                    <input type="text" class="form-control" id="username" name="username" value="{{ $png->USERNAME }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="email" class="col-form-label">Email :</label>
+                                                    <input type="email" class="form-control" id="email" name="email" value="{{ $png->EMAIL_PENGGUNA }}">
+                                                    </div>
+                                                <div class="form-group">
+                                                    <label for="telephone" class="col-form-label">Telephone :</label>
+                                                    <input type="telephone" class="form-control" id="telephone" name="telephone" value="{{ $png->TELEPHONE_PENGGUNA }}">
+                                                    </div>
+                                                <div class="form-group">
+                                                    <label for="alamat" class="col-form-label">Alamat :</label>
+                                                    <input type="alamat" class="form-control" id="alamat" name="alamat" value="{{ $png->ALAMAT_PENGGUNA }}">
+                                                    </div>
+                                                <div class="form-group">
+                                                    <label for="password" class="col-form-label">Password :</label>
+                                                    <input type="password" class="form-control" id="password" name="password" value="{{ $png->PASSWORD }}">
+                                                    </div>
+                                                <div class="form-group">
+                                                    <label for="jobstatus" class="col-form-label">Job Status :</label>
+                                                    <select name="jobstatus" class="form-control" id="jobstatus" value="{{ $png->JOB_STATUS }}">
+                                                            <option selected="selected">{{ $png->JOB_STATUS }}</option>
+                                                                <option>Admin</option>
+                                                                <option>Kasir</option>
                                                         </select> 
-                                                        </div>
-                                                    <div class="form-group">
-                                                        <label for="hargadasar" class="col-form-label">Harga Dasar :</label>
-                                                        <input type="hargadasar" class="form-control" id="hargadasar" name="hargadasar" value="{{ $pw->HARGA_DASAR }}">
-                                                        </div>
-                                                    <div class="form-group">
-                                                        <label for="hargajual" class="col-form-label">Harga Jual :</label>
-                                                        <input type="hargajual" class="form-control" id="hargajual" name="hargajual" value="{{ $pw->HARGA_JUAL }}">
-                                                        </div>
-                                                    <div class="form-group">
-                                                        <label for="fasilitas" class="col-form-label">Fasilitas :</label>
-                                                        <input type="fasilitas" class="form-control" id="fasilitas" name="fasilitas" value="{{ $pw->FASILITAS_PAKET }}">
-                                                        </div>
+                                                    </div>
                                                 
                                             </div>
                                             <div class="modal-footer">
@@ -181,17 +179,17 @@
                                         </div>
                                         </div>
                                     
-                                    <button type="button" class="btn btn-outline-danger btn-sm btn-floating ml-2" title="Delete" data-toggle="modal" data-target="#exampleModal13{{$pw -> ID_PAKET}}">
+                                    <button type="button" class="btn btn-outline-danger btn-sm btn-floating ml-2" title="Delete" data-toggle="modal" data-target="#exampleModal13{{$png -> ID_PENGGUNA}}">
                                         <i class="ti-trash"></i>
                                     </button>
                                     
                                         <!-- modal -->
-                                            <div class="modal fade" id="exampleModal13{{$pw -> ID_PAKET}}" tabindex="-1" role="dialog"
+                                            <div class="modal fade" id="exampleModal13{{$png -> ID_PENGGUNA}}" tabindex="-1" role="dialog"
                                                 aria-labelledby="exampleModal13Label" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModal13Label">Delete Data Paket</h5>
+                                                            <h5 class="modal-title" id="exampleModal13Label">Delete Data pengguna</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <i class="ti-close"></i>
                                                             </button>
@@ -203,7 +201,7 @@
                                                         
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                        <a href="paketwisatadestroy/{{$pw -> ID_PAKET}}">
+                                                        <a href="penggunadestroy/{{$png -> ID_PENGGUNA}}">
                                                         <button type="button" class="btn btn-primary" id="delete">Delete</button>
                                                         </a>
                                                     </div>
@@ -218,13 +216,14 @@
                                     </tbody>
                                     <tfoot>
                         <tr>
-                            <th>Id Paket</th>
-                            <th>Armada</th>
-                            <th>Nama Paket Wisata</th>
-                            <th>Tipe Paket</th>
-                            <th>Harga Dasar</th>
-                            <th>Harga Jual</th>
-                            <th>Fasilitas</th>
+                            <th>Id User</th>
+                            <th>Nama User</th>
+                            <th>Username</th>
+                            <th>Email User</th>
+                            <th>Telephone User</th>
+                            <th>Alamat User</th>
+                            <th>Password</th>
+                            <th>Job Status</th>
                             <th>Action</th>
                         </tr>
                         </tfoot>

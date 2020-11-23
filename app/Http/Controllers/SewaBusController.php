@@ -15,15 +15,22 @@ class SewaBusController extends Controller
      */
     public function index()
     {
-        $armada=DB::table('armada')->get();
+       
         $customer=DB::table('customer')->get();
+        $pengguna=DB::table('pengguna')->get();
         $sewa_bus=DB::table('sewa_bus')
-        ->join('armada','sewa_bus.ID_ARMADA', '=', 'armada.ID_ARMADA')
         ->join('customer','sewa_bus.ID_CUSTOMER', '=', 'customer.ID_CUSTOMER')
+        ->join('pengguna','sewa_bus.ID_PENGGUNA', '=', 'pengguna.ID_PENGGUNA')
         ->select('sewa_bus.ID_SEWA_BUS','sewa_bus.TGL_SEWA_BUS',
-        'sewa_bus.TGL_AKHIR_SEWA','sewa_bus.LAMA_SEWA','customer.NAMA_CUSTOMER','armada.NAMA_ARMADA',
-        'sewa_bus.HARGA_SEWA_BUS','sewa_bus.FINISH','sewa_bus.JAM_SEWA','sewa_bus.JAM_AKHIR_SEWA')
+        'sewa_bus.TGL_AKHIR_SEWA','sewa_bus.LAMA_SEWA','customer.NAMA_CUSTOMER',
+        'sewa_bus.HARGA_SEWA_BUS','sewa_bus.STATUS_SEWA','sewa_bus.JAM_SEWA','sewa_bus.JAM_AKHIR_SEWA','sewa_bus.ID_PENGGUNA')
         ->get();
+
+        $armada=DB::table('armada')->get();
+        $detail_sewa_bus=DB::table('detail_sewa_bus')
+        ->join('armada','detail_sewa_bus.ID_ARMADA', '=', 'armada.ID_ARMADA')
+        ->get();
+
 
         $max = DB::table('sewa_bus')->max('ID_SEWA_BUS');
         date_default_timezone_set('Asia/Jakarta');
@@ -36,8 +43,9 @@ class SewaBusController extends Controller
         else{
             $ID_SEWA_BUS=$date.str_pad(1,4,"0",STR_PAD_LEFT);
         }
-        $action=false;
-        return view('sewa_bus', ['sewa_bus' =>$sewa_bus,'armada' =>$armada, 'customer' =>$customer,'ID_SEWA_BUS'=>$ID_SEWA_BUS,'action'=>$action]);
+        
+        return view('sewa_bus', ['sewa_bus' =>$sewa_bus,'ID_SEWA_BUS'=>$ID_SEWA_BUS,'customer'=>$customer,'pengguna'=>$pengguna],  
+        ['detail_sewa_bus'=>$detail_sewa_bus,'armada'=>$armada]);
     }
 
     public function generateSewa(){
@@ -68,16 +76,22 @@ class SewaBusController extends Controller
         try{
             DB::table('sewa_bus')->insert([
                 'ID_SEWA_BUS' => $request->ID_SEWA_BUS,
-                'TGL_SEWA_BUS' => $request->tglsewa,
-                'TGL_AKHIR_SEWA' => $request->tglakhirsewa,
-                'LAMA_SEWA' => $request->lamasewa,
+                'TGL_SEWA_BUS' => $request->TGL_SEWA,
+                'TGL_AKHIR_SEWA' => $request->TGL_AKHIR_SEWA,
+                'LAMA_SEWA' => $request->LAMA_SEWA,
                 'ID_CUSTOMER' => $request->ID_CUSTOMER,
-                'ID_ARMADA' => $request->ID_ARMADA,
-                'HARGA_SEWA_BUS' => $request->hargasewabus,
-                'FINISH' => 1,
-                'JAM_SEWA' => $request->jamsewa,
-                'JAM_AKHIR_SEWA' => $request->jamakhirsewa
+                'ID_PENGGUNA' => $request->ID_PENGGUNA,
+                'HARGA_SEWA_BUS' => $request->HARGA_SEWA_BUS,
+                'STATUS_SEWA' => 1,
+                'JAM_SEWA' => $request->JAM_SEWA,
+                'JAM_AKHIR_SEWA' => $request->JAM_AKHIR_SEWA
             ]);
+
+            DB::table('detail_sewa_bus')->insert([
+                'ID_ARMADA' =>  $request->ID_ARMADA,
+                'ID_SEWA_BUS' => $request->ID_SEWA_BUS
+            ]);
+
         DB::commit();
         }
         Catch (\Exception $ex){
@@ -149,16 +163,16 @@ class SewaBusController extends Controller
 
     public function update_switch(Request $request)
     {
-        $sewa_bus=DB::table('sewa_bus')->where('ID_SEWA_BUS',$request->id)->value('status','=','1');
+        $sewa_bus=DB::table('sewa_bus')->where('ID_SEWA_BUS',$request->id)->value('STATUS_SEWA','=','1');
         if($sewa_bus){
             DB::table('sewa_bus')
                 ->where('ID_SEWA_BUS',$request->id)
-                ->update(['status'=>0]);
+                ->update(['STATUS_SEWA'=>0]);
         }
         else{
             DB::table('sewa_bus')
                 ->where('ID_SEWA_BUS',$request->id)
-                ->update(['status'=>1]);
+                ->update(['STATUS_SEWA'=>1]);
         }
         return redirect('sewa_busindex');
     }

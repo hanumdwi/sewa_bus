@@ -18,7 +18,7 @@ class Armada extends Model
         'NAMA_ARMADA',
         'PLAT_NOMOR',
         'KAPASITAS',
-        'FASILITAS',
+        'FASILITAS_ARMADA',
         'HARGA'
     ];
 }

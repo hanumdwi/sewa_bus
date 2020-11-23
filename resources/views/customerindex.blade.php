@@ -88,7 +88,7 @@
                                     <!-- <tr class="table-light"> -->
                                     <td>{{ $cus -> ID_CUSTOMER }}</td>
                                     <td>{{ $cus -> NAMA_CUSTOMER }}</td>
-                                    <td>{{ $cus -> EMAIL }}</td>
+                                    <td>{{ $cus -> EMAIL_CUSTOMER }}</td>
                                     <td>{{ $cus -> TELEPHONE }}</td>
                                     <td>{{ $cus -> ALAMAT }}</td>
                                     <td>
@@ -119,7 +119,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="email" class="col-form-label">Email :</label>
-                                                    <input type="email" class="form-control" id="email" name="email" value="{{ $cus->EMAIL }}">
+                                                    <input type="email" class="form-control" id="email" name="email" value="{{ $cus->EMAIL_CUSTOMER }}">
                                                     </div>
                                                 <div class="form-group">
                                                     <label for="telephone" class="col-form-label">Telephone :</label>

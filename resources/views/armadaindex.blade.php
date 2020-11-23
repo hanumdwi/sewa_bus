@@ -94,7 +94,7 @@
                             <th>Nama Armada</th>
                             <th>Plat Nomor</th>
                             <th>Kapasitas</th>
-                            <th>Fasilitas</th>
+                            <th>Fasilitas Armada</th>
                             <th>Harga</th>
                             <th>Action</th>
                         </tr>
@@ -113,7 +113,7 @@
                                         <form class="post0" method="post" action="armadaupdateswitch">
                                         @csrf
                                             <input type="hidden" name="id" value="{{$ar->ID_ARMADA}}">
-                                            @if($ar -> STATUS == 1)
+                                            @if($ar -> STATUS_ARMADA == 1)
                                             <div class="custom-control custom-switch">
                                                 <input type="checkbox" class="custom-control-input" checked id="switch{{$ar->ID_ARMADA}}">
                                                 <label class="custom-control-label" for="switch{{$ar->ID_ARMADA}}">Active</label>
@@ -129,7 +129,7 @@
                                         <form id="modal{{$ar->ID_ARMADA}}" onclick="modal(id)" method="post" action="#">
                                             @csrf
                                                 <input type="hidden" name="id" value="{{$ar->ID_ARMADA}}">
-                                                @if($ar -> STATUS == 1)
+                                                @if($ar -> STATUS_ARMADA == 1)
                                                 <div class="custom-control custom-switch">
                                                     <input type="checkbox" class="custom-control-input" checked id="switch{{$ar->ID_ARMADA}}">
                                                     <label class="custom-control-label" for="switch{{$ar->ID_ARMADA}}">Active</label>
@@ -149,10 +149,10 @@
                                     <td>{{ $ar -> NAMA_ARMADA }}</td>
                                     <td>{{ $ar -> PLAT_NOMOR }}</td>
                                     <td>{{ $ar -> KAPASITAS }}</td>
-                                    <td>{{ $ar -> FASILITAS }}</td>
+                                    <td>{{ $ar -> FASILITAS_ARMADA }}</td>
                                     <td>{{ $ar -> HARGA }}</td>
                                     <td>
-                                    @if($ar -> STATUS == 1)
+                                    @if($ar -> STATUS_ARMADA == 1)
                                     <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit" data-toggle="modal" data-target="#exampleModal12{{$ar -> ID_ARMADA}}">
                                         <i class="ti-pencil"></i>
                                     </button>
@@ -221,7 +221,7 @@
                                                     </div>
                                                 <div class="form-group">
                                                     <label for="fasilitas" class="col-form-label">Fasilitas :</label>
-                                                    <input type="fasilitas" class="form-control" id="fasilitas" name="fasilitas" value="{{ $ar->FASILITAS }}">
+                                                    <input type="fasilitas" class="form-control" id="fasilitas" name="fasilitas" value="{{ $ar->FASILITAS_ARMADA }}">
                                                     </div>
                                                 <div class="form-group">
                                                     <label for="harga" class="col-form-label">Harga :</label>
@@ -282,7 +282,7 @@
                             <th>Nama Armada</th>
                             <th>Plat Nomor</th>
                             <th>Kapasitas</th>
-                            <th>Fasilitas</th>
+                            <th>Fasilitas Armada</th>
                             <th>Harga</th>
                             <th>Action</th>
                         </tr>

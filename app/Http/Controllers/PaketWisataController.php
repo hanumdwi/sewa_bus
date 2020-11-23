@@ -19,7 +19,8 @@ class PaketWisataController extends Controller
         $armada = DB::table('armada')->get();
         $paket_wisata = DB::table('paket_wisata')
         ->join('armada','paket_wisata.ID_ARMADA', '=', 'armada.ID_ARMADA')
-        ->select('armada.NAMA_ARMADA','paket_wisata.ID_PAKET','paket_wisata.NAMA_PAKET', 'paket_wisata.TIPE_PAKET', 'paket_wisata.HARGA_DASAR', 'paket_wisata.HARGA_JUAL','paket_wisata.FASILITAS')
+        ->select('armada.NAMA_ARMADA','paket_wisata.ID_PAKET','paket_wisata.NAMA_PAKET', 
+        'paket_wisata.TIPE_PAKET', 'paket_wisata.HARGA_DASAR', 'paket_wisata.HARGA_JUAL','paket_wisata.FASILITAS_PAKET')
         ->get();
 
         return view ('paketwisataindex',['paket_wisata' =>$paket_wisata,'armada' =>$armada]);
@@ -47,12 +48,12 @@ class PaketWisataController extends Controller
         $armada = new Armada;
 
         $paket_wisata->fill([
-            'ID_ARMADA'     => $request->ID_ARMADA,
-            'NAMA_PAKET'    => $request->namapaket,
-            'TIPE_PAKET'    => $request->tipepaket,
-            'HARGA_DASAR'   => $request->hargadasar,
-            'HARGA_JUAL'    => $request->hargajual,
-            'FASILITAS'     => $request->fasilitas
+            'ID_ARMADA'             => $request->ID_ARMADA,
+            'NAMA_PAKET'            => $request->namapaket,
+            'TIPE_PAKET'            => $request->tipepaket,
+            'HARGA_DASAR'           => $request->hargadasar,
+            'HARGA_JUAL'            => $request->hargajual,
+            'FASILITAS_PAKET'       => $request->fasilitas
         ]);
 
         $paket_wisata->save();
@@ -92,12 +93,12 @@ class PaketWisataController extends Controller
     public function update(Request $request, paket_wisata $paket_wisata)
     {
         DB::table('paket_wisata')->where('ID_PAKET',$request->id)->update([
-            'ID_ARMADA'     => $request->ID_ARMADA,
-            'NAMA_PAKET'    => $request->namapaket,
-            'TIPE_PAKET'    => $request->tipepaket,
-            'HARGA_DASAR'   => $request->hargadasar,
-            'HARGA_JUAL'    => $request->hargajual,
-            'FASILITAS'     => $request->fasilitas
+            'ID_ARMADA'             => $request->ID_ARMADA,
+            'NAMA_PAKET'            => $request->namapaket,
+            'TIPE_PAKET'            => $request->tipepaket,
+            'HARGA_DASAR'           => $request->hargadasar,
+            'HARGA_JUAL'            => $request->hargajual,
+            'FASILITAS_PAKET'       => $request->fasilitas
         ]);
 
             return redirect('paketwisataindex');

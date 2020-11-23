@@ -75,7 +75,7 @@
                 
                     <form autocomplete="off" action="sewa_busstore" method="post">
                     @csrf
-                    <input id="finish" type="hidden" name="finish" value="false">
+                    <input id="statussewa" type="hidden" name="statussewa" value="false">
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Id Sewa</label>
                             <div class="col-sm-9">
@@ -83,7 +83,21 @@
                                 
                             </div>
                         </div>
-                    
+
+                        <div class="form-group row">
+                        
+                        <label class="col-sm-3 col-form-label">Nama Pengguna</label>
+                        <div class="col-sm-9">
+                        <select name="ID_PENGGUNA" class="form-control" id="ID_PENGGUNA">
+                                    @foreach($pengguna as $png)
+                                   
+                                    <option value="{{$png->ID_PENGGUNA}}">{{$png->NAMA_PENGGUNA}}</option>
+                                   
+                                    @endforeach                 
+                            </select>
+                        </div>
+                    </div>
+
                         <div class="form-group row">
                         
                             <label class="col-sm-3 col-form-label">Nama Customer</label>
@@ -113,24 +127,24 @@
                         <div class="form-group row row-sm">
                             <label class="col-sm-3 col-form-label">Start Sewa</label>
                             <div class="col-sm-5">
-                                <input id="tglsewa" type="text" name="tglsewa"
+                                <input id="TGL_SEWA" type="text" name="TGL_SEWA"
                                        class="form-control create-event-datepicker"
                                        placeholder="Date">
                             </div>
                             <div class="col-sm-4">
-                                <input id="jamsewa" name="jamsewa" type="text" class="form-control create-event-demo"
+                                <input id="JAM_SEWA" name="JAM_SEWA" type="text" class="form-control create-event-demo"
                                        placeholder="Time">
                             </div>
                         </div>
                         <div class="form-group row row-sm">
                             <label class="col-sm-3 col-form-label">Selesai Sewa</label>
                             <div class="col-sm-5">
-                                <input id="tglakhirsewa" type="text" name="tglakhirsewa"
+                                <input id="TGL_AKHIR_SEWA" type="text" name="TGL_AKHIR_SEWA"
                                 class="form-control create-event-datepicker"
                                        placeholder="Date">
                             </div>
                             <div class="col-sm-4">
-                                <input id="jamakhirsewa" type="text" name="jamakhirsewa"
+                                <input id="JAM_AKHIR_SEWA" type="text" name="JAM_AKHIR_SEWA"
                                 class="form-control create-event-demo"
                                        placeholder="Time">
                             </div>
@@ -139,7 +153,7 @@
                             <label class="col-sm-3 col-form-label">Lama Sewa</label>
                             <div class="col-sm-9">
                                 <div class="avatar-group">
-                                    <input id="lamasewa" type="text" name="lamasewa"
+                                    <input id="LAMA_SEWA" type="text" name="LAMA_SEWA"
                                     class="form-control" placeholder="Lama Sewa">
                                 </div>
                                 <!-- <button type="button" class="btn btn-outline-light btn-sm btn-floating">
@@ -150,7 +164,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Harga Sewa</label>
                             <div class="col-sm-9">
-                                <input id="hargasewabus" type="text" name="hargasewabus"
+                                <input id="HARGA_SEWA_BUS" type="text" name="HARGA_SEWA_BUS"
                                 class="form-control">
                                 <!-- <textarea id="event-desc" class="form-control" rows="6"></textarea> -->
                             </div>
@@ -181,7 +195,7 @@
                 </div>
                 
                 <div class="modal-body">
-                @foreach($sewa_bus as $sb)
+                
                     <form autocomplete="off" action="sewa_busupdate" method="post">
                     @csrf
                         <div class="form-group row">
@@ -192,6 +206,20 @@
                             </div>
                         </div>
                     
+                        <div class="form-group row">
+                        
+                            <label class="col-sm-3 col-form-label">Nama Pengguna</label>
+                            <div class="col-sm-9">
+                            <select name="ID_PENGGUNA" class="form-control" id="ID_PENGGUNA" value="{{ $png->NAMA_PENGGUNA }}">
+                                        @foreach($pengguna as $png)
+                                       
+                                        <option value="{{$png->ID_PENGGUNA}}">{{$png->NAMA_PENGGUNA}}</option>
+                                       
+                                        @endforeach                 
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                         
                             <label class="col-sm-3 col-form-label">Nama Customer</label>
@@ -221,32 +249,34 @@
                         <div class="form-group row row-sm">
                             <label class="col-sm-3 col-form-label">Start Sewa</label>
                             <div class="col-sm-5">
-                                <input id="tglsewa" type="text"
+                                <input id="TGL_SEWA" type="text" name="TGL_SEWA"
                                        class="form-control create-event-datepicker"
-                                       placeholder="Date" value="{{ $sb->TGL_SEWA_BUS }}">
+                                       placeholder="Date" value="{{ old('TGL_SEWA_BUS') }}">
                             </div>
                             <div class="col-sm-4">
-                                <input id="jamsewa" type="text" class="form-control create-event-demo"
-                                       placeholder="Time" value="{{ $sb->JAM_SEWA }}">
+                                <input id="JAM_SEWA" name="JAM_SEWA" type="text" class="form-control create-event-demo"
+                                       placeholder="Time" value="{{ old('JAM_SEWA') }}">
                             </div>
                         </div>
                         <div class="form-group row row-sm">
                             <label class="col-sm-3 col-form-label">Selesai Sewa</label>
                             <div class="col-sm-5">
-                                <input id="tglakhirsewa" type="text" class="form-control create-event-datepicker"
-                                       placeholder="Date" value="{{ $sb->TGL_AKHIR_SEWA }}">
+                                <input id="TGL_AKHIR_SEWA" type="text" name="TGL_AKHIR_SEWA"
+                                class="form-control create-event-datepicker"
+                                       placeholder="Date" value="{{ old('TGL_AKHIR_SEWA') }}">
                             </div>
                             <div class="col-sm-4">
-                                <input id="jamakhirsewa" type="text" class="form-control create-event-demo"
-                                       placeholder="Time" value="{{ $sb->JAM_AKHIR_SEWA }}">
+                                <input id="JAM_AKHIR_SEWA" type="text" name="JAM_AKHIR_SEWA"
+                                class="form-control create-event-demo"
+                                       placeholder="Time" value="{{ old('JAM_AKHIR_SEWA') }}">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Lama Sewa</label>
                             <div class="col-sm-9">
                                 <div class="avatar-group">
-                                    <input id="lamasewa" type="text" class="form-control" 
-                                    placeholder="Lama Sewa" value="{{ $sb->LAMA_SEWA }}">
+                                    <input id="LAMA_SEWA" type="text" name="LAMA_SEWA"
+                                    class="form-control" placeholder="Lama Sewa" value="{{ old('LAMA_SEWA') }}">
                                 </div>
                                 <!-- <button type="button" class="btn btn-outline-light btn-sm btn-floating">
                                     <i class="ti-plus"></i>
@@ -256,7 +286,8 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Harga Sewa</label>
                             <div class="col-sm-9">
-                                <input id="hargasewabus" type="text" class="form-control" value="{{ $sb->HARGA_SEWA_BUS }}">
+                                <input id="HARGA_SEWA_BUS" type="text" name="HARGA_SEWA_BUS"
+                                class="form-control" value="{{ old('HARGA_SEWA_BUS') }}">
                                 <!-- <textarea id="event-desc" class="form-control" rows="6"></textarea> -->
                             </div>
                         </div>
@@ -265,16 +296,16 @@
                             <div class="col-sm-9">
                             <form class="post0" method="post" action="updateswitch">
                                 @csrf
-                                    <input type="hidden" name="id" value="{{$sb->ID_SEWA_BUS}}">
-                                        @if($ar -> STATUS == 1)
+                                    <input type="hidden" name="id" value="{{ old('ID_SEWA_BUS') }}">
+                                        @if('STATUS_SEWA' == 1)
                                             <div class="custom-control custom-switch">
-                                                <input type="checkbox" class="custom-control-input" checked id="switch{{$sb->ID_SEWA_BUS}}">
-                                                <label class="custom-control-label" for="switch{{$sb->ID_SEWA_BUS}}">Berlangsung</label>
+                                                <input type="checkbox" class="custom-control-input" checked id="switch{{ old('ID_SEWA_BUS') }}">
+                                                <label class="custom-control-label" for="switch{{ old('ID_SEWA_BUS') }}">Berlangsung</label>
                                             </div>
                                         @else 
                                             <div class="custom-control custom-switch">
-                                                <input type="checkbox" class="custom-control-input" id="switch{{$sb->ID_SEWA_BUS}}">
-                                                <label class="custom-control-label" for="switch{{$sb->ID_SEWA_BUS}}">Selesai</label>
+                                                <input type="checkbox" class="custom-control-input" id="switch{{ old('ID_SEWA_BUS') }}">
+                                                <label class="custom-control-label" for="switch{{ old('ID_SEWA_BUS') }}">Selesai</label>
                                             </div>
                                         @endif
                             </form>
@@ -288,7 +319,7 @@
                             </div>
                         </div>
                     </form>
-                    @endforeach
+                    
                 </div>
                 
             </div>

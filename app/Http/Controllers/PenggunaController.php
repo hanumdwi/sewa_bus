@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\customer;
+use App\pengguna;
 use Illuminate\Http\Request;
 use DB;
 
-class CustomerController extends Controller
+class PenggunaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +15,11 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customer=DB::table('customer')->get();
+        $pengguna=DB::table('pengguna')->get();
 
 
 
-        return view('customerindex', ['customer' =>$customer]);
+        return view('penggunaindex', ['pengguna' =>$pengguna]);
     }
 
     /**
@@ -48,18 +48,21 @@ class CustomerController extends Controller
         //      ]);
      
         // return redirect('customerindex');
-        $customer = new Customer;
+        $pengguna = new Pengguna;
 
-        $customer->fill([
-            'NAMA_CUSTOMER'   => $request->nama,
-            'EMAIL_CUSTOMER'  => $request->email,
-            'TELEPHONE'       => $request->telephone,
-            'ALAMAT'          => $request->alamat
+        $pengguna->fill([
+            'NAMA_PENGGUNA'         => $request->nama,
+            'EMAIL_PENGGUNA'        => $request->email,
+            'USERNAME'              => $request->email,
+            'TELEPHONE_PENGGUNA'    => $request->telephone,
+            'ALAMAT_PENGGUNA'       => $request->alamat,
+            'PASSWORD'              => $request->password,
+            'JOB_STATUS'            => $request->jobstatus
         ]);
 
-        $customer->save();
+        $pengguna->save();
 
-        return redirect('customerindex');
+        return redirect('penggunaindex');
     }
 
     /**
@@ -82,9 +85,9 @@ class CustomerController extends Controller
     public function edit($id)
     {
         // mengambil data customer berdasarkan id yang dipilih
-		$customer = DB::table('customer')->where('ID_CUSTOMER',$id)->get();
-		// passing data customer yang didapat ke view edit.blade.php
-		return view('customerindex',['customer' => $customer]);
+		$pengguna = DB::table('pengguna')->where('ID_PENGGUNA',$id)->get();
+		// passing data pengguna yang didapat ke view edit.blade.php
+		return view('penggunaindex',['pengguna' => $pengguna]);
     }
 
     /**
@@ -96,27 +99,30 @@ class CustomerController extends Controller
      */
     public function update(Request $request)
     {
-        DB::table('customer')->where('ID_CUSTOMER',$request->id)->update([
-			'NAMA_CUSTOMER'   => $request->nama,
-            'EMAIL_CUSTOMER'  => $request->email,
-            'TELEPHONE'       => $request->telephone,
-            'ALAMAT'          => $request->alamat
+        DB::table('pengguna')->where('ID_PENGGUNA',$request->id)->update([
+			'NAMA_PENGGUNA'         => $request->nama,
+            'EMAIL_PENGGUNA'        => $request->email,
+            'USERNAME'              => $request->email,
+            'TELEPHONE_PENGGUNA'    => $request->telephone,
+            'ALAMAT_PENGGUNA'       => $request->alamat,
+            'PASSWORD'              => $request->password,
+            'JOB_STATUS'            => $request->jobstatus
 		]);
 		// alihkan halaman ke halaman customer
-		return redirect('customerindex');
+		return redirect('penggunaindex');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\customer  $customer
+     * @param  \App\pengguna  $pengguna
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        DB::table('customer')->where('ID_CUSTOMER',$id)->delete();
+        DB::table('pengguna')->where('ID_PENGGUNA',$id)->delete();
 		
-		// alihkan halaman ke halaman customer
-		return redirect('customerindex');
+		// alihkan halaman ke halaman pengguna
+		return redirect('penggunaindex');
     }
 }

@@ -20,7 +20,8 @@ class ArmadaController extends Controller
         $sewa_bus = DB::table('sewa_bus')->get();
         $armada = DB::table('armada')
         ->join('category_armada','armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
-        ->select('category_armada.NAMA_CATEGORY','armada.ID_ARMADA','armada.NAMA_ARMADA', 'armada.PLAT_NOMOR', 'armada.KAPASITAS', 'armada.FASILITAS','armada.HARGA','armada.STATUS')
+        ->select('category_armada.NAMA_CATEGORY','armada.ID_ARMADA','armada.NAMA_ARMADA', 
+        'armada.PLAT_NOMOR', 'armada.KAPASITAS', 'armada.FASILITAS_ARMADA','armada.HARGA','armada.STATUS_ARMADA')
         ->get();
 
         return view ('armadaindex',['armada' =>$armada,'category_armada' =>$category_armada], ['sewa_bus'=>$sewa_bus]);
@@ -48,13 +49,13 @@ class ArmadaController extends Controller
         $category_armada = new Category;
 
         $armada->fill([
-            'ID_CATEGORY'     => $request->ID_CATEGORY,
-            'NAMA_ARMADA'     => $request->namaarmada,
-            'PLAT_NOMOR'      => $request->platnomor,
-            'KAPASITAS'       => $request->kapasitas,
-            'FASILITAS'       => $request->fasilitas,
-            'HARGA'           => $request->harga,
-            'STATUS'          => $request->status
+            'ID_CATEGORY'           => $request->ID_CATEGORY,
+            'NAMA_ARMADA'           => $request->namaarmada,
+            'PLAT_NOMOR'            => $request->platnomor,
+            'KAPASITAS'             => $request->kapasitas,
+            'FASILITAS_ARMADA'      => $request->fasilitas,
+            'HARGA'                 => $request->harga,
+            'STATUS_ARMADA'         => $request->status
         ]);
 
         $armada->save();
@@ -94,13 +95,13 @@ class ArmadaController extends Controller
     public function update(Request $request)
     {
         DB::table('armada')->where('ID_ARMADA',$request->id)->update([
-			'ID_CATEGORY'     => $request->ID_CATEGORY,
-            'NAMA_ARMADA'     => $request->namaarmada,
-            'PLAT_NOMOR'      => $request->platnomor,
-            'KAPASITAS'       => $request->kapasitas,
-            'FASILITAS'       => $request->fasilitas,
-            'HARGA'           => $request->harga,
-            'STATUS'          => $request->status
+			'ID_CATEGORY'           => $request->ID_CATEGORY,
+            'NAMA_ARMADA'           => $request->namaarmada,
+            'PLAT_NOMOR'            => $request->platnomor,
+            'KAPASITAS'             => $request->kapasitas,
+            'FASILITAS_ARMADA'      => $request->fasilitas,
+            'HARGA'                 => $request->harga,
+            'STATUS_ARMADA'         => $request->status
 		]);
 		// alihkan halaman ke halaman armada
 		return redirect('armadaindex');
@@ -108,16 +109,16 @@ class ArmadaController extends Controller
 
     public function update_switch(Request $request)
     {
-        $armada=DB::table('armada')->where('ID_ARMADA',$request->id)->value('status','=','1');
+        $armada=DB::table('armada')->where('ID_ARMADA',$request->id)->value('STATUS_ARMADA','=','1');
         if($armada){
             DB::table('armada')
                 ->where('ID_ARMADA',$request->id)
-                ->update(['status'=>0]);
+                ->update(['STATUS_ARMADA'=>0]);
         }
         else{
             DB::table('armada')
                 ->where('ID_ARMADA',$request->id)
-                ->update(['status'=>1]);
+                ->update(['STATUS_ARMADA'=>1]);
         }
         return redirect('armadaindex');
     }
