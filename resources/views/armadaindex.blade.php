@@ -104,8 +104,8 @@
                             @foreach($armada as $ar)
                                     <td>
                                         @php $x=0; @endphp
-                                            @foreach($sewa_bus as $sb)
-                                                @if($ar->ID_ARMADA == $sb->ID_ARMADA)
+                                            @foreach($detail_sewa_bus as $dsb)
+                                                @if($ar->ID_ARMADA == $dsb->ID_ARMADA)
                                         @php $x=1; @endphp
                                                 @endif
                                             @endforeach

@@ -17,14 +17,14 @@ class ArmadaController extends Controller
     public function index()
     {
         $category_armada = DB::table('category_armada')->get();
-        $sewa_bus = DB::table('sewa_bus')->get();
+        $detail_sewa_bus = DB::table('detail_sewa_bus')->get();
         $armada = DB::table('armada')
         ->join('category_armada','armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
         ->select('category_armada.NAMA_CATEGORY','armada.ID_ARMADA','armada.NAMA_ARMADA', 
         'armada.PLAT_NOMOR', 'armada.KAPASITAS', 'armada.FASILITAS_ARMADA','armada.HARGA','armada.STATUS_ARMADA')
         ->get();
 
-        return view ('armadaindex',['armada' =>$armada,'category_armada' =>$category_armada], ['sewa_bus'=>$sewa_bus]);
+        return view ('armadaindex',['armada' =>$armada,'category_armada' =>$category_armada], ['detail_sewa_bus'=>$detail_sewa_bus]);
     }
 
     /**
@@ -100,8 +100,7 @@ class ArmadaController extends Controller
             'PLAT_NOMOR'            => $request->platnomor,
             'KAPASITAS'             => $request->kapasitas,
             'FASILITAS_ARMADA'      => $request->fasilitas,
-            'HARGA'                 => $request->harga,
-            'STATUS_ARMADA'         => $request->status
+            'HARGA'                 => $request->harga
 		]);
 		// alihkan halaman ke halaman armada
 		return redirect('armadaindex');
