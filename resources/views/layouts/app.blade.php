@@ -849,6 +849,14 @@
                                 <span>Armada Bus</span>
                             </a>
                         </li>
+
+                        <li class="navigation-divider">Galeri</li>
+                        <li>
+                            <a  class="active" href="galeriindex">
+                                <span class="nav-link-icon" data-feather="image"></span>
+                                <span>Galeri Armada</span>
+                            </a>
+                        </li>
                     
                     </ul>
                     
@@ -868,7 +876,7 @@
                                 <span>Sewa Paket Wisata</span>
                             </a>
                         </li>
-                        <li class="navigation-divider">Laporan Sewa</li>
+                        <li class="navigation-divider">Invoice Sewa</li>
                         <li>
                             <a  class="active" href="category_armadaindex">
                                 <span class="nav-link-icon" data-feather="file"></span>

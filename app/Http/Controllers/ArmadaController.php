@@ -18,13 +18,15 @@ class ArmadaController extends Controller
     {
         $category_armada = DB::table('category_armada')->get();
         $schedule_armada = DB::table('schedule_armada')->get();
+        $galeri = DB::table('galeri')->get();
         $armada = DB::table('armada')
         ->join('category_armada','armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
-        ->select('category_armada.NAMA_CATEGORY','armada.ID_ARMADA','armada.NAMA_ARMADA', 'armada.FOTO_ARMADA',
+        ->join('galeri','armada.ID_GALERI', '=', 'galeri.ID_GALERI')
+        ->select('category_armada.NAMA_CATEGORY','armada.ID_ARMADA','armada.NAMA_ARMADA', 'galeri.FOTO_ARMADA',
         'armada.PLAT_NOMOR', 'armada.KAPASITAS', 'armada.FASILITAS_ARMADA','armada.HARGA','armada.STATUS_ARMADA')
         ->get();
 
-        return view ('armadaindex',['armada' =>$armada,'category_armada' =>$category_armada], ['schedule_armada'=>$schedule_armada]);
+        return view ('armadaindex',['armada' =>$armada,'category_armada' =>$category_armada, 'galeri' =>$galeri], ['schedule_armada'=>$schedule_armada]);
     }
 
     /**
@@ -51,7 +53,7 @@ class ArmadaController extends Controller
         $armada->fill([
             'ID_CATEGORY'           => $request->ID_CATEGORY,
             'NAMA_ARMADA'           => $request->namaarmada,
-            'FOTO_ARMADA'           => $request->fotoarmada,
+            'ID_GALERI'             => $request->fotoarmada,
             'PLAT_NOMOR'            => $request->platnomor,
             'KAPASITAS'             => $request->kapasitas,
             'FASILITAS_ARMADA'      => $request->fasilitas,
@@ -98,7 +100,7 @@ class ArmadaController extends Controller
         DB::table('armada')->where('ID_ARMADA',$request->id)->update([
 			'ID_CATEGORY'           => $request->ID_CATEGORY,
             'NAMA_ARMADA'           => $request->namaarmada,
-            'FOTO_ARMADA'           => $request->fotoarmada,
+            'ID_GALERI'             => $request->fotoarmada,
             'PLAT_NOMOR'            => $request->platnomor,
             'KAPASITAS'             => $request->kapasitas,
             'FASILITAS_ARMADA'      => $request->fasilitas,

@@ -54,6 +54,15 @@ Route::get('armadadestroy/{id}', 'ArmadaController@destroy');
 Route::post('armadaupdateswitch', 'ArmadaController@update_switch');
 //================================================================================
 
+//Galeri Armada
+Route::get('galeriindex','GaleriController@index');
+Route::post('galeristore', 'GaleriController@store');
+Route::get('galeriedit/{id}', 'GaleriController@edit');
+Route::post('galeriupdate', 'GaleriController@update');
+Route::get('galeridestroy/{id}', 'GaleriController@destroy');
+Route::post('galeriupdateswitch', 'GaleriController@update_switch');
+//================================================================================
+
 //Category Armada
 Route::get('category_armadaindex','CategoryController@index');
 Route::post('category_armadastore', 'CategoryController@store');

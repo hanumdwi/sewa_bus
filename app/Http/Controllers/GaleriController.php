@@ -92,6 +92,22 @@ class GaleriController extends Controller
         return redirect('galeriindex');
     }
 
+    public function update_switch(Request $request)
+    {
+        $galeri=DB::table('galeri')->where('ID_GALERI',$request->id)->value('STATUS_FOTO','=','1');
+        if($galeri){
+            DB::table('galeri')
+                ->where('ID_GALERI',$request->id)
+                ->update(['STATUS_FOTO'=>0]);
+        }
+        else{
+            DB::table('galeri')
+                ->where('ID_GALERI',$request->id)
+                ->update(['STATUS_FOTO'=>1]);
+        }
+        return redirect('galeriindex');
+    }
+
     /**
      * Remove the specified resource from storage.
      *

@@ -290,6 +290,7 @@
                             <th>Id Armada</th>
                             <th>Category Armada</th>
                             <th>Nama Armada</th>
+                            <th>Foto Armada</th>
                             <th>Plat Nomor</th>
                             <th>Kapasitas</th>
                             <th>Fasilitas Armada</th>
