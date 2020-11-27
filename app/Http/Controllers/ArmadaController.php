@@ -17,14 +17,14 @@ class ArmadaController extends Controller
     public function index()
     {
         $category_armada = DB::table('category_armada')->get();
-        $detail_sewa_bus = DB::table('detail_sewa_bus')->get();
+        $schedule_armada = DB::table('schedule_armada')->get();
         $armada = DB::table('armada')
         ->join('category_armada','armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
-        ->select('category_armada.NAMA_CATEGORY','armada.ID_ARMADA','armada.NAMA_ARMADA', 
+        ->select('category_armada.NAMA_CATEGORY','armada.ID_ARMADA','armada.NAMA_ARMADA', 'armada.FOTO_ARMADA',
         'armada.PLAT_NOMOR', 'armada.KAPASITAS', 'armada.FASILITAS_ARMADA','armada.HARGA','armada.STATUS_ARMADA')
         ->get();
 
-        return view ('armadaindex',['armada' =>$armada,'category_armada' =>$category_armada], ['detail_sewa_bus'=>$detail_sewa_bus]);
+        return view ('armadaindex',['armada' =>$armada,'category_armada' =>$category_armada], ['schedule_armada'=>$schedule_armada]);
     }
 
     /**
@@ -51,6 +51,7 @@ class ArmadaController extends Controller
         $armada->fill([
             'ID_CATEGORY'           => $request->ID_CATEGORY,
             'NAMA_ARMADA'           => $request->namaarmada,
+            'FOTO_ARMADA'           => $request->fotoarmada,
             'PLAT_NOMOR'            => $request->platnomor,
             'KAPASITAS'             => $request->kapasitas,
             'FASILITAS_ARMADA'      => $request->fasilitas,
@@ -97,6 +98,7 @@ class ArmadaController extends Controller
         DB::table('armada')->where('ID_ARMADA',$request->id)->update([
 			'ID_CATEGORY'           => $request->ID_CATEGORY,
             'NAMA_ARMADA'           => $request->namaarmada,
+            'FOTO_ARMADA'           => $request->fotoarmada,
             'PLAT_NOMOR'            => $request->platnomor,
             'KAPASITAS'             => $request->kapasitas,
             'FASILITAS_ARMADA'      => $request->fasilitas,

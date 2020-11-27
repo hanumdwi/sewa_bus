@@ -60,6 +60,10 @@
                                     <input type="namaarmada" class="form-control" id="namaarmada" name="namaarmada">
                                     </div>
                                 <div class="form-group">
+                                    <label for="fotoarmada" class="col-form-label">Foto Armada :</label>
+                                    <input type="fotoarmada" class="form-control" id="fotoarmada" name="fotoarmada">
+                                    </div>
+                                <div class="form-group">
                                     <label for="platnomor" class="col-form-label">Plat Nomor :</label>
                                     <input type="platnomor" class="form-control" id="platnomor" name="platnomor">
                                     </div>
@@ -92,6 +96,7 @@
                             <th>Id Armada</th>
                             <th>Category Armada</th>
                             <th>Nama Armada</th>
+                            <th>Foto Armada</th>
                             <th>Plat Nomor</th>
                             <th>Kapasitas</th>
                             <th>Fasilitas Armada</th>
@@ -104,8 +109,8 @@
                             @foreach($armada as $ar)
                                     <td>
                                         @php $x=0; @endphp
-                                            @foreach($detail_sewa_bus as $dsb)
-                                                @if($ar->ID_ARMADA == $dsb->ID_ARMADA)
+                                            @foreach($schedule_armada as $scd)
+                                                @if($ar->ID_ARMADA == $scd->ID_ARMADA)
                                         @php $x=1; @endphp
                                                 @endif
                                             @endforeach
@@ -147,6 +152,7 @@
                                     <td>{{ $ar -> ID_ARMADA }}</td>
                                     <td>{{ $ar -> NAMA_CATEGORY }}</td>
                                     <td>{{ $ar -> NAMA_ARMADA }}</td>
+                                    <td>{{ $ar -> FOTO_ARMADA }}</td>
                                     <td>{{ $ar -> PLAT_NOMOR }}</td>
                                     <td>{{ $ar -> KAPASITAS }}</td>
                                     <td>{{ $ar -> FASILITAS_ARMADA }}</td>
@@ -210,6 +216,10 @@
                                                 <div class="form-group">
                                                     <label for="namaarmada" class="col-form-label">Nama Armada :</label>
                                                     <input type="namaarmada" class="form-control" id="namaarmada" name="namaarmada" value="{{ $ar->NAMA_ARMADA }}">
+                                                    </div>
+                                                <div class="form-group">
+                                                    <label for="fotoarmada" class="col-form-label">Foto Armada :</label>
+                                                    <input type="fotoarmada" class="form-control" id="fotoarmada" name="fotoarmada" value="{{ $ar->FOTO_ARMADA }}">
                                                     </div>
                                                 <div class="form-group">
                                                     <label for="platnomor" class="col-form-label">Plat Nomor :</label>

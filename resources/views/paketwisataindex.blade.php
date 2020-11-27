@@ -63,17 +63,18 @@
                                     <label for="tipepaket" class="col-form-label">Tipe Paket :</label>
                                     <select name="tipepaket" class="form-control" id="tipepaket">
                                         <option selected="selected">--Pilih Paket--</option>
-                                            <option>Normal</option>
-                                            <option>Promo</option>
+                                            <option id="paketA">Paket A (Kapasitas 40 Orang)</option>
+                                            <option id="paketB">Paket B (Kapasitas 35 Orang)</option>
+                                            <option id="paketC">Paket C (Kapasitas 30 Orang)</option>
                                     </select>
                                     </div>
                                 <div class="form-group">
                                     <label for="hargadasar" class="col-form-label">Harga Dasar :</label>
-                                    <input type="hargadasar" class="form-control" id="hargadasar" name="hargadasar">
+                                    <input type="hargadasar" class="form-control" id="hargadasar" name="hargadasar" onkeyup="hitunghargajualA()">
                                     </div>
                                 <div class="form-group">
                                     <label for="hargajual" class="col-form-label">Harga Jual :</label>
-                                    <input type="hargajual" class="form-control" id="hargajual" name="hargajual">
+                                    <input type="hargajual" class="form-control" id="hargajual" name="hargajual" readonly>
                                     </div>
                                 <div class="form-group">
                                     <label for="fasilitas" class="col-form-label">Fasilitas :</label>
@@ -153,8 +154,9 @@
                                                         <label for="tipepaket" class="col-form-label">Tipe Paket :</label>
                                                         <select name="tipepaket" class="form-control" id="tipepaket" value="{{ $pw->TIPE_PAKET }}">
                                                             <option selected="selected">{{ $pw->TIPE_PAKET }}</option>
-                                                                <option>Normal</option>
-                                                                <option>Promo</option>
+                                                                <option>Paket A (Kapasitas 40 Orang)</option>
+                                                                <option>Paket B (Kapasitas 35 Orang)</option>
+                                                                <option>Paket C (Kapasitas 30 Orang)</option>
                                                         </select> 
                                                         </div>
                                                     <div class="form-group">
@@ -243,12 +245,29 @@
 <script>
     $(document).ready(function (){
     $('#myTable').DataTable();
+
+    function hitunghargajualA(){
+        console.log("function getHargaJual");
+        var hargajual = document.getElementById('hargajual').value;
+        var hargadasar = document.getElementById('hargadasar').value;
+        var paketA = document.getElementById("paketA");
+        var paketB = document.getElementById("paketB");
+        // if(paketA){
+        var totals = (Number(hargadasar.value*40));
+        hargajual.value = totals;
+        console.log(hargadasar.value);
+        // }else{
+        //     var totals = (Number(hargadasar*30));
+        // hargajual.value = totals;
+        // console.log(totals);
+        }
 });
 
     function modal(id){
         const y=document.getElementById(id);
             $("#exampleModal12").modal();
         }
+
 
 </script>
     <!-- Sweet alert -->

@@ -868,6 +868,20 @@
                                 <span>Sewa Paket Wisata</span>
                             </a>
                         </li>
+                        <li class="navigation-divider">Laporan Sewa</li>
+                        <li>
+                            <a  class="active" href="category_armadaindex">
+                                <span class="nav-link-icon" data-feather="file"></span>
+                                <span>Armada</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a  class="active" href="category_armadaindex">
+                                <span class="nav-link-icon" data-feather="file"></span>
+                                <span>Paket Wisata</span>
+                            </a>
+                        </li>
+
                     </ul>
                     
                     
