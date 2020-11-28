@@ -727,11 +727,21 @@
                         <li>
                             <a href="#" data-menu-target="#paketwisata">
                                 <span class="menu-tab-icon">
-                                    <i data-feather="calendar"></i>
+                                    <i data-feather="grid"></i>
                                 </span>
                                 <span>Paket Wisata</span>
                             </a>
                         </li>
+
+                        <li>
+                            <a href="#" data-menu-target="#schedule">
+                                <span class="menu-tab-icon">
+                                    <i data-feather="calendar"></i>
+                                </span>
+                                <span>Schedule</span>
+                            </a>
+                        </li>
+
                         <li>
                             <a href="#" data-menu-target="#sewa">
                                 <span class="menu-tab-icon">
@@ -829,6 +839,16 @@
                             <a  class="active" href="paketwisataindex">
                                 <span class="nav-link-icon" data-feather="calendar"></span>
                                 <span>Paket Wisata</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul id="schedule">
+                        <li class="navigation-divider">Schedule</li>
+                        <li>
+                            <a  class="active" href="scheduleindex">
+                                <span class="nav-link-icon" data-feather="calendar"></span>
+                                <span>Schedule Armada</span>
                             </a>
                         </li>
                     </ul>

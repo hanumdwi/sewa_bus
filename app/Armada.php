@@ -15,6 +15,7 @@ class Armada extends Model
     protected $fillable = 
     [
         'ID_CATEGORY',
+        'ID_GALERI',
         'NAMA_ARMADA',
         'PLAT_NOMOR',
         'KAPASITAS',

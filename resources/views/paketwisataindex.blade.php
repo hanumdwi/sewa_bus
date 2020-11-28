@@ -46,16 +46,6 @@
                                 <form action="paketwisatastore" method="post">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="nama" class="col-form-label">Armada :</label>
-                                    <select name="ID_ARMADA" class="form-control" id="ID_ARMADA">
-                                        @foreach($armada as $ar)
-                                       
-                                        <option value="{{$ar->ID_ARMADA}}">{{$ar->NAMA_ARMADA}}</option>
-                                       
-                                        @endforeach                 
-                                </select>
-                                </div>
-                                <div class="form-group">
                                     <label for="namapaket" class="col-form-label">Nama Paket Wisata :</label>
                                     <input type="namapaket" class="form-control" id="namapaket" name="namapaket">
                                     </div>
@@ -74,7 +64,11 @@
                                     </div>
                                 <div class="form-group">
                                     <label for="hargajual" class="col-form-label">Harga Jual :</label>
-                                    <input type="hargajual" class="form-control" id="hargajual" name="hargajual" readonly>
+                                    <input type="hargajual" class="form-control" id="hargajual" name="hargajual">
+                                    </div>
+                                <div class="form-group">
+                                    <label for="tempatkunjung" class="col-form-label">Tempat Kunjung :</label>
+                                    <input type="tempatkunjung" class="form-control" id="tempatkunjung" name="tempatkunjung">
                                     </div>
                                 <div class="form-group">
                                     <label for="fasilitas" class="col-form-label">Fasilitas :</label>
@@ -94,11 +88,11 @@
                         <thead>
                         <tr>
                             <th>Id Paket</th>
-                            <th>Armada</th>
                             <th>Nama Paket Wisata</th>
                             <th>Tipe Paket</th>
                             <th>Harga Dasar</th>
                             <th>Harga Jual</th>
+                            <th>Tempat Kunjung</th>
                             <th>Fasilitas</th>
                             <th>Action</th>
                         </tr>
@@ -108,11 +102,11 @@
                             @foreach($paket_wisata as $pw)
                                     <!-- <tr class="table-light"> -->
                                     <td>{{ $pw -> ID_PAKET }}</td>
-                                    <td>{{ $pw -> NAMA_ARMADA }}</td>
                                     <td>{{ $pw -> NAMA_PAKET }}</td>
                                     <td>{{ $pw -> TIPE_PAKET }}</td>
                                     <td>{{ $pw -> HARGA_DASAR }}</td>
                                     <td>{{ $pw -> HARGA_JUAL }}</td>
+                                    <td>{{ $pw -> TEMPAT_KUNJUNG }}</td>
                                     <td>{{ $pw -> FASILITAS_PAKET }}</td>
                                     <td>
                                     
@@ -137,16 +131,6 @@
                                                 {{ csrf_field() }}
                                                 <input type="hidden" name="id" value="{{ $pw->ID_PAKET }}"> <br/>
                                                 <div class="form-group">
-                                                <label for="nama" class="col-form-label">Armada :</label>
-                                                <select name="ID_ARMADA" class="form-control" id="ID_ARMADA">
-                                                    @foreach($armada as $ar)
-                                                
-                                                    <option value="{{$ar->ID_ARMADA}}">{{$ar->NAMA_ARMADA}}</option>
-                                                
-                                                    @endforeach                     
-                                                </select>
-                                                </div>
-                                                <div class="form-group">
                                                     <label for="namapaket" class="col-form-label">Nama Paket Wisata :</label>
                                                         <input type="namapaket" class="form-control" id="namapaket" name="namapaket" value="{{ $pw->NAMA_PAKET }}">
                                                         </div>
@@ -166,6 +150,10 @@
                                                     <div class="form-group">
                                                         <label for="hargajual" class="col-form-label">Harga Jual :</label>
                                                         <input type="hargajual" class="form-control" id="hargajual" name="hargajual" value="{{ $pw->HARGA_JUAL }}">
+                                                        </div>
+                                                    <div class="form-group">
+                                                        <label for="tempatkunjung" class="col-form-label">Tempat Kunjung :</label>
+                                                        <input type="tempatkunjung" class="form-control" id="tempatkunjung" name="tempatkunjung" value="{{ $pw->TEMPAT_KUNJUNG }}">
                                                         </div>
                                                     <div class="form-group">
                                                         <label for="fasilitas" class="col-form-label">Fasilitas :</label>
@@ -221,11 +209,11 @@
                                     <tfoot>
                         <tr>
                             <th>Id Paket</th>
-                            <th>Armada</th>
                             <th>Nama Paket Wisata</th>
                             <th>Tipe Paket</th>
                             <th>Harga Dasar</th>
                             <th>Harga Jual</th>
+                            <th>Tempat Kunjung</th>
                             <th>Fasilitas</th>
                             <th>Action</th>
                         </tr>

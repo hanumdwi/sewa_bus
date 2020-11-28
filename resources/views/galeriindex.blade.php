@@ -88,7 +88,7 @@
                                         <form class="post0" method="post" action="galeriupdateswitch">
                                         @csrf
                                             <input type="hidden" name="id" value="{{$g -> ID_GALERI}}">
-                                            @if($ar -> STATUS_FOTO == 1)
+                                            @if($g -> STATUS_FOTO == 1)
                                             <div class="custom-control custom-switch">
                                                 <input type="checkbox" class="custom-control-input" checked id="switch{{$g -> ID_GALERI}}">
                                                 <label class="custom-control-label" for="switch{{$g -> ID_GALERI}}">Active</label>
@@ -104,7 +104,7 @@
                                         <form id="modal{{$g -> ID_GALERI}}" onclick="modal(id)" method="post" action="#">
                                             @csrf
                                                 <input type="hidden" name="id" value="{{$g -> ID_GALERI}}">
-                                                @if($ar -> STATUS_FOTO == 1)
+                                                @if($g -> STATUS_FOTO == 1)
                                                 <div class="custom-control custom-switch">
                                                     <input type="checkbox" class="custom-control-input" checked id="switch{{$g -> ID_GALERI}}">
                                                     <label class="custom-control-label" for="switch{{$g -> ID_GALERI}}">Active</label>
@@ -144,11 +144,11 @@
                                                 <input type="hidden" name="id" value="{{ $g -> ID_GALERI }}"> <br/>
                                                 <div class="form-group">
                                                     <label for="fotoarmada" class="col-form-label">Foto Armada :</label>
-                                                    <input type="text" class="form-control" id="fotoarmada" name="fotoarmada" value="{{ $c->FOTO_ARMADA }}">
+                                                    <input type="text" class="form-control" id="fotoarmada" name="fotoarmada" value="{{ $g->FOTO_ARMADA }}">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="deskripsifoto" class="col-form-label">Deskripsi Foto :</label>
-                                                    <input type="text" class="form-control" id="deskripsifoto" name="deskripsifoto" value="{{ $c->FOTO_ARMADA }}">
+                                                    <input type="text" class="form-control" id="deskripsifoto" name="deskripsifoto" value="{{ $g->FOTO_ARMADA }}">
                                                 </div>
                                                 
                                             </div>

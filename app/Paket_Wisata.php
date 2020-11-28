@@ -14,11 +14,11 @@ class Paket_Wisata extends Model
     
     protected $fillable = 
     [
-        'ID_ARMADA',
         'NAMA_PAKET',
         'TIPE_PAKET',
         'HARGA_DASAR',
         'HARGA_JUAL',
+        'TEMPAT_KUNJUNG',
         'FASILITAS_PAKET'
     ];
 }

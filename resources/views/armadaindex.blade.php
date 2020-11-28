@@ -61,7 +61,13 @@
                                     </div>
                                 <div class="form-group">
                                     <label for="fotoarmada" class="col-form-label">Foto Armada :</label>
-                                    <input type="fotoarmada" class="form-control" id="fotoarmada" name="fotoarmada">
+                                    <select name="ID_GALERI" class="form-control" id="ID_GALERI">
+                                        @foreach($galeri as $g)
+                                       
+                                        <option value="{{$g->ID_GALERI}}">{{$g->FOTO_ARMADA}}</option>
+                                       
+                                        @endforeach                 
+                                </select>
                                     </div>
                                 <div class="form-group">
                                     <label for="platnomor" class="col-form-label">Plat Nomor :</label>
@@ -219,7 +225,13 @@
                                                     </div>
                                                 <div class="form-group">
                                                     <label for="fotoarmada" class="col-form-label">Foto Armada :</label>
-                                                    <input type="fotoarmada" class="form-control" id="fotoarmada" name="fotoarmada" value="{{ $ar->FOTO_ARMADA }}">
+                                                    <select name="ID_GALERI" class="form-control" id="ID_GALERI">
+                                                            @foreach($galeri as $g)
+                                                        
+                                                            <option value="{{$g->ID_GALERI}}">{{$g->FOTO_ARMADA}}</option>
+                                                        
+                                                            @endforeach                 
+                                                    </select>
                                                     </div>
                                                 <div class="form-group">
                                                     <label for="platnomor" class="col-form-label">Plat Nomor :</label>

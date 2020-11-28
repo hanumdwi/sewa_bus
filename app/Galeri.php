@@ -15,7 +15,6 @@ class Galeri extends Model
     protected $fillable = 
     [
         'FOTO_ARMADA',
-        'DESKRIPSI_FOTO',
-        'STATUS_FOTO'
+        'DESKRIPSI_FOTO'
     ];
 }
