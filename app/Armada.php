@@ -20,6 +20,7 @@ class Armada extends Model
         'PLAT_NOMOR',
         'KAPASITAS',
         'FASILITAS_ARMADA',
-        'HARGA'
+        'HARGA',
+        'FOTO'
     ];
 }

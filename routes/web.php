@@ -86,7 +86,25 @@ Route::post('sewa_busupdate', 'SewaBusController@update');
 Route::get('schedulesewa', 'SewaBusController@getAllSchedule');
 Route::get('schedulesewa/{id}', 'SewaBusController@getScheduleById');
 Route::post('updateswitch', 'SewaBusController@update_switch');
+//===================================================================================
 
+//Sewa Bus
+Route::get('scheduleindex','ScheduleController@index');
+Route::post('schedulestore', 'ScheduleController@store');
+Route::post('scheduleupdate', 'ScheduleController@update');
+Route::get('schedulesewa', 'ScheduleController@getAllSchedule');
+Route::get('schedulesewa/{id}', 'ScheduleController@getScheduleById');
+Route::post('updateswitch', 'ScheduleController@update_switch');
+//===================================================================================
+
+//Sewa Bus
+Route::get('sewa_bus_detail/{id}','SewaDetailController@index');
+Route::post('sewa_bus_detailstore', 'SewaDetailController@store');
+Route::post('sewa_bus_detailupdate', 'SewaDetailController@update');
+Route::get('sewa_bus_detailsewa', 'SewaDetailController@getAllsewa_bus_detail');
+Route::get('sewa_bus_detailsewa/{id}', 'SewaDetailController@getsewa_bus_detailById');
+Route::post('updateswitch', 'SewaDetailController@update_switch');
+//===================================================================================
 
 //====================================================================================
 

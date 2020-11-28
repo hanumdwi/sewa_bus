@@ -1,379 +1,260 @@
 @extends('layouts.app')
 
 @section('head')
-    <!-- Fullcalendar -->
-    <link rel="stylesheet" href="{{ url('vendors/fullcalendar/fullcalendar.min.css') }}" type="text/css">
+    <!-- Slick -->
+    <link rel="stylesheet" href="{{ url('/vendors/slick/slick.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url('/vendors/slick/slick-theme.css') }}" type="text/css">
 
-    <!-- Clockpicker -->
-    <link rel="stylesheet" href="{{ url('vendors/clockpicker/bootstrap-clockpicker.min.css') }}" type="text/css">
-
-    <!-- Datepicker -->
+    <!-- Daterangepicker -->
     <link rel="stylesheet" href="{{ url('vendors/datepicker/daterangepicker.css') }}" type="text/css">
+
+    <!-- DataTable -->
+    <link rel="stylesheet" href="{{ url('vendors/dataTable/datatables.min.css') }}" type="text/css">
+
+    <!-- Css -->
+    <link rel="stylesheet" href="{{ url('vendors/dataTable/datatables.min.css') }}" type="text/css">
+
+    <!-- Prism -->
+    <link rel="stylesheet" href="{{ url('vendors/prism/prism.css') }}" type="text/css">
 @endsection
 
 @section('content')
 
-
-    <div class="page-header">
-        <div class="page-title">
-            <h3>Sewa Bus</h3>
-            <div>
-                <button class="btn btn-primary" data-toggle="modal"
-                        data-target="#createEventModal">
-                    <i class="ti-plus mr-2"></i> Create Sewa
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <div class="row app-block mb-4">
-        <div class="col-md-3 app-sidebar">
-            <div class="card">
+<div class="card">
                 <div class="card-body">
-                    <h6 class="card-title mb-2">Bus</h6>
-                    <p class="text-muted">Drag and drop your event</p>
-                    <div class="list-group mb-3" id="external-events">
-                    @foreach($armada as $ar)
-                        <div class="list-group-item px-0 fc-event">
-                            <i class="fa fa-circle text-success" data-icon="car"></i>
-                            {{$ar->NAMA_ARMADA}}
-                        </div>
-                    @endforeach
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="drop-remove" checked="">
-                        <label class="custom-control-label" for="drop-remove">Remove after drop</label>
-                    </div>
+                    <h6 class="card-title mb-0">Table Sewa</h6>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-9 app-content">
-            <div class="app-content-overlay"></div>
-            <div class="card app-content-body">
-                <div class="card-body">
-                    <a href="#" class="app-sidebar-menu-button btn btn-outline-light mb-3">
-                        <i data-feather="menu"></i>
-                    </a>
-                    <div id="calendar-demo"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- begin::Create Event Modal -->
-    <div class="modal fade" id="createEventModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Create Sewa</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <i class="ti-close"></i>
+                <div class="table-responsive">
+                <center>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
+                Tambah Data Sewa
                     </button>
-                </div>
-                
-                <div class="modal-body" >
-                
-                    <form autocomplete="off" action="sewa_busstore" method="post">
-                    @csrf
-                    <input id="statussewa" type="hidden" name="statussewa" value="false">
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Id Sewa</label>
-                            <div class="col-sm-9">
-                                <input id="ID_SEWA_BUS" type="text" class="form-control" name="ID_SEWA_BUS" value="{{ $ID_SEWA_BUS }}" readonly="">
-                                
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                        
-                        <label class="col-sm-3 col-form-label">Nama Pengguna</label>
-                        <div class="col-sm-9">
-                        <select name="ID_PENGGUNA" class="form-control" id="ID_PENGGUNA">
-                                    @foreach($pengguna as $png)
-                                   
-                                    <option value="{{$png->ID_PENGGUNA}}">{{$png->NAMA_PENGGUNA}}</option>
-                                   
-                                    @endforeach                 
-                            </select>
-                        </div>
-                    </div>
-
-                        <div class="form-group row">
-                        
-                            <label class="col-sm-3 col-form-label">Nama Customer</label>
-                            <div class="col-sm-9">
-                            <select name="ID_CUSTOMER" class="form-control" id="ID_CUSTOMER">
-                                        @foreach($customer as $cus)
-                                       
-                                        <option value="{{$cus->ID_CUSTOMER}}">{{$cus->NAMA_CUSTOMER}}</option>
-                                       
-                                        @endforeach                 
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Nama Armada</label>
-                            <div class="col-sm-9">
-                            <select name="ID_ARMADA" class="form-control" id="ID_ARMADA">
-                                        @foreach($armada as $ar)
-                                       
-                                        <option value="{{$ar->ID_ARMADA}}">{{$ar->NAMA_ARMADA}}</option>
-                                       
-                                        @endforeach                 
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row row-sm">
-                            <label class="col-sm-3 col-form-label">Start Sewa</label>
-                            <div class="col-sm-5">
-                                <input id="TGL_SEWA" type="text" name="TGL_SEWA"
-                                       class="form-control create-event-datepicker"
-                                       placeholder="Date">
-                            </div>
-                            <div class="col-sm-4">
-                                <input id="JAM_SEWA" name="JAM_SEWA" type="text" class="form-control create-event-demo"
-                                       placeholder="Time">
-                            </div>
-                        </div>
-                        <div class="form-group row row-sm">
-                            <label class="col-sm-3 col-form-label">Selesai Sewa</label>
-                            <div class="col-sm-5">
-                                <input id="TGL_AKHIR_SEWA" type="text" name="TGL_AKHIR_SEWA"
-                                class="form-control create-event-datepicker"
-                                       placeholder="Date">
-                            </div>
-                            <div class="col-sm-4">
-                                <input id="JAM_AKHIR_SEWA" type="text" name="JAM_AKHIR_SEWA"
-                                class="form-control create-event-demo"
-                                       placeholder="Time">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Lama Sewa</label>
-                            <div class="col-sm-9">
-                                <div class="avatar-group">
-                                    <input id="LAMA_SEWA" type="text" name="LAMA_SEWA"
-                                    class="form-control" placeholder="Lama Sewa">
+                    </center>
+                        <!-- modal -->
+                        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModal1Label" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModal1Label">Tambah Data Sewa</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <i class="ti-close"></i>
+                                    </button>
                                 </div>
-                                <!-- <button type="button" class="btn btn-outline-light btn-sm btn-floating">
-                                    <i class="ti-plus"></i>
-                                </button> -->
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Harga Sewa</label>
-                            <div class="col-sm-9">
-                                <input id="HARGA_SEWA_BUS" type="text" name="HARGA_SEWA_BUS"
-                                class="form-control">
-                                <!-- <textarea id="event-desc" class="form-control" rows="6"></textarea> -->
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3"></label>
-                            <div class="col-sm-9">
-                                <button type="submit" id="btn-save" class="btn btn-primary">Create</button>
-                            </div>
-                        </div>
-                    </form>
-                    
-                </div>
-                
-            </div>
-        </div>
-    </div>
-    
-
-    <div class="modal fade" id="viewEventModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Sewa</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <i class="ti-close"></i>
-                    </button>
-                </div>
-                
-                <div class="modal-body">
-                
-                    <form autocomplete="off" action="sewa_busupdate" method="post">
-                    @csrf
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Id Sewa</label>
-                            <div class="col-sm-9">
-                                <input id="ID_SEWA_BUS" type="text" class="form-control" name="ID_SEWA_BUS" value="{{ $ID_SEWA_BUS }}" readonly="">
-                                
-                            </div>
-                        </div>
-                    
-                        <div class="form-group row">
-                        
-                            <label class="col-sm-3 col-form-label">Nama Pengguna</label>
-                            <div class="col-sm-9">
-                            <select name="ID_PENGGUNA" class="form-control" id="ID_PENGGUNA" value="{{ $png->NAMA_PENGGUNA }}">
+                                <div class="modal-body">
+                                <form action="sewa_busstore" method="post">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="nama" class="col-form-label">Nama User :</label>
+                                    <select name="ID_PENGGUNA" class="form-control" id="ID_PENGGUNA">
                                         @foreach($pengguna as $png)
                                        
                                         <option value="{{$png->ID_PENGGUNA}}">{{$png->NAMA_PENGGUNA}}</option>
                                        
                                         @endforeach                 
                                 </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                        
-                            <label class="col-sm-3 col-form-label">Nama Customer</label>
-                            <div class="col-sm-9">
-                            <select name="ID_CUSTOMER" class="form-control" id="ID_CUSTOMER" value="{{ $cus->NAMA_CUSTOMER }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="nama" class="col-form-label">Nama Customer :</label>
+                                    <select name="ID_CUSTOMER" class="form-control" id="ID_CUSTOMER">
                                         @foreach($customer as $cus)
                                        
                                         <option value="{{$cus->ID_CUSTOMER}}">{{$cus->NAMA_CUSTOMER}}</option>
                                        
                                         @endforeach                 
                                 </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Nama Armada</label>
-                            <div class="col-sm-9">
-                            <select name="ID_ARMADA" class="form-control" id="ID_ARMADA" value="{{ $ar->NAMA_ARMADA }}">
-                                        @foreach($armada as $ar)
-                                       
-                                        <option value="{{$ar->ID_ARMADA}}">{{$ar->NAMA_ARMADA}}</option>
-                                       
-                                        @endforeach                 
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row row-sm">
-                            <label class="col-sm-3 col-form-label">Start Sewa</label>
-                            <div class="col-sm-5">
-                                <input id="TGL_SEWA" type="text" name="TGL_SEWA"
-                                       class="form-control create-event-datepicker"
-                                       placeholder="Date" value="{{ old('TGL_SEWA_BUS') }}">
-                            </div>
-                            <div class="col-sm-4">
-                                <input id="JAM_SEWA" name="JAM_SEWA" type="text" class="form-control create-event-demo"
-                                       placeholder="Time" value="{{ old('JAM_SEWA') }}">
-                            </div>
-                        </div>
-                        <div class="form-group row row-sm">
-                            <label class="col-sm-3 col-form-label">Selesai Sewa</label>
-                            <div class="col-sm-5">
-                                <input id="TGL_AKHIR_SEWA" type="text" name="TGL_AKHIR_SEWA"
-                                class="form-control create-event-datepicker"
-                                       placeholder="Date" value="{{ old('TGL_AKHIR_SEWA') }}">
-                            </div>
-                            <div class="col-sm-4">
-                                <input id="JAM_AKHIR_SEWA" type="text" name="JAM_AKHIR_SEWA"
-                                class="form-control create-event-demo"
-                                       placeholder="Time" value="{{ old('JAM_AKHIR_SEWA') }}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Lama Sewa</label>
-                            <div class="col-sm-9">
-                                <div class="avatar-group">
-                                    <input id="LAMA_SEWA" type="text" name="LAMA_SEWA"
-                                    class="form-control" placeholder="Lama Sewa" value="{{ old('LAMA_SEWA') }}">
                                 </div>
-                                <!-- <button type="button" class="btn btn-outline-light btn-sm btn-floating">
-                                    <i class="ti-plus"></i>
-                                </button> -->
+                                <div class="form-group">
+                                    <label for="TGL_SEWA" class="col-form-label">Nama Armada :</label>
+                                    <input type="date" class="form-control" id="TGL_SEWA" name="TGL_SEWA">
+                                    </div>
+                                <div class="form-group">
+                                    <label for="TGL_AKHIR_SEWA">End Date :</label>
+                                    <input type="date" class="form-control create-event-datepicker" id="TGL_AKHIR_SEWA" name="TGL_AKHIR_SEWA">
+                                    </div>
+                                <div class="form-group">
+                                    <label for="JAM_SEWA" class="col-form-label">Start Time :</label>
+                                    <input type="time" class="form-control" id="JAM_SEWA" name="JAM_SEWA">
+                                    </div>
+                                <div class="form-group">
+                                    <label for="JAM_AKHIR_SEWA" class="col-form-label">End Time :</label>
+                                    <input type="time" class="form-control" id="JAM_AKHIR_SEWA" name="JAM_AKHIR_SEWA">
+                                    </div>
+                                <div class="form-group">
+                                    <label for="LAMA_SEWA" class="col-form-label">Lama sewa :</label>
+                                    <input type="LAMA_SEWA" class="form-control" id="LAMA_SEWA" name="LAMA_SEWA">
+                                    </div>
+                                <div class="form-group">
+                                <div class="form-group">
+                                    <label for="DP_SEWA" class="col-form-label">DP Sewa :</label>
+                                    <input type="DP_SEWA" class="form-control" id="DP_SEWA" name="DP_SEWA">
+                                    </div>
+                                <div class="form-group">
+                                    <label for="HARGA_SEWA_BUS" class="col-form-label">Harga Sewa Bus :</label>
+                                    <input type="HARGA_SEWA_BUS" class="form-control" id="HARGA_SEWA_BUS" name="HARGA_SEWA_BUS">
+                                    </div>
+                                    </div>
+                                
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Harga Sewa</label>
-                            <div class="col-sm-9">
-                                <input id="HARGA_SEWA_BUS" type="text" name="HARGA_SEWA_BUS"
-                                class="form-control" value="{{ old('HARGA_SEWA_BUS') }}">
-                                <!-- <textarea id="event-desc" class="form-control" rows="6"></textarea> -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary" id="berhasil">Add Armada</button>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Status</label>
-                            <div class="col-sm-9">
-                            <form class="post0" method="post" action="updateswitch">
-                                @csrf
-                                    <input type="hidden" name="id" value="{{ old('ID_SEWA_BUS') }}">
-                                        @if('STATUS_SEWA' == 1)
-                                            <div class="custom-control custom-switch">
-                                                <input type="checkbox" class="custom-control-input" checked id="switch{{ old('ID_SEWA_BUS') }}">
-                                                <label class="custom-control-label" for="switch{{ old('ID_SEWA_BUS') }}">Berlangsung</label>
-                                            </div>
-                                        @else 
-                                            <div class="custom-control custom-switch">
-                                                <input type="checkbox" class="custom-control-input" id="switch{{ old('ID_SEWA_BUS') }}">
-                                                <label class="custom-control-label" for="switch{{ old('ID_SEWA_BUS') }}">Selesai</label>
-                                            </div>
-                                        @endif
                             </form>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3"></label>
-                            <div class="col-sm-9">
-                           <button type="submit" id="btn-save" class="btn btn-primary">Update</button>
-                              
-                            </div>
                         </div>
-                    </form>
-                    
+
+
+                    <table id="myTable" class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Id Sewa Bus</th>
+                            <th>Nama User</th>
+                            <th>Nama Customer</th>
+                            <th>Start Date</th>
+                            <th>Start Time</th>
+                            <th>End Date</th>
+                            <th>End Time</th>
+                            <th>Lama Sewa</th>
+                            <th>DP Sewa</th>
+                            <th>Harga Sewa</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            @foreach($sewa_bus as $sb)
+                                   
+                                    <!-- <tr class="table-light"> -->
+                                    <td>{{ $sb -> ID_SEWA_BUS }}</td>
+                                    <td>{{ $sb -> NAMA_PENGGUNA }}</td>
+                                    <td>{{ $sb -> NAMA_CUSTOMER }}</td>
+                                    <td>{{ $sb -> TGL_SEWA_BUS }}</td>
+                                    <td>{{ $sb -> JAM_SEWA }}</td>
+                                    <td>{{ $sb -> TGL_AKHIR_SEWA }}</td>
+                                    <td>{{ $sb -> JAM_AKHIR_SEWA }}</td>
+                                    <td>{{ $sb -> LAMA_SEWA }}</td>
+                                    <td>{{ $sb -> DP_BUS }}</td>
+                                    <td>{{ $sb -> HARGA_SEWA_BUS }}</td>
+                                    <td>
+                                    <a href="sewa_bus_detail/{{$sb -> ID_SEWA_BUS}}">
+                                    <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit" data-toggle="modal" data-target="#exampleModal12">
+                                        <i class="ti-pencil"></i>
+                                    </button>
+                                    </a>
+                                    <button type="button" class="btn btn-outline-danger btn-sm btn-floating ml-2" title="Delete" data-toggle="modal" data-target="#exampleModal13">
+                                        <i class="ti-trash"></i>
+                                    </button>
+                                    
+                                        <!-- modal -->
+                                            <div class="modal fade" id="exampleModal13" tabindex="-1" role="dialog"
+                                                aria-labelledby="exampleModal13Label" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModal13Label">Delete Data Sewa Bus</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <i class="ti-close"></i>
+                                                            </button>
+                                                        </div>
+                                                        
+                                                        <div class="modal-body">
+                                                            <p>Are you sure to Delete this Data?</p>
+                                                        </div>
+                                                        
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <a href="sewa_busdestroy/{{$sb -> ID_SEWA_BUS}}">
+                                                        <button type="button" class="btn btn-primary" id="delete">Delete</button>
+                                                        </a>
+                                                    </div>
+                                                    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </td>
+                                    </tr>
+                                    @endforeach
+                                    <!-- </tr> -->
+                                    </tbody>
+                                    <tfoot>
+                        <tr>
+                            <th>Id Sewa Bus</th>
+                            <th>Nama User</th>
+                            <th>Nama Customer</th>
+                            <th>Start Date</th>
+                            <th>Start Time</th>
+                            <th>End Date</th>
+                            <th>End Time</th>
+                            <th>Lama Sewa</th>
+                            <th>DP Sewa</th>
+                            <th>Harga Sewa</th>
+                            <th>Action</th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                    </table>
                 </div>
                 
-            </div>
         </div>
     </div>
-    <!-- end::Create Event Modal -->
 
-    <!-- begin::Event Info Modal -->
-    <div class="modal fade" id="viewEventModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">
-                        <span class="event-icon mr-2"></span>
-                        <span class="event-title">Modal Title</span>
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <i class="ti-close"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="event-body"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end::Event Info Modal -->
 
 @endsection
 
 @section('script')
 <script>
+    $(document).ready(function (){
+    $('#myTable').DataTable();
+});
 
-    console.log('x : ')
-        const x = document.getElementsByClassName('post0');
+    
+
+        console.log('x : ')
+            const x = document.getElementsByClassName('post0');
             for(let i=0;i<x.length;i++){
                 x[i].addEventListener('click',function(){
                     x[i].submit();
-                    });
-                }
+                });
+            }
+
+            function modal(id){
+                const y=document.getElementById(id);
+                $("#tampil").modal();
+            }
+
+            function tampil(id){
+             const y=document.getElementById(id);
+            }
 
 </script>
-<!-- Fullcalendar -->
-<script src="{{ url('vendors/fullcalendar/moment.min.js') }}"></script>
-<script src="{{ url('vendors/fullcalendar/fullcalendar.min.js') }}"></script>
-<script src="{{ url('assets/js/examples/fullcalendar.js') }}"></script>
+    <!-- Sweet alert -->
+    <script src="{{ url('assets/js/examples/sweet-alert.js') }}"></script>
 
-<!-- Clockpicker -->
-<script src="{{ url('vendors/clockpicker/bootstrap-clockpicker.min.js') }}"></script>
-<script src="{{ url('assets/js/examples/clockpicker.js') }}"></script>
+    <!-- Prism -->
+    <script src="{{ url('vendors/prism/prism.js') }}"></script>
 
-<!-- Datepicker -->
-<script src="{{ url('vendors/datepicker/daterangepicker.js') }}"></script>
-<script src="{{ url('assets/js/examples/datepicker.js') }}"></script>
+     <!-- DataTable -->
+    <script src="{{ url('vendors/dataTable/datatables.min.js') }}"></script>
+    <script src="{{ url('assets/js/examples/datatable.js') }}"></script>
 
-<script src="{{ url('assets/js/examples/pages/calendar.js') }}"></script>
+    <!-- Javascript -->
+    <script src="{{ url('vendors/dataTable/datatables.min.js') }}"></script>
+
+    <script>  
+    toastr.options = {
+        timeOut: 3000,
+        progressBar: true,
+        showMethod: "slideDown",
+        hideMethod: "slideUp",
+        showDuration: 200,
+        hideDuration: 200
+    };
+
+toastr.success('Successfully completed');
+    </script>
+
+
 @endsection

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\sewa_bus;
+use App\schedule;
 use Illuminate\Http\Request;
 use DB;
 
-class SewaBusController extends Controller
+class ScheduleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,36 +16,32 @@ class SewaBusController extends Controller
     public function index()
     {
        
-        $customer=DB::table('customer')->get();
-        $pengguna=DB::table('pengguna')->get();
-        $sewa_bus=DB::table('sewa_bus')
-        ->join('customer','sewa_bus.ID_CUSTOMER', '=', 'customer.ID_CUSTOMER')
-        ->join('pengguna','sewa_bus.ID_PENGGUNA', '=', 'pengguna.ID_PENGGUNA')
-        ->select('sewa_bus.ID_SEWA_BUS','sewa_bus.TGL_SEWA_BUS',
-        'sewa_bus.TGL_AKHIR_SEWA','sewa_bus.LAMA_SEWA','customer.NAMA_CUSTOMER',
-        'sewa_bus.HARGA_SEWA_BUS','sewa_bus.STATUS_SEWA','sewa_bus.JAM_SEWA','sewa_bus.JAM_AKHIR_SEWA','sewa_bus.ID_PENGGUNA')
-        ->get();
-
         $armada=DB::table('armada')->get();
-        $detail_sewa_bus=DB::table('detail_sewa_bus')
-        ->join('armada','detail_sewa_bus.ID_ARMADA', '=', 'armada.ID_ARMADA')
+        $sewa_bus_category=DB::table('sewa_bus_category')->get();
+        $sewa_paket_wisata=DB::table('sewa_paket_wisata')->get();
+        $schedule_armada=DB::table('schedule_armada')
+        ->join('armada','schedule_armada.ID_ARMADA', '=', 'armada.ID_ARMADA')
+        ->join('sewa_bus_category','schedule_armada.ID_SEWA_CATEGORY', '=', 'sewa_bus_category.ID_SEWA_CATEGORY')
+        ->join('sewa_paket_wisata','schedule_armada.ID_SEWA_PAKET', '=', 'sewa_paket_wisata.ID_SEWA_PAKET')
+        ->select('schedule_armada.ID_SCHEDULE','schedule_armada.TGL_SEWA',
+        'schedule_armada.TGL_AKHIR_SEWA','armada.NAMA_ARMADA', 'sewa_paket_wisata.ID_SEWA_PAKET',
+        'schedule_armada.STATUS_ARMADA','schedule_armada.JAM_SEWA','schedule_armada.JAM_AKHIR_SEWA','sewa_bus_category.ID_SEWA_CATEGORY')
         ->get();
 
+        // $max = DB::table('sewa_bus')->max('ID_SEWA_BUS');
+        // date_default_timezone_set('Asia/Jakarta');
+        // $date=date("ymd",time());
 
-        $max = DB::table('sewa_bus')->max('ID_SEWA_BUS');
-        date_default_timezone_set('Asia/Jakarta');
-        $date=date("ymd",time());
-
-        $max=substr($max,6);
-        if($max>=1){
-            $ID_SEWA_BUS=$date.str_pad($max+1,4,"0",STR_PAD_LEFT);
-        }
-        else{
-            $ID_SEWA_BUS=$date.str_pad(1,4,"0",STR_PAD_LEFT);
-        }
+        // $max=substr($max,6);
+        // if($max>=1){
+        //     $ID_SEWA_BUS=$date.str_pad($max+1,4,"0",STR_PAD_LEFT);
+        // }
+        // else{
+        //     $ID_SEWA_BUS=$date.str_pad(1,4,"0",STR_PAD_LEFT);
+        // }
         
-        return view('sewa_bus', ['sewa_bus' =>$sewa_bus,'ID_SEWA_BUS'=>$ID_SEWA_BUS,'customer'=>$customer,'pengguna'=>$pengguna],  
-        ['detail_sewa_bus'=>$detail_sewa_bus,'armada'=>$armada]);
+        return view('scheduleindex', ['schedule_armada'=> $schedule_armada, 'sewa_bus_category' =>$sewa_bus_category,
+        'armada'=>$armada,'sewa_paket_wisata'=>$sewa_paket_wisata]);
     }
 
     public function generateSewa(){
@@ -74,22 +70,18 @@ class SewaBusController extends Controller
     {
         DB::beginTransaction();
         try{
-            DB::table('sewa_bus')->insert([
-                'ID_SEWA_BUS' => $request->ID_SEWA_BUS,
-                'TGL_SEWA_BUS' => $request->TGL_SEWA,
+            DB::table('schedule_armada')->insert([
+                'ID_SCHEDULE' => $request->ID_SCHEDULE,
+                'TGL_SEWA' => $request->TGL_SEWA,
                 'TGL_AKHIR_SEWA' => $request->TGL_AKHIR_SEWA,
                 'LAMA_SEWA' => $request->LAMA_SEWA,
-                'ID_CUSTOMER' => $request->ID_CUSTOMER,
-                'ID_PENGGUNA' => $request->ID_PENGGUNA,
+                'ID_ARMADA' => $request->ID_ARMADA,
+                'ID_SEWA_CATEGORY' => $request->ID_SEWA_CATEGORY,
+                'ID_SEWA_PAKET' => $request->ID_SEWA_PAKET,
                 'HARGA_SEWA_BUS' => $request->HARGA_SEWA_BUS,
                 'STATUS_SEWA' => 1,
                 'JAM_SEWA' => $request->JAM_SEWA,
                 'JAM_AKHIR_SEWA' => $request->JAM_AKHIR_SEWA
-            ]);
-
-            DB::table('detail_sewa_bus')->insert([
-                'ID_ARMADA' =>  $request->ID_ARMADA,
-                'ID_SEWA_BUS' => $request->ID_SEWA_BUS
             ]);
 
         DB::commit();
@@ -98,15 +90,15 @@ class SewaBusController extends Controller
             DB::rollback();
             throw $ex;
         }
-             return redirect('sewa_bus')->with('insert','data berhasil di tambah');
+             return redirect('scheduleindex')->with('insert','data berhasil di tambah');
     }
 
     public function getAllSchedule()
     {
-        $sewa_bus=DB::table('sewa_bus')
+        $schedule_armada=DB::table('schedule_armada')
         ->select(
-        DB::raw('(ID_CUSTOMER) as title'), 
-        DB::raw('(TGL_SEWA_BUS) as start'), 
+        DB::raw('(ID_CARMADA) as title'), 
+        DB::raw('(TGL_SEWA) as start'), 
         DB::raw('(TGL_AKHIR_SEWA) as end'))
         ->get();
 
@@ -116,9 +108,9 @@ class SewaBusController extends Controller
 
     public function getScheduleById($id)
     {
-        $sewa_bus=DB::table('sewa_bus')->where('ID_SEWA_BUS','=',$id)
+        $schedule_armada=DB::table('schedule_armada')->where('ID_SCHEDULE','=',$id)
         ->select(
-        DB::raw('(ID_CUSTOMER) as title'), 
+        DB::raw('(ID_ARMADA) as title'), 
         DB::raw('(TGL_SEWA_BUS) as start'), 
         DB::raw('(TGL_AKHIR_SEWA) as end'))
         ->get();

@@ -18,10 +18,10 @@
         <div class="page-title">
             <h3>Schedule Armada</h3>
             <div>
-                <button class="btn btn-primary" data-toggle="modal"
+                <!-- <button class="btn btn-primary" data-toggle="modal"
                         data-target="#createEventModal">
                     <i class="ti-plus mr-2"></i> Create Schedule
-                </button>
+                </button> -->
             </div>
         </div>
     </div>
@@ -61,28 +61,23 @@
     </div>
     
     <!-- begin::Create Event Modal -->
-    <div class="modal fade" id="createEventModal" tabindex="-1" role="dialog" aria-hidden="true">
+    
+    
+
+    <div class="modal fade" id="viewEventModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Create Sewa</h5>
+                    <h5 class="modal-title">Sewa</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <i class="ti-close"></i>
                     </button>
                 </div>
                 
-                <div class="modal-body" >
+                <div class="modal-body">
                 
-                    <form autocomplete="off" action="sewa_busstore" method="post">
+                    <form autocomplete="off" action="scheduleupdate" method="post">
                     @csrf
-                    <input id="statussewa" type="hidden" name="statussewa" value="false">
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Id Sewa</label>
-                            <div class="col-sm-9">
-                                <input id="ID_SEWA_BUS" type="text" class="form-control" name="ID_SEWA_BUS" value="{{ $ID_SEWA_BUS }}" readonly="">
-                                
-                            </div>
-                        </div>
 
                         <div class="form-group row">
                         
@@ -129,128 +124,6 @@
                             <div class="col-sm-5">
                                 <input id="TGL_SEWA" type="text" name="TGL_SEWA"
                                        class="form-control create-event-datepicker"
-                                       placeholder="Date">
-                            </div>
-                            <div class="col-sm-4">
-                                <input id="JAM_SEWA" name="JAM_SEWA" type="text" class="form-control create-event-demo"
-                                       placeholder="Time">
-                            </div>
-                        </div>
-                        <div class="form-group row row-sm">
-                            <label class="col-sm-3 col-form-label">Selesai Sewa</label>
-                            <div class="col-sm-5">
-                                <input id="TGL_AKHIR_SEWA" type="text" name="TGL_AKHIR_SEWA"
-                                class="form-control create-event-datepicker"
-                                       placeholder="Date">
-                            </div>
-                            <div class="col-sm-4">
-                                <input id="JAM_AKHIR_SEWA" type="text" name="JAM_AKHIR_SEWA"
-                                class="form-control create-event-demo"
-                                       placeholder="Time">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Lama Sewa</label>
-                            <div class="col-sm-9">
-                                <div class="avatar-group">
-                                    <input id="LAMA_SEWA" type="text" name="LAMA_SEWA"
-                                    class="form-control" placeholder="Lama Sewa">
-                                </div>
-                                <!-- <button type="button" class="btn btn-outline-light btn-sm btn-floating">
-                                    <i class="ti-plus"></i>
-                                </button> -->
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Harga Sewa</label>
-                            <div class="col-sm-9">
-                                <input id="HARGA_SEWA_BUS" type="text" name="HARGA_SEWA_BUS"
-                                class="form-control">
-                                <!-- <textarea id="event-desc" class="form-control" rows="6"></textarea> -->
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3"></label>
-                            <div class="col-sm-9">
-                                <button type="submit" id="btn-save" class="btn btn-primary">Create</button>
-                            </div>
-                        </div>
-                    </form>
-                    
-                </div>
-                
-            </div>
-        </div>
-    </div>
-    
-
-    <div class="modal fade" id="viewEventModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Sewa</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <i class="ti-close"></i>
-                    </button>
-                </div>
-                
-                <div class="modal-body">
-                
-                    <form autocomplete="off" action="sewa_busupdate" method="post">
-                    @csrf
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Id Sewa</label>
-                            <div class="col-sm-9">
-                                <input id="ID_SEWA_BUS" type="text" class="form-control" name="ID_SEWA_BUS" value="{{ $ID_SEWA_BUS }}" readonly="">
-                                
-                            </div>
-                        </div>
-                    
-                        <div class="form-group row">
-                        
-                            <label class="col-sm-3 col-form-label">Nama Pengguna</label>
-                            <div class="col-sm-9">
-                            <select name="ID_PENGGUNA" class="form-control" id="ID_PENGGUNA" value="{{ $png->NAMA_PENGGUNA }}">
-                                        @foreach($pengguna as $png)
-                                       
-                                        <option value="{{$png->ID_PENGGUNA}}">{{$png->NAMA_PENGGUNA}}</option>
-                                       
-                                        @endforeach                 
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                        
-                            <label class="col-sm-3 col-form-label">Nama Customer</label>
-                            <div class="col-sm-9">
-                            <select name="ID_CUSTOMER" class="form-control" id="ID_CUSTOMER" value="{{ $cus->NAMA_CUSTOMER }}">
-                                        @foreach($customer as $cus)
-                                       
-                                        <option value="{{$cus->ID_CUSTOMER}}">{{$cus->NAMA_CUSTOMER}}</option>
-                                       
-                                        @endforeach                 
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Nama Armada</label>
-                            <div class="col-sm-9">
-                            <select name="ID_ARMADA" class="form-control" id="ID_ARMADA" value="{{ $ar->NAMA_ARMADA }}">
-                                        @foreach($armada as $ar)
-                                       
-                                        <option value="{{$ar->ID_ARMADA}}">{{$ar->NAMA_ARMADA}}</option>
-                                       
-                                        @endforeach                 
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row row-sm">
-                            <label class="col-sm-3 col-form-label">Start Sewa</label>
-                            <div class="col-sm-5">
-                                <input id="TGL_SEWA" type="text" name="TGL_SEWA"
-                                       class="form-control create-event-datepicker"
                                        placeholder="Date" value="{{ old('TGL_SEWA_BUS') }}">
                             </div>
                             <div class="col-sm-4">
@@ -269,18 +142,6 @@
                                 <input id="JAM_AKHIR_SEWA" type="text" name="JAM_AKHIR_SEWA"
                                 class="form-control create-event-demo"
                                        placeholder="Time" value="{{ old('JAM_AKHIR_SEWA') }}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Lama Sewa</label>
-                            <div class="col-sm-9">
-                                <div class="avatar-group">
-                                    <input id="LAMA_SEWA" type="text" name="LAMA_SEWA"
-                                    class="form-control" placeholder="Lama Sewa" value="{{ old('LAMA_SEWA') }}">
-                                </div>
-                                <!-- <button type="button" class="btn btn-outline-light btn-sm btn-floating">
-                                    <i class="ti-plus"></i>
-                                </button> -->
                             </div>
                         </div>
                         <div class="form-group row">

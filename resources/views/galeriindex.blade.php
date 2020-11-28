@@ -46,6 +46,16 @@
                                 <form action="galeristore" method="post">
                                 @csrf
                                 <div class="form-group">
+                                    <label for="ID_ARMADA" class="col-form-label">Id Armada :</label>
+                                        <select name="ID_ARMADA" class="form-control" id="ID_ARMADA">
+                                            @foreach($armada as $ar)
+                                                       
+                                                <option value="{{$ar->ID_ARMADA}}">{{$ar->NAMA_ARMADA}}</option>
+                                                       
+                                            @endforeach                 
+                                        </select>
+                                </div>
+                                <div class="form-group">
                                     <label for="fotoarmada" class="col-form-label">Foto Armada :</label>
                                     <input type="text" class="form-control" id="fotoarmada" name="fotoarmada">
                                 </div>
@@ -66,10 +76,11 @@
                     <table id="myTable" class="table table-striped table-bordered">
                         <thead>
                         <tr>
+                            <th>Status Foto</th>
                             <th>Id Galeri</th>
+                            <th>Nama Armada</th>
                             <th>Foto Armada</th>
                             <th>Deskripsi Foto</th>
-                            <th>Status Foto</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -118,6 +129,7 @@
                                             </form>
                                     @endif
                                     <td>{{ $g -> ID_GALERI }}</td>
+                                    <td>{{ $g -> NAMA_ARMADA }}</td>
                                     <td>{{ $g -> FOTO_ARMADA }}</td>
                                     <td>{{ $g -> DESKRIPSI_FOTO }}</td>
                                     <td>
@@ -142,6 +154,20 @@
                                                 <form action="galeriupdate" method="post">
                                                 {{ csrf_field() }}
                                                 <input type="hidden" name="id" value="{{ $g -> ID_GALERI }}"> <br/>
+                                                <div class="form-group">
+                                                    <label for="ID_ARMADA" class="col-form-label">Id Armada :</label>
+                                                    <select name="ID_ARMADA" class="form-control" id="ID_ARMADA">
+                                                        @foreach($armada as $ar)
+                                                       
+                                                        <option value="{{$ar->ID_ARMADA}}">{{$ar->NAMA_ARMADA}}</option>
+                                                       
+                                                        @endforeach                 
+                                                </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="deskripsifoto" class="col-form-label">Deskripsi Foto :</label>
+                                                    <input type="text" class="form-control" id="deskripsifoto" name="deskripsifoto" value="{{ $g->FOTO_ARMADA }}">
+                                                </div>
                                                 <div class="form-group">
                                                     <label for="fotoarmada" class="col-form-label">Foto Armada :</label>
                                                     <input type="text" class="form-control" id="fotoarmada" name="fotoarmada" value="{{ $g->FOTO_ARMADA }}">
@@ -199,10 +225,11 @@
                                     </tbody>
                                     <tfoot>
                         <tr>
+                            <th>Status Foto</th>
                             <th>Id Galeri</th>
+                            <th>Nama Armada</th>
                             <th>Foto Armada</th>
                             <th>Deskripsi Foto</th>
-                            <th>Status Foto</th>
                             <th>Action</th>
                         </tr>
                         </tfoot>

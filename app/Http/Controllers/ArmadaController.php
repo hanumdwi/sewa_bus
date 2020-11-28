@@ -18,15 +18,13 @@ class ArmadaController extends Controller
     {
         $schedule_armada = DB::table('schedule_armada')->get();
         $category_armada = DB::table('category_armada')->get();
-        $galeri = DB::table('galeri')->get();
         $armada = DB::table('armada')
         ->join('category_armada','armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
-        ->join('galeri','armada.ID_GALERI', '=', 'galeri.ID_GALERI')
-        ->select('category_armada.NAMA_CATEGORY','galeri.FOTO_ARMADA', 'armada.ID_ARMADA','armada.NAMA_ARMADA',
-        'armada.PLAT_NOMOR', 'armada.KAPASITAS', 'armada.FASILITAS_ARMADA','armada.HARGA','armada.STATUS_ARMADA')
+        ->select('category_armada.NAMA_CATEGORY','armada.ID_ARMADA','armada.NAMA_ARMADA',
+        'armada.PLAT_NOMOR', 'armada.KAPASITAS', 'armada.FASILITAS_ARMADA','armada.HARGA','armada.FOTO','armada.STATUS_ARMADA')
         ->get();
         // dump($armada);
-        return view ('armadaindex',['armada' =>$armada,'category_armada' =>$category_armada, 'galeri' =>$galeri], ['schedule_armada'=>$schedule_armada]);
+        return view ('armadaindex',['armada' =>$armada,'category_armada' =>$category_armada], ['schedule_armada'=>$schedule_armada]);
     }
 
     /**
@@ -53,11 +51,11 @@ class ArmadaController extends Controller
         $armada->fill([
             'ID_CATEGORY'           => $request->ID_CATEGORY,
             'NAMA_ARMADA'           => $request->namaarmada,
-            'ID_GALERI'             => $request->ID_GALERI,
             'PLAT_NOMOR'            => $request->platnomor,
             'KAPASITAS'             => $request->kapasitas,
             'FASILITAS_ARMADA'      => $request->fasilitas,
             'HARGA'                 => $request->harga,
+            'FOTO'                  => $request->foto,
             'STATUS_ARMADA'         => $request->status
         ]);
 
@@ -100,11 +98,11 @@ class ArmadaController extends Controller
         DB::table('armada')->where('ID_ARMADA',$request->id)->update([
 			'ID_CATEGORY'           => $request->ID_CATEGORY,
             'NAMA_ARMADA'           => $request->namaarmada,
-            'ID_GALERI'             => $request->ID_GALERI,
             'PLAT_NOMOR'            => $request->platnomor,
             'KAPASITAS'             => $request->kapasitas,
             'FASILITAS_ARMADA'      => $request->fasilitas,
-            'HARGA'                 => $request->harga
+            'HARGA'                 => $request->harga,
+            'FOTO'                  => $request->foto,
 		]);
 		// alihkan halaman ke halaman armada
 		return redirect('armadaindex');

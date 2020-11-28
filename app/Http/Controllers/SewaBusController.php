@@ -22,15 +22,9 @@ class SewaBusController extends Controller
         ->join('customer','sewa_bus.ID_CUSTOMER', '=', 'customer.ID_CUSTOMER')
         ->join('pengguna','sewa_bus.ID_PENGGUNA', '=', 'pengguna.ID_PENGGUNA')
         ->select('sewa_bus.ID_SEWA_BUS','sewa_bus.TGL_SEWA_BUS',
-        'sewa_bus.TGL_AKHIR_SEWA','sewa_bus.LAMA_SEWA','customer.NAMA_CUSTOMER',
-        'sewa_bus.HARGA_SEWA_BUS','sewa_bus.STATUS_SEWA','sewa_bus.JAM_SEWA','sewa_bus.JAM_AKHIR_SEWA','sewa_bus.ID_PENGGUNA')
+        'sewa_bus.TGL_AKHIR_SEWA','sewa_bus.LAMA_SEWA','customer.NAMA_CUSTOMER', 'sewa_bus.DP_BUS',
+        'sewa_bus.HARGA_SEWA_BUS','sewa_bus.JAM_SEWA','sewa_bus.JAM_AKHIR_SEWA','pengguna.NAMA_PENGGUNA')
         ->get();
-
-        $armada=DB::table('armada')->get();
-        $detail_sewa_bus=DB::table('detail_sewa_bus')
-        ->join('armada','detail_sewa_bus.ID_ARMADA', '=', 'armada.ID_ARMADA')
-        ->get();
-
 
         $max = DB::table('sewa_bus')->max('ID_SEWA_BUS');
         date_default_timezone_set('Asia/Jakarta');
@@ -44,8 +38,7 @@ class SewaBusController extends Controller
             $ID_SEWA_BUS=$date.str_pad(1,4,"0",STR_PAD_LEFT);
         }
         
-        return view('sewa_bus', ['sewa_bus' =>$sewa_bus,'ID_SEWA_BUS'=>$ID_SEWA_BUS,'customer'=>$customer,'pengguna'=>$pengguna],  
-        ['detail_sewa_bus'=>$detail_sewa_bus,'armada'=>$armada]);
+        return view('sewa_bus', ['sewa_bus' =>$sewa_bus,'ID_SEWA_BUS'=>$ID_SEWA_BUS,'customer'=>$customer,'pengguna'=>$pengguna]);
     }
 
     public function generateSewa(){
@@ -82,14 +75,9 @@ class SewaBusController extends Controller
                 'ID_CUSTOMER' => $request->ID_CUSTOMER,
                 'ID_PENGGUNA' => $request->ID_PENGGUNA,
                 'HARGA_SEWA_BUS' => $request->HARGA_SEWA_BUS,
-                'STATUS_SEWA' => 1,
                 'JAM_SEWA' => $request->JAM_SEWA,
-                'JAM_AKHIR_SEWA' => $request->JAM_AKHIR_SEWA
-            ]);
-
-            DB::table('detail_sewa_bus')->insert([
-                'ID_ARMADA' =>  $request->ID_ARMADA,
-                'ID_SEWA_BUS' => $request->ID_SEWA_BUS
+                'JAM_AKHIR_SEWA' => $request->JAM_AKHIR_SEWA,
+                'DP_BUS'        =>  $request->DP_SEWA
             ]);
 
         DB::commit();
