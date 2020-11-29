@@ -14,6 +14,7 @@
 
     <!-- Prism -->
     <link rel="stylesheet" href="{{ url('vendors/prism/prism.css') }}" type="text/css">
+    
 
 @endsection
 
@@ -23,83 +24,77 @@
         <div class="page-title">
             <h3>Form Validation</h3>
         </div>
-    </div>
+</div>
 
     <div class="row">
         <div class="col-md-12">
         
         <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title">Basic Content Wizard</h6>
-                    <p class="text-muted">Below is an example of a basic horizontal form wizard.</p>
+                    <h6 class="card-title">Sewa Armada</h6>
+                    <p class="text-muted"></p>
                     <div id="wizard1">
                         <h3>Personal Information</h3>
                         <section class="card card-body border mb-0">
                             
-                            <form action="sewa_busstore" method="post">
-                                @csrf
-                                <div class="form-row">
-                                    <div class="col-md-4 mb-3">
+                        <form action="sewa_busupdate" method="post">
+                            {{ csrf_field() }}
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
                                     <label for="nama" class="col-form-label">Nama User :</label>
                                     
                                         <label>{{$pengguna->NAMA_PENGGUNA}}</label>
                                        
                                 </div>
                                 
-                                    <div class="col-md-4 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="nama" class="col-form-label">Nama Customer :</label>
                                     
                                         <label>{{$customer->NAMA_CUSTOMER}}</label>
-                                        </div>
-                                
+                                        
                                 </div>
-                                <div class="form-row">
-                                    <div class="col-md-4 mb-3">
+                                
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
                                     <label for="TGL_SEWA" class="col-form-label">Start Date :</label>
                                     <input type="date" class="form-control" id="TGL_SEWA" name="TGL_SEWA" value="{{$sewa_bus->TGL_SEWA_BUS}}">
-                                    </div>
+                                </div>
                                     
-                                    <div class="col-md-4 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="TGL_AKHIR_SEWA">End Date :</label>
                                     <input type="date" class="form-control create-event-datepicker" id="TGL_AKHIR_SEWA" name="TGL_AKHIR_SEWA" value="{{$sewa_bus->TGL_AKHIR_SEWA}}">
-                                    </div>
-                                   </div>
+                                </div>
+                            </div>
                                 
 
-                                <div class="form-row">
-                                    <div class="col-md-4 mb-3">
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
                                     <label for="JAM_SEWA" class="col-form-label">Start Time :</label>
                                     <input type="time" class="form-control" id="JAM_SEWA" name="JAM_SEWA" value="{{$sewa_bus->JAM_SEWA}}">
-                                    </div>
+                                </div>
                                     
                                
-                                    <div class="col-md-4 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="JAM_AKHIR_SEWA" class="col-form-label">End Time :</label>
                                     <input type="time" class="form-control" id="JAM_AKHIR_SEWA" name="JAM_AKHIR_SEWA" value="{{$sewa_bus->JAM_AKHIR_SEWA}}">
-                                    </div>
-                                   
-                                  
+                                </div>
                                
-                                    <div class="col-md-4 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="LAMA_SEWA" class="col-form-label">Lama sewa :</label>
                                     <input type="LAMA_SEWA" class="form-control" id="LAMA_SEWA" name="LAMA_SEWA" value="{{$sewa_bus->LAMA_SEWA}}">
-                                    </div>
-                                    </div>
+                                </div>
+                            </div>
                                     
-
-                                
-                                    
-                                    
-                                
                            
-                                <button type="submit" class="btn btn-primary" id="berhasil">Update Sewa</button>
-                                </form>
+                            <button type="submit" class="btn btn-primary" id="berhasil">Update Sewa</button>
+                        </form>
               
-
                         </section>
+
                         <h3>Billing Information</h3>
                         <section class="card card-body border mb-0">
-                        <div class="row">
+                        
                          <form class="basic-repeater">
                             <div data-repeater-list="group-a">
                                 <div data-repeater-item>
@@ -140,6 +135,7 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         <button type="button" class="btn btn-primary" id="add" data-repeater-create>
                             <i class="ti-plus font-size-10 mr-2"></i> Add
                         </button>
@@ -147,31 +143,223 @@
                             <i class="ti-plus font-size-10 mr-2"></i> Submit
                         </button>
                     </form>
-                    </div>
-                    
-                        <div class="col-md-2 col-sm-12 form-group">
-                                        <label for="gender">Total Payment</label>
-                                        <div>
-                                            <input type="number" class="form-control" value="1">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2 col-sm-12 form-group">
-                                        <label for="profession">DP</label>
-                                        <input type="text" class="form-control" name="dp" id="dp">
-                                    </div>
-                                    <div class="col-md-2 col-sm-12 form-group">
-                                        <label for="profession">Sisa Bayar</label>
-                                        <input type="sisabayar" class="form-control" name="sisabayar" id="sisabayar">
-                                    </div>
- 
-                    
+                    <div><label>&nbsp;</label></div>
+                    <div><label>&nbsp;</label></div>
+                    <form class="basic-repeater">
+                            <div data-repeater-list="group-a">
+                                <div data-repeater-item>
+                                    <div class="row">
+                            <div class="col-md-2 col-sm-6 form-group">
+                                <label for="gender">Total Payment</label>
+                                    <input type="text" class="form-control" name="dp" id="dp">
+                            </div>
+                                    
+                            <div class="col-md-2 col-sm-12 form-group">
+                                <label for="profession">DP (25%)</label>
+                                    <input type="text" class="form-control" name="dp" id="dp">
+                            </div>
 
-                        </section>
+                            <div class="col-md-2 col-sm-12 form-group">
+                                <label for="profession">Harus Bayar</label>
+                                    <input type="text" class="form-control" name="harusbayar" id="harusbayar">
+                            </div>
+                                    
+                            <div class="col-md-2 col-sm-12 form-group">
+                                <label for="profession">Sisa Bayar</label>
+                                    <input type="sisabayar" class="form-control" name="sisabayar" id="sisabayar">
+                            </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </section>
+
                         <h3>Payment Details</h3>
                         <section class="card card-body border mb-0">
-                            <h5>Payment Details</h5>
-                            <p>The next and previous buttons help you to navigate through your content.</p>
+                            <h5>Invoice</h5>
+                            
+                            
+                                    <div class="invoice">
+                                        <div class="d-md-flex justify-content-between align-items-center">
+                                            <img src="{{ url('assets/media/image/logo/mdc.png') }}" alt="logo">
+                                            <h3 class="text-xs-left m-b-0">Invoice #INV-16</h3>
+                                        </div>
+                                        <hr class="m-t-b-50">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p>
+                                                    <b>PT. Medina Dzikra Cemerlang Trans</b>
+                                                </p>
+                                                <p>104,<br>Minare SK,<br>Canada, K1A 0G9.</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="text-right">
+                                                    <b>Invoice to</b>
+                                                </p>
+                                                <p class="text-right">Gaala &amp; Sons,<br> C-201, Beykoz-34800,<br> Canada, K1A 0G9.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table my-4">
+                                                <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Description</th>
+                                                    <th class="text-right">Quantity</th>
+                                                    <th class="text-right">Unit Cost</th>
+                                                    <th class="text-right">Total</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr class="text-right">
+                                                    <td class="text-left">1</td>
+                                                    <td class="text-left">Brochure Design</td>
+                                                    <td>2</td>
+                                                    <td>$20</td>
+                                                    <td>$40</td>
+                                                </tr>
+                                                <tr class="text-right">
+                                                    <td class="text-left">2</td>
+                                                    <td class="text-left">Web Design Packages(Template) - Basic</td>
+                                                    <td>05</td>
+                                                    <td>$25</td>
+                                                    <td>$125</td>
+                                                </tr>
+                                                <tr class="text-right">
+                                                    <td class="text-left">3</td>
+                                                    <td class="text-left">Print Ad - Basic - Color</td>
+                                                    <td>08</td>
+                                                    <td>$500</td>
+                                                    <td>$4000</td>
+                                                </tr>
+                                                <tr class="text-right">
+                                                    <td class="text-left">4</td>
+                                                    <td class="text-left">Down Coat</td>
+                                                    <td>1</td>
+                                                    <td>$5</td>
+                                                    <td>$5</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="text-right">
+                                            <p>Sub - Total amount: $12,348</p>
+                                            <p>vat (10%) : $138</p>
+                                            <h4 class="font-weight-800">Total : $13,986</h4>
+                                        </div>
+                                        <p class="text-center small text-muted  m-t-50">
+                                            <span class="row">
+                                                <span class="col-md-6 offset-3">
+                                                    Invoice of PT. MDC Trans
+                                                </span>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="text-right d-print-none">
+                                        <hr class="my-5">
+                                        <a href="#" class="btn btn-primary">Send Invoice</a>
+                                        <a href="javascript:window.print()" class="btn btn-success m-l-5">
+                                            <i class="ti-printer mr-2"></i> Print
+                                        </a>
+                                    </div>
+                                
                         </section>
+                        <h3>Schedule Armada</h3>
+                        <section class="card card-body border mb-0">
+                            <h5>Schedule Sewa Armada</h5>
+                            <p>The next and previous buttons help you to navigate through your content.</p>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="invoice">
+                                        <div class="d-md-flex justify-content-between align-items-center">
+                                            <img src="{{ url('assets/media/image/logo/mdc.png') }}" alt="logo">
+                                            <h3 class="text-xs-left m-b-0">Invoice #INV-16</h3>
+                                        </div>
+                                        <hr class="m-t-b-50">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p>
+                                                    <b>PT. Medina Dzikra Cemerlang Trans</b>
+                                                </p>
+                                                <p>104,<br>Minare SK,<br>Canada, K1A 0G9.</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="text-right">
+                                                    <b>Invoice to</b>
+                                                </p>
+                                                <p class="text-right">Gaala &amp; Sons,<br> C-201, Beykoz-34800,<br> Canada, K1A 0G9.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table my-4">
+                                                <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Description</th>
+                                                    <th class="text-right">Quantity</th>
+                                                    <th class="text-right">Unit Cost</th>
+                                                    <th class="text-right">Total</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr class="text-right">
+                                                    <td class="text-left">1</td>
+                                                    <td class="text-left">Brochure Design</td>
+                                                    <td>2</td>
+                                                    <td>$20</td>
+                                                    <td>$40</td>
+                                                </tr>
+                                                <tr class="text-right">
+                                                    <td class="text-left">2</td>
+                                                    <td class="text-left">Web Design Packages(Template) - Basic</td>
+                                                    <td>05</td>
+                                                    <td>$25</td>
+                                                    <td>$125</td>
+                                                </tr>
+                                                <tr class="text-right">
+                                                    <td class="text-left">3</td>
+                                                    <td class="text-left">Print Ad - Basic - Color</td>
+                                                    <td>08</td>
+                                                    <td>$500</td>
+                                                    <td>$4000</td>
+                                                </tr>
+                                                <tr class="text-right">
+                                                    <td class="text-left">4</td>
+                                                    <td class="text-left">Down Coat</td>
+                                                    <td>1</td>
+                                                    <td>$5</td>
+                                                    <td>$5</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="text-right">
+                                            <p>Sub - Total amount: $12,348</p>
+                                            <p>vat (10%) : $138</p>
+                                            <h4 class="font-weight-800">Total : $13,986</h4>
+                                        </div>
+                                        <p class="text-center small text-muted  m-t-50">
+                                            <span class="row">
+                                                <span class="col-md-6 offset-3">
+                                                    Invoice of PT. MDC Trans
+                                                </span>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="text-right d-print-none">
+                                        <hr class="my-5">
+                                        <a href="#" class="btn btn-primary">Send Invoice</a>
+                                        <a href="javascript:window.print()" class="btn btn-success m-l-5">
+                                            <i class="ti-printer mr-2"></i> Print
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
                     </div>
                     </div>
                     </div>
@@ -183,6 +371,13 @@
 @endsection
 
 @section('script')
+
+<script>
+   $(document).ready(function () {
+      $('.repeater').repeater();
+   });
+</script>
+
 <script>
 
 $('#save').hide();
@@ -190,42 +385,13 @@ $('#add').click(function(){
     $('#save').show();
 });
 
-$('#wizard-example').steps({
-    headerTag: 'h3',
-    bodyTag: 'section',
-    autoFocus: true,
-    titleTemplate: '&lt;span class="wizard-index"&gt;#index#&lt;/span&gt; #title#',
-    onStepChanging: function (event, currentIndex, newIndex) {
-        if (currentIndex &lt; newIndex) {
-            var form = document.getElementById('form1'),
-                form2 = document.getElementById('form2');
 
-            if (currentIndex === 0) {
-                if (form.checkValidity() === false) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    form.classList.add('was-validated');
-                } else {
-                    return true;
-                }
-            } else if (currentIndex === 1) {
-                if (form2.checkValidity() === false) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    form2.classList.add('was-validated');
-                } else {
-                    return true;
-                }
-            } else {
-                return true;
-            }
-        } else {
-            return true;
-        }
-    }
-});
 
 </script>
+<!-- Form wizard -->
+<script src="{{ url('vendors/form-wizard/jquery.steps.min.js') }}"></script>
+<script src="{{ url('assets/js/examples/form-wizard.js') }}"></script>
+
 <!-- Fullcalendar -->
 <script src="{{ url('vendors/fullcalendar/moment.min.js') }}"></script>
 <script src="{{ url('vendors/fullcalendar/fullcalendar.min.js') }}"></script>
@@ -247,9 +413,6 @@ $('#wizard-example').steps({
 <!-- Form repeater examples -->
 <script src="{{ url('assets/js/examples/pages/form-repeater.js') }}"></script>
 
-<!-- Form wizard -->
-<script src="{{ url('vendors/form-wizard/jquery.steps.min.js') }}"></script>
-<script src="{{ url('assets/js/examples/form-wizard.js') }}"></script>
 
 <!-- Prism -->
 <script src="{{ url('vendors/prism/prism.js') }}"></script>

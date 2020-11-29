@@ -89,11 +89,11 @@ class PaketWisataController extends Controller
     public function update(Request $request, paket_wisata $paket_wisata)
     {
         DB::table('paket_wisata')->where('ID_PAKET',$request->id)->update([
-            'ID_ARMADA'             => $request->ID_ARMADA,
             'NAMA_PAKET'            => $request->namapaket,
             'TIPE_PAKET'            => $request->tipepaket,
             'HARGA_DASAR'           => $request->hargadasar,
             'HARGA_JUAL'            => $request->hargajual,
+            'TEMPAT_KUNJUNG'        => $request->hargajual,
             'FASILITAS_PAKET'       => $request->fasilitas
         ]);
 

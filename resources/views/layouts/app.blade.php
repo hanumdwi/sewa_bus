@@ -7,7 +7,7 @@
     <title>Baston - Responsive Admin Dashboard Template</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ url('assets/media/image/favicon.png') }}"/>
+    <link rel="shortcut icon" href="{{ url('assets/media/image/bus.png') }}"/>
 
     <!-- Main css -->
     <link rel="stylesheet" href="{{ url('vendors/bundle.css') }}" type="text/css">
@@ -898,13 +898,13 @@
                         </li>
                         <li class="navigation-divider">Invoice Sewa</li>
                         <li>
-                            <a  class="active" href="category_armadaindex">
+                            <a  class="active" href="invoice">
                                 <span class="nav-link-icon" data-feather="file"></span>
                                 <span>Armada</span>
                             </a>
                         </li>
                         <li>
-                            <a  class="active" href="category_armadaindex">
+                            <a  class="active" href="invoicepaket">
                                 <span class="nav-link-icon" data-feather="file"></span>
                                 <span>Paket Wisata</span>
                             </a>

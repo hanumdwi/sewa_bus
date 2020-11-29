@@ -88,7 +88,7 @@ Route::get('schedulesewa/{id}', 'SewaBusController@getScheduleById');
 Route::post('updateswitch', 'SewaBusController@update_switch');
 //===================================================================================
 
-//Sewa Bus
+//Schedule
 Route::get('scheduleindex','ScheduleController@index');
 Route::post('schedulestore', 'ScheduleController@store');
 Route::post('scheduleupdate', 'ScheduleController@update');
@@ -97,7 +97,7 @@ Route::get('schedulesewa/{id}', 'ScheduleController@getScheduleById');
 Route::post('updateswitch', 'ScheduleController@update_switch');
 //===================================================================================
 
-//Sewa Bus
+//Sewa Bus Detail
 Route::get('sewa_bus_detail/{id}','SewaDetailController@index');
 Route::post('sewa_bus_detailstore', 'SewaDetailController@store');
 Route::post('sewa_bus_detailupdate', 'SewaDetailController@update');
@@ -106,6 +106,27 @@ Route::get('sewa_bus_detailsewa/{id}', 'SewaDetailController@getsewa_bus_detailB
 Route::post('updateswitch', 'SewaDetailController@update_switch');
 //===================================================================================
 
+//Sewa Bus Invoice
+Route::get('invoice','SewaDetailController@pdf');
+//===================================================================================
+
+//Sewa Paket Wisata
+Route::get('sewa_paket','SewaPaketController@index');
+Route::post('sewa_paketstore', 'SewaPaketController@store');
+Route::post('sewa_paketupdate', 'SewaPaketController@update');
+Route::get('schedulesewa', 'SewaPaketController@getAllSchedule');
+Route::get('schedulesewa/{id}', 'SewaPaketController@getScheduleById');
+Route::post('updateswitch', 'SewaPaketController@update_switch');
+//===================================================================================
+
+//Sewa Paket Detail
+Route::get('sewa_paket_detail/{id}','SewaDetailController@indexpaket');
+Route::post('sewa_paket_detailstore', 'SewaDetailController@store');
+Route::post('sewa_paket_detailupdate', 'SewaDetailController@update');
+Route::get('sewa_paket_detailsewa', 'SewaDetailController@getAllsewa_paket_detail');
+Route::get('sewa_paket_detailsewa/{id}', 'SewaDetailController@getsewa_paket_detailById');
+Route::post('updateswitch', 'SewaDetailController@update_switch');
+//===================================================================================
 //====================================================================================
 
 Route::get('orders', function () {

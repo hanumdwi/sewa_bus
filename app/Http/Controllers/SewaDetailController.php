@@ -6,7 +6,9 @@ use App\sewa_bus;
 use App\pengguna;
 use App\customer;
 use App\category;
+use App\paket_wisata;
 use App\sewa_bus_category;
+use App\sewa_paket_wisata;
 use Illuminate\Http\Request;
 use DB;
 
@@ -31,12 +33,30 @@ class SewaDetailController extends Controller
         ['sewa_bus_category'=>$sewa_bus_category,'category_armada'=>$category_armada]);
     }
 
+    public function indexpaket(Request $request, $id)
+    {
+        $sewa_paket_wisata= Sewa_Paket_Wisata::find($id);
+        $pengguna= Pengguna::find($sewa_paket_wisata->ID_PENGGUNA);
+        $customer= Customer::find($sewa_paket_wisata->ID_CUSTOMER);
+        
+        $paket_wisata= Paket_Wisata::find($sewa_paket_wisata->ID_PAKET);
+
+
+
+        return view('sewa_paket_detail', ['sewa_paket_wisata' =>$sewa_paket_wisata,'pengguna'=>$pengguna,
+        'customer'=>$customer,'paket_wisata'=>$paket_wisata]);
+    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
+    {
+        //
+    }
+
+    public function pdf()
     {
         //
     }

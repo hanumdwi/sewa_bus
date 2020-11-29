@@ -144,9 +144,22 @@ class SewaBusController extends Controller
      * @param  \App\sewa_bus  $sewa_bus
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, sewa_bus $sewa_bus)
+    public function update(Request $request)
     {
-        
+        DB::table('sewa_bus')->where('ID_SEWA_BUS',$request->id)->update([
+                'ID_SEWA_BUS' => $request->ID_SEWA_BUS,
+                'TGL_SEWA_BUS' => $request->TGL_SEWA,
+                'TGL_AKHIR_SEWA' => $request->TGL_AKHIR_SEWA,
+                'LAMA_SEWA' => $request->LAMA_SEWA,
+                'ID_CUSTOMER' => $request->ID_CUSTOMER,
+                'ID_PENGGUNA' => $request->ID_PENGGUNA,
+                'HARGA_SEWA_BUS' => $request->HARGA_SEWA_BUS,
+                'JAM_SEWA' => $request->JAM_SEWA,
+                'JAM_AKHIR_SEWA' => $request->JAM_AKHIR_SEWA,
+                'DP_BUS'        =>  $request->DP_SEWA
+        ]);
+
+        return redirect('sewa_bus');
     }
 
     public function update_switch(Request $request)
@@ -162,7 +175,7 @@ class SewaBusController extends Controller
                 ->where('ID_SEWA_BUS',$request->id)
                 ->update(['STATUS_SEWA'=>1]);
         }
-        return redirect('sewa_busindex');
+        return redirect('sewa_bus');
     }
 
     /**
