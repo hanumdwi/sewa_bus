@@ -149,7 +149,7 @@
                                                         </div>
                                                     <div class="form-group">
                                                         <label for="hargajual" class="col-form-label">Harga Jual :</label>
-                                                        <input type="hargajual" class="form-control" id="hargajual" name="hargajual" value="{{ $pw->HARGA_JUAL }}">
+                                                        <input type="hargajual" class="form-control" id="" name="hargajual" value="{{ $pw->HARGA_JUAL }}">
                                                         </div>
                                                     <div class="form-group">
                                                         <label for="tempatkunjung" class="col-form-label">Tempat Kunjung :</label>
@@ -234,22 +234,28 @@
     $(document).ready(function (){
     $('#myTable').DataTable();
 
-    function hitunghargajualA(){
+});
+
+function hitunghargajualA(){
         console.log("function getHargaJual");
         var hargajual = document.getElementById('hargajual').value;
+        // console.log(hargajual);
+        var x = document.getElementById('hargajual')
         var hargadasar = document.getElementById('hargadasar').value;
         var paketA = document.getElementById("paketA");
         var paketB = document.getElementById("paketB");
         // if(paketA){
-        var totals = (Number(hargadasar.value*40));
-        hargajual.value = totals;
-        console.log(hargadasar.value);
+        var totals = (Number(hargadasar*40));
+        // hargajual = totals;
+            // x.innerHTML = totals;
+         $('#hargajual').val(totals);
+       
+        console.log(totals);
         // }else{
         //     var totals = (Number(hargadasar*30));
         // hargajual.value = totals;
         // console.log(totals);
         }
-});
 
     function modal(id){
         const y=document.getElementById(id);
