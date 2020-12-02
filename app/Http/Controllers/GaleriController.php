@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\galeri;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use DB;
 
 class GaleriController extends Controller
@@ -15,12 +17,17 @@ class GaleriController extends Controller
      */
     public function index()
     {
+        if(!Session::get('login')){
+            return redirect('login');
+        }
+        else{
         $galeri=DB::table('galeri')->get();
         $armada=DB::table('armada')->get();
 
 
         return view('galeriindex', ['galeri' =>$galeri], ['armada' =>$armada]);
     }
+}
 
     /**
      * Show the form for creating a new resource.

@@ -6,13 +6,13 @@
     <h5>Log in</h5>
 
     <!-- form -->
-    <form method="POST" action="{{ route('login') }}">
+    <form action="postlogin" method="post">
     @csrf
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Username or email" required autofocus>
+            <input type="text" class="form-control" name="EMAIL_PENGGUNA" id="EMAIL_PENGGUNA" placeholder="Username or email" required autofocus>
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" placeholder="Password" required>
+            <input type="password" class="form-control" name="PASSWORD" id="PASSWORD" placeholder="Password" required>
         </div>
         <div class="form-group d-flex justify-content-between align-items-center">
             <div class="custom-control custom-checkbox">
@@ -22,7 +22,8 @@
             <a class="small" href="{{ route('recovery-password') }}">Reset password</a>
         </div>
         <hr>
-        <a href ="{{ url('ecommerce-dashboard')}}" class="btn btn-primary btn-block">Log in</a>
+        <!-- <a href ="{{ url('ecommerce-dashboard')}}" class="btn btn-primary btn-block">Log in</a> -->
+        <button type ="submit" class="btn btn-primary btn-block">Log in</button>
         <!-- <p class="text-muted">Login with your social media account.</p> -->
         <!-- <ul class="list-inline">
             <li class="list-inline-item">

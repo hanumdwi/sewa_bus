@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\sewa_bus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use DB;
 
 class SewaBusController extends Controller
@@ -15,7 +17,10 @@ class SewaBusController extends Controller
      */
     public function index()
     {
-       
+        if(!Session::get('login')){
+            return redirect('login');
+        }
+        else{
         $customer=DB::table('customer')->get();
         $pengguna=DB::table('pengguna')->get();
         $sewa_bus=DB::table('sewa_bus')
@@ -40,6 +45,7 @@ class SewaBusController extends Controller
         
         return view('sewa_bus', ['sewa_bus' =>$sewa_bus,'ID_SEWA_BUS'=>$ID_SEWA_BUS,'customer'=>$customer,'pengguna'=>$pengguna]);
     }
+}
 
     public function generateSewa(){
 

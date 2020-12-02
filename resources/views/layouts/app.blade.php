@@ -606,7 +606,7 @@
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" title="User menu" data-toggle="dropdown">
                             <span class="mr-2 d-sm-inline d-none">
-                                Hi! <strong>Bony Gidden</strong>
+                                Hi! <strong>{{Session::get('coba')}}</strong>
                             </span>
                             <figure class="avatar avatar-sm">
                                 <img src="{{ url('assets/media/image/user/man_avatar3.jpg') }}"
@@ -621,7 +621,7 @@
                                     <img src="{{ url('assets/media/image/user/man_avatar3.jpg') }}"
                                          class="rounded-circle" alt="image">
                                 </figure>
-                                <h5 class="mb-0">Bony Gidden</h5>
+                                <h5 class="mb-0">{{Session::get('coba')}}</h5>
                             </div>
                             <div class="list-group list-group-flush">
                                 <a href="{{ route('profile') }}" class="list-group-item">Profile</a>
@@ -699,6 +699,7 @@
                                 <span>Dashboards</span>
                             </a>
                         </li>
+                        @if(\Session::has('admin'))
                         <li>
                             <a href="#" data-menu-target="#customer">
                                 <span class="menu-tab-icon">
@@ -732,7 +733,7 @@
                                 <span>Paket Wisata</span>
                             </a>
                         </li>
-
+                        @endif
                         <li>
                             <a href="#" data-menu-target="#schedule">
                                 <span class="menu-tab-icon">
@@ -811,6 +812,7 @@
                             </a>
                         </li>
                     </ul>
+                    @if(\Session::has('admin'))
                     <ul id="customer">
                         <li class="navigation-divider">Customer</li>
                         <li>
@@ -843,16 +845,6 @@
                         </li>
                     </ul>
 
-                    <ul id="schedule">
-                        <li class="navigation-divider">Schedule</li>
-                        <li>
-                            <a  class="active" href="scheduleindex">
-                                <span class="nav-link-icon" data-feather="calendar"></span>
-                                <span>Schedule Armada</span>
-                            </a>
-                        </li>
-                    </ul>
-
                     <ul id="armada">
                         <li class="navigation-divider">Category Armada</li>
                         <li>
@@ -870,6 +862,14 @@
                             </a>
                         </li>
 
+                        <li class="navigation-divider">Pricelist Armada</li>
+                        <li>
+                            <a  class="active" href="pricelistsewaarmada">
+                                <span class="nav-link-icon" data-feather="plus"></span>
+                                <span>Pricelist Tujuan Armada</span>
+                            </a>
+                        </li>
+
                         <li class="navigation-divider">Galeri</li>
                         <li>
                             <a  class="active" href="galeriindex">
@@ -880,6 +880,18 @@
                     
                     </ul>
                     
+                    @endif
+                    
+                    <ul id="schedule">
+                        <li class="navigation-divider">Schedule</li>
+                        <li>
+                            <a  class="active" href="scheduleindex">
+                                <span class="nav-link-icon" data-feather="calendar"></span>
+                                <span>Schedule Armada</span>
+                            </a>
+                        </li>
+                    </ul>
+
                     <ul id="sewa">
                         <li class="navigation-divider">Sewa</li>
                         <li>

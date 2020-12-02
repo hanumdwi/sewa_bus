@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use DB;
 
 class CategoryController extends Controller
@@ -15,11 +17,16 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        if(!Session::get('login')){
+            return redirect('login');
+        }
+        else{
         $category_armada=DB::table('category_armada')->get();
 
 
         return view('category_armadaindex', ['category_armada' =>$category_armada]);
     }
+}
 
     /**
      * Show the form for creating a new resource.

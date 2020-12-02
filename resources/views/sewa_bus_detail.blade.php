@@ -20,9 +20,11 @@
 
 @section('content')
 
+@if(\Session::has('kasir') || \Session::has('admin'))
+
 <div class="page-header">
         <div class="page-title">
-            <h3>Form Validation</h3>
+            <h3>Form Sewa Armada</h3>
         </div>
 </div>
 
@@ -31,7 +33,6 @@
         
         <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title">Sewa Armada</h6>
                     <p class="text-muted"></p>
                     <div id="wizard1">
                         <h3>Personal Information</h3>
@@ -96,6 +97,12 @@
                         <section class="card card-body border mb-0">
                         
                          <form class="basic-repeater">
+                         <center>
+                         <div class="col-md-4 mb-3">
+                                        <label for="profession">Tanggal Sewa</label>
+                                        <input type="date" class="form-control" name="tglsewa" id="tglsewa">
+                                   </div></center>
+                                   <div><label>&nbsp;</label></div>
                             <div data-repeater-list="group-a">
                                 <div data-repeater-item>
                                     <div class="row">
@@ -110,8 +117,18 @@
                                         </select>
                                     </div>
                                     <div class="col-md-2 col-sm-12 form-group">
-                                        <label for="harga">Harga</label>
-                                        <input type="harga" class="form-control" name="harga" id="harga">
+                                        <label for="name">Tujuan Sewa</label>
+                                            <select name="TUJUAN_SEWA" class="form-control" id="TUJUAN_SEWA">
+                                            @foreach($pricelist_sewa_armada as $pr)
+                                        
+                                            <option value="{{$pr->ID_PRICELIST}}">{{$pr->TUJUAN_SEWA}}</option>
+                                        
+                                            @endforeach                 
+                                            </select>
+                                    </div>
+                                    <div class="col-md-2 col-sm-12 form-group">
+                                        <label for="hargasewa">Harga</label>
+                                        <input type="hargasewa" class="form-control" name="hargasewa" id="hargasewa">
                                     </div>
                                     <div class="col-md-2 col-sm-12 form-group">
                                         <label for="gender">Quantity</label>
@@ -119,10 +136,7 @@
                                             <input type="number" class="form-control" value="1">
                                         </div>
                                     </div>
-                                    <div class="col-md-2 col-sm-12 form-group">
-                                        <label for="profession">Tanggal Sewa</label>
-                                        <input type="date" class="form-control" name="tglsewa" id="tglsewa">
-                                    </div>
+                                    
                                     <div class="col-md-2 col-sm-12 form-group">
                                         <label for="profession">Sub Total</label>
                                         <input type="subtotal" class="form-control" name="subtotal" id="subtotal">
@@ -367,7 +381,7 @@
 
                     
             
-
+@endif
 @endsection
 
 @section('script')

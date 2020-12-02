@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\sewa_paket_wisata;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use DB;
 
 class SewaPaketController extends Controller
@@ -15,7 +17,10 @@ class SewaPaketController extends Controller
      */
     public function index()
     {
-       
+        if(!Session::get('login')){
+            return redirect('login');
+        }
+        else{
         $customer=DB::table('customer')->get();
         $pengguna=DB::table('pengguna')->get();
         $paket_wisata=DB::table('paket_wisata')->get();
@@ -43,6 +48,7 @@ class SewaPaketController extends Controller
         
         return view('sewa_paket', ['sewa_paket_wisata' =>$sewa_paket_wisata,'ID_SEWA_PAKET'=>$ID_SEWA_PAKET,'customer'=>$customer,'pengguna'=>$pengguna,'paket_wisata'=>$paket_wisata]);
     }
+}
 
     public function generateSewa(){
 

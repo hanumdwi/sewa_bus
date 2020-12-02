@@ -23,7 +23,14 @@ Route::get('ecommerce-dashboard', function () {
 // Download File
 // user-manual
 Route::get('user-manual', 'Data2Controller@user_manual');
+//====================================================================
 
+Route::get('login', 'PenggunaController@login');
+Route::post('postlogin', 'PenggunaController@postlogin');
+
+Route::get('logout', 'PenggunaController@logout');
+
+// Route::get('register', 'AuthController@register');
 
 //login
 Route::get('/','OtentifikasiController@index');
@@ -52,6 +59,15 @@ Route::get('armadaedit/{id}', 'ArmadaController@edit');
 Route::post('armadaupdate', 'ArmadaController@update');
 Route::get('armadadestroy/{id}', 'ArmadaController@destroy');
 Route::post('armadaupdateswitch', 'ArmadaController@update_switch');
+//================================================================================
+
+//Pricelist Sewa Armada
+Route::get('pricelistsewaarmada','PricelistSewaArmadaController@index');
+Route::post('pricelistsewaarmadastore', 'PricelistSewaArmadaController@store');
+Route::get('pricelistsewaarmadaedit/{id}', 'PricelistSewaArmadaController@edit');
+Route::post('pricelistsewaarmadaupdate', 'PricelistSewaArmadaController@update');
+Route::get('pricelistsewaarmadadestroy/{id}', 'PricelistSewaArmadaController@destroy');
+Route::post('pricelistsewaarmadaupdateswitch', 'PricelistSewaArmadaController@update_switch');
 //================================================================================
 
 //Galeri Armada

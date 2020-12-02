@@ -9,7 +9,10 @@ use App\category;
 use App\paket_wisata;
 use App\sewa_bus_category;
 use App\sewa_paket_wisata;
+use App\Pricelist_Sewa_Armada;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use DB;
 
 class SewaDetailController extends Controller
@@ -21,20 +24,30 @@ class SewaDetailController extends Controller
      */
     public function index(Request $request, $id)
     {
+        if(!Session::get('login')){
+            return redirect('login');
+        }
+        else{
         $sewa_bus= Sewa_Bus::find($id);
         $pengguna= Pengguna::find($sewa_bus->ID_PENGGUNA);
         $customer= customer::find($sewa_bus->ID_CUSTOMER);
 
         $sewa_bus_category= Sewa_Bus_Category::where('ID_SEWA_BUS','=',$sewa_bus->ID_SEWA_BUS);
+        $pricelist_sewa_armada= Pricelist_Sewa_Armada::all();
         $category_armada= Category::all();
 
 
         return view('sewa_bus_detail', ['sewa_bus' =>$sewa_bus,'pengguna'=>$pengguna,'customer'=>$customer],
-        ['sewa_bus_category'=>$sewa_bus_category,'category_armada'=>$category_armada]);
+        ['sewa_bus_category'=>$sewa_bus_category,'pricelist_sewa_armada'=>$pricelist_sewa_armada, 'category_armada'=>$category_armada]);
     }
+}
 
     public function indexpaket(Request $request, $id)
     {
+        if(!Session::get('login')){
+            return redirect('login');
+        }
+        else{
         $sewa_paket_wisata= Sewa_Paket_Wisata::find($id);
         $pengguna= Pengguna::find($sewa_paket_wisata->ID_PENGGUNA);
         $customer= Customer::find($sewa_paket_wisata->ID_CUSTOMER);
@@ -46,6 +59,7 @@ class SewaDetailController extends Controller
         return view('sewa_paket_detail', ['sewa_paket_wisata' =>$sewa_paket_wisata,'pengguna'=>$pengguna,
         'customer'=>$customer,'paket_wisata'=>$paket_wisata]);
     }
+}
     /**
      * Show the form for creating a new resource.
      *

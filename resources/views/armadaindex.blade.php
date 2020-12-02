@@ -20,7 +20,7 @@
 
 @section('content')
 
-    
+@if(\Session::has('kasir') || \Session::has('admin'))
 <div class="card">
                 <div class="card-body">
                     <h6 class="card-title mb-0">Table Armada</h6>
@@ -306,7 +306,7 @@
         </div>
     </div>
 
-
+@endif
 @endsection
 
 @section('script')

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\schedule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use DB;
 
 class ScheduleController extends Controller
@@ -15,7 +17,10 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-       
+        if(!Session::get('login')){
+            return redirect('login');
+        }
+        else{
         $armada=DB::table('armada')->get();
         $sewa_bus_category=DB::table('sewa_bus_category')->get();
         $sewa_paket_wisata=DB::table('sewa_paket_wisata')->get();
@@ -43,6 +48,7 @@ class ScheduleController extends Controller
         return view('scheduleindex', ['schedule_armada'=> $schedule_armada, 'sewa_bus_category' =>$sewa_bus_category,
         'armada'=>$armada,'sewa_paket_wisata'=>$sewa_paket_wisata]);
     }
+}
 
     public function generateSewa(){
 

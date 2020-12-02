@@ -13,7 +13,7 @@
 
 @section('content')
 
-
+@if(\Session::has('kasir') || \Session::has('admin'))
     <div class="page-header">
         <div class="page-title">
             <h3>Schedule Armada</h3>
@@ -86,7 +86,7 @@
                         <select name="ID_SEWA_CATEGORY" class="form-control" id="ID_SEWA_CATEGORY">
                                     @foreach($sewa_bus_category as $sbc)
                                    
-                                    <option value="{{$sbc->ID_SEWA_CATEGORY}}">{{$sbc->NAMA_SEWA_CATEGORY}}</option>
+                                    <option value="{{$sbc->ID_SEWA_CATEGORY}}"></option>
                                    
                                     @endforeach                 
                             </select>
@@ -100,7 +100,7 @@
                             <select name="ID_SEWA_PAKET" class="form-control" id="ID_SEWA_PAKET">
                                         @foreach($sewa_paket_wisata as $spw)
                                        
-                                        <option value="{{$spw->ID_SEWA_PAKET}}">{{$spw->NAMA_SEWA_PAKET}}</option>
+                                        <option value="{{$spw->ID_SEWA_PAKET}}"></option>
                                        
                                         @endforeach                 
                                 </select>
@@ -208,7 +208,7 @@
         </div>
     </div>
     <!-- end::Event Info Modal -->
-
+@endif
 @endsection
 
 @section('script')

@@ -14,6 +14,8 @@
 
 @section('content')
 
+@if(\Session::has('kasir') || \Session::has('admin'))
+
 <div class="page-header">
         <div class="page-title">
             <h3>E-commerce Dashboard</h3>
@@ -790,6 +792,7 @@
             </div>
         </div>
     </div>
+@endif
 @endsection
 
 @section('script')

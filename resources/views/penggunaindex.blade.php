@@ -20,7 +20,7 @@
 
 @section('content')
 
-    
+@if(\Session::has('kasir') || \Session::has('admin'))   
 <div class="card">
                 <div class="card-body">
                     <h6 class="card-title mb-0">Table User</h6>
@@ -70,8 +70,8 @@
                                     <input type="password" class="form-control" id="password" name="password">
                                 </div>
                                 <div class="form-group">
-                                    <label for="jobstatus" class="col-form-label">Job Status :</label>
-                                    <select name="jobstatus" class="form-control" id="jobstatus">
+                                    <label for="JOB_STATUS" class="col-form-label">Job Status :</label>
+                                    <select name="JOB_STATUS" class="form-control" id="JOB_STATUS">
                                         <option selected="selected">--Pilih Job Status--</option>
                                             <option>Admin</option>
                                             <option>Kasir</option>
@@ -160,8 +160,8 @@
                                                     <input type="password" class="form-control" id="password" name="password" value="{{ $png->PASSWORD }}">
                                                     </div>
                                                 <div class="form-group">
-                                                    <label for="jobstatus" class="col-form-label">Job Status :</label>
-                                                    <select name="jobstatus" class="form-control" id="jobstatus" value="{{ $png->JOB_STATUS }}">
+                                                    <label for="JOB_STATUS" class="col-form-label">Job Status :</label>
+                                                    <select name="JOB_STATUS" class="form-control" id="JOB_STATUS" value="{{ $png->JOB_STATUS }}">
                                                             <option selected="selected">{{ $png->JOB_STATUS }}</option>
                                                                 <option>Admin</option>
                                                                 <option>Kasir</option>
@@ -235,7 +235,7 @@
         </div>
     </div>
 
-
+@endif
 @endsection
 
 @section('script')

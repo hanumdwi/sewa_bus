@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\armada;
 use App\category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use DB;
 
 class ArmadaController extends Controller
@@ -16,6 +18,10 @@ class ArmadaController extends Controller
      */
     public function index()
     {
+        if(!Session::get('login')){
+            return redirect('login');
+        }
+        else{
         $schedule_armada = DB::table('schedule_armada')->get();
         $category_armada = DB::table('category_armada')->get();
         $armada = DB::table('armada')
@@ -26,6 +32,7 @@ class ArmadaController extends Controller
         // dump($armada);
         return view ('armadaindex',['armada' =>$armada,'category_armada' =>$category_armada], ['schedule_armada'=>$schedule_armada]);
     }
+}
 
     /**
      * Show the form for creating a new resource.

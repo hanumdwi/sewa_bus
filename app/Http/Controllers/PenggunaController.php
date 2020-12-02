@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\pengguna;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use DB;
 
 class PenggunaController extends Controller
@@ -15,11 +17,16 @@ class PenggunaController extends Controller
      */
     public function index()
     {
+        if(!Session::get('login')){
+            return redirect('login');
+        }
+        else{
         $pengguna=DB::table('pengguna')->get();
 
 
 
         return view('penggunaindex', ['pengguna' =>$pengguna]);
+        }
     }
 
     /**
@@ -40,14 +47,9 @@ class PenggunaController extends Controller
      */
     public function store(Request $request)
     {
-        // DB::table('customer')->insert([
-        //     'NAMA_CUSTOMER'   => $request->nama,
-        //     'EMAIL'           => $request->email,
-        //     'TELEPHONE'       => $request->telephone,
-        //     'ALAMAT'          => $request->alamat
-        //      ]);
-     
-        // return redirect('customerindex');
+        
+        $password = md5($request->pass);
+
         $pengguna = new Pengguna;
 
         $pengguna->fill([
@@ -57,7 +59,7 @@ class PenggunaController extends Controller
             'TELEPHONE_PENGGUNA'    => $request->telephone,
             'ALAMAT_PENGGUNA'       => $request->alamat,
             'PASSWORD'              => $request->password,
-            'JOB_STATUS'            => $request->jobstatus
+            'JOB_STATUS'            => $request->JOB_STATUS
         ]);
 
         $pengguna->save();
@@ -106,7 +108,7 @@ class PenggunaController extends Controller
             'TELEPHONE_PENGGUNA'    => $request->telephone,
             'ALAMAT_PENGGUNA'       => $request->alamat,
             'PASSWORD'              => $request->password,
-            'JOB_STATUS'            => $request->jobstatus
+            'JOB_STATUS'            => $request->JOB_STATUS
 		]);
 		// alihkan halaman ke halaman customer
 		return redirect('penggunaindex');
@@ -124,5 +126,40 @@ class PenggunaController extends Controller
 		
 		// alihkan halaman ke halaman pengguna
 		return redirect('penggunaindex');
+    }
+
+    public function login(){
+        return view('login');
+    }
+
+    public function postlogin(Request $request)
+    {
+        $EMAIL_PENGGUNA = $request->EMAIL_PENGGUNA;
+        $PASSWORD       = $request->PASSWORD;
+
+        $data = Pengguna::where('EMAIL_PENGGUNA',$EMAIL_PENGGUNA)->first();
+        if($data){
+            if($data->PASSWORD==$PASSWORD){
+                Session::put('coba',$data->NAMA_PENGGUNA);
+                Session::put('coba1',$data->JOB_STATUS);
+                    Session::put('login', TRUE);
+                    if($data->JOB_STATUS == 'Admin'){
+                        Session::put('admin', TRUE);
+                    }
+                    if($data->JOB_STATUS == 'Kasir'){
+                        Session::put('kasir', TRUE);
+                    }
+                    return redirect('ecommerce-dashboard');
+            }
+            else{
+                return redirect('login');
+            }
+        }
+       
+    }
+
+    public function logout(){
+        Session::flush();
+        return redirect('login');
     }
 }

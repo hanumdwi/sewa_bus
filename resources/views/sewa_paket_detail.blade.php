@@ -19,7 +19,7 @@
 @endsection
 
 @section('content')
-
+@if(\Session::has('kasir') || \Session::has('admin'))
 <div class="page-header">
         <div class="page-title">
             <h3>Form Validation</h3>
@@ -225,7 +225,7 @@
 
                     
             
-
+@endif
 @endsection
 
 @section('script')

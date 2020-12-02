@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\paket_wisata;
 use App\armada;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use\DB;
 
 class PaketWisataController extends Controller
@@ -16,11 +18,16 @@ class PaketWisataController extends Controller
      */
     public function index()
     {
+        if(!Session::get('login')){
+            return redirect('login');
+        }
+        else{
         $paket_wisata = DB::table('paket_wisata')
         ->get();
 
         return view ('paketwisataindex',['paket_wisata' =>$paket_wisata]);
     }
+}
 
     /**
      * Show the form for creating a new resource.

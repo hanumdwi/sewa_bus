@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use DB;
 
 class CustomerController extends Controller
@@ -15,12 +17,17 @@ class CustomerController extends Controller
      */
     public function index()
     {
+        if(!Session::get('login')){
+            return redirect('login');
+        }
+        else{
         $customer=DB::table('customer')->get();
 
 
 
         return view('customerindex', ['customer' =>$customer]);
     }
+}
 
     /**
      * Show the form for creating a new resource.
