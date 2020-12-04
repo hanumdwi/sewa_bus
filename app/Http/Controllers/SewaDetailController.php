@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use DB;
+use PDF;
 
 class SewaDetailController extends Controller
 {
@@ -70,9 +71,13 @@ class SewaDetailController extends Controller
         //
     }
 
-    public function pdf()
+    public function pdf(Request $request, $id)
     {
-        //
+        $sewa_bus= Sewa_Bus::find($id);
+        $pengguna= Pengguna::find($sewa_bus->ID_PENGGUNA);
+        $customer= customer::find($sewa_bus->ID_CUSTOMER);
+
+        return view('invoice',['sewa_bus'=>$sewa_bus, 'pengguna'=>$pengguna,'customer'=>$customer]);
     }
 
     /**
@@ -83,15 +88,7 @@ class SewaDetailController extends Controller
      */
     public function store(Request $request)
     {
-        $category_armada = new Category;
-
-        $category_armada->fill([
-            'NAMA_CATEGORY'   => $request->namacategory
-        ]);
-
-        $category_armada->save();
-
-        return redirect('category_armadaindex');
+        
     }
 
     /**
@@ -145,4 +142,25 @@ class SewaDetailController extends Controller
 		// alihkan halaman ke halaman category
 		return redirect('category_armadaindex');
     }
+
+    public function cetak_pdf($id)
+    {
+    	$customer=DB::table('customer')->get();
+        $pengguna=DB::table('pengguna')->get();
+        $sewa_bus=DB::table('sewa_bus')
+        ->join('customer','sewa_bus.ID_CUSTOMER', '=', 'customer.ID_CUSTOMER')
+        ->join('pengguna','sewa_bus.ID_PENGGUNA', '=', 'pengguna.ID_PENGGUNA')
+        ->select('sewa_bus.ID_SEWA_BUS','sewa_bus.TGL_SEWA_BUS',
+        'sewa_bus.TGL_AKHIR_SEWA','sewa_bus.LAMA_SEWA','customer.NAMA_CUSTOMER', 'sewa_bus.DP_BUS',
+        'sewa_bus.HARGA_SEWA_BUS','sewa_bus.JAM_SEWA','sewa_bus.JAM_AKHIR_SEWA','pengguna.NAMA_PENGGUNA')
+        ->get();
+
+    	// $pdf = PDF::loadview('invoice',['sewa_bus'=>$sewa_bus]);
+        // return $pdf->stream();
+        // $pegawai = Pegawai::all();
+ 
+    	$pdf = PDF::loadview('pegawai_pdf',['sewa_bus' =>$sewa_bus,'ID_SEWA_BUS'=>$ID_SEWA_BUS,'customer'=>$customer,'pengguna'=>$pengguna]);
+    	return $pdf->download('laporan-sewa_bus-pdf');
+    }
+
 }

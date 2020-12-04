@@ -128,12 +128,13 @@
                                     </div>
                                     <div class="col-md-2 col-sm-12 form-group">
                                         <label for="hargasewa">Harga</label>
-                                        <input type="hargasewa" class="form-control" name="hargasewa" id="hargasewa">
+                                        <input type="hargasewa" class="form-control" name="hargasewa" id="hargasewa" 
+                                        value="{{$pr->PRICELIST_SEWA}}" readonly="" onkeyup="hitunghargajualA()">
                                     </div>
                                     <div class="col-md-2 col-sm-12 form-group">
                                         <label for="gender">Quantity</label>
                                         <div>
-                                            <input type="number" class="form-control" value="1">
+                                            <input type="number" class="form-control" value="1" id="qty">
                                         </div>
                                     </div>
                                     
@@ -275,6 +276,7 @@
                                         <hr class="my-5">
                                         <a href="#" class="btn btn-primary">Send Invoice</a>
                                         <a href="javascript:window.print()" class="btn btn-success m-l-5">
+                                        <!-- <a href="sewa_buscetak_pdf/{{$sewa_bus->ID_SEWA_BUS}}" class="btn btn-success m-l-5"> -->
                                             <i class="ti-printer mr-2"></i> Print
                                         </a>
                                     </div>
@@ -390,6 +392,25 @@
    $(document).ready(function () {
       $('.repeater').repeater();
    });
+
+   function hitunghargajualA(){
+        console.log("function getSubTotal");
+        var hargajual = document.getElementById('subtotal').value;
+        // console.log(hargajual);
+        var x = document.getElementById('subtotal')
+        var hargadasar = document.getElementById('hargasewa').value;
+        // if(paketA){
+        var totals = (Number(hargasewa*qty));
+        // hargajual = totals;
+            // x.innerHTML = totals;
+         $('#subotal').val(totals);
+       
+        console.log(totals);
+        // }else{
+        //     var totals = (Number(hargadasar*30));
+        // hargajual.value = totals;
+        // console.log(totals);
+        }
 </script>
 
 <script>

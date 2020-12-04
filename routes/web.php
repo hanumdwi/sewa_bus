@@ -102,6 +102,8 @@ Route::post('sewa_busupdate', 'SewaBusController@update');
 Route::get('schedulesewa', 'SewaBusController@getAllSchedule');
 Route::get('schedulesewa/{id}', 'SewaBusController@getScheduleById');
 Route::post('updateswitch', 'SewaBusController@update_switch');
+// Route::post('invoice/{id}', 'SewaBusController@update_switch');
+Route::get('sewa_buscetak_pdf/{id}', 'SewaBusController@cetak_pdf');
 //===================================================================================
 
 //Schedule
@@ -123,7 +125,7 @@ Route::post('updateswitch', 'SewaDetailController@update_switch');
 //===================================================================================
 
 //Sewa Bus Invoice
-Route::get('invoice','SewaDetailController@pdf');
+Route::get('invoice/{id}','SewaDetailController@pdf');
 //===================================================================================
 
 //Sewa Paket Wisata

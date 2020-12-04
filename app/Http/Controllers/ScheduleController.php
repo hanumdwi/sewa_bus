@@ -103,13 +103,13 @@ class ScheduleController extends Controller
     {
         $schedule_armada=DB::table('schedule_armada')
         ->select(
-        DB::raw('(ID_CARMADA) as title'), 
+        DB::raw('(ID_ARMADA) as title'), 
         DB::raw('(TGL_SEWA) as start'), 
         DB::raw('(TGL_AKHIR_SEWA) as end'))
         ->get();
 
         //$data = array_values($sewa_bus);
-        return response()->json($sewa_bus);
+        return response()->json($schedule_armada);
     }
 
     public function getScheduleById($id)

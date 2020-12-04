@@ -17,21 +17,25 @@
                     <div class="invoice">
                         <div class="d-md-flex justify-content-between align-items-center">
                             <img src="{{ url('assets/media/image/logo/mdc.png') }}" alt="logo">
-                            <h3 class="text-xs-left m-b-0">Invoice #INV-16</h3>
+                            <h3 class="text-xs-left m-b-0">#INV-{{$sewa_bus->ID_SEWA_BUS}}</h3>
                         </div>
                         <hr class="m-t-b-50">
                         <div class="row">
                             <div class="col-md-6">
                                 <p>
-                                    <b>PT. Medina Dzikra Cemerlang Trans</b>
+                                    <b>PT. Medina Dzikra Cemerlang Trans</b><br>
+                                    JL. Suwoko No. 43 A Lamongan - Jawa Timur<br>
+                                    Telp : (0322) 3101285
                                 </p>
-                                <p>104,<br>Minare SK,<br>Canada, K1A 0G9.</p>
+                                <p>
+                                <b>{{$pengguna->NAMA_PENGGUNA}},</b><br>{{$sewa_bus->TGL_SEWA_BUS}}   -   {{$sewa_bus->TGL_AKHIR_SEWA}}
+                                <br>{{$sewa_bus->JAM_SEWA}}       -      {{$sewa_bus->JAM_AKHIR_SEWA}}</p>
                             </div>
                             <div class="col-md-6">
                                 <p class="text-right">
                                     <b>Invoice to</b>
                                 </p>
-                                <p class="text-right">Gaala &amp; Sons,<br> C-201, Beykoz-34800,<br> Canada, K1A 0G9.
+                                <p class="text-right"> {{$customer->NAMA_CUSTOMER}},<br> {{$customer->TELEPHONE}},<br> {{$customer->ALAMAT}}.
                                 </p>
                             </div>
                         </div>
@@ -54,27 +58,7 @@
                                     <td>$20</td>
                                     <td>$40</td>
                                 </tr>
-                                <tr class="text-right">
-                                    <td class="text-left">2</td>
-                                    <td class="text-left">Web Design Packages(Template) - Basic</td>
-                                    <td>05</td>
-                                    <td>$25</td>
-                                    <td>$125</td>
-                                </tr>
-                                <tr class="text-right">
-                                    <td class="text-left">3</td>
-                                    <td class="text-left">Print Ad - Basic - Color</td>
-                                    <td>08</td>
-                                    <td>$500</td>
-                                    <td>$4000</td>
-                                </tr>
-                                <tr class="text-right">
-                                    <td class="text-left">4</td>
-                                    <td class="text-left">Down Coat</td>
-                                    <td>1</td>
-                                    <td>$5</td>
-                                    <td>$5</td>
-                                </tr>
+                                
                                 </tbody>
                             </table>
                         </div>
