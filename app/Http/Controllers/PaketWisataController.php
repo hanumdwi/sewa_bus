@@ -52,8 +52,8 @@ class PaketWisataController extends Controller
 
         $paket_wisata->fill([
             'NAMA_PAKET'            => $request->namapaket,
-            'TIPE_PAKET'            => $request->tipepaket,
-            'HARGA_DASAR'           => $request->hargadasar,
+            // 'TIPE_PAKET'            => $request->tipepaket,
+            'HARGA_PAKET'           => $request->hargapaket,
             'HARGA_JUAL'            => $request->hargajual,
             'TEMPAT_KUNJUNG'        => $request->hargajual,
             'FASILITAS_PAKET'       => $request->fasilitas
@@ -98,7 +98,7 @@ class PaketWisataController extends Controller
         DB::table('paket_wisata')->where('ID_PAKET',$request->id)->update([
             'NAMA_PAKET'            => $request->namapaket,
             'TIPE_PAKET'            => $request->tipepaket,
-            'HARGA_DASAR'           => $request->hargadasar,
+            'HARGA_PAKET'           => $request->hargapaket,
             'HARGA_JUAL'            => $request->hargajual,
             'TEMPAT_KUNJUNG'        => $request->hargajual,
             'FASILITAS_PAKET'       => $request->fasilitas

@@ -174,10 +174,10 @@
                                     <input type="text" class="form-control" name="dp" id="dp">
                             </div>
 
-                            <div class="col-md-2 col-sm-12 form-group">
+                            <!-- <div class="col-md-2 col-sm-12 form-group">
                                 <label for="profession">Harus Bayar</label>
                                     <input type="text" class="form-control" name="harusbayar" id="harusbayar">
-                            </div>
+                            </div> -->
                                     
                             <div class="col-md-2 col-sm-12 form-group">
                                 <label for="profession">Sisa Bayar</label>

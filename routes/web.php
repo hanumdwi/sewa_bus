@@ -126,6 +126,7 @@ Route::post('updateswitch', 'SewaDetailController@update_switch');
 
 //Sewa Bus Invoice
 Route::get('invoice/{id}','SewaDetailController@pdf');
+Route::get('invoicepaket/{id}','SewaDetailController@pdf_paket');
 //===================================================================================
 
 //Sewa Paket Wisata

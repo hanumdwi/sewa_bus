@@ -83,10 +83,10 @@ class SewaPaketController extends Controller
                 'ID_PAKET'              => $request->ID_PAKET,
                 'ID_CUSTOMER'           => $request->ID_CUSTOMER,
                 'ID_PENGGUNA'           => $request->ID_PENGGUNA,
-                'HARGA_SEWA_PAKET'      => $request->HARGA_SEWA_PAKET,
+                // 'HARGA_SEWA_PAKET'      => $request->HARGA_SEWA_PAKET,
                 'JAM_SEWA_PAKET'        => $request->JAM_SEWA_PAKET,
-                'JAM_AKHIR_SEWA_PAKET'  => $request->JAM_AKHIR_SEWA_PAKET,
-                'DP_PAKET'              =>  $request->DP_PAKET
+                'JAM_AKHIR_SEWA_PAKET'  => $request->JAM_AKHIR_SEWA_PAKET
+                // 'DP_PAKET'              =>  $request->DP_PAKET
             ]);
 
         DB::commit();
@@ -157,15 +157,15 @@ class SewaPaketController extends Controller
     {
         DB::table('sewa_paket_wisata')->where('ID_SEWA_PAKET',$request->id)->update([
             'ID_SEWA_PAKET'         => $request->ID_SEWA_PAKET,
-            'TGL_SEWA_PAKET'        => $request->TGL_SEWA_PAKET,
-            'TGL_AKHIR_SEWA_PAKET'  => $request->TGL_AKHIR_SEWA_PAKET,
-            'ID_PAKET'              => $request->ID_PAKET,
-            'ID_CUSTOMER'           => $request->ID_CUSTOMER,
-            'ID_PENGGUNA'           => $request->ID_PENGGUNA,
-            'HARGA_SEWA_PAKET'      => $request->HARGA_SEWA_PAKET,
-            'JAM_SEWA_PAKET'        => $request->JAM_SEWA_PAKET,
-            'JAM_AKHIR_SEWA_PAKET'  => $request->JAM_AKHIR_SEWA_PAKET,
-            'DP_PAKET'              =>  $request->DP_PAKET
+                'TGL_SEWA_PAKET'        => $request->TGL_SEWA_PAKET,
+                'TGL_AKHIR_SEWA_PAKET'  => $request->TGL_AKHIR_SEWA_PAKET,
+                'ID_PAKET'              => $request->ID_PAKET,
+                'ID_CUSTOMER'           => $request->ID_CUSTOMER,
+                'ID_PENGGUNA'           => $request->ID_PENGGUNA,
+                // 'HARGA_SEWA_PAKET'      => $request->HARGA_SEWA_PAKET,
+                'JAM_SEWA_PAKET'        => $request->JAM_SEWA_PAKET,
+                'JAM_AKHIR_SEWA_PAKET'  => $request->JAM_AKHIR_SEWA_PAKET
+                // 'DP_PAKET'              =>  $request->DP_PAKET
         ]);
 
         return redirect('sewa_paket');

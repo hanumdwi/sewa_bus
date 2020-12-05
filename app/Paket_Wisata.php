@@ -16,7 +16,7 @@ class Paket_Wisata extends Model
     [
         'NAMA_PAKET',
         'TIPE_PAKET',
-        'HARGA_DASAR',
+        'HARGA_PAKET',
         'HARGA_JUAL',
         'TEMPAT_KUNJUNG',
         'FASILITAS_PAKET'

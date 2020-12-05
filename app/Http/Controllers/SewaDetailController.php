@@ -10,6 +10,8 @@ use App\paket_wisata;
 use App\sewa_bus_category;
 use App\sewa_paket_wisata;
 use App\Pricelist_Sewa_Armada;
+use App\schedule_armada;
+use App\Armada;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -78,6 +80,15 @@ class SewaDetailController extends Controller
         $customer= customer::find($sewa_bus->ID_CUSTOMER);
 
         return view('invoice',['sewa_bus'=>$sewa_bus, 'pengguna'=>$pengguna,'customer'=>$customer]);
+    }
+
+    public function pdf_paket(Request $request, $id)
+    {
+        $sewa_paket_wisata= Sewa_Paket_Wisata::find($id);
+        $pengguna= Pengguna::find($sewa_paket_wisata->ID_PENGGUNA);
+        $customer= customer::find($sewa_paket_wisata->ID_CUSTOMER);
+
+        return view('invoicepaket',['sewa_paket_wisata'=>$sewa_paket_wisata, 'pengguna'=>$pengguna,'customer'=>$customer]);
     }
 
     /**

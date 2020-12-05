@@ -90,7 +90,7 @@
                                     <label for="JAM_AKHIR_SEWA" class="col-form-label">End Time :</label>
                                     <input type="time" class="form-control" id="JAM_AKHIR_SEWA_PAKET" name="JAM_AKHIR_SEWA_PAKET">
                                     </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                 <div class="form-group">
                                     <label for="DP_PAKET" class="col-form-label">DP Sewa :</label>
                                     <input type="DP_PAKET" class="form-control" id="DP_PAKET" name="DP_PAKET">
@@ -99,7 +99,7 @@
                                     <label for="HARGA_SEWA_PAKET" class="col-form-label">Harga Sewa Paket :</label>
                                     <input type="HARGA_SEWA_PAKET" class="form-control" id="HARGA_SEWA_PAKET" name="HARGA_SEWA_PAKET">
                                     </div>
-                                    </div>
+                                    </div> -->
                                 
                             </div>
                             <div class="modal-footer">
@@ -123,8 +123,8 @@
                             <th>Start Time</th>
                             <th>End Date</th>
                             <th>End Time</th>
-                            <th>DP Sewa</th>
-                            <th>Harga Sewa</th>
+                            <!-- <th>DP Sewa</th>
+                            <th>Harga Sewa</th> -->
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -141,8 +141,8 @@
                                     <td>{{ $spw -> JAM_SEWA_PAKET }}</td>
                                     <td>{{ $spw -> TGL_AKHIR_SEWA_PAKET }}</td>
                                     <td>{{ $spw -> JAM_AKHIR_SEWA_PAKET }}</td>
-                                    <td>{{ $spw -> DP_PAKET }}</td>
-                                    <td>{{ $spw -> HARGA_SEWA_PAKET }}</td>
+                                    <!-- <td>{{ $spw -> DP_PAKET }}</td>
+                                    <td>{{ $spw -> HARGA_SEWA_PAKET }}</td> -->
                                     <td>
                                     <a href="sewa_paket_detail/{{$spw -> ID_SEWA_PAKET}}">
                                     <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit" data-toggle="modal" data-target="#exampleModal12">
@@ -152,10 +152,11 @@
                                     <button type="button" class="btn btn-outline-danger btn-sm btn-floating ml-2" title="Delete" data-toggle="modal" data-target="#exampleModal13">
                                         <i class="ti-trash"></i>
                                     </button>
+                                    <a href="invoicepaket/{{$spw -> ID_SEWA_PAKET}}">
                                     <button type="button" class="btn btn-outline-warning btn-sm btn-floating ml-2" title="Print Invoice" data-toggle="modal" data-target="#exampleModal14">
                                         <i class="ti-printer"></i>
                                     </button>
-                                    
+                                    </a>
                                         <!-- modal -->
                                             <div class="modal fade" id="exampleModal13" tabindex="-1" role="dialog"
                                                 aria-labelledby="exampleModal13Label" aria-hidden="true">
@@ -197,8 +198,8 @@
                             <th>Start Time</th>
                             <th>End Date</th>
                             <th>End Time</th>
-                            <th>DP Sewa</th>
-                            <th>Harga Sewa</th>
+                            <!-- <th>DP Sewa</th>
+                            <th>Harga Sewa</th> -->
                             <th>Action</th>
                         </tr>
                         </tfoot>
