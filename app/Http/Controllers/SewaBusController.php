@@ -28,7 +28,7 @@ class SewaBusController extends Controller
         ->join('pengguna','sewa_bus.ID_PENGGUNA', '=', 'pengguna.ID_PENGGUNA')
         ->select('sewa_bus.ID_SEWA_BUS','sewa_bus.TGL_SEWA_BUS',
         'sewa_bus.TGL_AKHIR_SEWA','sewa_bus.LAMA_SEWA','customer.NAMA_CUSTOMER', 'sewa_bus.DP_BUS',
-        'sewa_bus.HARGA_SEWA_BUS','sewa_bus.JAM_SEWA','sewa_bus.JAM_AKHIR_SEWA','pengguna.NAMA_PENGGUNA')
+        'sewa_bus.HARGA_SEWA_BUS','sewa_bus.JAM_SEWA','sewa_bus.JAM_AKHIR_SEWA','pengguna.NAMA_PENGGUNA', 'sewa_bus.STATUS_SEWA')
         ->get();
 
         $max = DB::table('sewa_bus')->max('ID_SEWA_BUS');
@@ -83,7 +83,8 @@ class SewaBusController extends Controller
                 'HARGA_SEWA_BUS' => $request->HARGA_SEWA_BUS,
                 'JAM_SEWA' => $request->JAM_SEWA,
                 'JAM_AKHIR_SEWA' => $request->JAM_AKHIR_SEWA,
-                'DP_BUS'        =>  $request->DP_SEWA
+                'DP_BUS'        =>  $request->DP_SEWA,
+                'STATUS_SEWA' => $request->statussewa
             ]);
 
         DB::commit();
@@ -150,9 +151,9 @@ class SewaBusController extends Controller
      * @param  \App\sewa_bus  $sewa_bus
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        DB::table('sewa_bus')->where('ID_SEWA_BUS',$request->id)->update([
+        DB::table('sewa_bus')->where('ID_SEWA_BUS',$request->ID_SEWA_BUS)->update([
                 'ID_SEWA_BUS' => $request->ID_SEWA_BUS,
                 'TGL_SEWA_BUS' => $request->TGL_SEWA,
                 'TGL_AKHIR_SEWA' => $request->TGL_AKHIR_SEWA,

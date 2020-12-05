@@ -85,6 +85,15 @@
                                     <input type="LAMA_SEWA" class="form-control" id="LAMA_SEWA" name="LAMA_SEWA">
                                     </div>
                                 <div class="form-group">
+                                <div class="form-group">
+                                    <label for="statussewa" class="col-form-label">Status Sewa :</label>
+                                    <select name="statussewa" class="form-control" id="statussewa">
+                                        <option selected="selected">-- Status --</option>
+                                            <option>Booking</option>
+                                            <option>Belum Bayar</option>
+                                            <option>Lunas</option>
+                                    </select>
+                                    </div>
                                 <!-- <div class="form-group">
                                     <label for="DP_SEWA" class="col-form-label">DP Sewa :</label>
                                     <input type="DP_SEWA" class="form-control" id="DP_SEWA" name="DP_SEWA">
@@ -109,6 +118,7 @@
                     <table id="myTable" class="table table-striped table-bordered">
                         <thead>
                         <tr>
+                            <th>Status Sewa</th>
                             <th>Id Sewa Bus</th>
                             <th>Nama User</th>
                             <th>Nama Customer</th>
@@ -127,6 +137,7 @@
                             @foreach($sewa_bus as $sb)
                                    
                                     <!-- <tr class="table-light"> -->
+                                    <td>{{ $sb -> STATUS_SEWA}}
                                     <td>{{ $sb -> ID_SEWA_BUS }}</td>
                                     <td>{{ $sb -> NAMA_PENGGUNA }}</td>
                                     <td>{{ $sb -> NAMA_CUSTOMER }}</td>
@@ -138,7 +149,7 @@
                                     <!-- <td>{{ $sb -> DP_BUS }}</td>
                                     <td>{{ $sb -> HARGA_SEWA_BUS }}</td> -->
                                     <td>
-                                    <a href="sewa_bus_detail/{{$sb -> ID_SEWA_BUS}}">
+                                    <a href="{{ url('sewa_bus_detail', ['id'=>$sb -> ID_SEWA_BUS]) }}">
                                     <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit" data-toggle="modal" data-target="#exampleModal12">
                                         <i class="ti-pencil"></i>
                                     </button>
@@ -185,6 +196,7 @@
                                     </tbody>
                                     <tfoot>
                         <tr>
+                            <th>Status Sewa</th>
                             <th>Id Sewa Bus</th>
                             <th>Nama User</th>
                             <th>Nama Customer</th>

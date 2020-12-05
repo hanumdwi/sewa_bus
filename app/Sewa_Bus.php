@@ -22,6 +22,7 @@ class Sewa_Bus extends Model
         'JAM_AKHIR_SEWA',
         'LAMA_SEWA',
         'DP_BUS',
-        'HARGA_SEWA_BUS'
+        'HARGA_SEWA_BUS',
+        'STATUS_SEWA'
     ];
 }

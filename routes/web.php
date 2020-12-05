@@ -79,6 +79,16 @@ Route::get('galeridestroy/{id}', 'GaleriController@destroy');
 Route::post('galeriupdateswitch', 'GaleriController@update_switch');
 //================================================================================
 
+//Galeri Armada
+Route::get('gallery','GaleriController@index');
+
+Route::post('galeristore', 'GaleriController@store');
+Route::get('galeriedit/{id}', 'GaleriController@edit');
+Route::post('galeriupdate', 'GaleriController@update');
+Route::get('galeridestroy/{id}', 'GaleriController@destroy');
+Route::post('galeriupdateswitch', 'GaleriController@update_switch');
+//================================================================================
+
 //Category Armada
 Route::get('category_armadaindex','CategoryController@index');
 Route::post('category_armadastore', 'CategoryController@store');
@@ -99,6 +109,7 @@ Route::get('paketwisatadestroy/{id}', 'PaketWisataController@destroy');
 Route::get('sewa_bus','SewaBusController@index');
 Route::post('sewa_busstore', 'SewaBusController@store');
 Route::post('sewa_busupdate', 'SewaBusController@update');
+
 Route::get('schedulesewa', 'SewaBusController@getAllSchedule');
 Route::get('schedulesewa/{id}', 'SewaBusController@getScheduleById');
 Route::post('updateswitch', 'SewaBusController@update_switch');
@@ -116,7 +127,8 @@ Route::post('updateswitch', 'ScheduleController@update_switch');
 //===================================================================================
 
 //Sewa Bus Detail
-Route::get('sewa_bus_detail/{id}','SewaDetailController@index');
+Route::get('sewa_bus_detail/{id}','SewaDetailController@index')->name('sewa_bus_detail_index');
+Route::post('sewa_bus_detail/{id}','SewaDetailController@update');
 Route::post('sewa_bus_detailstore', 'SewaDetailController@store');
 Route::post('sewa_bus_detailupdate', 'SewaDetailController@update');
 Route::get('sewa_bus_detailsewa', 'SewaDetailController@getAllsewa_bus_detail');

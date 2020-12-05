@@ -38,16 +38,18 @@
                         <h3>Personal Information</h3>
                         <section class="card card-body border mb-0">
                             
-                        <form action="sewa_busupdate" method="post">
+                        <form action="{{ $sewa_bus->ID_SEWA_BUS }}" method="post">
                             {{ csrf_field() }}
+                            <input type="hidden" name="ID_SEWA_BUS" value="{{ $sewa_bus->ID_SEWA_BUS }}"> <br/>
                             <div class="form-row">
+                            <input type="hidden" name="ID_PENGGUNA" value="{{ $sewa_bus->ID_PENGGUNA }}"> <br/>
                                 <div class="col-md-4 mb-3">
                                     <label for="nama" class="col-form-label">Nama User :</label>
                                     
                                         <label>{{$pengguna->NAMA_PENGGUNA}}</label>
                                        
                                 </div>
-                                
+                                <input type="hidden" name="ID_CUSTOMER" value="{{ $sewa_bus->ID_CUSTOMER }}"> <br/>
                                 <div class="col-md-4 mb-3">
                                     <label for="nama" class="col-form-label">Nama Customer :</label>
                                     
@@ -85,6 +87,16 @@
                                     <label for="LAMA_SEWA" class="col-form-label">Lama sewa :</label>
                                     <input type="LAMA_SEWA" class="form-control" id="LAMA_SEWA" name="LAMA_SEWA" value="{{$sewa_bus->LAMA_SEWA}}">
                                 </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label for="statussewa" class="col-form-label">Status Sewa :</label>
+                                    <select name="statussewa" class="form-control" id="statussewa">
+                                        <option selected="selected">-- Status --</option>
+                                            <option>Booking</option>
+                                            <option>Belum Bayar</option>
+                                            <option>Lunas</option>
+                                    </select>
+                                    </div>
                             </div>
                                     
                            
@@ -97,12 +109,12 @@
                         <section class="card card-body border mb-0">
                         
                          <form class="basic-repeater">
-                         <center>
+                         <!-- <center>
                          <div class="col-md-4 mb-3">
                                         <label for="profession">Tanggal Sewa</label>
                                         <input type="date" class="form-control" name="tglsewa" id="tglsewa">
-                                   </div></center>
-                                   <div><label>&nbsp;</label></div>
+                                   </div></center> -->
+                                   <!-- <div><label>&nbsp;</label></div> -->
                             <div data-repeater-list="group-a">
                                 <div data-repeater-item>
                                     <div class="row">

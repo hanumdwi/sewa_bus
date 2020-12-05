@@ -78,8 +78,24 @@ class SewaDetailController extends Controller
         $sewa_bus= Sewa_Bus::find($id);
         $pengguna= Pengguna::find($sewa_bus->ID_PENGGUNA);
         $customer= customer::find($sewa_bus->ID_CUSTOMER);
+        // $sewa_bus_category= Sewa_Bus_Category::where('ID_SEWA_BUS','=',$sewa_bus->ID_SEWA_BUS);
+        // $sewa_bus_category= Sewa_Bus_Category::all();
+        
+        // $sewa_bus=DB::table('sewa_bus')->get();
+        $category_armada=DB::table('category_armada')->get();
+        $pricelist_sewa_armada=DB::table('pricelist_sewa_armada')->get();
+        $sewa_bus_category=DB::table('sewa_bus_category')
+        ->join('sewa_bus','sewa_bus_category.ID_SEWA_BUS', '=', 'sewa_bus.ID_SEWA_BUS')
+        ->join('pricelist_sewa_armada','sewa_bus_category.ID_PRICELIST', '=', 'pricelist_sewa_armada.ID_PRICELIST')
+        ->join('category_armada', 'pricelist_sewa_armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
+        ->select('sewa_bus_category.ID_SEWA_CATEGORY','sewa_bus_category.ID_SEWA_BUS',
+        'sewa_bus_category.ID_PRICELIST','sewa_bus_category.QUANTITY','sewa_bus_category.HARGA_SEWA', 'sewa_bus_category.TOTAL',
+        'category_armada.NAMA_CATEGORY', 'pricelist_sewa_armada.TUJUAN_SEWA')
+        ->get();
 
-        return view('invoice',['sewa_bus'=>$sewa_bus, 'pengguna'=>$pengguna,'customer'=>$customer]);
+
+        return view('invoice',['sewa_bus'=>$sewa_bus, 'pengguna'=>$pengguna,'customer'=>$customer],
+        ['sewa_bus_category'=>$sewa_bus_category, 'pricelist_sewa_armada'=>$pricelist_sewa_armada, 'category_armada'=>$category_armada]);
     }
 
     public function pdf_paket(Request $request, $id)
@@ -131,14 +147,14 @@ class SewaDetailController extends Controller
      * @param  \App\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
-    {
-        DB::table('category_armada')->where('ID_CATEGORY',$request->id)->update([
-            'NAMA_CATEGORY'   => $request->namacategory
-        ]);
+    // public function update(Request $request)
+    // {
+    //     DB::table('category_armada')->where('ID_CATEGORY',$request->id)->update([
+    //         'NAMA_CATEGORY'   => $request->namacategory
+    //     ]);
 
-        return redirect('category_armadaindex');
-    }
+    //     return redirect('category_armadaindex');
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -174,4 +190,22 @@ class SewaDetailController extends Controller
     	return $pdf->download('laporan-sewa_bus-pdf');
     }
 
+    public function update(Request $request, $id)
+    {
+        DB::table('sewa_bus')->where('ID_SEWA_BUS',$request->ID_SEWA_BUS)->update([
+                'ID_SEWA_BUS' => $request->ID_SEWA_BUS,
+                'TGL_SEWA_BUS' => $request->TGL_SEWA,
+                'TGL_AKHIR_SEWA' => $request->TGL_AKHIR_SEWA,
+                'LAMA_SEWA' => $request->LAMA_SEWA,
+                'ID_CUSTOMER' => $request->ID_CUSTOMER,
+                'ID_PENGGUNA' => $request->ID_PENGGUNA,
+                'HARGA_SEWA_BUS' => $request->HARGA_SEWA_BUS,
+                'JAM_SEWA' => $request->JAM_SEWA,
+                'JAM_AKHIR_SEWA' => $request->JAM_AKHIR_SEWA,
+                'DP_BUS'        =>  $request->DP_SEWA,
+                'STATUS_SEWA' => $request->statussewa
+        ]);
+
+        return redirect('sewa_bus');
+    }
 }

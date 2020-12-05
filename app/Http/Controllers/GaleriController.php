@@ -24,8 +24,7 @@ class GaleriController extends Controller
         $galeri=DB::table('galeri')->get();
         $armada=DB::table('armada')->get();
 
-
-        return view('galeriindex', ['galeri' =>$galeri], ['armada' =>$armada]);
+        return view('gallery', ['galeri' =>$galeri], ['armada' =>$armada]);
     }
 }
 

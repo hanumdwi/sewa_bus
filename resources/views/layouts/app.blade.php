@@ -626,7 +626,7 @@
                             <div class="list-group list-group-flush">
                                 <a href="{{ route('profile') }}" class="list-group-item">Profile</a>
                                 <a href="#" class="list-group-item" data-sidebar-target="#settings">Settings</a>
-                                <a href="{{ route('login') }}" class="list-group-item text-danger">Sign Out!</a>
+                                <a href="logout" class="list-group-item text-danger">Sign Out!</a>
                             </div>
                             <div class="pb-0 p-4">
                                 <div class="mb-4">
@@ -816,7 +816,7 @@
                     <ul id="customer">
                         <li class="navigation-divider">Customer</li>
                         <li>
-                            <a  class="active" href="customerindex">
+                            <a  class="active" href="{{ url('customerindex') }}">
                                 <span class="nav-link-icon">
                                     <i class="fa fa-user-o"></i>
                                 </span>
@@ -827,7 +827,7 @@
                     <ul id="user">
                         <li class="navigation-divider">User</li>
                         <li>
-                            <a  class="active" href="penggunaindex">
+                            <a  class="active" href="{{ url('penggunaindex') }}">
                             <span class="nav-link-icon">
                                     <i class="fa fa-user-o"></i>
                                 </span>
@@ -895,14 +895,14 @@
                     <ul id="sewa">
                         <li class="navigation-divider">Sewa</li>
                         <li>
-                            <a class="active" href="sewa_bus">
+                            <a class="active" href="{{ url('sewa_bus') }}">
                             <span class="nav-link-icon" data-feather="truck">
                                 </span>
                                 <span>Sewa Armada</span>
                             </a>
                         </li>
                         <li>
-                            <a class="active" href="sewa_paket">
+                            <a class="active" href="{{ url('sewa_paket') }}">
                             <span class="nav-link-icon" data-feather="calendar">
                                 </span>
                                 <span>Sewa Paket Wisata</span>

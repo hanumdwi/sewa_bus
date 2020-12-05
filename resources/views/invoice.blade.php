@@ -51,14 +51,17 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($sewa_bus_category as $sbc)
                                 <tr class="text-right">
-                                    <td class="text-left">1</td>
-                                    <td class="text-left">Brochure Design</td>
-                                    <td>2</td>
-                                    <td>$20</td>
-                                    <td>$40</td>
+                                    <td class="text-left">{{ $loop->iteration }}</td>
+                                    <td class="text-left">{{$sbc -> NAMA_CATEGORY}}
+                                    {{$sbc -> TUJUAN_SEWA}}
+                                    </td>
+                                    <td>{{$sbc -> QUANTITY}}</td>
+                                    <td>Rp. {{$sbc -> HARGA_SEWA}}</td>
+                                    <td>Rp. {{$sbc -> TOTAL}}</td>
                                 </tr>
-                                
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
