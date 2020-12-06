@@ -82,6 +82,9 @@ Route::post('galeriupdateswitch', 'GaleriController@update_switch');
 //Galeri Armada
 Route::get('gallery','GaleriController@index');
 
+//Foto Armada
+Route::get('fotoarmada/{id}','GaleriController@indexfoto');
+
 Route::post('galeristore', 'GaleriController@store');
 Route::get('galeriedit/{id}', 'GaleriController@edit');
 Route::post('galeriupdate', 'GaleriController@update');

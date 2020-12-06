@@ -28,6 +28,19 @@ class GaleriController extends Controller
     }
 }
 
+    public function indexfoto($id)
+    {
+        if(!Session::get('login')){
+            return redirect('login');
+        }
+        else{
+        $galeri=DB::table('galeri')->get();
+        $armada=DB::table('armada')->get();
+
+        return view('fotoarmada', ['galeri' =>$galeri], ['armada' =>$armada]);
+    }
+}
+
     /**
      * Show the form for creating a new resource.
      *

@@ -70,10 +70,10 @@
                                 <div class="form-group">
                                     <label for="harga" class="col-form-label">Harga :</label>
                                     <input type="harga" class="form-control" id="harga" name="harga">
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="foto" class="col-form-label">Foto Armada :</label>
                                         <input type="foto" class="form-control" id="foto" name="foto">
-                                    </div>
+                                    </div> -->
                                     </div>
                                 
                             </div>
@@ -274,9 +274,35 @@
                                     <td>{{ $ar -> FOTO }}</td>
                                     <td>
                                     @if($ar -> STATUS_ARMADA == 1)
-                                    <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit" data-toggle="modal" data-target="#exampleModal12{{$ar -> ID_ARMADA}}">
+                                    <a href="{{ url('fotoarmada', ['id'=>$ar -> ID_ARMADA]) }}">
+                                    <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit Foto">
                                         <i class="ti-pencil"></i>
                                     </button>
+                                    </a>
+                                    @else
+                                    <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit Foto" data-toggle="modal" data-target="#tampil">
+                                        <i class="ti-pencil"></i>
+                                    </button>
+
+                                        <div class="modal" id="tampil" tabindex="-1" role="dialog">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content border">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Modal title</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <i class="ti-close"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Sorry, Data Non-Active</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     @endif
                                     </td>
                                     </tr>

@@ -838,7 +838,7 @@
                     <ul id="paketwisata">
                         <li class="navigation-divider">Paket Wisata</li>
                         <li>
-                            <a  class="active" href="paketwisataindex">
+                            <a  class="active" href="{{ url('paketwisataindex') }}">
                                 <span class="nav-link-icon" data-feather="calendar"></span>
                                 <span>Paket Wisata</span>
                             </a>
@@ -848,7 +848,7 @@
                     <ul id="armada">
                         <li class="navigation-divider">Category Armada</li>
                         <li>
-                            <a  class="active" href="category_armadaindex">
+                            <a  class="active" href="{{ url('category_armadaindex') }}">
                                 <span class="nav-link-icon" data-feather="menu"></span>
                                 <span>Daftar Category Armada</span>
                             </a>
@@ -856,7 +856,7 @@
                         
                         <li class="navigation-divider">Armada</li>
                         <li>
-                            <a  class="active" href="armadaindex">
+                            <a  class="active" href="{{ url('armadaindex') }}">
                                 <span class="nav-link-icon" data-feather="truck"></span>
                                 <span>Armada Bus</span>
                             </a>
@@ -864,7 +864,7 @@
 
                         <li class="navigation-divider">Pricelist Armada</li>
                         <li>
-                            <a  class="active" href="pricelistsewaarmada">
+                            <a  class="active" href="{{ url('pricelistsewaarmada') }}">
                                 <span class="nav-link-icon" data-feather="plus"></span>
                                 <span>Pricelist Tujuan Armada</span>
                             </a>
@@ -872,7 +872,7 @@
 
                         <li class="navigation-divider">Galeri</li>
                         <li>
-                            <a  class="active" href="galeriindex">
+                            <a  class="active" href="{{ url('galeriindex') }}">
                                 <span class="nav-link-icon" data-feather="image"></span>
                                 <span>Galeri Armada</span>
                             </a>
@@ -885,7 +885,7 @@
                     <ul id="schedule">
                         <li class="navigation-divider">Schedule</li>
                         <li>
-                            <a  class="active" href="scheduleindex">
+                            <a  class="active" href="{{ url('scheduleindex') }}">
                                 <span class="nav-link-icon" data-feather="calendar"></span>
                                 <span>Schedule Armada</span>
                             </a>
@@ -910,13 +910,13 @@
                         </li>
                         <li class="navigation-divider">Invoice Sewa</li>
                         <li>
-                            <a  class="active" href="invoice">
+                            <a  class="active" href="{{ url('invoice') }}">
                                 <span class="nav-link-icon" data-feather="file"></span>
                                 <span>Armada</span>
                             </a>
                         </li>
                         <li>
-                            <a  class="active" href="invoicepaket">
+                            <a  class="active" href="{{ url('invoicepaket') }}">
                                 <span class="nav-link-icon" data-feather="file"></span>
                                 <span>Paket Wisata</span>
                             </a>
