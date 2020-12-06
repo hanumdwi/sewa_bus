@@ -67,9 +67,6 @@
                                     <label for="fasilitas" class="col-form-label">Fasilitas :</label>
                                     <input type="fasilitas" class="form-control" id="fasilitas" name="fasilitas">
                                     </div>
-                                <div class="form-group">
-                                    <label for="harga" class="col-form-label">Harga :</label>
-                                    <input type="harga" class="form-control" id="harga" name="harga">
                                 <!-- <div class="form-group">
                                     <label for="foto" class="col-form-label">Foto Armada :</label>
                                         <input type="foto" class="form-control" id="foto" name="foto">
@@ -94,7 +91,6 @@
                             <th>Plat Nomor</th>
                             <th>Kapasitas</th>
                             <th>Fasilitas Armada</th>
-                            <th>Harga</th>
                             <th>Action</th>
                             <th>Foto Armada</th>
                             <th>Edit Foto</th>
@@ -147,16 +143,17 @@
                                     <!-- <tr class="table-light"> -->
                                     <td>{{ $ar -> ID_ARMADA }}</td>
                                     <td>{{ $ar -> NAMA_CATEGORY }}</td>
-                                    <td>{{ $ar -> PLAT_NOMOR }}</td>
+                                    <td><a href="{{ url('fotoarmada', ['id'=>$ar -> ID_ARMADA]) }}">{{ $ar -> PLAT_NOMOR }}</a></td>
                                     <td>{{ $ar -> KAPASITAS }}</td>
                                     <td>{{ $ar -> FASILITAS_ARMADA }}</td>
-                                    <td>{{ $ar -> HARGA }}</td>
                                    
                                     <td>
                                     @if($ar -> STATUS_ARMADA == 1)
-                                    <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit" data-toggle="modal" data-target="#exampleModal12{{$ar -> ID_ARMADA}}">
+                                    <a href="{{ url('editarmada', ['id'=>$ar -> ID_ARMADA]) }}">
+                                    <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit">
                                         <i class="ti-pencil"></i>
                                     </button>
+                                    </a>
                                     @else
                                     <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit" data-toggle="modal" data-target="#tampil">
                                         <i class="ti-pencil"></i>
@@ -182,63 +179,7 @@
                                             </div>
                                         </div>
                                     @endif
-                                    <!-- modal -->
-                                        <div class="modal fade" id="exampleModal12{{$ar -> ID_ARMADA}}" tabindex="-1" role="dialog"
-                                        aria-labelledby="exampleModal12Label" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModal12Label">Edit Data Armada</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <i class="ti-close"></i>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                
-                                                <form action="armadaupdate" method="post">
-                                                {{ csrf_field() }}
-                                                <input type="hidden" name="id" value="{{ $ar->ID_ARMADA }}"> <br/>
-                                                <div class="form-group">
-                                                    <label for="nama" class="col-form-label">Category Armada :</label>
-                                                    <select name="ID_CATEGORY" class="form-control" id="ID_CATEGORY">
-                                                        @foreach($category_armada as $c)
-                                                       
-                                                        <option value="{{$c->ID_CATEGORY}}">{{$c->NAMA_CATEGORY}}</option>
-                                                       
-                                                        @endforeach                 
-                                                </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="platnomor" class="col-form-label">Plat Nomor :</label>
-                                                    <input type="platnomor" class="form-control" id="platnomor" name="platnomor" value="{{ $ar->PLAT_NOMOR }}">
-                                                    </div>
-                                                <div class="form-group">
-                                                    <label for="kapasitas" class="col-form-label">Kapasitas :</label>
-                                                    <input type="kapasitas" class="form-control" id="kapasitas" name="kapasitas" value="{{ $ar->KAPASITAS }}">
-                                                    </div>
-                                                <div class="form-group">
-                                                    <label for="fasilitas" class="col-form-label">Fasilitas :</label>
-                                                    <input type="fasilitas" class="form-control" id="fasilitas" name="fasilitas" value="{{ $ar->FASILITAS_ARMADA }}">
-                                                    </div>
-                                                <div class="form-group">
-                                                    <label for="harga" class="col-form-label">Harga :</label>
-                                                    <input type="harga" class="form-control" id="harga" name="harga" value="{{ $ar->HARGA }}">
-                                                <!-- <div class="form-group">
-                                                    <label for="foto" class="col-form-label">Foto Armada :</label>
-                                                    <input type="foto" class="form-control" id="foto" name="foto" value="{{ $ar->FOTO }}">
-                                                    </div> -->
-                                                    </div>
-                                                
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary" id="edit">Save Changes</button>
-                                            </div>
-                                            </form>
-                                            
-                                            </div>
-                                        </div>
-                                        </div>
+                                    
                                     
                                     <button type="button" class="btn btn-outline-danger btn-sm btn-floating ml-2" title="Delete" data-toggle="modal" data-target="#exampleModal13{{$ar -> ID_ARMADA}}">
                                         <i class="ti-trash"></i>
@@ -317,7 +258,6 @@
                             <th>Plat Nomor</th>
                             <th>Kapasitas</th>
                             <th>Fasilitas Armada</th>
-                            <th>Harga</th>
                             <th>Action</th>
                             <th>Foto Armada</th>
                             <th>Edit Foto</th>

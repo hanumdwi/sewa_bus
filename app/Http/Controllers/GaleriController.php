@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\galeri;
+use App\armada;
+use App\category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -28,16 +30,16 @@ class GaleriController extends Controller
     }
 }
 
-    public function indexfoto($id)
+    public function indexfoto(Request $request, $id)
     {
         if(!Session::get('login')){
             return redirect('login');
         }
         else{
-        $galeri=DB::table('galeri')->get();
-        $armada=DB::table('armada')->get();
-
-        return view('fotoarmada', ['galeri' =>$galeri], ['armada' =>$armada]);
+            $armada= Armada::find($id);
+            $category_armada= Category::all();
+            // dump($armada);
+            return view ('fotoarmada',['armada' =>$armada,'category_armada' =>$category_armada]);
     }
 }
 

@@ -55,7 +55,7 @@ Route::get('penggunadestroy/{id}', 'PenggunaController@destroy');
 //Armada
 Route::get('armadaindex','ArmadaController@index');
 Route::post('armadastore', 'ArmadaController@store');
-Route::get('armadaedit/{id}', 'ArmadaController@edit');
+Route::get('editarmada/{id}', 'ArmadaController@edit');
 Route::post('armadaupdate', 'ArmadaController@update');
 Route::get('armadadestroy/{id}', 'ArmadaController@destroy');
 Route::post('armadaupdateswitch', 'ArmadaController@update_switch');

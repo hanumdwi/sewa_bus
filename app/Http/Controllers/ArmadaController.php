@@ -88,9 +88,13 @@ class ArmadaController extends Controller
      * @param  \App\armada  $armada
      * @return \Illuminate\Http\Response
      */
-    public function edit(armada $armada)
+    public function edit($id)
     {
-        //
+        $category_armada = DB::table('category_armada')->get();
+        $armada = DB::table('armada')->where('ID_ARMADA',$id)->get();
+        
+		// passing data categories yang didapat ke view edit.blade.php
+		return view('editarmada',['armada' =>$armada,'category_armada' =>$category_armada]);
     }
 
     /**
