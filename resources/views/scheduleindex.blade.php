@@ -83,10 +83,10 @@
                         
                         <label class="col-sm-3 col-form-label">Sewa Category Armada</label>
                         <div class="col-sm-9">
-                        <select name="ID_SEWA_CATEGORY" class="form-control" id="ID_SEWA_CATEGORY">
+                        <select name="ID_SEWA_BUS" class="form-control" id="ID_SEWA_BUS">
                                     @foreach($sewa_bus_category as $sbc)
                                    
-                                    <option value="{{$sbc->ID_SEWA_CATEGORY}}"></option>
+                                    <option value="{{$sbc->ID_SEWA_BUS}}"></option>
                                    
                                     @endforeach                 
                             </select>

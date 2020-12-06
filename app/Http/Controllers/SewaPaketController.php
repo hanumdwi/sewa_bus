@@ -197,4 +197,23 @@ class SewaPaketController extends Controller
     {
         //
     }
+
+    public function pdf_paket(Request $request)
+    {
+        $customer=DB::table('customer')->get();
+        $pengguna=DB::table('pengguna')->get();
+        $paket_wisata=DB::table('paket_wisata')->get();
+        $sewa_paket_wisata=DB::table('sewa_paket_wisata')
+        ->join('customer','sewa_paket_wisata.ID_CUSTOMER', '=', 'customer.ID_CUSTOMER')
+        ->join('pengguna','sewa_paket_wisata.ID_PENGGUNA', '=', 'pengguna.ID_PENGGUNA')
+        ->join('paket_wisata','sewa_paket_wisata.ID_PAKET', '=', 'paket_wisata.ID_PAKET')
+        ->select('sewa_paket_wisata.ID_SEWA_PAKET','sewa_paket_wisata.TGL_SEWA_PAKET',
+        'sewa_paket_wisata.TGL_AKHIR_SEWA_PAKET','customer.NAMA_CUSTOMER', 'sewa_paket_wisata.DP_PAKET',
+        'sewa_paket_wisata.HARGA_SEWA_PAKET','sewa_paket_wisata.JAM_SEWA_PAKET',
+        'sewa_paket_wisata.JAM_AKHIR_SEWA_PAKET','pengguna.NAMA_PENGGUNA','paket_wisata.NAMA_PAKET')
+        ->get();
+
+        return view('invoicepaket', ['sewa_paket_wisata' =>$sewa_paket_wisata,
+        'customer'=>$customer,'pengguna'=>$pengguna,'paket_wisata'=>$paket_wisata]);
+    }
 }

@@ -26,11 +26,11 @@ class ScheduleController extends Controller
         $sewa_paket_wisata=DB::table('sewa_paket_wisata')->get();
         $schedule_armada=DB::table('schedule_armada')
         ->join('armada','schedule_armada.ID_ARMADA', '=', 'armada.ID_ARMADA')
-        ->join('sewa_bus_category','schedule_armada.ID_SEWA_CATEGORY', '=', 'sewa_bus_category.ID_SEWA_CATEGORY')
+        ->join('sewa_bus_category','schedule_armada.ID_SEWA_BUS', '=', 'sewa_bus_category.ID_SEWA_BUS')
         ->join('sewa_paket_wisata','schedule_armada.ID_SEWA_PAKET', '=', 'sewa_paket_wisata.ID_SEWA_PAKET')
         ->select('schedule_armada.ID_SCHEDULE','schedule_armada.TGL_SEWA',
         'schedule_armada.TGL_AKHIR_SEWA','armada.NAMA_ARMADA', 'sewa_paket_wisata.ID_SEWA_PAKET',
-        'schedule_armada.STATUS_ARMADA','schedule_armada.JAM_SEWA','schedule_armada.JAM_AKHIR_SEWA','sewa_bus_category.ID_SEWA_CATEGORY')
+        'schedule_armada.STATUS_ARMADA','schedule_armada.JAM_SEWA','schedule_armada.JAM_AKHIR_SEWA','sewa_bus_category.ID_SEWA_BUS')
         ->get();
 
         // $max = DB::table('sewa_bus')->max('ID_SEWA_BUS');
@@ -82,7 +82,7 @@ class ScheduleController extends Controller
                 'TGL_AKHIR_SEWA' => $request->TGL_AKHIR_SEWA,
                 'LAMA_SEWA' => $request->LAMA_SEWA,
                 'ID_ARMADA' => $request->ID_ARMADA,
-                'ID_SEWA_CATEGORY' => $request->ID_SEWA_CATEGORY,
+                'ID_SEWA_BUS' => $request->ID_SEWA_BUS,
                 'ID_SEWA_PAKET' => $request->ID_SEWA_PAKET,
                 'HARGA_SEWA_BUS' => $request->HARGA_SEWA_BUS,
                 'STATUS_SEWA' => 1,

@@ -9,12 +9,22 @@
 
     <div class="page-header">
         <div class="page-title">
-            <h3>Gallery</h3>
+            <h3>Gallery Armada</h3>
             <div>
-                <button class="btn btn-primary" data-toggle="modal"
+            <button class="btn btn-primary file-upload-btn" data-toggle="modal"
+                        data-target="#compose">
+                    <i class="ti-upload mr-2"></i> Upload Foto
+                </button>
+                <form class="d-none" id="file-upload">
+                    <input type="file" multiple>
+                </form>
+                <!-- <button class="btn btn-primary" data-toggle="modal"
                         data-target="#createEventModal">
                     <i class="ti-upload mr-2"></i> Upload
                 </button>
+                <form class="d-none" id="file-upload">
+                    <input type="file" multiple>
+                </form> -->
             </div>
         </div>
     </div>
@@ -26,13 +36,13 @@
                     <a href="#" class="nav-link active" data-filter="*">All</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link" data-filter=".webTemplates">Web</a>
+                    <a href="#" class="nav-link" data-filter=".webTemplates">Bus Besar</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link" data-filter=".logos">Logos</a>
+                    <a href="#" class="nav-link" data-filter=".logos">Bus Sedang</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link" data-filter=".drawings">Drawings</a>
+                    <a href="#" class="nav-link" data-filter=".drawings">Elf (Mini Bus)</a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link" data-filter=".ui">UI Elements</a>
@@ -179,4 +189,9 @@
     <script src="{{ url('vendors/jquery.isotope.min.js') }}"></script>
 
     <script src="{{ url('assets/js/examples/pages/gallery.js') }}"></script>
+
+    
+    <!-- File manager example -->
+    <script src="{{ url('assets/js/examples/file-manager.js') }}"></script>
+    
 @endsection

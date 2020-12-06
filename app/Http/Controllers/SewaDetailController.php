@@ -78,19 +78,16 @@ class SewaDetailController extends Controller
         $sewa_bus= Sewa_Bus::find($id);
         $pengguna= Pengguna::find($sewa_bus->ID_PENGGUNA);
         $customer= customer::find($sewa_bus->ID_CUSTOMER);
-        // $sewa_bus_category= Sewa_Bus_Category::where('ID_SEWA_BUS','=',$sewa_bus->ID_SEWA_BUS);
-        // $sewa_bus_category= Sewa_Bus_Category::all();
         
-        // $sewa_bus=DB::table('sewa_bus')->get();
         $category_armada=DB::table('category_armada')->get();
         $pricelist_sewa_armada=DB::table('pricelist_sewa_armada')->get();
         $sewa_bus_category=DB::table('sewa_bus_category')
         ->join('sewa_bus','sewa_bus_category.ID_SEWA_BUS', '=', 'sewa_bus.ID_SEWA_BUS')
         ->join('pricelist_sewa_armada','sewa_bus_category.ID_PRICELIST', '=', 'pricelist_sewa_armada.ID_PRICELIST')
         ->join('category_armada', 'pricelist_sewa_armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
-        ->select('sewa_bus_category.ID_SEWA_CATEGORY','sewa_bus_category.ID_SEWA_BUS',
-        'sewa_bus_category.ID_PRICELIST','sewa_bus_category.QUANTITY','sewa_bus_category.HARGA_SEWA', 'sewa_bus_category.TOTAL',
-        'category_armada.NAMA_CATEGORY', 'pricelist_sewa_armada.TUJUAN_SEWA')
+        ->select('sewa_bus_category.ID_SEWA_BUS', 'sewa_bus_category.ID_PRICELIST',
+        'sewa_bus_category.QUANTITY', 'sewa_bus_category.TOTAL',
+        'category_armada.NAMA_CATEGORY', 'pricelist_sewa_armada.TUJUAN_SEWA', 'pricelist_sewa_armada.PRICELIST_SEWA')
         ->get();
 
 
@@ -104,7 +101,18 @@ class SewaDetailController extends Controller
         $pengguna= Pengguna::find($sewa_paket_wisata->ID_PENGGUNA);
         $customer= customer::find($sewa_paket_wisata->ID_CUSTOMER);
 
-        return view('invoicepaket',['sewa_paket_wisata'=>$sewa_paket_wisata, 'pengguna'=>$pengguna,'customer'=>$customer]);
+        $paket_wisata=DB::table('paket_wisata')->get();
+        $sewa_paket_wisata=DB::table('sewa_paket_wisata')
+        ->join('paket_wisata','sewa_paket_wisata.ID_PAKET', '=', 'paket_wisata.ID_PAKET')
+        ->where('ID_SEWA_PAKET', '=', $id)
+        ->select('sewa_paket_wisata.ID_SEWA_PAKET','sewa_paket_wisata.TGL_SEWA_PAKET',
+        'sewa_paket_wisata.TGL_AKHIR_SEWA_PAKET', 'sewa_paket_wisata.DP_PAKET',
+        'sewa_paket_wisata.HARGA_SEWA_PAKET','sewa_paket_wisata.JAM_SEWA_PAKET',
+        'sewa_paket_wisata.JAM_AKHIR_SEWA_PAKET','paket_wisata.NAMA_PAKET')
+        ->get();
+
+        return view('invoicepaket',['sewa_paket_wisata'=>$sewa_paket_wisata, 'pengguna'=>$pengguna,
+        'customer'=>$customer, 'paket_wisata'=>$paket_wisata]);
     }
 
     /**

@@ -47,27 +47,29 @@
                                     <th>Description</th>
                                     <th class="text-right">Quantity</th>
                                     <th class="text-right">Unit Cost</th>
-                                    <th class="text-right">Total</th>
+                                    <th class="text-right">Total Price</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($sewa_bus_category as $sbc)
+                                @if($sbc->ID_SEWA_BUS == $sewa_bus->ID_SEWA_BUS)
                                 <tr class="text-right">
                                     <td class="text-left">{{ $loop->iteration }}</td>
-                                    <td class="text-left">{{$sbc -> NAMA_CATEGORY}}
+                                    <td class="text-left">{{$sbc -> NAMA_CATEGORY}} - 
                                     {{$sbc -> TUJUAN_SEWA}}
                                     </td>
                                     <td>{{$sbc -> QUANTITY}}</td>
-                                    <td>Rp. {{$sbc -> HARGA_SEWA}}</td>
+                                    <td>Rp. {{$sbc -> PRICELIST_SEWA}}</td>
                                     <td>Rp. {{$sbc -> TOTAL}}</td>
                                 </tr>
+                                @endif
                                 @endforeach
                                 </tbody>
                             </table>
                         </div>
                         <div class="text-right">
-                            <p>Sub - Total amount: $12,348</p>
-                            <p>vat (10%) : $138</p>
+                            <p>Sub - Total : $12,348</p>
+                            <p>DP (25%) : $138</p>
                             <h4 class="font-weight-800">Total : $13,986</h4>
                         </div>
                         <p class="text-center small text-muted  m-t-50">

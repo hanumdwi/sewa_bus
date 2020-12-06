@@ -45,20 +45,17 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Description</th>
-                                    <th class="text-right">Quantity</th>
-                                    <th class="text-right">Unit Cost</th>
-                                    <th class="text-right">Total</th>
+                                    <th class="text-right">Price</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($sewa_paket_wisata as $spw)
                                 <tr class="text-right">
-                                    <td class="text-left">1</td>
-                                    <td class="text-left">Brochure Design</td>
-                                    <td>2</td>
-                                    <td>$20</td>
-                                    <td>$40</td>
+                                    <td class="text-left">{{ $loop->iteration }}</td>
+                                    <td class="text-left">{{$spw -> NAMA_PAKET}}</td>
+                                    <td>Rp. {{$spw -> HARGA_SEWA_PAKET}}</td>
                                 </tr>
-                                
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>

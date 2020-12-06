@@ -56,10 +56,6 @@
                                 </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="namaarmada" class="col-form-label">Nama Armada :</label>
-                                    <input type="namaarmada" class="form-control" id="namaarmada" name="namaarmada">
-                                    </div>
-                                <div class="form-group">
                                     <label for="platnomor" class="col-form-label">Plat Nomor :</label>
                                     <input type="platnomor" class="form-control" id="platnomor" name="platnomor">
                                     </div>
@@ -95,13 +91,13 @@
                             <th>Status</th>
                             <th>Id Armada</th>
                             <th>Category Armada</th>
-                            <th>Nama Armada</th>
                             <th>Plat Nomor</th>
                             <th>Kapasitas</th>
                             <th>Fasilitas Armada</th>
                             <th>Harga</th>
-                            <th>Foto Armada</th>
                             <th>Action</th>
+                            <th>Foto Armada</th>
+                            <th>Edit Foto</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -151,12 +147,11 @@
                                     <!-- <tr class="table-light"> -->
                                     <td>{{ $ar -> ID_ARMADA }}</td>
                                     <td>{{ $ar -> NAMA_CATEGORY }}</td>
-                                    <td>{{ $ar -> NAMA_ARMADA }}</td>
                                     <td>{{ $ar -> PLAT_NOMOR }}</td>
                                     <td>{{ $ar -> KAPASITAS }}</td>
                                     <td>{{ $ar -> FASILITAS_ARMADA }}</td>
                                     <td>{{ $ar -> HARGA }}</td>
-                                    <td>{{ $ar -> FOTO }}</td>
+                                   
                                     <td>
                                     @if($ar -> STATUS_ARMADA == 1)
                                     <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit" data-toggle="modal" data-target="#exampleModal12{{$ar -> ID_ARMADA}}">
@@ -214,10 +209,6 @@
                                                 </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="namaarmada" class="col-form-label">Nama Armada :</label>
-                                                    <input type="namaarmada" class="form-control" id="namaarmada" name="namaarmada" value="{{ $ar->NAMA_ARMADA }}">
-                                                    </div>
-                                                <div class="form-group">
                                                     <label for="platnomor" class="col-form-label">Plat Nomor :</label>
                                                     <input type="platnomor" class="form-control" id="platnomor" name="platnomor" value="{{ $ar->PLAT_NOMOR }}">
                                                     </div>
@@ -232,10 +223,10 @@
                                                 <div class="form-group">
                                                     <label for="harga" class="col-form-label">Harga :</label>
                                                     <input type="harga" class="form-control" id="harga" name="harga" value="{{ $ar->HARGA }}">
-                                                <div class="form-group">
+                                                <!-- <div class="form-group">
                                                     <label for="foto" class="col-form-label">Foto Armada :</label>
                                                     <input type="foto" class="form-control" id="foto" name="foto" value="{{ $ar->FOTO }}">
-                                                    </div>
+                                                    </div> -->
                                                     </div>
                                                 
                                             </div>
@@ -280,6 +271,14 @@
                                                 </div>
                                             </div>
                                     </td>
+                                    <td>{{ $ar -> FOTO }}</td>
+                                    <td>
+                                    @if($ar -> STATUS_ARMADA == 1)
+                                    <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit" data-toggle="modal" data-target="#exampleModal12{{$ar -> ID_ARMADA}}">
+                                        <i class="ti-pencil"></i>
+                                    </button>
+                                    @endif
+                                    </td>
                                     </tr>
                                     @endforeach
                                     <!-- </tr> -->
@@ -289,13 +288,13 @@
                             <th>Status</th>
                             <th>Id Armada</th>
                             <th>Category Armada</th>
-                            <th>Nama Armada</th>
                             <th>Plat Nomor</th>
                             <th>Kapasitas</th>
                             <th>Fasilitas Armada</th>
                             <th>Harga</th>
-                            <th>Foto Armada</th>
                             <th>Action</th>
+                            <th>Foto Armada</th>
+                            <th>Edit Foto</th>
                         </tr>
                         </tfoot>
                     </table>
