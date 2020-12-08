@@ -12,52 +12,17 @@
         <div class="page-title">
             <h3>Gallery Armada</h3>
         <div>
-            <button class="btn btn-primary file-upload-btn" data-toggle="modal" data-target="#import">
+        <a href="tambahfoto">
+            <button class="btn btn-primary file-upload-btn">
                     <i class="ti-upload mr-2"></i> Upload Foto
             </button>
+            </a>
+            </div>
+            </div>
     </div>
 
      
-            <!-- modal -->
-            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModal1Label" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModal1Label">Tambah Foto Armada</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <i class="ti-close"></i>
-                                </button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="uploadgambar" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                    <div class="form-group">
-                                        <label for="nama" class="col-form-label">Platnomor Armada :</label>
-                                            <select name="ID_ARMADA" class="form-control" id="ID_ARMADA">
-                                                @foreach($armada as $ar)
-                                                            
-                                                    <option value="{{$ar->ID_ARMADA}}">{{$ar->PLAT_NOMOR}}</option>
-                                                            
-                                                @endforeach                 
-                                            </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="DESKRIPSI_FOTO" class="col-form-label">Deskripsi Foto :</label>
-                                            <input type="DESKRIPSI_FOTO" class="form-control" id="DESKRIPSI_FOTO" name="DESKRIPSI_FOTO">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>PILIH FILE</label>
-                                        <input type="file" name="file" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">TUTUP</button>
-                                    <button type="submit" class="btn btn-success">Upload</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+           
 
 
     <div class="row">

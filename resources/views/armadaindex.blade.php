@@ -27,7 +27,7 @@
                 </div>
                 <div class="table-responsive">
                 <center>
-                <a href="createarmada"
+                <a href="createarmada">
                 <button type="button" class="btn btn-primary">
                 Tambah Data Armada
                     </button>

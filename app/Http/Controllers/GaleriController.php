@@ -52,9 +52,12 @@ class GaleriController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function create()
     {
-        //
+        $armada = DB::table('armada')->get();
+
+        return view('tambahfoto',['armada' =>$armada]);
     }
 
     /**

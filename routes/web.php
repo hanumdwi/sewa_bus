@@ -82,6 +82,7 @@ Route::get('galeriindex','GaleriController@index');
 
 //Galeri Armada
 Route::get('gallery','GaleriController@index');
+Route::get('tambahfoto','GaleriController@create');
 
 Route::post('uploadgambar', 'GaleriController@store');
 
