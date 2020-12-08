@@ -21,6 +21,6 @@ class Armada extends Model
         'KAPASITAS',
         'FASILITAS_ARMADA',
         'HARGA',
-        'FOTO'
+        'avatar'
     ];
 }

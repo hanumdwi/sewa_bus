@@ -872,7 +872,7 @@
 
                         <li class="navigation-divider">Galeri</li>
                         <li>
-                            <a  class="active" href="{{ url('galeriindex') }}">
+                            <a  class="active" href="{{ url('gallery') }}">
                                 <span class="nav-link-icon" data-feather="image"></span>
                                 <span>Galeri Armada</span>
                             </a>

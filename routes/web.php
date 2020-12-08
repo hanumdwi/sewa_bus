@@ -54,9 +54,10 @@ Route::get('penggunadestroy/{id}', 'PenggunaController@destroy');
 
 //Armada
 Route::get('armadaindex','ArmadaController@index');
+Route::get('createarmada','ArmadaController@create');
 Route::post('armadastore', 'ArmadaController@store');
 Route::get('editarmada/{id}', 'ArmadaController@edit');
-Route::post('armadaupdate', 'ArmadaController@update');
+Route::post('armadaupdate/{id}', 'ArmadaController@update');
 Route::get('armadadestroy/{id}', 'ArmadaController@destroy');
 Route::post('armadaupdateswitch', 'ArmadaController@update_switch');
 //================================================================================
@@ -70,17 +71,19 @@ Route::get('pricelistsewaarmadadestroy/{id}', 'PricelistSewaArmadaController@des
 Route::post('pricelistsewaarmadaupdateswitch', 'PricelistSewaArmadaController@update_switch');
 //================================================================================
 
-//Galeri Armada
+// //Galeri Armada
 Route::get('galeriindex','GaleriController@index');
-Route::post('galeristore', 'GaleriController@store');
-Route::get('galeriedit/{id}', 'GaleriController@edit');
-Route::post('galeriupdate', 'GaleriController@update');
-Route::get('galeridestroy/{id}', 'GaleriController@destroy');
-Route::post('galeriupdateswitch', 'GaleriController@update_switch');
+// Route::post('galeristore', 'GaleriController@store');
+// Route::get('galeriedit/{id}', 'GaleriController@edit');
+// Route::post('galeriupdate', 'GaleriController@update');
+// Route::get('galeridestroy/{id}', 'GaleriController@destroy');
+// Route::post('galeriupdateswitch', 'GaleriController@update_switch');
 //================================================================================
 
 //Galeri Armada
 Route::get('gallery','GaleriController@index');
+
+Route::post('uploadgambar', 'GaleriController@store');
 
 //Foto Armada
 Route::get('fotoarmada/{id}','GaleriController@indexfoto');

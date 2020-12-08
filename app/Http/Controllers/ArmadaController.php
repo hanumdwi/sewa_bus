@@ -27,7 +27,7 @@ class ArmadaController extends Controller
         $armada = DB::table('armada')
         ->join('category_armada','armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
         ->select('category_armada.NAMA_CATEGORY','armada.ID_ARMADA','armada.NAMA_ARMADA',
-        'armada.PLAT_NOMOR', 'armada.KAPASITAS', 'armada.FASILITAS_ARMADA','armada.HARGA','armada.FOTO','armada.STATUS_ARMADA')
+        'armada.PLAT_NOMOR', 'armada.KAPASITAS', 'armada.FASILITAS_ARMADA','armada.HARGA','armada.avatar','armada.STATUS_ARMADA')
         ->get();
         // dump($armada);
         return view ('armadaindex',['armada' =>$armada,'category_armada' =>$category_armada], ['schedule_armada'=>$schedule_armada]);
@@ -41,7 +41,9 @@ class ArmadaController extends Controller
      */
     public function create()
     {
-        //
+        $category_armada = DB::table('category_armada')->get();
+
+        return view('createarmada',['category_armada' =>$category_armada]);
     }
 
     /**
@@ -52,21 +54,35 @@ class ArmadaController extends Controller
      */
     public function store(Request $request)
     {
-        $armada = new Armada;
+        // $armada = new Armada;
+        // $category_armada = new Category;
+
+        // $armada->fill([
+        //     'ID_CATEGORY'           => $request->ID_CATEGORY,
+        //     'NAMA_ARMADA'           => $request->namaarmada,
+        //     'PLAT_NOMOR'            => $request->platnomor,
+        //     'KAPASITAS'             => $request->kapasitas,
+        //     'FASILITAS_ARMADA'      => $request->fasilitas,
+        //     'HARGA'                 => $request->harga,
+        //     'avatar'                  => $request->avatar,
+        //     'STATUS_ARMADA'         => $request->status
+        // ]);
+        $hm = $request->avatar;
+        $namaFile = $hm->getClientOriginalName();
+
+        $ar = new Armada;
         $category_armada = new Category;
 
-        $armada->fill([
-            'ID_CATEGORY'           => $request->ID_CATEGORY,
-            'NAMA_ARMADA'           => $request->namaarmada,
-            'PLAT_NOMOR'            => $request->platnomor,
-            'KAPASITAS'             => $request->kapasitas,
-            'FASILITAS_ARMADA'      => $request->fasilitas,
-            'HARGA'                 => $request->harga,
-            'FOTO'                  => $request->foto,
-            'STATUS_ARMADA'         => $request->status
-        ]);
-
-        $armada->save();
+            $ar->ID_CATEGORY        = $request->ID_CATEGORY;
+            $ar->NAMA_ARMADA        = $request->namaarmada;
+            $ar->PLAT_NOMOR         = $request->platnomor;
+            $ar->KAPASITAS          = $request->kapasitas;
+            $ar->FASILITAS_ARMADA   = $request->fasilitas;
+            $ar->HARGA              = $request->harga;
+            $ar->avatar             = $namaFile;
+            
+        $hm->move(public_path().'/img', $namaFile);
+        $ar->save();
 
         return redirect('armadaindex');
     }
@@ -79,7 +95,16 @@ class ArmadaController extends Controller
      */
     public function show(armada $armada)
     {
-        //
+          // dd($request->all());
+        // DB::table('armada')->where('ID_ARMADA',$request->id)->update([
+		// 	'ID_CATEGORY'           => $request->ID_CATEGORY,
+        //     'NAMA_ARMADA'           => $request->namaarmada,
+        //     'PLAT_NOMOR'            => $request->platnomor,
+        //     'KAPASITAS'             => $request->kapasitas,
+        //     'FASILITAS_ARMADA'      => $request->fasilitas,
+        //     'HARGA'                 => $request->harga,
+        //     'FOTO'                  => $request->foto,
+        // ]);
     }
 
     /**
@@ -106,17 +131,31 @@ class ArmadaController extends Controller
      */
     public function update(Request $request)
     {
+    //   dd($request->all());
+        // $armada = Armada::find($id);
+        // $category_armada = new Category;
+        // $category = Category::find($category_armada->ID_CATEGORY);
+        // $armada->update($request->all());
+        
         DB::table('armada')->where('ID_ARMADA',$request->id)->update([
-			'ID_CATEGORY'           => $request->ID_CATEGORY,
-            'NAMA_ARMADA'           => $request->namaarmada,
-            'PLAT_NOMOR'            => $request->platnomor,
-            'KAPASITAS'             => $request->kapasitas,
-            'FASILITAS_ARMADA'      => $request->fasilitas,
-            'HARGA'                 => $request->harga,
-            'FOTO'                  => $request->foto,
-		]);
+            	'ID_CATEGORY'           => $request->ID_CATEGORY,
+                'NAMA_ARMADA'           => $request->namaarmada,
+                'PLAT_NOMOR'            => $request->platnomor,
+                'KAPASITAS'             => $request->kapasitas,
+                'FASILITAS_ARMADA'      => $request->fasilitas,
+                'HARGA'                 => $request->harga,
+                'avatar'                 => $request->avatar,
+        ]);
+
+        if($request->hasFile('avatar')){
+            $request->file('avatar')->move('images/',$request->file('avatar')->getClientOriginalName());
+            $armada->avatar=$request->file('avatar')->getClientOriginalName();
+            dd($avatar);
+            $armada->save();
+        }
 		// alihkan halaman ke halaman armada
-		return redirect('armadaindex');
+        return redirect('armadaindex');
+        
     }
 
     public function update_switch(Request $request)

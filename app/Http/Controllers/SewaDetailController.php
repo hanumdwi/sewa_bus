@@ -35,9 +35,16 @@ class SewaDetailController extends Controller
         $pengguna= Pengguna::find($sewa_bus->ID_PENGGUNA);
         $customer= customer::find($sewa_bus->ID_CUSTOMER);
 
-        $sewa_bus_category= Sewa_Bus_Category::where('ID_SEWA_BUS','=',$sewa_bus->ID_SEWA_BUS);
-        $pricelist_sewa_armada= Pricelist_Sewa_Armada::all();
-        $category_armada= Category::all();
+        $category_armada=DB::table('category_armada')->get();
+        $pricelist_sewa_armada=DB::table('pricelist_sewa_armada')->get();
+        $sewa_bus_category=DB::table('sewa_bus_category')
+        ->join('sewa_bus','sewa_bus_category.ID_SEWA_BUS', '=', 'sewa_bus.ID_SEWA_BUS')
+        ->join('pricelist_sewa_armada','sewa_bus_category.ID_PRICELIST', '=', 'pricelist_sewa_armada.ID_PRICELIST')
+        ->join('category_armada', 'pricelist_sewa_armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
+        ->select('sewa_bus_category.ID_SEWA_BUS', 'sewa_bus_category.ID_PRICELIST',
+        'sewa_bus_category.QUANTITY', 'sewa_bus_category.TOTAL',
+        'category_armada.NAMA_CATEGORY', 'pricelist_sewa_armada.TUJUAN_SEWA', 'pricelist_sewa_armada.PRICELIST_SEWA')
+        ->get();
 
 
         return view('sewa_bus_detail', ['sewa_bus' =>$sewa_bus,'pengguna'=>$pengguna,'customer'=>$customer],

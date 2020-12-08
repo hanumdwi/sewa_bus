@@ -27,10 +27,12 @@
                 </div>
                 <div class="table-responsive">
                 <center>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
+                <a href="createarmada"
+                <button type="button" class="btn btn-primary">
                 Tambah Data Armada
                     </button>
                     </center>
+                    </a>
                         <!-- modal -->
                         <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
                          aria-labelledby="exampleModal1Label" aria-hidden="true">
@@ -92,8 +94,8 @@
                             <th>Kapasitas</th>
                             <th>Fasilitas Armada</th>
                             <th>Action</th>
-                            <th>Foto Armada</th>
-                            <th>Edit Foto</th>
+                            <!-- <th>Foto Armada</th>
+                            <th>Edit Foto</th> -->
                         </tr>
                         </thead>
                         <tbody>
@@ -212,7 +214,7 @@
                                                 </div>
                                             </div>
                                     </td>
-                                    <td>{{ $ar -> FOTO }}</td>
+                                    <!-- <td>{{ $ar -> avatar }}</td>
                                     <td>
                                     @if($ar -> STATUS_ARMADA == 1)
                                     <a href="{{ url('fotoarmada', ['id'=>$ar -> ID_ARMADA]) }}">
@@ -245,7 +247,7 @@
                                             </div>
                                         </div>
                                     @endif
-                                    </td>
+                                    </td> -->
                                     </tr>
                                     @endforeach
                                     <!-- </tr> -->
@@ -259,8 +261,8 @@
                             <th>Kapasitas</th>
                             <th>Fasilitas Armada</th>
                             <th>Action</th>
-                            <th>Foto Armada</th>
-                            <th>Edit Foto</th>
+                            <!-- <th>Foto Armada</th>
+                            <th>Edit Foto</th> -->
                         </tr>
                         </tfoot>
                     </table>

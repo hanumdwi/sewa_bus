@@ -33,15 +33,7 @@
                         <div class="col-md-6">
                             <div class="slider-for">
                                 <div class="slick-slide-item">
-                                    <img src="{{ url('assets/media/image/products/product1.png') }}" class="img-fluid rounded"
-                                         alt="image">
-                                </div>
-                                <div class="slick-slide-item">
-                                    <img src="{{ url('assets/media/image/products/product5.png') }}" class="img-fluid rounded"
-                                         alt="image">
-                                </div>
-                                <div class="slick-slide-item">
-                                    <img src="{{ url('assets/media/image/products/product6.png') }}" class="img-fluid rounded"
+                                    <img src="{{ url('img/$armada->avatar') }}" class="img-fluid rounded"
                                          alt="image">
                                 </div>
                             </div>

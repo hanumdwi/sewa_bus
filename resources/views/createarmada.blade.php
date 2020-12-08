@@ -24,10 +24,10 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-        @foreach($armada as $ar)
-        <form action="/armadaupdate/{id}" method="POST" enctype="multipart/form-data">
+     
+        <form action="/armadastore" method="POST" enctype="multipart/form-data">
                                                 {{ csrf_field() }}
-                                                <input type="hidden" name="id" value="{{ $ar->ID_ARMADA }}"> <br/>
+                                               
                                                 <div class="form-group">
                                                     <label for="nama" class="col-form-label">Category Armada :</label>
                                                     <select name="ID_CATEGORY" class="form-control" id="ID_CATEGORY">
@@ -40,15 +40,15 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="platnomor" class="col-form-label">Plat Nomor :</label>
-                                                    <input type="platnomor" class="form-control" id="platnomor" name="platnomor" value="{{ $ar->PLAT_NOMOR }}">
+                                                    <input type="platnomor" class="form-control" id="platnomor" name="platnomor">
                                                     </div>
                                                 <div class="form-group">
                                                     <label for="kapasitas" class="col-form-label">Kapasitas :</label>
-                                                    <input type="kapasitas" class="form-control" id="kapasitas" name="kapasitas" value="{{ $ar->KAPASITAS }}">
+                                                    <input type="kapasitas" class="form-control" id="kapasitas" name="kapasitas">
                                                     </div>
                                                 <div class="form-group">
                                                     <label for="fasilitas" class="col-form-label">Fasilitas :</label>
-                                                    <input type="fasilitas" class="form-control" id="fasilitas" name="fasilitas" value="{{ $ar->FASILITAS_ARMADA }}">
+                                                    <input type="fasilitas" class="form-control" id="fasilitas" name="fasilitas">
                                                     </div>
                                                 <div class="form-group">
                                                     <label for="avatar" class="col-form-label">Foto Armada :</label>
@@ -56,10 +56,10 @@
                                                     </div>
                                                     </div>
                                                     <div><label>&nbsp;</label></div>
-                                                <button type="submit" class="btn btn-primary" id="edit">Update</button>
+                                                <button type="submit" class="btn btn-primary" id="edit">Add</button>
                                             </div>
                                             </form>
-     @endforeach
+
 
 
 

@@ -137,7 +137,15 @@
                             @foreach($sewa_bus as $sb)
                                    
                                     <!-- <tr class="table-light"> -->
-                                    <td>{{ $sb -> STATUS_SEWA}}
+                                    @if($sb -> STATUS_SEWA == 'Booking')
+                                    <td><span class="badge bg-success-bright text-secondary">{{ $sb -> STATUS_SEWA}}</span></td>
+                                    @endif
+                                    @if($sb -> STATUS_SEWA == 'Lunas')
+                                    <td><span class="badge bg-success-bright text-success">{{ $sb -> STATUS_SEWA}}</span></td>
+                                    @endif
+                                    @if($sb -> STATUS_SEWA == 'Belum Bayar')
+                                    <td><span class="badge bg-success-bright text-danger">{{ $sb -> STATUS_SEWA}}</span></td>
+                                    @endif
                                     <td>{{ $sb -> ID_SEWA_BUS }}</td>
                                     <td>{{ $sb -> NAMA_PENGGUNA }}</td>
                                     <td>{{ $sb -> NAMA_CUSTOMER }}</td>
