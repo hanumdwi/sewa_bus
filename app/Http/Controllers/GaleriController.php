@@ -17,7 +17,7 @@ class GaleriController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
         if(!Session::get('login')){
             return redirect('login');

@@ -50,10 +50,10 @@
                                                     <label for="fasilitas" class="col-form-label">Fasilitas :</label>
                                                     <input type="fasilitas" class="form-control" id="fasilitas" name="fasilitas">
                                                     </div>
-                                                <div class="form-group">
-                                                    <label for="avatar" class="col-form-label">Foto Armada :</label>
-                                                    <input type="file" class="form-control" id="avatar" name="avatar">
-                                                    </div>
+                                                    <div class="form-group">
+                                        <label>Pilih Foto</label>
+                                            <input type="file" name="file" class="form-control" required>
+                                    </div>
                                                     </div>
                                                     <div><label>&nbsp;</label></div>
                                                 <button type="submit" class="btn btn-primary" id="edit">Add</button>

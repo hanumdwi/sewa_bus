@@ -67,8 +67,11 @@ class ArmadaController extends Controller
         //     'avatar'                  => $request->avatar,
         //     'STATUS_ARMADA'         => $request->status
         // ]);
-        $hm = $request->avatar;
-        $namaFile = $hm->getClientOriginalName();
+        if($request->hasFile('file')) {
+
+            $file = $request->file('file');
+        
+            $fileName = $file->getClientOriginalName();
 
         $ar = new Armada;
         $category_armada = new Category;
@@ -79,11 +82,10 @@ class ArmadaController extends Controller
             $ar->KAPASITAS          = $request->kapasitas;
             $ar->FASILITAS_ARMADA   = $request->fasilitas;
             $ar->HARGA              = $request->harga;
-            $ar->avatar             = $namaFile;
-            
-        $hm->move(public_path().'/img', $namaFile);
-        $ar->save();
-
+            $ar->avatar             = $fileName;
+            $file->move(public_path().'/foto', $fileName);
+            $ar->save();
+        }
         return redirect('armadaindex');
     }
 
