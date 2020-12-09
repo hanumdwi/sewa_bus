@@ -48,9 +48,9 @@
     
             <div class="gallery-container row">
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 drawings mb-4">
-                    <a href="{{ url('assets/media/image/photo1.jpg') }}" class="image-popup-gallery-item">
+                    <a href="{{ url($galeri->FOTO_ARMADA) }}" class="image-popup-gallery-item">
                         <div class="image-hover">
-                            <img src="{{ url('assets/media/image/photo1.jpg') }}" class="rounded" alt="image">
+                            <img src="{{ url($galeri->FOTO_ARMADA) }}" class="rounded" alt="image">
                             <div class="image-hover-body rounded">
                                 <div>
                                     <h4 class="mb-2">Gallery Item Title</h4>
@@ -61,117 +61,7 @@
                     </a>
                 </div>
 
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 webTemplates drawings ui mb-4">
-                    <a href="{{ url('assets/media/image/photo2.jpg') }}" class="image-popup-gallery-item">
-                        <div class="image-hover">
-                            <img src="{{ url('assets/media/image/photo2.jpg') }}" class="rounded" alt="image">
-                            <div class="image-hover-body rounded">
-                                <div>
-                                    <h4 class="mb-2">Gallery Item Title</h4>
-                                    <div><i class="fa fa-tag mr-2"></i>Web, Logos</div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 logos mb-4">
-                    <a href="{{ url('assets/media/image/photo3.jpg') }}" class="image-popup-gallery-item">
-                        <div class="image-hover">
-                            <img src="{{ url('assets/media/image/photo3.jpg') }}" class="rounded" alt="image">
-                            <div class="image-hover-body rounded">
-                                <div>
-                                    <h4 class="mb-2">Gallery Item Title</h4>
-                                    <div><i class="fa fa-tag mr-2"></i>Web, Logos</div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 ui mb-4">
-                    <a href="{{ url('assets/media/image/photo4.jpg') }}" class="image-popup-gallery-item">
-                        <div class="image-hover">
-                            <img src="{{ url('assets/media/image/photo4.jpg') }}" class="rounded" alt="image">
-                            <div class="image-hover-body rounded">
-                                <div>
-                                    <h4 class="mb-2">Gallery Item Title</h4>
-                                    <div><i class="fa fa-tag mr-2"></i>Web, Logos</div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 ui mb-4">
-                    <a href="{{ url('assets/media/image/photo5.jpg') }}" class="image-popup-gallery-item">
-                        <div class="image-hover">
-                            <img src="{{ url('assets/media/image/photo5.jpg') }}" class="rounded" alt="image">
-                            <div class="image-hover-body rounded">
-                                <div>
-                                    <h4 class="mb-2">Gallery Item Title</h4>
-                                    <div><i class="fa fa-tag mr-2"></i>Web, Logos</div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 drawings mb-4">
-                    <a href="{{ url('assets/media/image/photo6.jpg') }}" class="image-popup-gallery-item">
-                        <div class="image-hover">
-                            <img src="{{ url('assets/media/image/photo6.jpg') }}" class="rounded" alt="image">
-                            <div class="image-hover-body rounded">
-                                <div>
-                                    <h4 class="mb-2">Gallery Item Title</h4>
-                                    <div><i class="fa fa-tag mr-2"></i>Web, Logos</div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 logos mb-4">
-                    <a href="{{ url('assets/media/image/photo7.jpg') }}" class="image-popup-gallery-item">
-                        <div class="image-hover">
-                            <img src="{{ url('assets/media/image/photo7.jpg') }}" class="rounded" alt="image">
-                            <div class="image-hover-body rounded">
-                                <div>
-                                    <h4 class="mb-2">Gallery Item Title</h4>
-                                    <div><i class="fa fa-tag mr-2"></i>Web, Logos</div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 webTemplates logos mb-4">
-                    <a href="{{ url('assets/media/image/photo8.jpg') }}" class="image-popup-gallery-item">
-                        <div class="image-hover">
-                            <img src="{{ url('assets/media/image/photo8.jpg') }}" class="rounded" alt="image">
-                            <div class="image-hover-body rounded">
-                                <div>
-                                    <h4 class="mb-2">Gallery Item Title</h4>
-                                    <div><i class="fa fa-tag mr-2"></i>Web, Logos</div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 logos mb-4">
-                    <a href="{{ url('assets/media/image/photo9.jpg') }}" class="image-popup-gallery-item">
-                        <div class="image-hover">
-                            <img src="{{ url('assets/media/image/photo9.jpg') }}" class="rounded" alt="image">
-                            <div class="image-hover-body rounded">
-                                <div>
-                                    <h4 class="mb-2">Gallery Item Title</h4>
-                                    <div><i class="fa fa-tag mr-2"></i>Web, Logos</div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                
             </div>
         </div>
     </div>

@@ -72,7 +72,7 @@ Route::post('pricelistsewaarmadaupdateswitch', 'PricelistSewaArmadaController@up
 //================================================================================
 
 // //Galeri Armada
-Route::get('galeriindex','GaleriController@index');
+// Route::get('galeriindex','GaleriController@index');
 // Route::post('galeristore', 'GaleriController@store');
 // Route::get('galeriedit/{id}', 'GaleriController@edit');
 // Route::post('galeriupdate', 'GaleriController@update');

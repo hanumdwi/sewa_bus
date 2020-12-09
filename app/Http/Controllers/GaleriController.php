@@ -17,7 +17,7 @@ class GaleriController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
         if(!Session::get('login')){
             return redirect('login');
@@ -31,6 +31,7 @@ class GaleriController extends Controller
         ->get();
 
         return view('gallery', ['galeri' =>$galeri, 'armada' =>$armada]);
+        // return view('gallery',compact('galeri','armada'));
     }
 }
 
@@ -80,7 +81,28 @@ class GaleriController extends Controller
 
         // return redirect('galeriindex');
 
-        dd($request->all());
+        //  dd($request->all());
+        if($request->hasFile('file')) {
+
+            $file = $request->file('file');
+        
+            $fileName = $file->getClientOriginalName();
+        // $hm = $request->hasFile('FOTO_ARMADA');
+        // // $namaFile= uniqid() . $hm->getClientOriginalName() . '.' . $hm->getClientOriginalExtension();
+        // $namaFile = $hm->getClientOriginalName();
+        //     dd($namaFile);
+        $galeri = new Galeri;
+        $armada = new Armada;
+
+            $galeri->ID_ARMADA          = $request->ID_ARMADA;
+            $galeri->DESKRIPSI_FOTO     = $request->DESKRIPSI_FOTO;
+            $galeri->STATUS_FOTO        = $request->STATUS_FOTO;
+            $galeri->FOTO_ARMADA        = $fileName;
+            $file->move(public_path().'/img', $fileName);
+            $galeri->save();
+        }
+
+        return redirect('gallery');
     }
 
     /**
