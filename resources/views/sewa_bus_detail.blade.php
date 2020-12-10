@@ -130,29 +130,29 @@
                                     </div>
                                     <div class="col-md-2 col-sm-12 form-group">
                                         <label for="name">Tujuan Sewa</label>
-                                            <select name="TUJUAN_SEWA" class="form-control" id="TUJUAN_SEWA">
+                                            <select name="TUJUAN_SEWA" class="form-control" id="TUJUAN_SEWA1" onchange="getPrice()">
                                             @foreach($pricelist_sewa_armada as $pr)
                                         
-                                            <option value="{{$pr->ID_PRICELIST}}">{{$pr->TUJUAN_SEWA}}</option>
+                                            <option id="TUJUAN_SEWA1{{$pr->ID_PRICELIST}}" value="{{$pr->ID_PRICELIST}}" data-pricelist="{{$pr->PRICELIST_SEWA}}">{{$pr->TUJUAN_SEWA}}</option>
                                         
                                             @endforeach                 
                                             </select>
                                     </div>
                                     <div class="col-md-2 col-sm-12 form-group">
                                         <label for="hargasewa">Harga</label>
-                                        <input type="hargasewa" class="form-control" name="hargasewa" id="hargasewa" 
-                                        value="{{$pr->PRICELIST_SEWA}}" readonly="" onkeyup="hitunghargajualA()">
+                                        <input type="hargasewa" class="form-control" name="hargasewa" id="hargasewa1" 
+                                        value="{{$pr->PRICELIST_SEWA}}" readonly="" onchange="getTotal()">
                                     </div>
                                     <div class="col-md-2 col-sm-12 form-group">
                                         <label for="gender">Quantity</label>
                                         <div>
-                                            <input type="number" class="form-control" value="1" id="qty">
+                                            <input type="number" class="form-control" value="1" id="qty" onchange="getTotal()">
                                         </div>
                                     </div>
                                     
                                     <div class="col-md-2 col-sm-12 form-group">
                                         <label for="profession">Sub Total</label>
-                                        <input type="subtotal" class="form-control" name="subtotal" id="subtotal">
+                                        <input type="subtotal" class="form-control" name="subtotal" id="subtotal1">
                                     </div>
                                     <div class="col-md-2 col-sm-12 form-group">
                                         <div><label>&nbsp;</label></div>
@@ -386,9 +386,30 @@
 @section('script')
 
 <script>
-   $(document).ready(function () {
-      $('.repeater').repeater();
+   
+   $('#TUJUAN_SEWA1').change(function(){
+       console.log("masuk");
+        $('#hargasewa1').val(10000000);
    });
+
+   function getPrice(){
+       console.log("masuk");
+       var tujuan = document.getElementById('TUJUAN_SEWA1').value;
+       var tmp = document.getElementsByTagName("select")[0].getAttribute("name");
+       console.log(tmp);
+       var ratings =  $('#TUJUAN_SEWA1'+tujuan).data('pricelist');
+       var price = document.getElementById('hargasewa1').value;
+    //    var harga = $('#TUJUAN_SEWA1'+this.value).data('pricelist');
+       console.log(ratings);
+       $('#hargasewa1').val(ratings);
+   }
+
+   function getTotal(){
+       var sub = document.getElementById('hargasewa1').value;
+       var kuantiti = document.getElementById('qty').value;
+       var subtotal = (Number(sub*kuantiti));
+       $('#subtotal1').val(subtotal);
+   }
 
    function hitunghargajualA(){
         console.log("function getSubTotal");
@@ -408,6 +429,8 @@
         // hargajual.value = totals;
         // console.log(totals);
         }
+
+    
 </script>
 
 <script>

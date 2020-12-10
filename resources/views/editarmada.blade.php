@@ -52,7 +52,7 @@
                                                     </div>
                                                 <div class="form-group">
                                                         <label>Pilih Foto</label>
-                                                            <input type="file" name="file" class="form-control">
+                                                            <input type="file" name="avatar" class="form-control">
                                                     </div>
                                                 <div class="form-group">
                                                 <center>

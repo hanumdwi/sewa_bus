@@ -134,25 +134,35 @@ class ArmadaController extends Controller
     public function update(Request $request, $id)
     {
     //  dd($request->all());
-        // $armada = Armada::find($id);
+         $armada = Armada::find($request->id);
         // $category_armada = new Category;
         // $category = Category::find($category_armada->ID_CATEGORY);
         // $armada->update($request->all());
         
-        DB::table('armada')->where('ID_ARMADA',$request->id)->update([
-            	'ID_CATEGORY'           => $request->ID_CATEGORY,
+        // DB::table('armada')->where('ID_ARMADA',$request->id)->update([
+        //     	'ID_CATEGORY'           => $request->ID_CATEGORY,
+        //         'NAMA_ARMADA'           => $request->namaarmada,
+        //         'PLAT_NOMOR'            => $request->platnomor,
+        //         'KAPASITAS'             => $request->kapasitas,
+        //         'FASILITAS_ARMADA'      => $request->fasilitas,
+        //         'avatar'                => $request->file
+        //         ]);
+        $filename=$armada->avatar;
+        if($request->hasFile('avatar')){
+            $request->file('avatar')->move('foto/',$request->file('avatar')->getClientOriginalName());
+            $filename=$request->file('avatar')->getClientOriginalName();
+          
+            // $armada->update($armada);
+        }
+
+        $armada->update([
+                'ID_CATEGORY'           => $request->ID_CATEGORY,
                 'NAMA_ARMADA'           => $request->namaarmada,
                 'PLAT_NOMOR'            => $request->platnomor,
                 'KAPASITAS'             => $request->kapasitas,
                 'FASILITAS_ARMADA'      => $request->fasilitas,
-                'avatar'                => $request->file
-                ]);
-        if($request->hasFile('avatar')){
-            $request->file('avatar')->move('foto/',$request->file('avatar')->getClientOriginalName());
-            $armada->avatar=$request->file('avatar')->getClientOriginalName();
-          
-            $armada->update($armada);
-        }
+                'avatar'                => $filename
+        ]);
 		// alihkan halaman ke halaman armada
         return redirect('armadaindex');
         
