@@ -65,9 +65,9 @@
     
             <div class="gallery-container row">
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 drawings mb-4">
-                    <a href="('img'/.$galeri->FOTO_ARMADA)" class="image-popup-gallery-item">
+                    <a href="{{ url('img/'.$galeri->FOTO_ARMADA) }}" class="image-popup-gallery-item">
                         <div class="image-hover">
-                            <img src="('img'/.$galeri->FOTO_ARMADA)" class="rounded" alt="image">
+                            <img src="{{ url('img/'.$galeri->FOTO_ARMADA) }}" class="rounded" alt="image">
                             <div class="image-hover-body rounded">
                                 <div>
                                     <h4 class="mb-2">Gallery Item Title</h4>
@@ -79,9 +79,9 @@
                 </div>
 
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 webTemplates drawings ui mb-4">
-                    <a href="('img'/.$galeri->FOTO_ARMADA)" class="image-popup-gallery-item">
+                    <a href="{{ url('img/'.$galeri->FOTO_ARMADA) }}" class="image-popup-gallery-item">
                         <div class="image-hover">
-                            <img src="('img'/.$galeri->FOTO_ARMADA)" class="rounded" alt="image">
+                            <img src="{{ url('img/'.$galeri->FOTO_ARMADA) }}" class="rounded" alt="image">
                             <div class="image-hover-body rounded">
                                 <div>
                                     <h4 class="mb-2">Gallery Item Title</h4>

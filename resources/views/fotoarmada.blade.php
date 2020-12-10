@@ -33,8 +33,7 @@
                         <div class="col-md-6">
                             <div class="slider-for">
                                 <div class="slick-slide-item">
-                                    <img src="{{ url('img/$armada->avatar') }}" class="img-fluid rounded"
-                                         alt="image">
+                                    <img src="{{ url('foto/'.$armada->avatar) }}" class="rounded" alt="image">
                                 </div>
                             </div>
                            

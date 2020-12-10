@@ -30,7 +30,7 @@ class GaleriController extends Controller
         'galeri.DESKRIPSI_FOTO', 'galeri.STATUS_FOTO')
         ->get();
 
-        return view('gallery', ['galeri' =>$galeri, 'armada' =>$armada]);
+        return view('galeriindex', ['galeri' =>$galeri, 'armada' =>$armada]);
         // return view('gallery',compact('galeri','armada'));
     }
 }

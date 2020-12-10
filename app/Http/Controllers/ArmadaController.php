@@ -131,9 +131,9 @@ class ArmadaController extends Controller
      * @param  \App\armada  $armada
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-    //   dd($request->all());
+    //  dd($request->all());
         // $armada = Armada::find($id);
         // $category_armada = new Category;
         // $category = Category::find($category_armada->ID_CATEGORY);
@@ -145,15 +145,13 @@ class ArmadaController extends Controller
                 'PLAT_NOMOR'            => $request->platnomor,
                 'KAPASITAS'             => $request->kapasitas,
                 'FASILITAS_ARMADA'      => $request->fasilitas,
-                'HARGA'                 => $request->harga,
-                'avatar'                 => $request->avatar,
-        ]);
-
+                'avatar'                => $request->file
+                ]);
         if($request->hasFile('avatar')){
-            $request->file('avatar')->move('images/',$request->file('avatar')->getClientOriginalName());
+            $request->file('avatar')->move('foto/',$request->file('avatar')->getClientOriginalName());
             $armada->avatar=$request->file('avatar')->getClientOriginalName();
-            dd($avatar);
-            $armada->save();
+          
+            $armada->update($armada);
         }
 		// alihkan halaman ke halaman armada
         return redirect('armadaindex');

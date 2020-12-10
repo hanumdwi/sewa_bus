@@ -51,11 +51,18 @@
                                                     <input type="fasilitas" class="form-control" id="fasilitas" name="fasilitas" value="{{ $ar->FASILITAS_ARMADA }}">
                                                     </div>
                                                 <div class="form-group">
-                                                    <label for="avatar" class="col-form-label">Foto Armada :</label>
-                                                    <input type="file" class="form-control" id="avatar" name="avatar">
+                                                        <label>Pilih Foto</label>
+                                                            <input type="file" name="file" class="form-control">
                                                     </div>
+                                                <div class="form-group">
+                                                <center>
+                                                    <img src="{{ url('foto/'.$ar->avatar) }}" class="rounded" alt="image">
+                                                </center>
+                                                    </div>
+                                                
                                                     </div>
                                                     <div><label>&nbsp;</label></div>
+                                                    
                                                 <button type="submit" class="btn btn-primary" id="edit">Update</button>
                                             </div>
                                             </form>
