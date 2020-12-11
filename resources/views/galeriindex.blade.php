@@ -35,25 +35,52 @@
                 <li class="nav-item">
                     <a href="#" class="nav-link active" data-filter="*">All</a>
                 </li>
+                @foreach($category_armada as $c)
                 <li class="nav-item">
-                    <a href="#" class="nav-link" data-filter=".webTemplates">Bus Besar</a>
+                    <a href="#" class="nav-link" data-filter=".{{$c->ID_CATEGORY}}">{{$c->NAMA_CATEGORY}}</a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" data-filter=".logos">Bus Sedang</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" data-filter=".drawings">Elf (Mini Bus)</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" data-filter=".ui">UI Elements</a>
-                </li>
+                @endforeach
+                
             </ul>
            
                 
       
     
             <div class="gallery-container row">
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 drawings mb-4">
+         
+           
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 {{$c->ID_CATEGORY}} mb-4">
+                <input type="hidden" name="id" value="{{ $g -> ID_GALERI }}">
+                    <a href="{{ url('img/'.$g->FOTO_ARMADA) }}" class="image-popup-gallery-item">
+                        <div class="image-hover">
+                            <img src="{{ url('img/'.$g->FOTO_ARMADA) }}" class="rounded" alt="image">
+                            <div class="image-hover-body rounded">
+                                <div>
+                                    <h4 class="mb-2">{{$g->PLAT_NOMOR}}</h4>
+                                    <div><i class="fa fa-tag mr-2"></i>{{$g->DESKRIPSI_FOTO}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 {{$c->ID_CATEGORY}} mb-4">
+                <input type="hidden" name="id" value="{{ $g -> ID_GALERI }}">
+                    <a href="{{ url('foto/'.$g->avatar) }}" class="image-popup-gallery-item">
+                        <div class="image-hover">
+                            <img src="{{ url('foto/'.$g->avatar) }}" class="rounded" alt="image">
+                            <div class="image-hover-body rounded">
+                                <div>
+                                    <h4 class="mb-2">{{$g->PLAT_NOMOR}}</h4>
+                                    <div><i class="fa fa-tag mr-2"></i>{{$g->DESKRIPSI_FOTO}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+         
+
+            <!-- <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 webTemplates drawings ui mb-4">
                     <a href="{{ url('img/'.$g->FOTO_ARMADA) }}" class="image-popup-gallery-item">
                         <div class="image-hover">
                             <img src="{{ url('img/'.$g->FOTO_ARMADA) }}" class="rounded" alt="image">
@@ -67,8 +94,21 @@
                     </a>
                 </div>
 
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 logos mb-4">
+                    <a href="{{ url('img/'.$g->FOTO_ARMADA) }}" class="image-popup-gallery-item">
+                        <div class="image-hover">
+                            <img src="{{ url('img/'.$g->FOTO_ARMADA) }}" class="rounded" alt="image">
+                            <div class="image-hover-body rounded">
+                                <div>
+                                    <h4 class="mb-2">Gallery Item Title</h4>
+                                    <div><i class="fa fa-tag mr-2"></i>Web, Logos</div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div> -->
 
-                </div>
+            </div>
         </div>
     </div>
     

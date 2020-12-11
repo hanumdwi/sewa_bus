@@ -29,8 +29,8 @@
 
             <div class="card">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
+                    <div class="gallery-container row">
+                        <div class="col-xl-6 col-lg-4 col-md-6 col-sm-12 mb-4">
                             <div class="slider-for">
                                 <div class="slick-slide-item">
                                     <img src="{{ url('foto/'.$armada->avatar) }}" class="rounded" alt="image">
@@ -38,7 +38,7 @@
                             </div>
                            
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-xl-6 col-lg-4 col-md-6 col-sm-12 mb-4">
                             <div class="d-flex justify-content-between mb-2">
                                 <p class="text-muted mb-0">Armada</p>
                                 <span class="d-flex align-items-center">

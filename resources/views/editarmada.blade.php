@@ -54,9 +54,11 @@
                                                         <label>Pilih Foto</label>
                                                             <input type="file" name="avatar" class="form-control">
                                                     </div>
-                                                <div class="form-group">
+                                                <div class="gallery-container row">
                                                 <center>
+                                                <div class="col-xl-6 col-lg-4 col-md-6 col-sm-12 mb-4">
                                                     <img src="{{ url('foto/'.$ar->avatar) }}" class="rounded" alt="image">
+                                                    </div>
                                                 </center>
                                                     </div>
                                                 

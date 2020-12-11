@@ -92,7 +92,7 @@
                             <th>Category Armada</th>
                             <th>Plat Nomor</th>
                             <th>Kapasitas</th>
-                            <th>Fasilitas Armada</th>
+                            <!-- <th>Fasilitas Armada</th> -->
                             <th>Action</th>
                             <!-- <th>Foto Armada</th>
                             <th>Edit Foto</th> -->
@@ -144,10 +144,18 @@
                                     </td>
                                     <!-- <tr class="table-light"> -->
                                     <td>{{ $ar -> ID_ARMADA }}</td>
-                                    <td>{{ $ar -> NAMA_CATEGORY }}</td>
+                                    @if($ar -> NAMA_CATEGORY == 'Bus Besar')
+                                    <td><span class="badge bg-success-bright text-secondary">{{ $ar -> NAMA_CATEGORY }}</span></td>
+                                    @endif
+                                    @if($ar -> NAMA_CATEGORY == 'Bus Sedang')
+                                    <td><span class="badge bg-success-bright text-warning">{{ $ar -> NAMA_CATEGORY }}</span></td>
+                                    @endif
+                                    @if($ar -> NAMA_CATEGORY == 'Elf Bus (Mini Bus)')
+                                    <td><span class="badge bg-success-bright text-success">{{ $ar -> NAMA_CATEGORY }}</span></td>
+                                    @endif
                                     <td><a href="{{ url('fotoarmada', ['id'=>$ar -> ID_ARMADA]) }}">{{ $ar -> PLAT_NOMOR }}</a></td>
                                     <td>{{ $ar -> KAPASITAS }}</td>
-                                    <td>{{ $ar -> FASILITAS_ARMADA }}</td>
+                                    <!-- <td>{{ $ar -> FASILITAS_ARMADA }}</td> -->
                                    
                                     <td>
                                     @if($ar -> STATUS_ARMADA == 1)
@@ -259,7 +267,7 @@
                             <th>Category Armada</th>
                             <th>Plat Nomor</th>
                             <th>Kapasitas</th>
-                            <th>Fasilitas Armada</th>
+                            <!-- <th>Fasilitas Armada</th> -->
                             <th>Action</th>
                             <!-- <th>Foto Armada</th>
                             <th>Edit Foto</th> -->

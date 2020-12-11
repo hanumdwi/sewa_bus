@@ -15,6 +15,7 @@
     <!-- Prism -->
     <link rel="stylesheet" href="{{ url('vendors/prism/prism.css') }}" type="text/css">
     
+    
 
 @endsection
 
@@ -108,7 +109,8 @@
                         <h3>Billing Information</h3>
                         <section class="card card-body border mb-0">
                         
-                         <form class="basic-repeater">
+                         <form class="basic-repeater" action="" method="POST" enctype="multipart/form-data">
+                         {{ csrf_field() }}
                          <!-- <center>
                          <div class="col-md-4 mb-3">
                                         <label for="profession">Tanggal Sewa</label>
@@ -123,7 +125,7 @@
                                         <select name="ID_CATEGORY" class="form-control" id="ID_CATEGORY">
                                         @foreach($category_armada as $c)
                                        
-                                        <option value="{{$c->ID_CATEGORY}}">{{$c->NAMA_CATEGORY}}</option>
+                                        <option id="cat{{$c->ID_CATEGORY}}" value="{{$c->ID_CATEGORY}}">{{$c->NAMA_CATEGORY}}</option>
                                        
                                         @endforeach                 
                                         </select>
@@ -387,6 +389,20 @@
 
 <script>
    
+//    $('#tabelproduk').DataTable().row.add([
+//         '<input type="checkbox" id="as'+results.category_armada[i]['ID_CATEGORY']+'">',
+//                         results.category_armada[i]['NAMA_CATEGORY'],
+//                     ]).node().id = 'row'+results.product[i]['ID_CATEGORY'];
+//                     $('#tabelproduk').DataTable().draw();
+
+   $(document).ready(function(){
+    console.log("hai");
+       $("#add").click(function(){
+           var nilai = $("#TUJUAN_SEWA").attr('select');
+           console.log(nilai);
+       })
+   });
+
    $('#TUJUAN_SEWA1').change(function(){
        console.log("masuk");
         $('#hargasewa1').val(10000000);
@@ -395,7 +411,7 @@
    function getPrice(){
        console.log("masuk");
        var tujuan = document.getElementById('TUJUAN_SEWA1').value;
-       var tmp = document.getElementsByTagName("select")[0].getAttribute("name");
+       var tmp = document.getElementsByTagName('select')[0].getAttribute("TUJUAN_SEWA[]");
        console.log(tmp);
        var ratings =  $('#TUJUAN_SEWA1'+tujuan).data('pricelist');
        var price = document.getElementById('hargasewa1').value;
@@ -439,10 +455,8 @@ $('#save').hide();
 $('#add').click(function(){
     $('#save').show();
 });
-
-
-
 </script>
+
 <!-- Form wizard -->
 <script src="{{ url('vendors/form-wizard/jquery.steps.min.js') }}"></script>
 <script src="{{ url('assets/js/examples/form-wizard.js') }}"></script>

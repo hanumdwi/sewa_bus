@@ -24,13 +24,15 @@ class GaleriController extends Controller
         }
         else{
         $armada=DB::table('armada')->get();
+        $category_armada = DB::table('category_armada')->get();
         $galeri=DB::table('galeri')
         ->join('armada', 'galeri.ID_ARMADA', '=', 'armada.ID_ARMADA')
+        ->join('category_armada','armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
         ->select('galeri.ID_GALERI', 'armada.PLAT_NOMOR', 'galeri.FOTO_ARMADA',
-        'galeri.DESKRIPSI_FOTO', 'galeri.STATUS_FOTO')
+        'galeri.DESKRIPSI_FOTO', 'galeri.STATUS_FOTO', 'category_armada.NAMA_CATEGORY', 'armada.avatar')
         ->get();
 
-        return view('galeriindex', ['galeri' =>$galeri, 'armada' =>$armada]);
+        return view('galeriindex', ['galeri' =>$galeri, 'armada' =>$armada, 'category_armada' =>$category_armada]);
         // return view('gallery',compact('galeri','armada'));
     }
 }
@@ -102,7 +104,7 @@ class GaleriController extends Controller
             $galeri->save();
         }
 
-        return redirect('gallery');
+        return redirect('galeriindex');
     }
 
     /**
