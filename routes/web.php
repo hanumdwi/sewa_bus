@@ -158,7 +158,8 @@ Route::post('updateswitch', 'SewaPaketController@update_switch');
 //===================================================================================
 
 //Sewa Paket Detail
-Route::get('sewa_paket_detail/{id}','SewaDetailController@indexpaket');
+Route::get('sewa_paket_detail/{id}','SewaDetailController@indexpaket')->name('sewa_paket_detail_index');
+Route::post('sewa_paket_detail/{id}','SewaPaketController@update');
 Route::post('sewa_paket_detailstore', 'SewaDetailController@store');
 Route::post('sewa_paket_detailupdate', 'SewaDetailController@update');
 Route::get('sewa_paket_detailsewa', 'SewaDetailController@getAllsewa_paket_detail');

@@ -31,6 +31,7 @@ class SewaBusController extends Controller
         'sewa_bus.HARGA_SEWA_BUS','sewa_bus.JAM_SEWA','sewa_bus.JAM_AKHIR_SEWA','pengguna.NAMA_PENGGUNA', 'sewa_bus.STATUS_SEWA')
         ->get();
 
+        
         $max = DB::table('sewa_bus')->max('ID_SEWA_BUS');
         date_default_timezone_set('Asia/Jakarta');
         $date=date("ymd",time());
@@ -86,6 +87,15 @@ class SewaBusController extends Controller
                 'DP_BUS'        =>  $request->DP_SEWA,
                 'STATUS_SEWA' => $request->statussewa
             ]);
+
+            // DB::table('schedule_armada')->insert([
+            //     'ID_SEWA_BUS' => $request->ID_SEWA_BUS,
+            //     'TGL_SEWA' => $request->TGL_SEWA,
+            //     'TGL_AKHIR_SEWA' => $request->TGL_AKHIR_SEWA,
+            //     'JAM_SEWA' => $request->JAM_SEWA,
+            //     'JAM_AKHIR_SEWA' => $request->JAM_AKHIR_SEWA,
+            //     'STATUS_ARMADA' => $request->STATUS_ARMADA
+            // ]);
 
         DB::commit();
         }

@@ -46,6 +46,7 @@ class SewaDetailController extends Controller
         'category_armada.NAMA_CATEGORY', 'pricelist_sewa_armada.TUJUAN_SEWA', 'pricelist_sewa_armada.PRICELIST_SEWA')
         ->get();
 
+     
 
         return view('sewa_bus_detail', ['sewa_bus' =>$sewa_bus,'pengguna'=>$pengguna,'customer'=>$customer],
         ['sewa_bus_category'=>$sewa_bus_category,'pricelist_sewa_armada'=>$pricelist_sewa_armada, 'category_armada'=>$category_armada]);
@@ -64,10 +65,18 @@ class SewaDetailController extends Controller
         
         $paket_wisata= Paket_Wisata::find($sewa_paket_wisata->ID_PAKET);
 
+        $armada=DB::table('armada')
+        ->join('category_armada', 'armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
+        ->leftjoin('schedule_armada', 'armada.ID_ARMADA', '=', 'schedule_armada.ID_ARMADA')
+        ->select('armada.ID_ARMADA', 'armada.PLAT_NOMOR', 'category_armada.NAMA_CATEGORY')
+        ->where('schedule_armada.STATUS_ARMADA', '=', 1)
+        ->get();
 
 
         return view('sewa_paket_detail', ['sewa_paket_wisata' =>$sewa_paket_wisata,'pengguna'=>$pengguna,
-        'customer'=>$customer,'paket_wisata'=>$paket_wisata]);
+        'customer'=>$customer,'paket_wisata'=>$paket_wisata, 'armada'=>$armada]);
+        // return response()->json( ['sewa_paket_wisata' =>$sewa_paket_wisata,'pengguna'=>$pengguna,
+        // 'customer'=>$customer,'paket_wisata'=>$paket_wisata, 'armada'=>$armada]);
     }
 }
     /**

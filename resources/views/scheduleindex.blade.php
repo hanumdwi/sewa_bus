@@ -36,7 +36,7 @@
                     @foreach($armada as $ar)
                         <div class="list-group-item px-0 fc-event">
                             <i class="fa fa-circle text-success" data-icon="car"></i>
-                            {{$ar->NAMA_ARMADA}}
+                            {{$ar->PLAT_NOMOR}}
                         </div>
                     @endforeach
                     </div>

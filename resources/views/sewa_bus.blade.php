@@ -143,7 +143,7 @@
                                     @if($sb -> STATUS_SEWA == 'Lunas')
                                     <td><span class="badge bg-success-bright text-success">{{ $sb -> STATUS_SEWA}}</span></td>
                                     @endif
-                                    @if($sb -> STATUS_SEWA == 'Belum Bayar')
+                                    @if($sb -> STATUS_SEWA == 'On Schedule')
                                     <td><span class="badge bg-success-bright text-danger">{{ $sb -> STATUS_SEWA}}</span></td>
                                     @endif
                                     <td>{{ $sb -> ID_SEWA_BUS }}</td>

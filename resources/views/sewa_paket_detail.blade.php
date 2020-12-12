@@ -37,7 +37,11 @@
                         <h3>Personal Information</h3>
                         <section class="card card-body border mb-0">
                             
-                        <form action="sewa_paketupdate" method="post">
+                        <form action="{{ $sewa_paket_wisata->ID_SEWA_PAKET }}" method="post">
+                        <input type="hidden" name="ID_SEWA_PAKET" value="{{ $sewa_paket_wisata->ID_SEWA_PAKET }}">
+                        <input type="hidden" name="ID_PENGGUNA" value="{{ $sewa_paket_wisata->ID_PENGGUNA }}">
+                        <input type="hidden" name="ID_CUSTOMER" value="{{ $sewa_paket_wisata->ID_CUSTOMER }}">
+                        <input type="hidden" name="ID_PAKET" value="{{ $sewa_paket_wisata->ID_PAKET }}"> 
                             {{ csrf_field() }}
                             <div class="form-row">
                                 <div class="col-md-4 mb-3">
@@ -86,13 +90,27 @@
                                     <input type="time" class="form-control" id="JAM_AKHIR_SEWA_PAKET" name="JAM_AKHIR_SEWA_PAKET" value="{{$sewa_paket_wisata->JAM_AKHIR_SEWA_PAKET}}">
                                 </div>
                             </div>
-
-                                <div><label>&nbsp;</label></div>
-
                             <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="STATUS_PAKET_WISATA" class="col-form-label">Status Sewa :</label>
+                                    <select name="STATUS_PAKET_WISATA" class="form-control" id="STATUS_PAKET_WISATA" value="{{$sewa_paket_wisata->STATUS_PAKET_WISATA}}">
+                                        <option selected="selected">-- Status --</option>
+                                            <option>Booking</option>
+                                            <option>On Schedule</option>
+                                            <option>Lunas</option>
+                                    </select>
+                            </div>
+
+
                                 <div class="col-md-4 mb-3">
-                                    <label for="harga">Harga</label>
-                                    <input type="harga" class="form-control" name="harga" id="harga">
+                                    <label for="ID_ARMADA">Armada</label>
+                                    <select name="ID_ARMADA" class="form-control" id="ID_ARMADA">
+                                        @foreach($armada as $c)
+                                       
+                                        <option value="{{$c->ID_ARMADA}}">{{$c->NAMA_CATEGORY}}   -  {{$c->PLAT_NOMOR}}</option>
+                                       
+                                        @endforeach                 
+                                        </select>
                                 </div>
                             </div>
                                 

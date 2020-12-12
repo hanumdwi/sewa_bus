@@ -90,16 +90,25 @@
                                     <label for="JAM_AKHIR_SEWA" class="col-form-label">End Time :</label>
                                     <input type="time" class="form-control" id="JAM_AKHIR_SEWA_PAKET" name="JAM_AKHIR_SEWA_PAKET">
                                     </div>
-                                <!-- <div class="form-group">
+                                    <!-- <div class="col-md-4 mb-3">
+                                    <label for="ID_ARMADA">Armada</label>
+                                    <select name="ID_ARMADA" class="form-control" id="ID_ARMADA">
+                                        @foreach($armada as $c)
+                                       
+                                        <option value="{{$c->ID_ARMADA}}">{{$c->NAMA_CATEGORY}}   -  {{$c->PLAT_NOMOR}}</option>
+                                       
+                                        @endforeach                 
+                                        </select>
+                                </div> -->
                                 <div class="form-group">
-                                    <label for="DP_PAKET" class="col-form-label">DP Sewa :</label>
-                                    <input type="DP_PAKET" class="form-control" id="DP_PAKET" name="DP_PAKET">
+                                    <label for="STATUS_PAKET_WISATA" class="col-form-label">Status Sewa :</label>
+                                    <select name="STATUS_PAKET_WISATA" class="form-control" id="STATUS_PAKET_WISATA">
+                                        <option selected="selected">-- Status --</option>
+                                            <option>Booking</option>
+                                            <option>On Schedule</option>
+                                            <option>Lunas</option>
+                                    </select>
                                     </div>
-                                <div class="form-group">
-                                    <label for="HARGA_SEWA_PAKET" class="col-form-label">Harga Sewa Paket :</label>
-                                    <input type="HARGA_SEWA_PAKET" class="form-control" id="HARGA_SEWA_PAKET" name="HARGA_SEWA_PAKET">
-                                    </div>
-                                    </div> -->
                                 
                             </div>
                             <div class="modal-footer">
@@ -115,6 +124,7 @@
                     <table id="myTable" class="table table-striped table-bordered">
                         <thead>
                         <tr>
+                            <th>Status Sewa</th>
                             <th>Id Sewa Paket Wisata</th>
                             <th>Nama User</th>
                             <th>Nama Customer</th>
@@ -131,7 +141,16 @@
                         <tbody>
                         <tr>
                             @foreach($sewa_paket_wisata as $spw)
-                                   
+
+                                    @if($spw -> STATUS_PAKET_WISATA == 'Booking')
+                                    <td><span class="badge bg-success-bright text-secondary">{{ $spw -> STATUS_PAKET_WISATA}}</span></td>
+                                    @endif
+                                    @if($spw -> STATUS_PAKET_WISATA == 'Lunas')
+                                    <td><span class="badge bg-success-bright text-success">{{ $spw -> STATUS_PAKET_WISATA}}</span></td>
+                                    @endif
+                                    @if($spw -> STATUS_PAKET_WISATA == 'On Schedule')
+                                    <td><span class="badge bg-success-bright text-danger">{{ $spw -> STATUS_PAKET_WISATA}}</span></td>
+                                    @endif
                                     <!-- <tr class="table-light"> -->
                                     <td>{{ $spw -> ID_SEWA_PAKET }}</td>
                                     <td>{{ $spw -> NAMA_PENGGUNA }}</td>
@@ -190,6 +209,7 @@
                                     </tbody>
                                     <tfoot>
                         <tr>
+                            <th>Status Sewa</th>
                             <th>Id Sewa Bus</th>
                             <th>Nama User</th>
                             <th>Nama Customer</th>

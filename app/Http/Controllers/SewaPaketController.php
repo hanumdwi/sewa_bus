@@ -31,22 +31,19 @@ class SewaPaketController extends Controller
         ->select('sewa_paket_wisata.ID_SEWA_PAKET','sewa_paket_wisata.TGL_SEWA_PAKET',
         'sewa_paket_wisata.TGL_AKHIR_SEWA_PAKET','customer.NAMA_CUSTOMER', 'sewa_paket_wisata.DP_PAKET',
         'sewa_paket_wisata.HARGA_SEWA_PAKET','sewa_paket_wisata.JAM_SEWA_PAKET',
-        'sewa_paket_wisata.JAM_AKHIR_SEWA_PAKET','pengguna.NAMA_PENGGUNA','paket_wisata.NAMA_PAKET')
+        'sewa_paket_wisata.JAM_AKHIR_SEWA_PAKET','pengguna.NAMA_PENGGUNA','paket_wisata.NAMA_PAKET', 'sewa_paket_wisata.STATUS_PAKET_WISATA')
         ->get();
 
-        $max = DB::table('sewa_paket_wisata')->max('ID_SEWA_PAKET');
-        date_default_timezone_set('Asia/Jakarta');
-        $date=date("ymd",time());
-
-        $max=substr($max,6);
-        if($max>=1){
-            $ID_SEWA_PAKET=$date.str_pad($max+1,4,"0",STR_PAD_LEFT);
-        }
-        else{
-            $ID_SEWA_PAKET=$date.str_pad(1,4,"0",STR_PAD_LEFT);
-        }
         
-        return view('sewa_paket', ['sewa_paket_wisata' =>$sewa_paket_wisata,'ID_SEWA_PAKET'=>$ID_SEWA_PAKET,'customer'=>$customer,'pengguna'=>$pengguna,'paket_wisata'=>$paket_wisata]);
+        $armada=DB::table('armada')
+        ->join('category_armada', 'armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
+        ->leftjoin('schedule_armada', 'armada.ID_ARMADA', '=', 'schedule_armada.ID_ARMADA')
+        ->select('armada.ID_ARMADA', 'armada.PLAT_NOMOR', 'category_armada.NAMA_CATEGORY')
+        ->where('schedule_armada.STATUS_ARMADA', '=', 1)
+        ->get();
+
+        return view('sewa_paket', ['sewa_paket_wisata' =>$sewa_paket_wisata,'customer'=>$customer,'pengguna'=>$pengguna,
+        'paket_wisata'=>$paket_wisata,  'armada'=>$armada]);
     }
 }
 
@@ -74,10 +71,7 @@ class SewaPaketController extends Controller
      */
     public function store(Request $request)
     {
-        DB::beginTransaction();
-        try{
             DB::table('sewa_paket_wisata')->insert([
-                'ID_SEWA_PAKET'         => $request->ID_SEWA_PAKET,
                 'TGL_SEWA_PAKET'        => $request->TGL_SEWA_PAKET,
                 'TGL_AKHIR_SEWA_PAKET'  => $request->TGL_AKHIR_SEWA_PAKET,
                 'ID_PAKET'              => $request->ID_PAKET,
@@ -85,25 +79,19 @@ class SewaPaketController extends Controller
                 'ID_PENGGUNA'           => $request->ID_PENGGUNA,
                 // 'HARGA_SEWA_PAKET'      => $request->HARGA_SEWA_PAKET,
                 'JAM_SEWA_PAKET'        => $request->JAM_SEWA_PAKET,
-                'JAM_AKHIR_SEWA_PAKET'  => $request->JAM_AKHIR_SEWA_PAKET
-                // 'DP_PAKET'              =>  $request->DP_PAKET
+                'JAM_AKHIR_SEWA_PAKET'  => $request->JAM_AKHIR_SEWA_PAKET,
+                'STATUS_PAKET_WISATA'              =>  $request->STATUS_PAKET_WISATA
             ]);
 
-        DB::commit();
-        }
-        Catch (\Exception $ex){
-            DB::rollback();
-            throw $ex;
-        }
              return redirect('sewa_paket')->with('insert','data berhasil di tambah');
     }
 
     public function getAllSchedule()
     {
-        $sewa_PAKET=DB::table('sewa_PAKET')
+        $sewa_PAKET=DB::table('schedule_armada')
         ->select(
-        DB::raw('(ID_CUSTOMER) as title'), 
-        DB::raw('(TGL_SEWA_PAKET) as start'), 
+        DB::raw('(ID_ARMADA) as title'), 
+        DB::raw('(TGL_SEWA) as start'), 
         DB::raw('(TGL_AKHIR_SEWA) as end'))
         ->get();
 
@@ -113,9 +101,9 @@ class SewaPaketController extends Controller
 
     public function getScheduleById($id)
     {
-        $sewa_PAKET=DB::table('sewa_PAKET')->where('ID_SEWA_PAKET','=',$id)
+        $sewa_PAKET=DB::table('schedule_armada')->where('ID_SEWA_PAKET','=',$id)
         ->select(
-        DB::raw('(ID_CUSTOMER) as title'), 
+        DB::raw('(ID_ARMADA) as title'), 
         DB::raw('(TGL_SEWA_PAKET) as start'), 
         DB::raw('(TGL_AKHIR_SEWA) as end'))
         ->get();
@@ -153,9 +141,9 @@ class SewaPaketController extends Controller
      * @param  \App\sewa_bus  $sewa_bus
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        DB::table('sewa_paket_wisata')->where('ID_SEWA_PAKET',$request->id)->update([
+        DB::table('sewa_paket_wisata')->where('ID_SEWA_PAKET',$request->ID_SEWA_PAKET)->update([
             'ID_SEWA_PAKET'         => $request->ID_SEWA_PAKET,
                 'TGL_SEWA_PAKET'        => $request->TGL_SEWA_PAKET,
                 'TGL_AKHIR_SEWA_PAKET'  => $request->TGL_AKHIR_SEWA_PAKET,
@@ -164,9 +152,21 @@ class SewaPaketController extends Controller
                 'ID_PENGGUNA'           => $request->ID_PENGGUNA,
                 // 'HARGA_SEWA_PAKET'      => $request->HARGA_SEWA_PAKET,
                 'JAM_SEWA_PAKET'        => $request->JAM_SEWA_PAKET,
-                'JAM_AKHIR_SEWA_PAKET'  => $request->JAM_AKHIR_SEWA_PAKET
+                'JAM_AKHIR_SEWA_PAKET'  => $request->JAM_AKHIR_SEWA_PAKET,
+                'STATUS_PAKET_WISATA'              =>  $request->STATUS_PAKET_WISATA
                 // 'DP_PAKET'              =>  $request->DP_PAKET
         ]);
+
+        DB::table('schedule_armada')->where('ID_SEWA_PAKET',$request->ID_SEWA_PAKET)->update([
+            'ID_SEWA_PAKET' => $request->ID_SEWA_PAKET,
+            'ID_ARMADA' => $request->ID_ARMADA,
+            'TGL_SEWA' => $request->TGL_SEWA_PAKET,
+            'TGL_AKHIR_SEWA' => $request->TGL_AKHIR_SEWA_PAKET,
+            'JAM_SEWA' => $request->JAM_SEWA_PAKET,
+            'JAM_AKHIR_SEWA' => $request->JAM_AKHIR_SEWA_PAKET,
+            'STATUS_ARMADA' => 1,
+        ]);
+
 
         return redirect('sewa_paket');
     }

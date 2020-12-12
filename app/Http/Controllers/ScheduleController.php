@@ -45,7 +45,7 @@ class ScheduleController extends Controller
         //     $ID_SEWA_BUS=$date.str_pad(1,4,"0",STR_PAD_LEFT);
         // }
         
-        return view('scheduleindex', ['schedule_armada'=> $schedule_armada, 'sewa_bus_category' =>$sewa_bus_category,
+        return view('scheduleindex',['schedule_armada'=> $schedule_armada, 'sewa_bus_category' =>$sewa_bus_category,
         'armada'=>$armada,'sewa_paket_wisata'=>$sewa_paket_wisata]);
     }
 }
