@@ -106,6 +106,7 @@ Route::get('category_armadadestroy/{id}', 'CategoryController@destroy');
 
 //Category Armada
 Route::get('paketwisataindex','PaketWisataController@index');
+Route::get('detailindexpaket/{id}','PaketWisataController@indexdetail');
 Route::post('paketwisatastore', 'PaketWisataController@store');
 Route::get('paketwisataedit/{id}', 'PaketWisataController@edit');
 Route::post('paketwisataupdate', 'PaketWisataController@update');

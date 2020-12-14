@@ -29,6 +29,13 @@ class PaketWisataController extends Controller
     }
 }
 
+    public function indexdetail(Request $request, $id)
+    {
+            $paket_wisata= Paket_Wisata::find($id);
+            // dump($armada);
+            return view ('detailindexpaket',['paket_wisata' =>$paket_wisata]);
+}
+
     /**
      * Show the form for creating a new resource.
      *
@@ -55,7 +62,7 @@ class PaketWisataController extends Controller
             // 'TIPE_PAKET'            => $request->tipepaket,
             'HARGA_PAKET'           => $request->hargapaket,
             'HARGA_JUAL'            => $request->hargajual,
-            'TEMPAT_KUNJUNG'        => $request->hargajual,
+            'TEMPAT_KUNJUNG'        => $request->tempatkunjung,
             'FASILITAS_PAKET'       => $request->fasilitas
         ]);
 
@@ -100,7 +107,7 @@ class PaketWisataController extends Controller
             'TIPE_PAKET'            => $request->tipepaket,
             'HARGA_PAKET'           => $request->hargapaket,
             'HARGA_JUAL'            => $request->hargajual,
-            'TEMPAT_KUNJUNG'        => $request->hargajual,
+            'TEMPAT_KUNJUNG'        => $request->tempatkunjung,
             'FASILITAS_PAKET'       => $request->fasilitas
         ]);
 

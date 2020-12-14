@@ -48,7 +48,7 @@
                                                     </div>
                                                 <div class="form-group">
                                                     <label for="fasilitas" class="col-form-label">Fasilitas :</label>
-                                                    <input type="fasilitas" class="form-control" id="fasilitas" name="fasilitas" value="{{ $ar->FASILITAS_ARMADA }}">
+                                                    <textarea type="fasilitas" class="form-control" id="fasilitas" name="fasilitas">{{ $ar->FASILITAS_ARMADA }}</textarea>
                                                     </div>
                                                 <div class="form-group">
                                                         <label>Pilih Foto</label>

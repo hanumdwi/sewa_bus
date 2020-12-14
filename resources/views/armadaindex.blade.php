@@ -67,13 +67,13 @@
                                     </div>
                                 <div class="form-group">
                                     <label for="fasilitas" class="col-form-label">Fasilitas :</label>
-                                    <input type="fasilitas" class="form-control" id="fasilitas" name="fasilitas">
+                                    <textarea type="fasilitas" class="form-control" id="fasilitas" name="fasilitas"></textarea>
                                     </div>
                                 <!-- <div class="form-group">
                                     <label for="foto" class="col-form-label">Foto Armada :</label>
                                         <input type="foto" class="form-control" id="foto" name="foto">
                                     </div> -->
-                                    </div>
+                                  
                                 
                             </div>
                             <div class="modal-footer">

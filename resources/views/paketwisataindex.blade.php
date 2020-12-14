@@ -49,15 +49,7 @@
                                     <label for="namapaket" class="col-form-label">Nama Paket Wisata :</label>
                                     <input type="namapaket" class="form-control" id="namapaket" name="namapaket">
                                     </div>
-                                <!-- <div class="form-group">
-                                    <label for="tipepaket" class="col-form-label">Tipe Paket :</label>
-                                    <select name="tipepaket" class="form-control" id="tipepaket">
-                                        <option selected="selected">--Pilih Paket--</option>
-                                            <option id="paketA">Paket A (Kapasitas 40 Orang)</option>
-                                            <option id="paketB">Paket B (Kapasitas 35 Orang)</option>
-                                            <option id="paketC">Paket C (Kapasitas 30 Orang)</option>
-                                    </select>
-                                    </div> -->
+                           
                                 <div class="form-group">
                                     <label for="hargapaket" class="col-form-label">Harga Paket :</label>
                                     <input type="hargapaket" class="form-control" id="hargapaket" name="hargapaket">
@@ -68,11 +60,11 @@
                                     </div>
                                 <div class="form-group">
                                     <label for="tempatkunjung" class="col-form-label">Tempat Kunjung :</label>
-                                    <input type="tempatkunjung" class="form-control" id="tempatkunjung" name="tempatkunjung">
+                                    <textarea type="text" class="form-control" id="tempatkunjung" name="tempatkunjung"></textarea>
                                     </div>
                                 <div class="form-group">
                                     <label for="fasilitas" class="col-form-label">Fasilitas :</label>
-                                    <input type="fasilitas" class="form-control" id="fasilitas" name="fasilitas">
+                                    <textarea type="text" class="form-control" id="fasilitas" name="fasilitas"></textarea>
                                     </div>
                                 
                             </div>
@@ -92,8 +84,8 @@
                             <!-- <th>Tipe Paket</th> -->
                             <th>Harga (1 Orang)</th>
                             <th>Harga Paket (Full)</th>
-                            <th>Tempat Kunjung</th>
-                            <th>Fasilitas</th>
+                            <!-- <th>Tempat Kunjung</th> -->
+                            <th>Detail</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -104,10 +96,21 @@
                                     <td>{{ $pw -> ID_PAKET }}</td>
                                     <td>{{ $pw -> NAMA_PAKET }}</td>
                                     <!-- <td>{{ $pw -> TIPE_PAKET }}</td> -->
-                                    <td>{{ $pw -> HARGA_PAKET }}</td>
-                                    <td>{{ $pw -> HARGA_JUAL }}</td>
-                                    <td>{{ $pw -> TEMPAT_KUNJUNG }}</td>
-                                    <td>{{ $pw -> FASILITAS_PAKET }}</td>
+                                    <td>
+                                    Rp <?php echo number_format($pw->HARGA_PAKET,'0',',','.'); ?>
+                                    </td>
+                                    <td>
+                                    Rp <?php echo number_format($pw->HARGA_JUAL,'0',',','.'); ?>
+                                    </td>
+                                    <!-- <td>{{ $pw -> TEMPAT_KUNJUNG }}</td>
+                                    <td>{{ $pw -> FASILITAS_PAKET }}</td> -->
+                                    <td>
+                                    <a href="{{ url('detailindexpaket', ['id'=>$pw -> ID_PAKET]) }}">
+                                    <button type="button" class="btn btn-outline-secondary">
+                                        <i class="ti-calendar mr-2"></i>Detail
+                                    </a>
+                                    </button>
+                                    </td>
                                     <td>
                                     
                                     <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit" data-toggle="modal" data-target="#exampleModal12{{$pw -> ID_PAKET}}">
@@ -134,15 +137,6 @@
                                                     <label for="namapaket" class="col-form-label">Nama Paket Wisata :</label>
                                                         <input type="namapaket" class="form-control" id="namapaket" name="namapaket" value="{{ $pw->NAMA_PAKET }}">
                                                         </div>
-                                                    <!-- <div class="form-group">
-                                                        <label for="tipepaket" class="col-form-label">Tipe Paket :</label>
-                                                        <select name="tipepaket" class="form-control" id="tipepaket" value="{{ $pw->TIPE_PAKET }}">
-                                                            <option selected="selected">{{ $pw->TIPE_PAKET }}</option>
-                                                                <option>Paket A (Kapasitas 40 Orang)</option>
-                                                                <option>Paket B (Kapasitas 35 Orang)</option>
-                                                                <option>Paket C (Kapasitas 30 Orang)</option>
-                                                        </select> 
-                                                        </div> -->
                                                     <div class="form-group">
                                                         <label for="hargapaket" class="col-form-label">Harga Paket :</label>
                                                         <input type="hargapaket" class="form-control" id="hargapaket" name="hargapaket" value="{{ $pw->HARGA_PAKET }}">
@@ -153,11 +147,11 @@
                                                         </div>
                                                     <div class="form-group">
                                                         <label for="tempatkunjung" class="col-form-label">Tempat Kunjung :</label>
-                                                        <input type="tempatkunjung" class="form-control" id="tempatkunjung" name="tempatkunjung" value="{{ $pw->TEMPAT_KUNJUNG }}">
+                                                        <textarea type="tempatkunjung" class="form-control" id="tempatkunjung" name="tempatkunjung">{{$pw->TEMPAT_KUNJUNG}}</textarea>
                                                         </div>
                                                     <div class="form-group">
                                                         <label for="fasilitas" class="col-form-label">Fasilitas :</label>
-                                                        <input type="fasilitas" class="form-control" id="fasilitas" name="fasilitas" value="{{ $pw->FASILITAS_PAKET }}">
+                                                        <textarea type="fasilitas" class="form-control" id="fasilitas" name="fasilitas">{{$pw->FASILITAS_PAKET}}</textarea>
                                                         </div>
                                                 
                                             </div>
@@ -213,8 +207,8 @@
                             <!-- <th>Tipe Paket</th> -->
                             <th>Harga (1 Orang)</th>
                             <th>Harga Paket (Full)</th>
-                            <th>Tempat Kunjung</th>
-                            <th>Fasilitas</th>
+                            <th>Detail</th>
+                            <!-- <th>Fasilitas</th> -->
                             <th>Action</th>
                         </tr>
                         </tfoot>
@@ -235,32 +229,6 @@
     $('#myTable').DataTable();
 
 });
-
-function hitunghargajualA(){
-        console.log("function getHargaJual");
-        var hargajual = document.getElementById('hargajual').value;
-        // console.log(hargajual);
-        var x = document.getElementById('hargajual')
-        var hargadasar = document.getElementById('hargadasar').value;
-        var paketA = document.getElementById("paketA");
-        var paketB = document.getElementById("paketB");
-        // if(paketA){
-        var totals = (Number(hargadasar*40));
-        // hargajual = totals;
-            // x.innerHTML = totals;
-         $('#hargajual').val(totals);
-       
-        console.log(totals);
-        // }else{
-        //     var totals = (Number(hargadasar*30));
-        // hargajual.value = totals;
-        // console.log(totals);
-        }
-
-    function modal(id){
-        const y=document.getElementById(id);
-            $("#exampleModal12").modal();
-        }
 
 
 </script>
