@@ -108,7 +108,7 @@ $(document).ready(function () {
         },
         eventClick: function (event, jsEvent, view) {
             var modal = $('#viewEventModal');
-            modal.find('.event-title').html("update");
+            modal.find('.event-title').html("Schedule");
             modal.modal();
         },
     });

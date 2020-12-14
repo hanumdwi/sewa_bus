@@ -76,7 +76,8 @@
                     <table id="myTable" class="table table-striped table-bordered">
                         <thead>
                         <tr>
-                            <th>Id Pricelist</th>
+                            <th>#</th>
+                            <!-- <th>Id Pricelist</th> -->
                             <th>Category Armada</th>
                             <th>Tujuan Sewa</th>
                             <th>Pricelist Sewa</th>
@@ -87,10 +88,21 @@
                         <tr>
                         @foreach($pricelist_sewa_armada as $pr)
                                     <!-- <tr class="table-light"> -->
-                                    <td>{{ $pr   -> ID_PRICELIST }}</td>
-                                    <td>{{ $pr   -> NAMA_CATEGORY }}</td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <!-- <td>{{ $pr   -> ID_PRICELIST }}</td> -->
+                                    @if($pr -> NAMA_CATEGORY == 'Bus Besar')
+                                    <td><span class="badge bg-success-bright text-secondary">{{ $pr -> NAMA_CATEGORY }}</span></td>
+                                    @endif
+                                    @if($pr -> NAMA_CATEGORY == 'Bus Sedang')
+                                    <td><span class="badge bg-success-bright text-warning">{{ $pr -> NAMA_CATEGORY }}</span></td>
+                                    @endif
+                                    @if($pr -> NAMA_CATEGORY == 'Elf Bus (Mini Bus)')
+                                    <td><span class="badge bg-success-bright text-success">{{ $pr -> NAMA_CATEGORY }}</span></td>
+                                    @endif
                                     <td>{{ $pr   -> TUJUAN_SEWA }}</td>
-                                    <td>Rp.   {{ $pr   -> PRICELIST_SEWA }}</td>
+                                    <td>
+                                    Rp <?php echo number_format($pr->PRICELIST_SEWA,'0',',','.'); ?>
+                                    </td>
                                     <td>
                                     
                                     <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit" data-toggle="modal" data-target="#exampleModal12{{$pr -> ID_PRICELIST}}">
@@ -179,7 +191,8 @@
                                     </tbody>
                                     <tfoot>
                         <tr>
-                            <th>Id Pricelist</th>
+                            <th>#</th>
+                            <!-- <th>Id Pricelist</th> -->
                             <th>Category Armada</th>
                             <th>Tujuan Sewa</th>
                             <th>Pricelist Sewa</th>
