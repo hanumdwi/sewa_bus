@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Session;
 use DB;
 use PDF;
 
-class SewaDetailController extends Controller
+class DataTableController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -48,7 +48,7 @@ class SewaDetailController extends Controller
 
      
 
-        return view('sewa_bus_detail', ['sewa_bus' =>$sewa_bus,'pengguna'=>$pengguna,'customer'=>$customer],
+        return view('datatable', ['sewa_bus' =>$sewa_bus,'pengguna'=>$pengguna,'customer'=>$customer],
         ['sewa_bus_category'=>$sewa_bus_category,'pricelist_sewa_armada'=>$pricelist_sewa_armada, 'category_armada'=>$category_armada]);
     }
 }
@@ -231,12 +231,5 @@ class SewaDetailController extends Controller
         ]);
 
         return redirect('sewa_bus');
-    }
-
-    public function getTujuan(){
-        $tmp = DB::table('pricelist_sewa_armada')->where('ID_CATEGORY', request()->category)
-        ->get();
-
-        return response()->json(['status'=>'success','data'=>$tmp]);
     }
 }

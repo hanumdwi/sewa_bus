@@ -137,11 +137,22 @@ Route::post('updateswitch', 'ScheduleController@update_switch');
 //Sewa Bus Detail
 Route::get('sewa_bus_detail/{id}','SewaDetailController@index')->name('sewa_bus_detail_index');
 Route::post('sewa_bus_detail/{id}','SewaDetailController@update');
+Route::get('tujuan','SewaDetailController@getTujuan');
 Route::post('sewa_bus_detailstore', 'SewaDetailController@store');
 Route::post('sewa_bus_detailupdate', 'SewaDetailController@update');
 Route::get('sewa_bus_detailsewa', 'SewaDetailController@getAllsewa_bus_detail');
 Route::get('sewa_bus_detailsewa/{id}', 'SewaDetailController@getsewa_bus_detailById');
 Route::post('updateswitch', 'SewaDetailController@update_switch');
+//===================================================================================
+
+//Sewa Bus Detail
+Route::get('datatable/{id}','DataTableController@index');
+Route::post('datatable/{id}','DataTableController@update');
+Route::post('datatablestore', 'DataTableController@store');
+Route::post('datatableupdate', 'DataTableController@update');
+Route::get('datatablesewa', 'DataTableController@getAlldatatable');
+Route::get('datatablesewa/{id}', 'DataTableController@getdatatableById');
+Route::post('updateswitch', 'DataTableController@update_switch');
 //===================================================================================
 
 //Sewa Bus Invoice

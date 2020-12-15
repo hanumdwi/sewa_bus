@@ -40,7 +40,7 @@
                         <section class="card card-body border mb-0">
                             
                         <form action="{{ $sewa_bus->ID_SEWA_BUS }}" method="post">
-                            <!-- {{ csrf_field() }} -->
+                            {{ csrf_field() }}
                             <input type="hidden" name="ID_SEWA_BUS" value="{{ $sewa_bus->ID_SEWA_BUS }}"> <br/>
                             <div class="form-row">
                             <input type="hidden" name="ID_PENGGUNA" value="{{ $sewa_bus->ID_PENGGUNA }}"> <br/>
@@ -108,12 +108,65 @@
 
                         <h3>Billing Information</h3>
                         <section class="card card-body border mb-0">
+                        <form>
+                        <div class="col-md-2 col-sm-12 form-group">
+                                        <label for="name">Category Armada</label>
+                                        <select name="ID_CATEGORY" class="form-control" id="ID_CATEGORY2" onchange="getTujuan()">
+                                        @foreach($category_armada as $c)
+                                       
+                                        <option id="ID_CATEGORY1{{$c->ID_CATEGORY}}" value="{{$c->ID_CATEGORY}}" 
+                                        data-tujuan="{{$c->ID_CATEGORY}}">{{$c->NAMA_CATEGORY}}</option>
+                                       
+                                        @endforeach                 
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 col-sm-12 form-group">
+                                        <label for="name">Tujuan Sewa</label>
+                                            <select name="TUJUAN_SEWA" class="form-control" id="TUJUAN_SEWA2" onchange="getPrice()">
+                                            <!-- @foreach($pricelist_sewa_armada as $pr)
+                                        
+                                            <option id="TUJUAN_SEWA1{{$pr->ID_PRICELIST}}" value="{{$pr->ID_PRICELIST}}" 
+                                            data-pricelist="{{$pr->PRICELIST_SEWA}}">{{$pr->TUJUAN_SEWA}}</option>
+                                        
+                                            @endforeach                  -->
+                                            </select>
+                                    </div>
+                                    <div class="col-md-2 col-sm-12 form-group">
+                                        <label for="hargasewa">Harga</label>
+                                        <input type="hargasewa" class="form-control" name="hargasewa" id="hargasewa2" 
+                                        value="{{$pr->PRICELIST_SEWA}}" readonly="" onchange="getTotal()">
+                                    </div>
+                                    <div class="col-md-2 col-sm-12 form-group">
+                                        <label for="gender">Quantity</label>
+                                        <div>
+                                            <input type="number" class="form-control" value="1" id="qty" onchange="getTotal()">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-2 col-sm-12 form-group">
+                                        <label for="profession">Sub Total</label>
+                                        <input type="subtotal" class="form-control" name="subtotal" id="subtotal1">
+                                    </div>
+                                    <div class="col-md-2 col-sm-12 form-group">
+                                        <div><label>&nbsp;</label></div>
+                                        <button type="button" class="btn btn-danger" data-repeater-delete>
+                                            <i class="ti-close font-size-10 mr-2"></i> Delete
+                                        </button>
+                                </div>
+                    </form>
                         
-                        <form action="" method="post">
-                        <div data-repeater-list="group-a">
-                            <div data-repeater-item>
-                                <div class="row">
-                                <div class="col-md-2 col-sm-12 form-group">
+                         <form class="basic-repeater" action="" method="POST" enctype="multipart/form-data">
+                         {{ csrf_field() }}
+                         <!-- <center>
+                         <div class="col-md-4 mb-3">
+                                        <label for="profession">Tanggal Sewa</label>
+                                        <input type="date" class="form-control" name="tglsewa" id="tglsewa">
+                                   </div></center> -->
+                                   <!-- <div><label>&nbsp;</label></div> -->
+                            <div data-repeater-list="group-a">
+                                <div data-repeater-item>
+                                    <div class="row" id="">
+                                    <div class="col-md-2 col-sm-12 form-group">
                                         <label for="name">Category Armada</label>
                                         <select name="ID_CATEGORY" class="form-control" id="ID_CATEGORY1" onchange="getTujuan()">
                                         @foreach($category_armada as $c)
@@ -127,12 +180,12 @@
                                     <div class="col-md-2 col-sm-12 form-group">
                                         <label for="name">Tujuan Sewa</label>
                                             <select name="TUJUAN_SEWA" class="form-control" id="TUJUAN_SEWA1" onchange="getPrice()">
-                                            @foreach($pricelist_sewa_armada as $pr)
+                                            <!-- @foreach($pricelist_sewa_armada as $pr)
                                         
                                             <option id="TUJUAN_SEWA1{{$pr->ID_PRICELIST}}" value="{{$pr->ID_PRICELIST}}" 
                                             data-pricelist="{{$pr->PRICELIST_SEWA}}">{{$pr->TUJUAN_SEWA}}</option>
                                         
-                                            @endforeach                 
+                                            @endforeach                  -->
                                             </select>
                                     </div>
                                     <div class="col-md-2 col-sm-12 form-group">
@@ -151,37 +204,51 @@
                                         <label for="profession">Sub Total</label>
                                         <input type="subtotal" class="form-control" name="subtotal" id="subtotal1">
                                     </div>
+                                    <div class="col-md-2 col-sm-12 form-group">
+                                        <div><label>&nbsp;</label></div>
+                                        <button type="button" class="btn btn-danger" data-repeater-delete>
+                                            <i class="ti-close font-size-10 mr-2"></i> Delete
+                                        </button>
                                     </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                        <button type="button" class="btn btn-primary" id="add" data-repeater-create>
+                            <i class="ti-plus font-size-10 mr-2"></i> Add
+                        </button>
+                        <button type="submit" class="btn btn-success" id="save">
+                            <i class="ti-plus font-size-10 mr-2"></i> Submit
+                        </button>
+                    </form>
                     <div><label>&nbsp;</label></div>
                     <div><label>&nbsp;</label></div>
-                    
-                    <div data-repeater-list="group-a">
-                    <div data-repeater-item>
-                        <div class="row">
-                            <div class="col-md-2 col-sm-12 form-group">
+                    <form class="basic-repeater">
+                            <div data-repeater-list="group-a">
+                                <div data-repeater-item>
+                                    <div class="row">
+                            <div class="col-md-2 col-sm-6 form-group">
                                 <label for="gender">Total Payment</label>
-                                    <input type="text" class="form-control" name="total_payment" id="total_payment">
+                                    <input type="text" class="form-control" name="dp" id="dp">
                             </div>
                                     
                             <div class="col-md-2 col-sm-12 form-group">
                                 <label for="profession">DP (25%)</label>
                                     <input type="text" class="form-control" name="dp" id="dp">
                             </div>
+
+                            <!-- <div class="col-md-2 col-sm-12 form-group">
+                                <label for="profession">Harus Bayar</label>
+                                    <input type="text" class="form-control" name="harusbayar" id="harusbayar">
+                            </div> -->
                                     
                             <div class="col-md-2 col-sm-12 form-group">
                                 <label for="profession">Sisa Bayar</label>
                                     <input type="sisabayar" class="form-control" name="sisabayar" id="sisabayar">
                             </div>
+                                </div>
                             </div>
-
-                            </div>
-                            </div>
-                           
-                </form>
-                        
-                      
+                        </div>
+                    </form>
 
                 </section>
 
@@ -388,25 +455,27 @@
        headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')}
    });
 
-   $('#TUJUAN_SEWA1').on('change',function(){
-       console.log("masuk Tujuan SEwa");
+   $('#TUJUAN_SEWA1').change(function(){
+       console.log("masuk");
         $('#hargasewa1').val(10000000);
    });
 
    
    function getTujuan(){
-    var cat = document.getElementById('ID_CATEGORY1').value;
+      
        $.ajax({
            url:"{{url('tujuan')}}",
-            data:"category="+cat,
+            data:{category:'CTG03'},
            dataType: "json",
            type: "GET",
-           success:function(response){
+           succes:function(response){
+                console.log("masuk tujuan");
+            $('#hargasewa2').val(10000000);
             // alert("Percoban");
-                $('#TUJUAN_SEWA1').empty();
-                 $.each(response.data,function(key,item){
-                     $('#TUJUAN_SEWA1').append('<option id="TUJUAN_SEWA1'+item.ID_PRICELIST+'"  value"'+item.ID_CATEGORY+'" data-pricelist="'+item.PRICELIST_SEWA+'">'+item.TUJUAN_SEWA+'</option>');
-                 });
+                $('#TUJUAN_SEWA2').empty();
+                // $.each(response.data,function(key,item){
+                //     $('#TUJUAN_SEWA2').append('<option id="TUJUAN_SEWA2'+item.ID_PRICELIST+'"  value"'+item.ID_CATEGORY+'" data-pricelist="'+item.PRICELIST_SEWA+'">'+item.TUJUAN_SEWA+'</option>');
+                // });
            }
        });
    }
@@ -430,34 +499,24 @@
        $('#subtotal1').val(subtotal);
    }
 
-   function getPayment(){
-       var sub1 = document.getElementById('subtotal1').value;
-       var jumlah = document.getElementById('total_payment').value;
-       var subtotal = (Number(sub*kuantiti));
-       $('#subtotal1').val(subtotal);
-   }
-
-   function percentDP(){
-      console.log("function percentDisc");
-      var percent = document.getElementById('percent').value;
-      if(percent>=25){
-        console.log('masukkk if percent');
-        var percent = document.getElementById('percent').value=0;
-      }
-      var total = document.getElementById('total_payment').value;
-      var hasil = (Number(percent)/100) * total;
-      document.getElementById("dp").value = hasil;
-      document.getElementById("total_payment").value = total;
-      document.getElementById("sisabayar").innerHTML = money(total-hasil);
-      getTotal();
-    };
-
-   function getDP(){
-       var sub1 = document.getElementById('total_payment').value;
-       var jumlah = document.getElementById('dp').value;
-       var subtotal = (Number(sub*kuantiti));
-       $('#subtotal1').val(subtotal);
-   }
+   function hitunghargajualA(){
+        console.log("function getSubTotal");
+        var hargajual = document.getElementById('subtotal').value;
+        // console.log(hargajual);
+        var x = document.getElementById('subtotal')
+        var hargadasar = document.getElementById('hargasewa').value;
+        // if(paketA){
+        var totals = (Number(hargasewa*qty));
+        // hargajual = totals;
+            // x.innerHTML = totals;
+         $('#subotal').val(totals);
+       
+        console.log(totals);
+        // }else{
+        //     var totals = (Number(hargadasar*30));
+        // hargajual.value = totals;
+        // console.log(totals);
+        }
 
     
 </script>
@@ -473,7 +532,6 @@ $('#add').click(function(){
 <!-- Form wizard -->
 <script src="{{ url('vendors/form-wizard/jquery.steps.min.js') }}"></script>
 <script src="{{ url('assets/js/examples/form-wizard.js') }}"></script>
-<script src="{{ url('vendors/jquery/jquery-ui.min.js') }}"></script>
 
 <!-- Fullcalendar -->
 <script src="{{ url('vendors/fullcalendar/moment.min.js') }}"></script>
