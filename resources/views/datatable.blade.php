@@ -120,7 +120,7 @@
                                    <!-- <div><label>&nbsp;</label></div> -->
                                    <div class="form-group row">
 		<div class="col-sm-12 col-md-2">
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Choose Product</button>
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Choose Armada</button>
 		</div>
 	</div>
 
@@ -131,6 +131,7 @@
 				<th scope="col">Tujuan Sewa</th>
 				<th scope="col">Price</th>
 				<th scope="col">Quantity</th>
+				<th scope="col">Discount (Rp.)</th>
 				<th scope="col">Sub Total</th>
 				<th scope="col">Action</th>
 			</tr>
@@ -154,19 +155,19 @@
 			<div class="form-group row">
 				<div class="col-sm-12 col-md-7"></div>
 				<div class="col-sm-12 col-md-2">
-					<label><strong>Tax 10%</strong></label><br>
+					<label><strong>DP 25%</strong></label><br>
 				</div>
 				<div class="col-sm-12 col-md-1">
 					<label>Rp.</label><br>
 				</div>
 				<div class="col-sm-12 col-md-2">
-					<label id="pajak"></label><br>
+					<label id="dpbus"></label><br>
 				</div>
 			</div>
 			<div class="form-group row">
 				<div class="col-sm-12 col-md-7"></div>
 				<div class="col-sm-12 col-md-2">
-					<label><strong>TOTAL</strong></label><br>
+					<label><strong>SISA BAYAR</strong></label><br>
 				</div>
 				<div class="col-sm-12 col-md-1">
 					<label>Rp.</label><br>
@@ -202,7 +203,10 @@
 							<tr role="row" class="odd" onclick="pilihBarang('{{ $p -> ID_PRICELIST }}')" style="cursor:pointer">
 								<td>{{ $p->NAMA_CATEGORY }}</td>
 								<td>{{ $p->TUJUAN_SEWA }}</td>
-								<td>{{ $p->PRICELIST_SEWA }}</td>
+                                <td>
+                                Rp <?php echo number_format($p->PRICELIST_SEWA,'0',',','.'); ?>
+                                </td>
+								<!-- <td>{{ $p->PRICELIST_SEWA }}</td> -->
 							</tr>
 							@endforeach
 						</tbody>
@@ -434,13 +438,15 @@ var barang = <?php echo json_encode($pricelist_sewa_armada); ?>;
 		var cell4 = row.insertCell(3);
 		var cell5 = row.insertCell(4);
 		var cell6 = row.insertCell(5);
+		var cell7 = row.insertCell(6);
 		console.log(index);
 		cell1.innerHTML = '<input type="hidden" name="id['+barang[index]["ID_PRICELIST"]+']" value="'+barang[index]["ID_PRICELIST"]+'">'+barang[index]["NAMA_CATEGORY"];
 		cell2.innerHTML = '<input type="hidden" name="id['+barang[index]["ID_PRICELIST"]+']" value="'+barang[index]["NAMA_CATEGORY"]+'">'+barang[index]["TUJUAN_SEWA"];	
 		cell3.innerHTML = '<input type="hidden" id="harga'+barang[index]["ID_PRICELIST"]+'" name="harga['+barang[index]["ID_PRICELIST"]+']" value="'+barang[index]["PRICELIST_SEWA"]+'">'+barang[index]["PRICELIST_SEWA"];
-		cell4.innerHTML = '<input type="number" name="qty['+barang[index]["ID_PRICELIST"]+']" value="1" oninput="recount(\''+barang[index]["ID_PRICELIST"]+'\')" id="qty'+barang[index]["ID_PRICELIST"]+'" style="background:primary; border:none; text-align:left; width=100%">';	
-		cell5.innerHTML = '<input type="hidden" class="subtotal" name="subtotal['+barang[index]["ID_PRICELIST"]+']" value="'+barang[index]["PRICELIST_SEWA"]+'" id="subtotal'+barang[index]["ID_PRICELIST"]+'"><span id="subtotalval'+barang[index]["ID_PRICELIST"]+'">'+barang[index]["PRICELIST_SEWA"]+'</span>';
-		cell6.innerHTML = '<button onclick="hapusEl(\''+id+'\')" class="btn btn-primary btn-block text-uppercase">Delete</button>';
+		cell4.innerHTML = '<input type="number" name="qty['+barang[index]["ID_PRICELIST"]+']" value="1" oninput="recount(\''+barang[index]["ID_PRICELIST"]+'\')" id="qty'+barang[index]["ID_PRICELIST"]+'" style="background:secondary; border:none; text-align:left; width=100%">';	
+        cell5.innerHTML = '<input class="discount" type="number" name="discount['+barang[index]["ID_PRICELIST"]+']" value="0" oninput="recount(\''+barang[index]["ID_PRICELIST"]+'\')" id="discount'+barang[index]["ID_PRICELIST"]+'" style="background:primary; border:none; text-align:left; width=100%">';	
+		cell6.innerHTML = '<input type="hidden" class="subtotal" name="subtotal['+barang[index]["ID_PRICELIST"]+']" value="'+barang[index]["PRICELIST_SEWA"]+'" id="subtotal'+barang[index]["ID_PRICELIST"]+'"><span id="subtotalval'+barang[index]["ID_PRICELIST"]+'">'+barang[index]["PRICELIST_SEWA"]+'</span>';
+		cell7.innerHTML = '<button onclick="hapusEl(\''+id+'\')" class="btn btn-primary btn-block text-uppercase">Delete</button>';
 
 		total();
 		
@@ -463,6 +469,7 @@ var barang = <?php echo json_encode($pricelist_sewa_armada); ?>;
 		console.log(plus);
 		recount(i);
 	}
+
 	function total(){
 		var subtotals = document.getElementsByClassName("subtotal");
 		var total = 0;
@@ -471,8 +478,8 @@ var barang = <?php echo json_encode($pricelist_sewa_armada); ?>;
 		}
 		document.getElementById("subtotal-val").innerHTML = total;
 		var dp = parseInt(25/100*total);
-		document.getElementById("pajak").innerHTML = dp;
-		total = parseInt(110/100*total);
+		document.getElementById("dpbus").innerHTML = dp;
+		total = parseInt(75/100*total);
 		document.getElementById("total-val").innerHTML = total;
 		document.getElementById("total_payment").value = total;
 
@@ -480,16 +487,13 @@ var barang = <?php echo json_encode($pricelist_sewa_armada); ?>;
 
 	function recount(id){
 		var price = document.getElementById("harga"+id).value;
-		//var discount = document.getElementById("discount"+id).value;
+		var diskon = document.getElementById("discount"+id).value;
 		var sembarang = document.getElementById("qty"+id).value;
-
-		var lego = Number(price*sembarang)-discount; 
+     
+		var lego = Number(price*sembarang)-diskon; 
 		document.getElementById("subtotal"+id).value = lego;
 		document.getElementById("subtotalval"+id).innerHTML = lego;
 		total();
-
-
-		
 	}
 
 	function modal(){
