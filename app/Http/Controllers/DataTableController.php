@@ -36,7 +36,11 @@ class DataTableController extends Controller
         $customer= customer::find($sewa_bus->ID_CUSTOMER);
 
         $category_armada=DB::table('category_armada')->get();
-        $pricelist_sewa_armada=DB::table('pricelist_sewa_armada')->get();
+        $pricelist_sewa_armada=DB::table('pricelist_sewa_armada')
+        ->join('category_armada', 'pricelist_sewa_armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
+        ->select('pricelist_sewa_armada.ID_PRICELIST', 'category_armada.NAMA_CATEGORY', 'pricelist_sewa_armada.TUJUAN_SEWA', 
+        'pricelist_sewa_armada.PRICELIST_SEWA')
+        ->get();
         $sewa_bus_category=DB::table('sewa_bus_category')
         ->join('sewa_bus','sewa_bus_category.ID_SEWA_BUS', '=', 'sewa_bus.ID_SEWA_BUS')
         ->join('pricelist_sewa_armada','sewa_bus_category.ID_PRICELIST', '=', 'pricelist_sewa_armada.ID_PRICELIST')

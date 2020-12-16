@@ -157,7 +157,7 @@
                                     <!-- <td>{{ $sb -> DP_BUS }}</td>
                                     <td>{{ $sb -> HARGA_SEWA_BUS }}</td> -->
                                     <td>
-                                    <a href="{{ url('sewa_bus_detail', ['id'=>$sb -> ID_SEWA_BUS]) }}">
+                                    <a href="{{ url('datatable', ['id'=>$sb -> ID_SEWA_BUS]) }}">
                                     <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit" data-toggle="modal" data-target="#exampleModal12">
                                         <i class="ti-pencil"></i>
                                     </button>

@@ -239,4 +239,23 @@ class SewaDetailController extends Controller
 
         return response()->json(['status'=>'success','data'=>$tmp]);
     }
+
+    public function getHarga(){
+        $tmp1 = DB::table('pricelist_sewa_armada')->where('TUJUAN_SEWA', request()->price)
+        ->get();
+
+        return response()->json(['status'=>'success','data'=>$tmp1]);
+    }
+
+    public function getCountries()
+    {
+        $provinsi = DB::table('pricelist_sewa_armada')->pluck("NAMA_CATEGORY","ID_CATEGORY");
+        return view('sewa_bus_detail',compact('pricelist_sewa_armada'));
+    }
+
+    public function getPrice($id) 
+    {        
+        $kota = DB::table("pricelist_sewa_armada")->where("ID_CATEGORY",$id)->pluck("TUJUAN_SEWA");
+        return json_encode($kota);
+    }
 }

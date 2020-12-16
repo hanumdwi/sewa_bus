@@ -138,12 +138,16 @@ Route::post('updateswitch', 'ScheduleController@update_switch');
 Route::get('sewa_bus_detail/{id}','SewaDetailController@index')->name('sewa_bus_detail_index');
 Route::post('sewa_bus_detail/{id}','SewaDetailController@update');
 Route::get('tujuan','SewaDetailController@getTujuan');
+Route::get('harga','SewaDetailController@getHarga');
 Route::post('sewa_bus_detailstore', 'SewaDetailController@store');
 Route::post('sewa_bus_detailupdate', 'SewaDetailController@update');
 Route::get('sewa_bus_detailsewa', 'SewaDetailController@getAllsewa_bus_detail');
 Route::get('sewa_bus_detailsewa/{id}', 'SewaDetailController@getsewa_bus_detailById');
 Route::post('updateswitch', 'SewaDetailController@update_switch');
 //===================================================================================
+
+Route::get('getstates/{id}','SewaDetailController@getCountries');
+Route::get('getkecamatan/{id}','SewaDetailController@getPrice');
 
 //Sewa Bus Detail
 Route::get('datatable/{id}','DataTableController@index');
@@ -154,7 +158,8 @@ Route::get('datatablesewa', 'DataTableController@getAlldatatable');
 Route::get('datatablesewa/{id}', 'DataTableController@getdatatableById');
 Route::post('updateswitch', 'DataTableController@update_switch');
 //===================================================================================
-
+Route::get('ajax/{id}','DataTableController@index');
+Route::post('ajax/{id}','DataTableController@update');
 //Sewa Bus Invoice
 Route::get('invoice/{id}','SewaDetailController@pdf');
 Route::get('invoicepaket/{id}','SewaDetailController@pdf_paket');

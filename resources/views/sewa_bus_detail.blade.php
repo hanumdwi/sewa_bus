@@ -126,7 +126,7 @@
                                     </div>
                                     <div class="col-md-2 col-sm-12 form-group">
                                         <label for="name">Tujuan Sewa</label>
-                                            <select name="TUJUAN_SEWA" class="form-control" id="TUJUAN_SEWA1" onchange="getPrice()">
+                                            <select name="TUJUAN_SEWA" class="form-control" id="TUJUAN_SEWA1" onchange="getHarga()">
                                             @foreach($pricelist_sewa_armada as $pr)
                                         
                                             <option id="TUJUAN_SEWA1{{$pr->ID_PRICELIST}}" value="{{$pr->ID_PRICELIST}}" 
@@ -376,22 +376,22 @@
 //                     ]).node().id = 'row'+results.product[i]['ID_CATEGORY'];
 //                     $('#tabelproduk').DataTable().draw();
 
-   $(document).ready(function(){
-    console.log("hai");
-       $("#add").click(function(){
-           var nilai = $("#TUJUAN_SEWA").attr('select');
-           console.log(nilai);
-       })
-   });
+//    $(document).ready(function(){
+//     console.log("hai");
+//        $("#add").click(function(){
+//            var nilai = $("#TUJUAN_SEWA").attr('select');
+//            console.log(nilai);
+//        })
+//    });
 
    $.ajaxSetup({
        headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')}
    });
 
-   $('#TUJUAN_SEWA1').on('change',function(){
-       console.log("masuk Tujuan SEwa");
-        $('#hargasewa1').val(10000000);
-   });
+//    $('#TUJUAN_SEWA1').on('change',function(){
+//        console.log("masuk Tujuan SEwa");
+//         $('#hargasewa1').val(10000000);
+//    });
 
    
    function getTujuan(){
@@ -411,11 +411,28 @@
        });
    }
 
+   function getHarga(){
+    var pr = document.getElementById('TUJUAN_SEWA1').value;
+       $.ajax({
+           url:"{{url('harga')}}",
+            data:"price="+pr,
+           dataType: "json",
+           type: "GET",
+           success:function(response){
+            // alert("Percoban");
+                $('#hargasewa1').empty();
+                $.each(response.data,function(key,item){
+                     $('#hargasewa1').append('<input type="hargasewa'+'"  value"'+item.PRICELIST_SEWA+'">');
+                 });
+           }
+       });
+   }
+
    function getPrice(){
        console.log("masuk");
        var tujuan = document.getElementById('TUJUAN_SEWA1').value;
-       var tmp = document.getElementsByTagName('select')[0].getAttribute("TUJUAN_SEWA[]");
-       console.log(tmp);
+      // var tmp = document.getElementsByTagName('select')[0].getAttribute("TUJUAN_SEWA[]");
+       //console.log(tmp);
        var ratings =  $('#TUJUAN_SEWA1'+tujuan).data('pricelist');
        var price = document.getElementById('hargasewa1').value;
     //    var harga = $('#TUJUAN_SEWA1'+this.value).data('pricelist');
@@ -459,8 +476,63 @@
        $('#subtotal1').val(subtotal);
    }
 
-    
 </script>
+
+<script type="text/javascript">
+    jQuery(document).ready(function ()
+    {
+        jQuery('select[name="ID_CATEGORY"]').on('change',function(){
+               var provinsiID = jQuery(this).val();
+               if(provinsiID)
+               {
+                  jQuery.ajax({
+                     url : 'sewa_bus_detail/getTujuan/' +provinsiID,
+                     type : "GET",
+                     dataType : "json",
+                     success:function(data)
+                     {
+                        console.log(data);
+                        jQuery('select[name="TUJUAN_SEWA"]').empty();
+                        jQuery.each(data, function(key,value){
+                           $('select[name="TUJUAN_SEWA"]').append('<option value="'+ key +'">'+ value +'</option>');
+                        });
+                     }
+                  });
+               }
+               else
+               {
+                  $('select[name="TUJUAN_SEWA"]').empty();
+               }
+            });
+
+            jQuery('select[name="TUJUAN_SEWA"]').on('change',function(){
+               var kotaID = jQuery(this).val();
+               if(kotaID)
+               {
+                
+                  jQuery.ajax({
+                     url : 'sewa_bus_detail/getPrice/' +kotaID,
+                     type : "GET",
+                     dataType : "json",
+                     success:function(data)
+                     {
+
+                        console.log(data);
+                        jQuery('#hargasewa1').val();
+                        jQuery.each(data, function(key,value){
+                           $('#hargasewa1').val();
+                        });
+                     }
+                  });
+               }
+               else
+               {
+                  $('#hargasewa1').empty();
+               }
+            });
+        });
+</script>
+
 
 <script>
 
