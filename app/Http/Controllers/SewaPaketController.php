@@ -144,7 +144,7 @@ class SewaPaketController extends Controller
     public function update(Request $request, $id)
     {
         DB::table('sewa_paket_wisata')->where('ID_SEWA_PAKET',$request->ID_SEWA_PAKET)->update([
-            'ID_SEWA_PAKET'         => $request->ID_SEWA_PAKET,
+                'ID_SEWA_PAKET'         => $request->ID_SEWA_PAKET,
                 'TGL_SEWA_PAKET'        => $request->TGL_SEWA_PAKET,
                 'TGL_AKHIR_SEWA_PAKET'  => $request->TGL_AKHIR_SEWA_PAKET,
                 'ID_PAKET'              => $request->ID_PAKET,
@@ -153,7 +153,7 @@ class SewaPaketController extends Controller
                 // 'HARGA_SEWA_PAKET'      => $request->HARGA_SEWA_PAKET,
                 'JAM_SEWA_PAKET'        => $request->JAM_SEWA_PAKET,
                 'JAM_AKHIR_SEWA_PAKET'  => $request->JAM_AKHIR_SEWA_PAKET,
-                'STATUS_PAKET_WISATA'              =>  $request->STATUS_PAKET_WISATA
+                'STATUS_PAKET_WISATA'   => $request->STATUS_PAKET_WISATA
                 // 'DP_PAKET'              =>  $request->DP_PAKET
         ]);
 

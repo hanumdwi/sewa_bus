@@ -152,7 +152,8 @@ Route::get('getkecamatan/{id}','SewaDetailController@getPrice');
 //Sewa Bus Detail
 Route::get('datatable/{id}','DataTableController@index');
 Route::post('datatable/{id}','DataTableController@update');
-Route::post('datatablestore', 'DataTableController@store');
+Route::post('datatable_store/{id}', 'DataTableController@store');
+
 Route::post('datatableupdate', 'DataTableController@update');
 Route::get('datatablesewa', 'DataTableController@getAlldatatable');
 Route::get('datatablesewa/{id}', 'DataTableController@getdatatableById');

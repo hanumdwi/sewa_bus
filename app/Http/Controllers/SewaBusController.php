@@ -28,7 +28,8 @@ class SewaBusController extends Controller
         ->join('pengguna','sewa_bus.ID_PENGGUNA', '=', 'pengguna.ID_PENGGUNA')
         ->select('sewa_bus.ID_SEWA_BUS','sewa_bus.TGL_SEWA_BUS',
         'sewa_bus.TGL_AKHIR_SEWA','sewa_bus.LAMA_SEWA','customer.NAMA_CUSTOMER', 'sewa_bus.DP_BUS',
-        'sewa_bus.HARGA_SEWA_BUS','sewa_bus.JAM_SEWA','sewa_bus.JAM_AKHIR_SEWA','pengguna.NAMA_PENGGUNA', 'sewa_bus.STATUS_SEWA')
+        'sewa_bus.JAM_SEWA','sewa_bus.JAM_AKHIR_SEWA','pengguna.NAMA_PENGGUNA', 'sewa_bus.STATUS_SEWA',
+        'sewa_bus.SISA_SEWA_BUS', 'sewa_bus.DP_BUS')
         ->get();
 
         
@@ -78,13 +79,14 @@ class SewaBusController extends Controller
                 'ID_SEWA_BUS' => $request->ID_SEWA_BUS,
                 'TGL_SEWA_BUS' => $request->TGL_SEWA,
                 'TGL_AKHIR_SEWA' => $request->TGL_AKHIR_SEWA,
-                'LAMA_SEWA' => $request->LAMA_SEWA,
+                // 'LAMA_SEWA' => $request->LAMA_SEWA,
                 'ID_CUSTOMER' => $request->ID_CUSTOMER,
                 'ID_PENGGUNA' => $request->ID_PENGGUNA,
                 'HARGA_SEWA_BUS' => $request->HARGA_SEWA_BUS,
                 'JAM_SEWA' => $request->JAM_SEWA,
                 'JAM_AKHIR_SEWA' => $request->JAM_AKHIR_SEWA,
                 'DP_BUS'        =>  $request->DP_SEWA,
+                'SISA_SEWA_BUS'        =>  $request->SISA_SEWA_BUS,
                 'STATUS_SEWA' => $request->statussewa
             ]);
 
@@ -167,7 +169,7 @@ class SewaBusController extends Controller
                 'ID_SEWA_BUS' => $request->ID_SEWA_BUS,
                 'TGL_SEWA_BUS' => $request->TGL_SEWA,
                 'TGL_AKHIR_SEWA' => $request->TGL_AKHIR_SEWA,
-                'LAMA_SEWA' => $request->LAMA_SEWA,
+                // 'LAMA_SEWA' => $request->LAMA_SEWA,
                 'ID_CUSTOMER' => $request->ID_CUSTOMER,
                 'ID_PENGGUNA' => $request->ID_PENGGUNA,
                 'HARGA_SEWA_BUS' => $request->HARGA_SEWA_BUS,

@@ -46,7 +46,7 @@ class SewaDetailController extends Controller
         'category_armada.NAMA_CATEGORY', 'pricelist_sewa_armada.TUJUAN_SEWA', 'pricelist_sewa_armada.PRICELIST_SEWA')
         ->get();
 
-     
+        
 
         return view('sewa_bus_detail', ['sewa_bus' =>$sewa_bus,'pengguna'=>$pengguna,'customer'=>$customer],
         ['sewa_bus_category'=>$sewa_bus_category,'pricelist_sewa_armada'=>$pricelist_sewa_armada, 'category_armada'=>$category_armada]);
@@ -220,7 +220,7 @@ class SewaDetailController extends Controller
                 'ID_SEWA_BUS' => $request->ID_SEWA_BUS,
                 'TGL_SEWA_BUS' => $request->TGL_SEWA,
                 'TGL_AKHIR_SEWA' => $request->TGL_AKHIR_SEWA,
-                'LAMA_SEWA' => $request->LAMA_SEWA,
+                // 'LAMA_SEWA' => $request->LAMA_SEWA,
                 'ID_CUSTOMER' => $request->ID_CUSTOMER,
                 'ID_PENGGUNA' => $request->ID_PENGGUNA,
                 'HARGA_SEWA_BUS' => $request->HARGA_SEWA_BUS,

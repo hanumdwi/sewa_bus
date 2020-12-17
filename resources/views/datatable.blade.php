@@ -85,17 +85,17 @@
                                     <input type="time" class="form-control" id="JAM_AKHIR_SEWA" name="JAM_AKHIR_SEWA" value="{{$sewa_bus->JAM_AKHIR_SEWA}}">
                                 </div>
                                
-                                <div class="col-md-4 mb-3">
+                                <!-- <div class="col-md-4 mb-3">
                                     <label for="LAMA_SEWA" class="col-form-label">Lama sewa :</label>
                                     <input type="LAMA_SEWA" class="form-control" id="LAMA_SEWA" name="LAMA_SEWA" value="{{$sewa_bus->LAMA_SEWA}}">
-                                </div>
+                                </div> -->
 
                                 <div class="col-md-4 mb-3">
                                     <label for="statussewa" class="col-form-label">Status Sewa :</label>
                                     <select name="statussewa" class="form-control" id="statussewa" value="{{$sewa_bus->STATUS_SEWA}}">
                                         <option selected="selected">-- Status --</option>
                                             <option>Booking</option>
-                                            <option>Belum Bayar</option>
+                                            <option>On Schedule</option>
                                             <option>Lunas</option>
                                     </select>
                                     </div>
@@ -110,7 +110,7 @@
                         <h3>Billing Information</h3>
                         <section class="card card-body border mb-0">
                         
-                         <form class="basic-repeater" action="" method="POST" enctype="multipart/form-data">
+                         <form action="/datatable_store/{{ $sewa_bus->ID_SEWA_BUS }}" method="post">
                          {{ csrf_field() }}
                          <!-- <center>
                          <div class="col-md-4 mb-3">
@@ -143,7 +143,7 @@
 			<div class="form-group row">
 				<div class="col-sm-12 col-md-7"></div>
 				<div class="col-sm-12 col-md-2">
-					<label><strong>Sub Total</strong></label><br>
+					<label><strong>Total</strong></label><br>
 				</div>
 				<div class="col-sm-12 col-md-1">
 					<label>Rp.</label><br>
@@ -201,7 +201,7 @@
 						<tbody>
 							@foreach( $pricelist_sewa_armada as $p )
 							<tr role="row" class="odd" onclick="pilihBarang('{{ $p -> ID_PRICELIST }}')" style="cursor:pointer">
-								<td>{{ $p->NAMA_CATEGORY }}</td>
+								<td value="{{$p->ID_CATEGORY}}">{{ $p->NAMA_CATEGORY }}</td>
 								<td>{{ $p->TUJUAN_SEWA }}</td>
                                 <td>
                                 Rp <?php echo number_format($p->PRICELIST_SEWA,'0',',','.'); ?>
@@ -224,170 +224,113 @@
 
                         <h3>Payment Details</h3>
                         <section class="card card-body border mb-0">
-                            <h5>Invoice</h5>
+                            <h3>Konfirmasi Pembayaran</h3>
                                     <div class="invoice">
-                                        <div class="d-md-flex justify-content-between align-items-center">
-                                            <img src="{{ url('assets/media/image/logo/mdc.png') }}" alt="logo">
-                                            <h3 class="text-xs-left m-b-0">#INV-{{$sewa_bus->ID_SEWA_BUS}}</h3>
-                                        </div>
-                                            <hr class="m-t-b-50">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <p>
-                                                        <b>PT. Medina Dzikra Cemerlang Trans</b><br>
-                                                        JL. Suwoko No. 43 A Lamongan - Jawa Timur<br>
-                                                        Telp : (0322) 3101285
-                                                    </p>
-                                                    <p>
-                                                    <b>{{$pengguna->NAMA_PENGGUNA}},</b><br>{{$sewa_bus->TGL_SEWA_BUS}}   -   {{$sewa_bus->TGL_AKHIR_SEWA}}
-                                                    <br>{{$sewa_bus->JAM_SEWA}}       -      {{$sewa_bus->JAM_AKHIR_SEWA}}</p>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <p class="text-right">
-                                                        <b>Invoice to</b>
-                                                    </p>
-                                                    <p class="text-right"> {{$customer->NAMA_CUSTOMER}},<br> {{$customer->TELEPHONE}},<br> {{$customer->ALAMAT}}.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="table-responsive">
-                                                <table class="table my-4">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>Description</th>
-                                                        <th class="text-right">Quantity</th>
-                                                        <th class="text-right">Unit Cost</th>
-                                                        <th class="text-right">Total Price</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    @foreach($sewa_bus_category as $sbc)
-                                                    @if($sbc->ID_SEWA_BUS == $sewa_bus->ID_SEWA_BUS)
-                                                    <tr class="text-right">
-                                                        <td class="text-left">{{ $loop->iteration }}</td>
-                                                        <td class="text-left">{{$sbc -> NAMA_CATEGORY}} - 
-                                                        {{$sbc -> TUJUAN_SEWA}}
-                                                        </td>
-                                                        <td>{{$sbc -> QUANTITY}}</td>
-                                                        <td>Rp. {{$sbc -> PRICELIST_SEWA}}</td>
-                                                        <td>Rp. {{$sbc -> TOTAL}}</td>
-                                                    </tr>
-                                                    @endif
-                                                    @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="text-right">
-                                                <p>Sub - Total : $12,348</p>
-                                                <p>DP (25%) : $138</p>
-                                                <h4 class="font-weight-800">Total : $13,986</h4>
-                                            </div>
-                                            <p class="text-center small text-muted  m-t-50">
-                                                <span class="row">
-                                                    <span class="col-md-6 offset-3">
-                                                        Invoice of PT. MDC Trans
-                                                    </span>
-                                                </span>
-                                            </p>
-                                        </div>
-                                        <div class="text-right d-print-none">
-                                            <hr class="my-5">
-                                            <a href="#" class="btn btn-primary">Send Invoice</a>
-                                            <a href="javascript:window.print()" class="btn btn-success m-l-5">
-                                                <i class="ti-printer mr-2"></i> Print
-                                            </a>
+                            <form action="pembayaranstore" method="post">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="nama" class="col-form-label">Rekening Pembayaran :</label>
+                                    <select name="ID_REKENING" class="form-control" id="ID_REKENING">
+                                                      
+                                </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nama" class="col-form-label">Cara Bayar :</label>
+                                    <select name="carabayar" class="form-control" id="carabayar">
+                                        <option selected="selected">-- Pilih --</option>
+                                            <option>Transfer</option>
+                                            <option>Tunai</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="date" class="col-form-label">Tanggal Bayar :</label>
+                                    <input type="date" class="form-control" id="tanggalbayar" name="tanggalbayar">
+                                    </div>
+                                <div class="form-group">
+                                    <label>Upload Bukti Bayar</label>
+                                        <input type="file" name="avatar" class="form-control">
+                                       
+                                    <h8>Format JPG, PNG, Maksimal 2 MB</h8>
+                                </div>
+                                <div class="form-group">
+                                    <label for="jumlahbayar" class="col-form-label">Jumlah Pembayaran :</label>
+                                    <input type="jumlahbayar" class="form-control" id="jumlahbayar" name="jumlahbayar">
+                                    </div>
+                                <div class="form-group">
+                                    <label for="pemilikrekening" class="col-form-label">Nama Pemilik Rekening :</label>
+                                    <input type="pemilikrekening" class="form-control" id="pemilikrekening" name="pemilikrekening">
+                                    </div>
+                                <div class="form-group">
+                                    <label for="namabank" class="col-form-label">Nama Bank :</label>
+                                        <input type="namabank" class="form-control" id="namabank" name="namabank">
+                                    </div>
+                                <div class="form-group">
+                                    <label for="norek" class="col-form-label">Nomor Rekening Pembayaran :</label>
+                                        <input type="norek" class="form-control" id="norek" name="norek">
+                                    </div>
+                                <div class="form-group">
+                                    <label for="keterangan" class="col-form-label">Keterangan Lainnya :</label>
+                                        <textarea type="text" class="form-control" id="keterangan" name="keterangan"></textarea>
+                                </div>
+                                </div>
+                            </form>
                                 
                         </section>
                         <h3>Schedule Armada</h3>
                         <section class="card card-body border mb-0">
                             <h5>Schedule Sewa Armada</h5>
-                            <p>The next and previous buttons help you to navigate through your content.</p>
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="invoice">
-                                        <div class="d-md-flex justify-content-between align-items-center">
-                                            <img src="{{ url('assets/media/image/logo/mdc.png') }}" alt="logo">
-                                            <h3 class="text-xs-left m-b-0">Invoice #INV-16</h3>
-                                        </div>
-                                        <hr class="m-t-b-50">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <p>
-                                                    <b>PT. Medina Dzikra Cemerlang Trans</b>
-                                                </p>
-                                                <p>104,<br>Minare SK,<br>Canada, K1A 0G9.</p>
+                          
+                        
+                            
+                            <div class="row app-block mb-4">
+                                <div class="col-md-3 app-sidebar">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h6 class="card-title mb-2">Armada</h6>
+                                            <p class="text-muted">Armada On Schedule</p>
+                                            <div class="list-group mb-3" id="external-events">
+                                            
                                             </div>
-                                            <div class="col-md-6">
-                                                <p class="text-right">
-                                                    <b>Invoice to</b>
-                                                </p>
-                                                <p class="text-right">Gaala &amp; Sons,<br> C-201, Beykoz-34800,<br> Canada, K1A 0G9.
-                                                </p>
-                                            </div>
+                                            <!-- <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="drop-remove" checked="">
+                                                <label class="custom-control-label" for="drop-remove">Remove after drop</label>
+                                            </div> -->
                                         </div>
-                                        <div class="table-responsive">
-                                            <table class="table my-4">
-                                                <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Description</th>
-                                                    <th class="text-right">Quantity</th>
-                                                    <th class="text-right">Unit Cost</th>
-                                                    <th class="text-right">Total</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr class="text-right">
-                                                    <td class="text-left">1</td>
-                                                    <td class="text-left">Brochure Design</td>
-                                                    <td>2</td>
-                                                    <td>$20</td>
-                                                    <td>$40</td>
-                                                </tr>
-                                                <tr class="text-right">
-                                                    <td class="text-left">2</td>
-                                                    <td class="text-left">Web Design Packages(Template) - Basic</td>
-                                                    <td>05</td>
-                                                    <td>$25</td>
-                                                    <td>$125</td>
-                                                </tr>
-                                                <tr class="text-right">
-                                                    <td class="text-left">3</td>
-                                                    <td class="text-left">Print Ad - Basic - Color</td>
-                                                    <td>08</td>
-                                                    <td>$500</td>
-                                                    <td>$4000</td>
-                                                </tr>
-                                                <tr class="text-right">
-                                                    <td class="text-left">4</td>
-                                                    <td class="text-left">Down Coat</td>
-                                                    <td>1</td>
-                                                    <td>$5</td>
-                                                    <td>$5</td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="text-right">
-                                            <p>Sub - Total amount: $12,348</p>
-                                            <p>vat (10%) : $138</p>
-                                            <h4 class="font-weight-800">Total : $13,986</h4>
-                                        </div>
-                                        <p class="text-center small text-muted  m-t-50">
-                                            <span class="row">
-                                                <span class="col-md-6 offset-3">
-                                                    Invoice of PT. MDC Trans
-                                                </span>
-                                            </span>
-                                        </p>
                                     </div>
-                                    <div class="text-right d-print-none">
-                                        <hr class="my-5">
-                                        <a href="#" class="btn btn-primary">Send Invoice</a>
-                                        <a href="javascript:window.print()" class="btn btn-success m-l-5">
-                                            <i class="ti-printer mr-2"></i> Print
-                                        </a>
+                                </div>
+                                <div class="col-md-9 app-content">
+                                    <div class="app-content-overlay"></div>
+                                    <div class="card app-content-body">
+                                        <div class="card-body">
+                                            <a href="#" class="app-sidebar-menu-button btn btn-outline-light mb-3">
+                                                <i data-feather="menu"></i>
+                                            </a>
+                                            <div id="calendar-demo"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- begin::Create Event Modal -->
+                                
+                            <!-- end::Create Event Modal -->
+
+                            <!-- begin::Event Info Modal -->
+                            <div class="modal fade" id="viewEventModal" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">
+                                                <span class="event-icon mr-2"></span>
+                                                <span class="event-title">Modal Title</span>
+                                            </h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <i class="ti-close"></i>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="event-body"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -439,14 +382,16 @@ var barang = <?php echo json_encode($pricelist_sewa_armada); ?>;
 		var cell5 = row.insertCell(4);
 		var cell6 = row.insertCell(5);
 		var cell7 = row.insertCell(6);
+		var cell8 = row.insertCell(7);
 		console.log(index);
 		cell1.innerHTML = '<input type="hidden" name="id['+barang[index]["ID_PRICELIST"]+']" value="'+barang[index]["ID_PRICELIST"]+'">'+barang[index]["NAMA_CATEGORY"];
-		cell2.innerHTML = '<input type="hidden" name="id['+barang[index]["ID_PRICELIST"]+']" value="'+barang[index]["NAMA_CATEGORY"]+'">'+barang[index]["TUJUAN_SEWA"];	
-		cell3.innerHTML = '<input type="hidden" id="harga'+barang[index]["ID_PRICELIST"]+'" name="harga['+barang[index]["ID_PRICELIST"]+']" value="'+barang[index]["PRICELIST_SEWA"]+'">'+barang[index]["PRICELIST_SEWA"];
-		cell4.innerHTML = '<input type="number" name="qty['+barang[index]["ID_PRICELIST"]+']" value="1" oninput="recount(\''+barang[index]["ID_PRICELIST"]+'\')" id="qty'+barang[index]["ID_PRICELIST"]+'" style="background:secondary; border:none; text-align:left; width=100%">';	
-        cell5.innerHTML = '<input class="discount" type="number" name="discount['+barang[index]["ID_PRICELIST"]+']" value="0" oninput="recount(\''+barang[index]["ID_PRICELIST"]+'\')" id="discount'+barang[index]["ID_PRICELIST"]+'" style="background:primary; border:none; text-align:left; width=100%">';	
-		cell6.innerHTML = '<input type="hidden" class="subtotal" name="subtotal['+barang[index]["ID_PRICELIST"]+']" value="'+barang[index]["PRICELIST_SEWA"]+'" id="subtotal'+barang[index]["ID_PRICELIST"]+'"><span id="subtotalval'+barang[index]["ID_PRICELIST"]+'">'+barang[index]["PRICELIST_SEWA"]+'</span>';
-		cell7.innerHTML = '<button onclick="hapusEl(\''+id+'\')" class="btn btn-primary btn-block text-uppercase">Delete</button>';
+		cell2.innerHTML = '<input type="hidden" name="cat['+barang[index]["ID_PRICELIST"]+']" value="'+barang[index]["ID_CATEGORY"]+'">'+barang[index]["NAMA_CATEGORY"];
+		cell3.innerHTML = '<input type="hidden" name="tj['+barang[index]["ID_PRICELIST"]+']" value="'+barang[index]["TUJUAN_SEWA"]+'">'+barang[index]["TUJUAN_SEWA"];	
+		cell4.innerHTML = '<input type="hidden" id="harga'+barang[index]["ID_PRICELIST"]+'" name="harga['+barang[index]["ID_PRICELIST"]+']" value="'+barang[index]["PRICELIST_SEWA"]+'">'+barang[index]["PRICELIST_SEWA"];
+		cell5.innerHTML = '<input type="number" name="qty['+barang[index]["ID_PRICELIST"]+']" value="1" oninput="recount(\''+barang[index]["ID_PRICELIST"]+'\')" id="qty'+barang[index]["ID_PRICELIST"]+'" style="background:secondary; border:none; text-align:left; width=100%">';	
+        cell6.innerHTML = '<input class="discount" type="number" name="discount['+barang[index]["ID_PRICELIST"]+']" value="0" oninput="recount(\''+barang[index]["ID_PRICELIST"]+'\')" id="discount'+barang[index]["ID_PRICELIST"]+'" style="background:primary; border:none; text-align:left; width=100%">';	
+		cell7.innerHTML = '<input type="hidden" class="subtotal" name="subtotal['+barang[index]["ID_PRICELIST"]+']" value="'+barang[index]["PRICELIST_SEWA"]+'" id="subtotal'+barang[index]["ID_PRICELIST"]+'"><span id="subtotalval'+barang[index]["ID_PRICELIST"]+'">'+barang[index]["PRICELIST_SEWA"]+'</span>';
+		cell8.innerHTML = '<button onclick="hapusEl(\''+id+'\')" class="btn btn-danger btn-block text-uppercase">Delete</button>';
 
 		total();
 		

@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use DB;
 use PDF;
+use Redirect;
 
 class DataTableController extends Controller
 {
@@ -36,24 +37,30 @@ class DataTableController extends Controller
         $customer= customer::find($sewa_bus->ID_CUSTOMER);
 
         $category_armada=DB::table('category_armada')->get();
+
         $pricelist_sewa_armada=DB::table('pricelist_sewa_armada')
         ->join('category_armada', 'pricelist_sewa_armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
         ->select('pricelist_sewa_armada.ID_PRICELIST', 'category_armada.NAMA_CATEGORY', 'pricelist_sewa_armada.TUJUAN_SEWA', 
-        'pricelist_sewa_armada.PRICELIST_SEWA')
+        'pricelist_sewa_armada.PRICELIST_SEWA', 'pricelist_sewa_armada.ID_CATEGORY')
         ->get();
+
         $sewa_bus_category=DB::table('sewa_bus_category')
         ->join('sewa_bus','sewa_bus_category.ID_SEWA_BUS', '=', 'sewa_bus.ID_SEWA_BUS')
         ->join('pricelist_sewa_armada','sewa_bus_category.ID_PRICELIST', '=', 'pricelist_sewa_armada.ID_PRICELIST')
         ->join('category_armada', 'pricelist_sewa_armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
         ->select('sewa_bus_category.ID_SEWA_BUS', 'sewa_bus_category.ID_PRICELIST',
-        'sewa_bus_category.QUANTITY', 'sewa_bus_category.TOTAL',
+        'sewa_bus_category.QUANTITY', 'sewa_bus_category.TOTAL', 
         'category_armada.NAMA_CATEGORY', 'pricelist_sewa_armada.TUJUAN_SEWA', 'pricelist_sewa_armada.PRICELIST_SEWA')
         ->get();
 
+        // dump($sewa_bus_category);
+        
+        $rekening=DB::table('rekening')->get();
      
 
         return view('datatable', ['sewa_bus' =>$sewa_bus,'pengguna'=>$pengguna,'customer'=>$customer],
-        ['sewa_bus_category'=>$sewa_bus_category,'pricelist_sewa_armada'=>$pricelist_sewa_armada, 'category_armada'=>$category_armada]);
+        ['sewa_bus_category'=>$sewa_bus_category,'pricelist_sewa_armada'=>$pricelist_sewa_armada, 
+        'category_armada'=>$category_armada, 'rekening'=>$rekening]);
     }
 }
 
@@ -141,9 +148,46 @@ class DataTableController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        
+        //dd($request->all());
+        // y;
+
+        $sewa_bus= Sewa_Bus::find($id);
+
+        foreach ($request['id'] as $key) {
+            DB::table('sewa_bus_category')->insert([
+            'ID_SEWA_BUS'   => $id,
+            'ID_PRICELIST'  => $key,
+            
+            // 'NAMA_CATEGORY' => $request['cat'][$key],
+            // 'TUJUAN_SEWA' => $request['tj'][$key],
+            'QUANTITY' => $request['qty'][$key],
+            //'PRICELIST_SEWA'=> $request['harga'][$key],
+            'DISCOUNT'=> $request['discount'][$key],
+            'TOTAL'=> $request['subtotal'][$key]
+            // 'DP_BUS'=> $request['dpbus'][$key],
+            // 'SISA_BAYAR'=> $request['sisabayar'][$key]
+        ]);
+    }
+
+
+            $sewa_bus_category=DB::table('sewa_bus_category')
+            ->join('pricelist_sewa_armada','sewa_bus_category.ID_PRICELIST','=','pricelist_sewa_armada.ID_PRICELIST')
+            ->join('category_armada','pricelist_sewa_armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
+            ->select('sewa_bus_category.*','pricelist_sewa_armada.TUJUAN_SEWA', 'category_armada.NAMA_CATEGORY', 'pricelist_sewa_armada.PRICELIST_SEWA')
+            ->where('ID_SEWA_BUS', $request->ID_SEWA_BUS)
+            ->get();
+            
+        $total=$request->SISA_SEWA_BUS;
+        $subtotal=100/75*$total;
+        $sisa_bayar=$total-$subtotal;
+
+
+
+       return Redirect::back()->with(['sewa_bus_category'=>$sewa_bus_category, 'total'=>$total, 'subtotal'=>$subtotal, 
+       'sisa_bayar'=>$sisa_bayar, 'sewa_bus' =>$sewa_bus]);       
+    //    return redirect('invoice', ['sewa_bus_category'=>$sewa_bus_category, 'total'=>$total, 'subtotal'=>$subtotal, 'sisa_bayar'=>$sisa_bayar]);       
     }
 
     /**
@@ -152,9 +196,9 @@ class DataTableController extends Controller
      * @param  \App\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(category $category)
+    public function store_pembayaran(Request $request)
     {
-        //
+        
     }
 
     /**
