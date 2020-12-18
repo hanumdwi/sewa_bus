@@ -21,11 +21,15 @@ class ScheduleController extends Controller
             return redirect('login');
         }
         else{
-        $armada=DB::table('armada')->get();
+        $armada=DB::table('armada')
+        ->join('category_armada', 'armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
+        ->select('category_armada.NAMA_CATEGORY', 'armada.PLAT_NOMOR', 'armada.ID_ARMADA')
+        ->get();
         $sewa_bus_category=DB::table('sewa_bus_category')->get();
         $sewa_paket_wisata=DB::table('sewa_paket_wisata')->get();
         $schedule_armada=DB::table('schedule_armada')
         ->join('armada','schedule_armada.ID_ARMADA', '=', 'armada.ID_ARMADA')
+        ->join('category_armada', 'armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
         ->join('sewa_bus_category','schedule_armada.ID_SEWA_BUS', '=', 'sewa_bus_category.ID_SEWA_BUS')
         ->join('sewa_paket_wisata','schedule_armada.ID_SEWA_PAKET', '=', 'sewa_paket_wisata.ID_SEWA_PAKET')
         ->select('schedule_armada.ID_SCHEDULE','schedule_armada.TGL_SEWA',

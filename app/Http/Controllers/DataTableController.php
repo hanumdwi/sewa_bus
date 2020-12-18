@@ -53,6 +53,18 @@ class DataTableController extends Controller
         'category_armada.NAMA_CATEGORY', 'pricelist_sewa_armada.TUJUAN_SEWA', 'pricelist_sewa_armada.PRICELIST_SEWA')
         ->get();
 
+        $armada=DB::table('armada')
+        ->join('category_armada', 'armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
+        ->join('pricelist_sewa_armada', 'pricelist_sewa_armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
+        ->join('sewa_bus_category', 'sewa_bus_category.ID_PRICELIST', '=', 'pricelist_sewa_armada.ID_PRICELIST')
+        ->leftjoin('schedule_armada', 'armada.ID_ARMADA', '=', 'schedule_armada.ID_ARMADA','and','schedule_armada.STATUS_ARMADA', '=', 1)
+        ->select('armada.ID_ARMADA', 'armada.PLAT_NOMOR', 'category_armada.NAMA_CATEGORY')
+        ->distinct()
+        ->get();
+        // $armada=DB::table('armada')
+        // ->join('category_armada', 'armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
+        // ->select('category_armada.NAMA_CATEGORY', 'armada.PLAT_NOMOR', 'armada.ID_ARMADA')
+        // ->get();
         // dump($sewa_bus_category);
         
         $rekening=DB::table('rekening')->get();
@@ -60,7 +72,7 @@ class DataTableController extends Controller
 
         return view('datatable', ['sewa_bus' =>$sewa_bus,'pengguna'=>$pengguna,'customer'=>$customer],
         ['sewa_bus_category'=>$sewa_bus_category,'pricelist_sewa_armada'=>$pricelist_sewa_armada, 
-        'category_armada'=>$category_armada, 'rekening'=>$rekening]);
+        'category_armada'=>$category_armada, 'rekening'=>$rekening, 'armada'=>$armada]);
     }
 }
 
@@ -154,7 +166,7 @@ class DataTableController extends Controller
         // y;
 
         $sewa_bus= Sewa_Bus::find($id);
-
+//dd($request->id);
         foreach ($request['id'] as $key) {
             DB::table('sewa_bus_category')->insert([
             'ID_SEWA_BUS'   => $id,
@@ -178,8 +190,14 @@ class DataTableController extends Controller
             ->select('sewa_bus_category.*','pricelist_sewa_armada.TUJUAN_SEWA', 'category_armada.NAMA_CATEGORY', 'pricelist_sewa_armada.PRICELIST_SEWA')
             ->where('ID_SEWA_BUS', $request->ID_SEWA_BUS)
             ->get();
+
+            DB::table('sewa_bus')->where('ID_SEWA_BUS',$request->idsewa)->update([
+                'DP_BUS'        => $request->dpbus,
+                'SISA_SEWA_BUS' => $request->sisa,
+                'total_payment' => $request->sub
+        ]);
             
-        $total=$request->SISA_SEWA_BUS;
+        $total=$request->total_payment;
         $subtotal=100/75*$total;
         $sisa_bayar=$total-$subtotal;
 
@@ -196,6 +214,35 @@ class DataTableController extends Controller
      * @param  \App\category  $category
      * @return \Illuminate\Http\Response
      */
+
+    public function store_schedule(Request $request)
+    {
+        
+            DB::table('schedule_armada')->insert([
+                'TGL_SEWA' => $request->TGL_SEWA,
+                'TGL_AKHIR_SEWA' => $request->TGL_AKHIR_SEWA,
+                'ID_ARMADA' => $request->ID_ARMADA,
+                'ID_SEWA_BUS' => $request->ID_SEWA_BUS,
+                'STATUS_ARMADA' => 0,
+                'JAM_SEWA' => $request->JAM_SEWA,
+                'JAM_AKHIR_SEWA' => $request->JAM_AKHIR_SEWA
+            ]);
+
+            
+            // DB::table('schedule_armada')->insert([
+            //     'TGL_SEWA' => '2020-12-18',
+            //     'TGL_AKHIR_SEWA' => '2020-12-18',
+            //     'ID_ARMADA' => 'ARMD003',
+            //     'ID_SEWA_BUS' => '20121813',
+            //     'STATUS_SEWA' => 0,
+            //     'JAM_SEWA' => '19:52:00',
+            //     'JAM_AKHIR_SEWA' => '19:52:00'
+            // ]);
+
+        
+            return Redirect::back()->with('insert','data berhasil di tambah');
+    }
+
     public function store_pembayaran(Request $request)
     {
         
@@ -271,7 +318,6 @@ class DataTableController extends Controller
                 'LAMA_SEWA' => $request->LAMA_SEWA,
                 'ID_CUSTOMER' => $request->ID_CUSTOMER,
                 'ID_PENGGUNA' => $request->ID_PENGGUNA,
-                'HARGA_SEWA_BUS' => $request->HARGA_SEWA_BUS,
                 'JAM_SEWA' => $request->JAM_SEWA,
                 'JAM_AKHIR_SEWA' => $request->JAM_AKHIR_SEWA,
                 'DP_BUS'        =>  $request->DP_SEWA,

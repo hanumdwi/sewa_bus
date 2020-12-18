@@ -80,28 +80,16 @@
                                     <label for="JAM_AKHIR_SEWA" class="col-form-label">End Time :</label>
                                     <input type="time" class="form-control" id="JAM_AKHIR_SEWA" name="JAM_AKHIR_SEWA">
                                     </div>
-                                <!-- <div class="form-group">
-                                    <label for="LAMA_SEWA" class="col-form-label">Lama sewa :</label>
-                                    <input type="LAMA_SEWA" class="form-control" id="LAMA_SEWA" name="LAMA_SEWA">
-                                    </div> -->
                                 <div class="form-group">
                                 <div class="form-group">
                                     <label for="statussewa" class="col-form-label">Status Sewa :</label>
                                     <select name="statussewa" class="form-control" id="statussewa">
                                         <option selected="selected">-- Status --</option>
                                             <option>Booking</option>
-                                            <option>Belum Bayar</option>
+                                            <option>On Schedule</option>
                                             <option>Lunas</option>
                                     </select>
                                     </div>
-                                <!-- <div class="form-group">
-                                    <label for="DP_SEWA" class="col-form-label">DP Sewa :</label>
-                                    <input type="DP_SEWA" class="form-control" id="DP_SEWA" name="DP_SEWA">
-                                    </div>
-                                <div class="form-group">
-                                    <label for="HARGA_SEWA_BUS" class="col-form-label">Harga Sewa Bus :</label>
-                                    <input type="HARGA_SEWA_BUS" class="form-control" id="HARGA_SEWA_BUS" name="HARGA_SEWA_BUS">
-                                    </div> -->
                                     </div>
                                 
                             </div>
@@ -126,9 +114,6 @@
                             <th>Start Time</th>
                             <th>End Date</th>
                             <th>End Time</th>
-                            <!-- <th>Lama Sewa</th> -->
-                            <!-- <th>DP Sewa</th>
-                            <th>Harga Sewa</th> -->
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -153,9 +138,6 @@
                                     <td>{{ $sb -> JAM_SEWA }}</td>
                                     <td>{{ $sb -> TGL_AKHIR_SEWA }}</td>
                                     <td>{{ $sb -> JAM_AKHIR_SEWA }}</td>
-                                    <!-- <td>{{ $sb -> LAMA_SEWA }}</td> -->
-                                    <!-- <td>{{ $sb -> DP_BUS }}</td>
-                                    <td>{{ $sb -> SISA_SEWA_BUS }}</td> -->
                                     <td>
                                     <a href="{{ url('datatable', ['id'=>$sb -> ID_SEWA_BUS]) }}">
                                     <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit" data-toggle="modal" data-target="#exampleModal12">

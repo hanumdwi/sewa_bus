@@ -84,12 +84,7 @@
                                     <label for="JAM_AKHIR_SEWA" class="col-form-label">End Time :</label>
                                     <input type="time" class="form-control" id="JAM_AKHIR_SEWA" name="JAM_AKHIR_SEWA" value="{{$sewa_bus->JAM_AKHIR_SEWA}}">
                                 </div>
-                               
-                                <!-- <div class="col-md-4 mb-3">
-                                    <label for="LAMA_SEWA" class="col-form-label">Lama sewa :</label>
-                                    <input type="LAMA_SEWA" class="form-control" id="LAMA_SEWA" name="LAMA_SEWA" value="{{$sewa_bus->LAMA_SEWA}}">
-                                </div> -->
-
+                         
                                 <div class="col-md-4 mb-3">
                                     <label for="statussewa" class="col-form-label">Status Sewa :</label>
                                     <select name="statussewa" class="form-control" id="statussewa" value="{{$sewa_bus->STATUS_SEWA}}">
@@ -127,6 +122,7 @@
 	<table class="table table-bordered" id="keranjang">
 		<thead>
 			<tr>
+				<th scope="col">ID Category</th>
 				<th scope="col">Armada</th>
 				<th scope="col">Tujuan Sewa</th>
 				<th scope="col">Price</th>
@@ -173,9 +169,15 @@
 					<label>Rp.</label><br>
 				</div>
 				<div class="col-sm-12 col-md-2">
-					<input type="hidden" name="total_payment" id="total_payment"><label id="total-val"></label><br>
+                    <label id="total-val"></label><br>
+                    
 				</div>
 			</div>
+                <input type="hidden" name="idsewa" id="idsewa" value="{{ $sewa_bus->ID_SEWA_BUS }}">
+                <input type="hidden" name="sub" id="tot">
+                <input type="hidden" name="dpbus" id="depe">
+                <input type="hidden" name="sisa" id="sb">
+
 	</div>
 	<div class="clearfix" align="center">
 		<input class="btn btn-primary" type="submit" value="Submit">
@@ -219,6 +221,7 @@
 					                            </div>
                
                     </form>
+                    
 
                 </section>
 
@@ -286,10 +289,8 @@
                                 <div class="col-md-3 app-sidebar">
                                     <div class="card">
                                         <div class="card-body">
-                                            <h6 class="card-title mb-2">Armada</h6>
+                                        <h6 class="card-title mb-2">Armada</h6>
                                             <p class="text-muted">Armada On Schedule</p>
-                                            <div class="list-group mb-3" id="external-events">
-                                            
                                             </div>
                                             <!-- <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input" id="drop-remove" checked="">
@@ -329,13 +330,29 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
+                                        <form action="/schedule_store" method="post">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="ID_SEWA_BUS" value="{{ $sewa_bus->ID_SEWA_BUS }}">
+                                        <input type="hidden" class="form-control" id="JAM_AKHIR_SEWA" name="JAM_AKHIR_SEWA" value="{{$sewa_bus->JAM_AKHIR_SEWA}}">
+                                        <input type="hidden" class="form-control" id="JAM_SEWA" name="JAM_SEWA" value="{{$sewa_bus->JAM_SEWA}}">
+                                        <input type="hidden" class="form-control" id="TGL_AKHIR_SEWA" name="TGL_AKHIR_SEWA" value="{{$sewa_bus->TGL_AKHIR_SEWA}}">
+                                        <input type="hidden" class="form-control" id="TGL_SEWA" name="TGL_SEWA" value="{{$sewa_bus->TGL_SEWA_BUS}}">
+                                            <label for="ID_ARMADA">Armada</label>
+                                                <select name="ID_ARMADA" class="form-control" id="ID_ARMADA">
+                                                    @foreach($armada as $c)
+                                                            
+                                                        <option value="{{$c->ID_ARMADA}}">{{$c->NAMA_CATEGORY}}   -  {{$c->PLAT_NOMOR}}</option>
+                                                            
+                                                    @endforeach                 
+                                                </select>
+                                                <button type="submit" class="btn btn-primary" id="berhasil">Add</button>
                                             <div class="event-body"></div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </section>
-                    </div>
                     </div>
                     </div>
                     </div>
@@ -383,8 +400,9 @@ var barang = <?php echo json_encode($pricelist_sewa_armada); ?>;
 		var cell6 = row.insertCell(5);
 		var cell7 = row.insertCell(6);
 		var cell8 = row.insertCell(7);
+		
 		console.log(index);
-		cell1.innerHTML = '<input type="hidden" name="id['+barang[index]["ID_PRICELIST"]+']" value="'+barang[index]["ID_PRICELIST"]+'">'+barang[index]["NAMA_CATEGORY"];
+		cell1.innerHTML = '<input type="hidden" name="id['+barang[index]["ID_PRICELIST"]+']" value="'+barang[index]["ID_PRICELIST"]+'">'+barang[index]["ID_CATEGORY"];
 		cell2.innerHTML = '<input type="hidden" name="cat['+barang[index]["ID_PRICELIST"]+']" value="'+barang[index]["ID_CATEGORY"]+'">'+barang[index]["NAMA_CATEGORY"];
 		cell3.innerHTML = '<input type="hidden" name="tj['+barang[index]["ID_PRICELIST"]+']" value="'+barang[index]["TUJUAN_SEWA"]+'">'+barang[index]["TUJUAN_SEWA"];	
 		cell4.innerHTML = '<input type="hidden" id="harga'+barang[index]["ID_PRICELIST"]+'" name="harga['+barang[index]["ID_PRICELIST"]+']" value="'+barang[index]["PRICELIST_SEWA"]+'">'+barang[index]["PRICELIST_SEWA"];
@@ -392,6 +410,7 @@ var barang = <?php echo json_encode($pricelist_sewa_armada); ?>;
         cell6.innerHTML = '<input class="discount" type="number" name="discount['+barang[index]["ID_PRICELIST"]+']" value="0" oninput="recount(\''+barang[index]["ID_PRICELIST"]+'\')" id="discount'+barang[index]["ID_PRICELIST"]+'" style="background:primary; border:none; text-align:left; width=100%">';	
 		cell7.innerHTML = '<input type="hidden" class="subtotal" name="subtotal['+barang[index]["ID_PRICELIST"]+']" value="'+barang[index]["PRICELIST_SEWA"]+'" id="subtotal'+barang[index]["ID_PRICELIST"]+'"><span id="subtotalval'+barang[index]["ID_PRICELIST"]+'">'+barang[index]["PRICELIST_SEWA"]+'</span>';
 		cell8.innerHTML = '<button onclick="hapusEl(\''+id+'\')" class="btn btn-danger btn-block text-uppercase">Delete</button>';
+        
 
 		total();
 		
@@ -424,10 +443,11 @@ var barang = <?php echo json_encode($pricelist_sewa_armada); ?>;
 		document.getElementById("subtotal-val").innerHTML = total;
 		var dp = parseInt(25/100*total);
 		document.getElementById("dpbus").innerHTML = dp;
-		total = parseInt(75/100*total);
-		document.getElementById("total-val").innerHTML = total;
-		document.getElementById("total_payment").value = total;
-
+		var sisabayar = parseInt(75/100*total);
+        document.getElementById("total-val").innerHTML = sisabayar;
+        document.getElementById("tot").value = total;
+        document.getElementById("depe").value = dp;
+        document.getElementById("sb").value = sisabayar;
 	}
 
 	function recount(id){

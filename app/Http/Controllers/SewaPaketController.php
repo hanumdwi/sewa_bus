@@ -30,7 +30,7 @@ class SewaPaketController extends Controller
         ->join('paket_wisata','sewa_paket_wisata.ID_PAKET', '=', 'paket_wisata.ID_PAKET')
         ->select('sewa_paket_wisata.ID_SEWA_PAKET','sewa_paket_wisata.TGL_SEWA_PAKET',
         'sewa_paket_wisata.TGL_AKHIR_SEWA_PAKET','customer.NAMA_CUSTOMER', 'sewa_paket_wisata.DP_PAKET',
-        'sewa_paket_wisata.HARGA_SEWA_PAKET','sewa_paket_wisata.JAM_SEWA_PAKET',
+        'sewa_paket_wisata.SISA_SEWA_PAKET','sewa_paket_wisata.JAM_SEWA_PAKET',
         'sewa_paket_wisata.JAM_AKHIR_SEWA_PAKET','pengguna.NAMA_PENGGUNA','paket_wisata.NAMA_PAKET', 'sewa_paket_wisata.STATUS_PAKET_WISATA')
         ->get();
 
@@ -77,9 +77,10 @@ class SewaPaketController extends Controller
                 'ID_PAKET'              => $request->ID_PAKET,
                 'ID_CUSTOMER'           => $request->ID_CUSTOMER,
                 'ID_PENGGUNA'           => $request->ID_PENGGUNA,
-                // 'HARGA_SEWA_PAKET'      => $request->HARGA_SEWA_PAKET,
                 'JAM_SEWA_PAKET'        => $request->JAM_SEWA_PAKET,
                 'JAM_AKHIR_SEWA_PAKET'  => $request->JAM_AKHIR_SEWA_PAKET,
+                'DP_PAKET'  => $request->DP_PAKET,
+                'SISA_SEWA_PAKET'  => $request->SISA_SEWA_PAKET,
                 'STATUS_PAKET_WISATA'              =>  $request->STATUS_PAKET_WISATA
             ]);
 
@@ -150,10 +151,11 @@ class SewaPaketController extends Controller
                 'ID_PAKET'              => $request->ID_PAKET,
                 'ID_CUSTOMER'           => $request->ID_CUSTOMER,
                 'ID_PENGGUNA'           => $request->ID_PENGGUNA,
-                // 'HARGA_SEWA_PAKET'      => $request->HARGA_SEWA_PAKET,
                 'JAM_SEWA_PAKET'        => $request->JAM_SEWA_PAKET,
                 'JAM_AKHIR_SEWA_PAKET'  => $request->JAM_AKHIR_SEWA_PAKET,
-                'STATUS_PAKET_WISATA'   => $request->STATUS_PAKET_WISATA
+                'STATUS_PAKET_WISATA'   => $request->STATUS_PAKET_WISATA,
+                'JAM_AKHIR_SEWA_PAKET'  => $request->JAM_AKHIR_SEWA_PAKET,
+                'DP_PAKET'  => $request->DP_PAKET,
                 // 'DP_PAKET'              =>  $request->DP_PAKET
         ]);
 

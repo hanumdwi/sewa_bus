@@ -66,30 +66,73 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="nama" class="col-form-label">Nama Paket :</label>
-                                    <select name="ID_PAKET" class="form-control" id="ID_PAKET">
+                                    <select name="ID_PAKET" class="form-control" id="ID_PAKET1" onchange="getDP()">
                                         @foreach($paket_wisata as $pw)
                                        
-                                        <option value="{{$pw->ID_PAKET}}">{{$pw->NAMA_PAKET}}</option>
+                                        <option id="ID_PAKET1{{$pw->ID_PAKET}}" value="{{$pw->ID_PAKET}}" data-price="{{$pw->HARGA_JUAL}}">{{$pw->NAMA_PAKET}} - {{$pw->HARGA_JUAL}}</option>
                                        
                                         @endforeach                 
                                 </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="TGL_SEWA" class="col-form-label">Start Date :</label>
-                                    <input type="date" class="form-control" id="TGL_SEWA_PAKET" name="TGL_SEWA_PAKET">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label for="TGL_SEWA" class="col-form-label">Start Date :</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                        <label for="JAM_SEWA" class="col-form-label">Start Time :</label>
+                                        
+                                        </div>
                                     </div>
-                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-6"><input type="date" class="form-control" id="TGL_SEWA_PAKET" name="TGL_SEWA_PAKET"></div>
+                                        <div class="col-lg-6"><input type="time" class="form-control" id="JAM_SEWA_PAKET" name="JAM_SEWA_PAKET"></div>
+                                    
+                                    </div>
+                                    </div>
+                                    <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                        <label for="TGL_AKHIR_SEWA">End Date :</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                        <label for="JAM_AKHIR_SEWA" class="col-form-label">End Time :</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6"><input type="date" class="form-control create-event-datepicker" id="TGL_AKHIR_SEW_PAKET" name="TGL_AKHIR_SEWA_PAKET"></div>
+                                        <div class="col-lg-6"><input type="time" class="form-control" id="JAM_AKHIR_SEWA_PAKET" name="JAM_AKHIR_SEWA_PAKET"></div>
+                                    
+                                    </div>
+                                    </div>
+                                    <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label for="DP_PAKET" class="col-form-label">DP (25%) :</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                        <label for="SISA_SEWA_PAKET" class="col-form-label">Sisa Bayar :</label>
+                                        
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6"><input type="text" class="form-control" id="DP_PAKET1" name="DP_PAKET"></div>
+                                        <div class="col-lg-6"><input type="text" class="form-control" id="SISA_SEWA_PAKET1" name="SISA_SEWA_PAKET"></div>
+                                    
+                                    </div>
+                                    </div>
+                                <!-- <div class="form-group">
                                     <label for="TGL_AKHIR_SEWA">End Date :</label>
                                     <input type="date" class="form-control create-event-datepicker" id="TGL_AKHIR_SEW_PAKET" name="TGL_AKHIR_SEWA_PAKET">
-                                    </div>
-                                <div class="form-group">
+                                    </div> -->
+                                <!-- <div class="form-group">
                                     <label for="JAM_SEWA" class="col-form-label">Start Time :</label>
                                     <input type="time" class="form-control" id="JAM_SEWA_PAKET" name="JAM_SEWA_PAKET">
                                     </div>
                                 <div class="form-group">
                                     <label for="JAM_AKHIR_SEWA" class="col-form-label">End Time :</label>
                                     <input type="time" class="form-control" id="JAM_AKHIR_SEWA_PAKET" name="JAM_AKHIR_SEWA_PAKET">
-                                    </div>
+                                    </div> -->
                                     <!-- <div class="col-md-4 mb-3">
                                     <label for="ID_ARMADA">Armada</label>
                                     <select name="ID_ARMADA" class="form-control" id="ID_ARMADA">
@@ -160,8 +203,6 @@
                                     <td>{{ $spw -> JAM_SEWA_PAKET }}</td>
                                     <td>{{ $spw -> TGL_AKHIR_SEWA_PAKET }}</td>
                                     <td>{{ $spw -> JAM_AKHIR_SEWA_PAKET }}</td>
-                                    <!-- <td>{{ $spw -> DP_PAKET }}</td>
-                                    <td>{{ $spw -> HARGA_SEWA_PAKET }}</td> -->
                                     <td>
                                     <a href="sewa_paket_detail/{{$spw -> ID_SEWA_PAKET}}">
                                     <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit" data-toggle="modal" data-target="#exampleModal12">
@@ -239,25 +280,19 @@
     $(document).ready(function (){
     $('#myTable').DataTable();
 });
-
+    function getDP(){
+        console.log("masuk");
+        var total = document.getElementById('ID_PAKET1').value;
+        var harga = $('#ID_PAKET1'+total).data('price');
+        var dp = document.getElementById('DP_PAKET1').value;
+        var dp_bayar = (Number(25/100*harga));
+        $('#DP_PAKET1').val(dp_bayar);
+        var x = (Number(harga-dp_bayar))
+        $('#SISA_SEWA_PAKET1').val(x);
+    }
     
 
-        console.log('x : ')
-            const x = document.getElementsByClassName('post0');
-            for(let i=0;i<x.length;i++){
-                x[i].addEventListener('click',function(){
-                    x[i].submit();
-                });
-            }
-
-            function modal(id){
-                const y=document.getElementById(id);
-                $("#tampil").modal();
-            }
-
-            function tampil(id){
-             const y=document.getElementById(id);
-            }
+        
 
 </script>
     <!-- Sweet alert -->

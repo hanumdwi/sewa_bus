@@ -78,7 +78,19 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                <form action="" method="post">
+                {{ csrf_field() }}
+                    <label for="ID_ARMADA">Armada</label>
+                        <select name="ID_ARMADA" class="form-control" id="ID_ARMADA">
+                            @foreach($armada as $c)
+                                       
+                                <option value="{{$c->ID_ARMADA}}">{{$c->NAMA_CATEGORY}}   -  {{$c->PLAT_NOMOR}}</option>
+                                       
+                            @endforeach                 
+                        </select>
+                        <button type="submit" class="btn btn-primary" id="berhasil">Add</button>
                     <div class="event-body"></div>
+                    </form>
                 </div>
             </div>
         </div>

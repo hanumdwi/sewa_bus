@@ -29,7 +29,7 @@ class SewaBusController extends Controller
         ->select('sewa_bus.ID_SEWA_BUS','sewa_bus.TGL_SEWA_BUS',
         'sewa_bus.TGL_AKHIR_SEWA','sewa_bus.LAMA_SEWA','customer.NAMA_CUSTOMER', 'sewa_bus.DP_BUS',
         'sewa_bus.JAM_SEWA','sewa_bus.JAM_AKHIR_SEWA','pengguna.NAMA_PENGGUNA', 'sewa_bus.STATUS_SEWA',
-        'sewa_bus.SISA_SEWA_BUS', 'sewa_bus.DP_BUS')
+        'sewa_bus.SISA_SEWA_BUS', 'sewa_bus.DP_BUS', 'sewa_bus.total_payment')
         ->get();
 
         
@@ -79,15 +79,16 @@ class SewaBusController extends Controller
                 'ID_SEWA_BUS' => $request->ID_SEWA_BUS,
                 'TGL_SEWA_BUS' => $request->TGL_SEWA,
                 'TGL_AKHIR_SEWA' => $request->TGL_AKHIR_SEWA,
-                // 'LAMA_SEWA' => $request->LAMA_SEWA,
                 'ID_CUSTOMER' => $request->ID_CUSTOMER,
                 'ID_PENGGUNA' => $request->ID_PENGGUNA,
-                'HARGA_SEWA_BUS' => $request->HARGA_SEWA_BUS,
+                'SISA_SEWA_BUS' => $request->HARGA_SEWA_BUS,
                 'JAM_SEWA' => $request->JAM_SEWA,
                 'JAM_AKHIR_SEWA' => $request->JAM_AKHIR_SEWA,
                 'DP_BUS'        =>  $request->DP_SEWA,
                 'SISA_SEWA_BUS'        =>  $request->SISA_SEWA_BUS,
+                'total_payment' => $request->total_payment,
                 'STATUS_SEWA' => $request->statussewa
+                
             ]);
 
             // DB::table('schedule_armada')->insert([
@@ -166,16 +167,14 @@ class SewaBusController extends Controller
     public function update(Request $request, $id)
     {
         DB::table('sewa_bus')->where('ID_SEWA_BUS',$request->ID_SEWA_BUS)->update([
-                'ID_SEWA_BUS' => $request->ID_SEWA_BUS,
-                'TGL_SEWA_BUS' => $request->TGL_SEWA,
-                'TGL_AKHIR_SEWA' => $request->TGL_AKHIR_SEWA,
-                // 'LAMA_SEWA' => $request->LAMA_SEWA,
-                'ID_CUSTOMER' => $request->ID_CUSTOMER,
-                'ID_PENGGUNA' => $request->ID_PENGGUNA,
-                'HARGA_SEWA_BUS' => $request->HARGA_SEWA_BUS,
-                'JAM_SEWA' => $request->JAM_SEWA,
-                'JAM_AKHIR_SEWA' => $request->JAM_AKHIR_SEWA,
-                'DP_BUS'        =>  $request->DP_SEWA
+                'ID_SEWA_BUS'       => $request->ID_SEWA_BUS,
+                'TGL_SEWA_BUS'      => $request->TGL_SEWA,
+                'TGL_AKHIR_SEWA'    => $request->TGL_AKHIR_SEWA,
+                'ID_CUSTOMER'       => $request->ID_CUSTOMER,
+                'ID_PENGGUNA'       => $request->ID_PENGGUNA,
+                'JAM_SEWA'          => $request->JAM_SEWA,
+                'JAM_AKHIR_SEWA'    => $request->JAM_AKHIR_SEWA,
+                'STATUS_SEWA'       =>  $request->statussewa
         ]);
 
         return redirect('sewa_bus');

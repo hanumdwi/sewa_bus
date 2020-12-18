@@ -120,11 +120,11 @@
                             <div class="form-row">
                                 <div class="col-md-4 mb-3">
                                     <label for="gender">Total Payment</label>
-                                    <input type="text" class="form-control" name="totalpayment" id="totalpayment">
-                                </div>
+                                    <input type="text" class="form-control" name="totalpayment" id="totalpayment1" onchange="getDP()"
+                                    value="{{$paket_wisata->HARGA_JUAL}}" readonly=""></div>
                                 <div class="col-md-4 mb-3">
                                     <label for="profession">DP (25%)</label>
-                                    <input type="text" class="form-control" name="dp" id="dp">
+                                    <input type="text" class="form-control" name="dp" id="dp1" onchange="getDP()">
                                 </div>
                                 <!-- <div class="col-md-4 mb-3">
                                     <label for="profession">Harus Bayar</label>
@@ -324,9 +324,13 @@
 @section('script')
 
 <script>
-   $(document).ready(function () {
-      $('.repeater').repeater();
-   });
+   function getDP(){
+       console("masuk");
+       var total = document.getElementById('totalpayment1').value;
+       var dp = document.getElementById('dp1').value;
+       var db_bayar = (Number(25/100*total));
+       $('#dp1').val(dp_bayar);
+   }
 </script>
 
 <script>
