@@ -120,8 +120,6 @@
                         <tbody>
                         <tr>
                             @foreach($sewa_bus as $sb)
-                                   
-                                    <!-- <tr class="table-light"> -->
                                     @if($sb -> STATUS_SEWA == 'Booking')
                                     <td><span class="badge bg-success-bright text-secondary">{{ $sb -> STATUS_SEWA}}</span></td>
                                     @endif
@@ -182,7 +180,6 @@
                                     </td>
                                     </tr>
                                     @endforeach
-                                    <!-- </tr> -->
                                     </tbody>
                                     <tfoot>
                         <tr>
@@ -194,11 +191,8 @@
                             <th>Start Time</th>
                             <th>End Date</th>
                             <th>End Time</th>
-                            <!-- <th>Lama Sewa</th> -->
-                            <!-- <th>DP Sewa</th>
-                            <th>Harga Sewa</th> -->
                             <th>Action</th>
-                        </tr>
+                            </tr>
                         </tfoot>
                     </table>
                 </div>
@@ -216,26 +210,6 @@
     $(document).ready(function (){
     $('#myTable').DataTable();
 });
-
-    
-
-        console.log('x : ')
-            const x = document.getElementsByClassName('post0');
-            for(let i=0;i<x.length;i++){
-                x[i].addEventListener('click',function(){
-                    x[i].submit();
-                });
-            }
-
-            function modal(id){
-                const y=document.getElementById(id);
-                $("#tampil").modal();
-            }
-
-            function tampil(id){
-             const y=document.getElementById(id);
-            }
-
 </script>
     <!-- Sweet alert -->
     <script src="{{ url('assets/js/examples/sweet-alert.js') }}"></script>
@@ -262,6 +236,5 @@
 
 toastr.success('Successfully completed');
     </script>
-
 
 @endsection

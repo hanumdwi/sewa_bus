@@ -103,11 +103,11 @@
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="subtotal" class="col-form-label">DP (25%):</label>
-                                    <input type="text" class="form-control" id="subtotal1" name="subtotal" onchange="getSisaBayar()" 
-                                    value="<?php echo number_format($sewa_bus->DP_BUS,'0',',','.'); ?>">
+                                    <input type="text" class="form-control" id="subtotal1" name="subtotal" 
+                                    value="<?php echo number_format($sewa_bus->DP_BUS,'0',',','.'); ?>" onkeyup="hitunghargajualA()">
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="sisa_bayar" class="col-form-label">SIsa Bayar :</label>
+                                    <label for="sisa_bayar" class="col-form-label">Sisa Bayar :</label>
                                     <input type="text" class="form-control" id="sisa_bayar1" name="sisa_bayar" 
                                     value="<?php echo number_format($sewa_bus->SISA_SEWA_BUS,'0',',','.'); ?>">
                                 </div>
@@ -501,14 +501,17 @@ var barang = <?php echo json_encode($pricelist_sewa_armada); ?>;
 		total();
 	}
 
-    function getSisaBayar(){
-        console.log("masuk");
+    function hitunghargajualA(){
+        console.log("function getHargaJual");
         var total = document.getElementById('total_payment1').value;
         var dp = document.getElementById('subtotal1').value;
-        var sb = document.getElementById('sisabayar1').value;
-        var x = (Number(total-dp))
-        $('#sisabayar1').val(x);
-    }
+        var x = document.getElementById('sisa_bayar1').value;
+        var sisa = Number(total-dp);
+         $('#sisa_bayar1').val(sisa);
+       
+        console.log(sisa);
+        }
+
 </script>
 
 <!-- Form wizard -->

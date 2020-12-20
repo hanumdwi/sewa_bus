@@ -43,7 +43,6 @@
                             <table class="table my-4">
                                 <thead>
                                 <tr>
-                                    <th>#</th>
                                     <th>Description</th>
                                     <th class="text-right">Quantity</th>
                                     <th class="text-right">Unit Cost</th>
@@ -52,25 +51,24 @@
                                 </thead>
                                 <tbody>
                                 @foreach($sewa_bus_category as $sbc)
-                                
+                                @if($sbc->ID_SEWA_BUS == $sewa_bus->ID_SEWA_BUS)
                                 <tr class="text-right">
-                                    <td class="text-left">{{ $loop->iteration }}</td>
                                     <td class="text-left">{{$sbc -> NAMA_CATEGORY}} - 
                                     {{$sbc -> TUJUAN_SEWA}}
                                     </td>
                                     <td>{{$sbc -> QUANTITY}}</td>
-                                    <td>Rp. {{$sbc -> PRICELIST_SEWA}}</td>
-                                    <td>Rp. {{$sbc -> TOTAL}}</td>
+                                    <td>Rp. <?php echo number_format($sbc->PRICELIST_SEWA,'0',',','.'); ?></td>
+                                    <td>Rp. <?php echo number_format($sbc->TOTAL,'0',',','.'); ?></td>
                                 </tr>
-                               
+                                @endif
                                 @endforeach
                                 </tbody>
                             </table>
                         </div>
                         <div class="text-right">
-                            <p>Sub - Total : $12,348</p>
-                            <p>DP (25%) : $138</p>
-                            <h4 class="font-weight-800">Total : $13,986</h4>
+                            <p>Total : Rp. <?php echo number_format($sewa_bus->total_payment,'0',',','.'); ?></p>
+                            <p>DP (25%) : Rp. <?php echo number_format($sewa_bus->DP_BUS,'0',',','.'); ?></p>
+                            <h4 class="font-weight-800">Sisa Bayar : Rp <?php echo number_format($sewa_bus->SISA_SEWA_BUS,'0',',','.'); ?></h4>
                         </div>
                         <p class="text-center small text-muted  m-t-50">
                             <span class="row">

@@ -389,16 +389,17 @@ class DataTableController extends Controller
     public function update(Request $request, $id)
     {
         DB::table('sewa_bus')->where('ID_SEWA_BUS',$request->ID_SEWA_BUS)->update([
-                'ID_SEWA_BUS' => $request->ID_SEWA_BUS,
-                'TGL_SEWA_BUS' => $request->TGL_SEWA,
-                'TGL_AKHIR_SEWA' => $request->TGL_AKHIR_SEWA,
-                'ID_CUSTOMER' => $request->ID_CUSTOMER,
-                'ID_PENGGUNA' => $request->ID_PENGGUNA,
-                'JAM_SEWA' => $request->JAM_SEWA,
-                'JAM_AKHIR_SEWA' => $request->JAM_AKHIR_SEWA,
-                'DP_BUS'        =>  $request->subtotal,
-                'SISA_SEWA_BUS'        =>  $request->sisa_bayar,
-                'STATUS_SEWA' => $request->statussewa
+                'ID_SEWA_BUS'       => $request->ID_SEWA_BUS,
+                'TGL_SEWA_BUS'      => $request->TGL_SEWA,
+                'TGL_AKHIR_SEWA'    => $request->TGL_AKHIR_SEWA,
+                'ID_CUSTOMER'       => $request->ID_CUSTOMER,
+                'ID_PENGGUNA'       => $request->ID_PENGGUNA,
+                'JAM_SEWA'          => $request->JAM_SEWA,
+                'JAM_AKHIR_SEWA'    => $request->JAM_AKHIR_SEWA,
+                'DP_BUS'            =>  $request->subtotal,
+                'total_payment'     =>  $request->total_payment,
+                'SISA_SEWA_BUS'     =>  $request->sisa_bayar,
+                'STATUS_SEWA'       => $request->statussewa
         ]);
 
         return redirect('sewa_bus');
