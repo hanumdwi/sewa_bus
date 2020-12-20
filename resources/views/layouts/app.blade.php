@@ -921,6 +921,25 @@
                                 <span>Paket Wisata</span>
                             </a>
                         </li>
+                        <li class="navigation-divider">Pembayaran</li>
+                        <li>
+                            <a  class="active" href="{{ url('rekening') }}">
+                                <span class="nav-link-icon" data-feather="book"></span>
+                                <span>Rekening</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a  class="active" href="{{ url('konfirmasipembayaran') }}">
+                                <span class="nav-link-icon" data-feather="check"></span>
+                                <span>Pembayaran Bus</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a  class="active" href="{{ url('konfirmasipembayaran_paket') }}">
+                                <span class="nav-link-icon" data-feather="check"></span>
+                                <span>Pembayaran Paket</span>
+                            </a>
+                        </li>
 
                     </ul>
                     

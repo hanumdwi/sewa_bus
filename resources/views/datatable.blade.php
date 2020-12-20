@@ -40,7 +40,7 @@
                         <h3>Personal Information</h3>
                         <section class="card card-body border mb-0">
                             
-                        <form action="{{ $sewa_bus->ID_SEWA_BUS }}" method="post">
+                        <form action="{{ $sewa_bus->ID_SEWA_BUS }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <input type="hidden" name="ID_SEWA_BUS" value="{{ $sewa_bus->ID_SEWA_BUS }}"> <br/>
                             <div class="form-row">
@@ -95,6 +95,23 @@
                                     </select>
                                     </div>
                             </div>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="total_payment" class="col-form-label">Total Payment :</label>
+                                    <input type="text" class="form-control" id="total_payment1" name="total_payment" 
+                                    value="<?php echo number_format($sewa_bus->total_payment,'0',',','.'); ?>" readonly="">
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="subtotal" class="col-form-label">DP (25%):</label>
+                                    <input type="text" class="form-control" id="subtotal1" name="subtotal" onchange="getSisaBayar()" 
+                                    value="<?php echo number_format($sewa_bus->DP_BUS,'0',',','.'); ?>">
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="sisa_bayar" class="col-form-label">SIsa Bayar :</label>
+                                    <input type="text" class="form-control" id="sisa_bayar1" name="sisa_bayar" 
+                                    value="<?php echo number_format($sewa_bus->SISA_SEWA_BUS,'0',',','.'); ?>">
+                                </div>
+                                </div>
                                     
                            
                             <button type="submit" class="btn btn-primary" id="berhasil">Update Sewa</button>
@@ -105,7 +122,7 @@
                         <h3>Billing Information</h3>
                         <section class="card card-body border mb-0">
                         
-                         <form action="/datatable_store/{{ $sewa_bus->ID_SEWA_BUS }}" method="post">
+                         <form action="/datatable_store/{{ $sewa_bus->ID_SEWA_BUS }}" method="POST" enctype="multipart/form-data">
                          {{ csrf_field() }}
                          <!-- <center>
                          <div class="col-md-4 mb-3">
@@ -218,9 +235,9 @@
 		</div>
 	<div>
 
-					                            </div>
+</div>
                
-                    </form>
+</form>
                     
 
                 </section>
@@ -229,53 +246,67 @@
                         <section class="card card-body border mb-0">
                             <h3>Konfirmasi Pembayaran</h3>
                                     <div class="invoice">
-                            <form action="pembayaranstore" method="post">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="nama" class="col-form-label">Rekening Pembayaran :</label>
-                                    <select name="ID_REKENING" class="form-control" id="ID_REKENING">
-                                                      
-                                </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="nama" class="col-form-label">Cara Bayar :</label>
-                                    <select name="carabayar" class="form-control" id="carabayar">
-                                        <option selected="selected">-- Pilih --</option>
-                                            <option>Transfer</option>
-                                            <option>Tunai</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="date" class="col-form-label">Tanggal Bayar :</label>
-                                    <input type="date" class="form-control" id="tanggalbayar" name="tanggalbayar">
-                                    </div>
-                                <div class="form-group">
-                                    <label>Upload Bukti Bayar</label>
-                                        <input type="file" name="avatar" class="form-control">
+                            <form action="/pembayaranstore/{{ $sewa_bus->ID_SEWA_BUS }}" method="POST" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="nama" class="col-form-label">Rekening Pembayaran :</label>
+                                            <select name="ID_REKENING" class="form-control" id="ID_REKENING">
+                                            @foreach($rekening as $c)
                                        
-                                    <h8>Format JPG, PNG, Maksimal 2 MB</h8>
+                                                <option value="{{$c->ID_REKENING}}">{{$c->NAMA_BANK}}   -  {{$c->NOMOR_REKENING}}</option>
+                                            
+                                            @endforeach                 
+                                            </select>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="nama" class="col-form-label">Cara Bayar :</label>
+                                            <select name="carabayar" class="form-control" id="carabayar">
+                                                <option selected="selected">-- Pilih --</option>
+                                                    <option>Transfer</option>
+                                                    <option>Tunai</option>
+                                            </select>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="date" class="col-form-label">Tanggal Bayar :</label>
+                                            <input type="date" class="form-control" id="tanggalbayar" name="tanggalbayar">
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="jumlahbayar" class="col-form-label">Jumlah Pembayaran :</label>
-                                    <input type="jumlahbayar" class="form-control" id="jumlahbayar" name="jumlahbayar">
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="jumlahbayar" class="col-form-label">Jumlah Pembayaran :</label>
+                                            <input type="jumlahbayar" class="form-control" id="jumlahbayar" name="jumlahbayar">
                                     </div>
-                                <div class="form-group">
-                                    <label for="pemilikrekening" class="col-form-label">Nama Pemilik Rekening :</label>
-                                    <input type="pemilikrekening" class="form-control" id="pemilikrekening" name="pemilikrekening">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="pemilikrekening" class="col-form-label">Nama Pemilik Rekening :</label>
+                                            <input type="pemilikrekening" class="form-control" id="pemilikrekening" name="pemilikrekening">
                                     </div>
-                                <div class="form-group">
-                                    <label for="namabank" class="col-form-label">Nama Bank :</label>
-                                        <input type="namabank" class="form-control" id="namabank" name="namabank">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="namabank" class="col-form-label">Nama Bank :</label>
+                                            <input type="namabank" class="form-control" id="namabank" name="namabank">
                                     </div>
-                                <div class="form-group">
-                                    <label for="norek" class="col-form-label">Nomor Rekening Pembayaran :</label>
-                                        <input type="norek" class="form-control" id="norek" name="norek">
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="norek" class="col-form-label">Nomor Rekening Pembayaran :</label>
+                                            <input type="norek" class="form-control" id="norek" name="norek">
                                     </div>
-                                <div class="form-group">
+                                    <div class="col-md-4 mb-3">
+                                        <label>Upload Bukti Bayar</label>
+                                            <input type="file" name="file" class="form-control">
+                                                <h8>Format JPG, PNG, Maksimal 2 MB</h8>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                <div class="col-md-4 mb-3">
                                     <label for="keterangan" class="col-form-label">Keterangan Lainnya :</label>
                                         <textarea type="text" class="form-control" id="keterangan" name="keterangan"></textarea>
                                 </div>
                                 </div>
+                                <div class="clearfix" align="center">
+                                    <button type="submit" class="btn btn-primary" id="berhasil">Submit</button>
+                                </div>
+                               
                             </form>
                                 
                         </section>
@@ -469,6 +500,15 @@ var barang = <?php echo json_encode($pricelist_sewa_armada); ?>;
 		document.getElementById(idCol).remove();
 		total();
 	}
+
+    function getSisaBayar(){
+        console.log("masuk");
+        var total = document.getElementById('total_payment1').value;
+        var dp = document.getElementById('subtotal1').value;
+        var sb = document.getElementById('sisabayar1').value;
+        var x = (Number(total-dp))
+        $('#sisabayar1').val(x);
+    }
 </script>
 
 <!-- Form wizard -->

@@ -72,9 +72,14 @@ class SewaDetailController extends Controller
         ->where('schedule_armada.STATUS_ARMADA', '=', 1)
         ->get();
 
+        $rekening=DB::table('rekening')->get();
+        $pembayaran_paket=DB::table('pembayaran_paket')
+        ->join('rekening', 'pembayaran_paket.ID_REKENING', 'rekening.ID_REKENING')
+        ->select('pembayaran_paket.*', 'rekening.NAMA_BANK', 'rekening.NOMOR_REKENING')
+        ->get();
 
         return view('sewa_paket_detail', ['sewa_paket_wisata' =>$sewa_paket_wisata,'pengguna'=>$pengguna,
-        'customer'=>$customer,'paket_wisata'=>$paket_wisata, 'armada'=>$armada]);
+        'customer'=>$customer,'paket_wisata'=>$paket_wisata, 'armada'=>$armada, 'pembayaran_paket'=>$pembayaran_paket]);
         // return response()->json( ['sewa_paket_wisata' =>$sewa_paket_wisata,'pengguna'=>$pengguna,
         // 'customer'=>$customer,'paket_wisata'=>$paket_wisata, 'armada'=>$armada]);
     }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\sewa_paket_wisata;
+use App\rekening;
+use App\pembayaran_paket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -42,8 +44,10 @@ class SewaPaketController extends Controller
         ->where('schedule_armada.STATUS_ARMADA', '=', 1)
         ->get();
 
+        
+
         return view('sewa_paket', ['sewa_paket_wisata' =>$sewa_paket_wisata,'customer'=>$customer,'pengguna'=>$pengguna,
-        'paket_wisata'=>$paket_wisata,  'armada'=>$armada]);
+        'paket_wisata'=>$paket_wisata, 'armada'=>$armada]);
     }
 }
 
@@ -87,31 +91,7 @@ class SewaPaketController extends Controller
              return redirect('sewa_paket')->with('insert','data berhasil di tambah');
     }
 
-    public function getAllSchedule()
-    {
-        $sewa_PAKET=DB::table('schedule_armada')
-        ->select(
-        DB::raw('(ID_ARMADA) as title'), 
-        DB::raw('(TGL_SEWA) as start'), 
-        DB::raw('(TGL_AKHIR_SEWA) as end'))
-        ->get();
-
-        //$data = array_values($sewa_PAKET);
-        return response()->json($sewa_PAKET);
-    }
-
-    public function getScheduleById($id)
-    {
-        $sewa_PAKET=DB::table('schedule_armada')->where('ID_SEWA_PAKET','=',$id)
-        ->select(
-        DB::raw('(ID_ARMADA) as title'), 
-        DB::raw('(TGL_SEWA_PAKET) as start'), 
-        DB::raw('(TGL_AKHIR_SEWA) as end'))
-        ->get();
-
-        //$data = array_values($sewa_PAKET);
-        return response()->json($sewa_PAKET);
-    }
+ 
 
     /**
      * Display the specified resource.
@@ -155,7 +135,8 @@ class SewaPaketController extends Controller
                 'JAM_AKHIR_SEWA_PAKET'  => $request->JAM_AKHIR_SEWA_PAKET,
                 'STATUS_PAKET_WISATA'   => $request->STATUS_PAKET_WISATA,
                 'JAM_AKHIR_SEWA_PAKET'  => $request->JAM_AKHIR_SEWA_PAKET,
-                'DP_PAKET'  => $request->DP_PAKET,
+                'DP_PAKET'              => $request->dp,
+                'SISA_SEWA_PAKET'       => $request->sisabayar
                 // 'DP_PAKET'              =>  $request->DP_PAKET
         ]);
 

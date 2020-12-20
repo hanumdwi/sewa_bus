@@ -52,7 +52,7 @@
                                 </thead>
                                 <tbody>
                                 @foreach($sewa_bus_category as $sbc)
-                                @if($sbc->ID_SEWA_BUS == $sewa_bus->ID_SEWA_BUS)
+                                
                                 <tr class="text-right">
                                     <td class="text-left">{{ $loop->iteration }}</td>
                                     <td class="text-left">{{$sbc -> NAMA_CATEGORY}} - 
@@ -62,7 +62,7 @@
                                     <td>Rp. {{$sbc -> PRICELIST_SEWA}}</td>
                                     <td>Rp. {{$sbc -> TOTAL}}</td>
                                 </tr>
-                                @endif
+                               
                                 @endforeach
                                 </tbody>
                             </table>

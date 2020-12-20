@@ -12,6 +12,9 @@ use App\sewa_paket_wisata;
 use App\Pricelist_Sewa_Armada;
 use App\schedule_armada;
 use App\Armada;
+use App\rekening;
+use App\pembayaran;
+use App\Pembayaran_Paket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -66,13 +69,16 @@ class DataTableController extends Controller
         // ->select('category_armada.NAMA_CATEGORY', 'armada.PLAT_NOMOR', 'armada.ID_ARMADA')
         // ->get();
         // dump($sewa_bus_category);
-        
         $rekening=DB::table('rekening')->get();
+        $pembayaran=DB::table('pembayaran')
+        ->join('rekening', 'pembayaran.ID_REKENING', 'rekening.ID_REKENING')
+        ->select('pembayaran.*', 'rekening.NAMA_BANK', 'rekening.NOMOR_REKENING')
+        ->get();
      
 
         return view('datatable', ['sewa_bus' =>$sewa_bus,'pengguna'=>$pengguna,'customer'=>$customer],
         ['sewa_bus_category'=>$sewa_bus_category,'pricelist_sewa_armada'=>$pricelist_sewa_armada, 
-        'category_armada'=>$category_armada, 'rekening'=>$rekening, 'armada'=>$armada]);
+        'category_armada'=>$category_armada, 'pembayaran'=>$pembayaran, 'armada'=>$armada, 'rekening'=>$rekening]);
     }
 }
 
@@ -95,9 +101,15 @@ class DataTableController extends Controller
         ->where('schedule_armada.STATUS_ARMADA', '=', 1)
         ->get();
 
+        $rekening=DB::table('rekening')->get();
+        $pembayaran_paket=DB::table('pembayaran_paket')
+        ->join('rekening', 'pembayaran_paket.ID_REKENING', 'rekening.ID_REKENING')
+        ->select('pembayaran_paket.*', 'rekening.NAMA_BANK', 'rekening.NOMOR_REKENING')
+        ->get();
 
         return view('sewa_paket_detail', ['sewa_paket_wisata' =>$sewa_paket_wisata,'pengguna'=>$pengguna,
-        'customer'=>$customer,'paket_wisata'=>$paket_wisata, 'armada'=>$armada]);
+        'customer'=>$customer,'paket_wisata'=>$paket_wisata, 'armada'=>$armada, 
+        'pembayaran_paket'=>$pembayaran_paket, 'rekening'=>$rekening]);
         // return response()->json( ['sewa_paket_wisata' =>$sewa_paket_wisata,'pengguna'=>$pengguna,
         // 'customer'=>$customer,'paket_wisata'=>$paket_wisata, 'armada'=>$armada]);
     }
@@ -112,9 +124,9 @@ class DataTableController extends Controller
         //
     }
 
-    public function pdf(Request $request, $id)
+    public function pdf(Request $request, $ids)
     {
-        $sewa_bus= Sewa_Bus::find($id);
+        $sewa_bus= Sewa_Bus::find($ids);
         $pengguna= Pengguna::find($sewa_bus->ID_PENGGUNA);
         $customer= customer::find($sewa_bus->ID_CUSTOMER);
         
@@ -163,8 +175,6 @@ class DataTableController extends Controller
     public function store(Request $request, $id)
     {
         //dd($request->all());
-        // y;
-
         $sewa_bus= Sewa_Bus::find($id);
 //dd($request->id);
         foreach ($request['id'] as $key) {
@@ -182,8 +192,6 @@ class DataTableController extends Controller
             // 'SISA_BAYAR'=> $request['sisabayar'][$key]
         ]);
     }
-
-
             $sewa_bus_category=DB::table('sewa_bus_category')
             ->join('pricelist_sewa_armada','sewa_bus_category.ID_PRICELIST','=','pricelist_sewa_armada.ID_PRICELIST')
             ->join('category_armada','pricelist_sewa_armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
@@ -243,9 +251,78 @@ class DataTableController extends Controller
             return Redirect::back()->with('insert','data berhasil di tambah');
     }
 
-    public function store_pembayaran(Request $request)
+    public function store_pembayaran(Request $request, $id)
     {
+        //dd($request->all());
+        $sewa_bus= Sewa_Bus::find($id);
+       
+        if($request->hasFile('file')) {
+
+            $file = $request->file('file');
         
+            $fileName = $file->getClientOriginalName();
+
+            $bayar = new Pembayaran;
+                $bayar->CARA_BAYAR            = $request->carabayar;
+                $bayar->ID_REKENING           = $request->ID_REKENING;
+                $bayar->TGL_BAYAR             = $request->tglbayar;
+                $bayar->JUMLAH_BAYAR          = $request->jumlahbayar;
+                $bayar->ID_SEWA_BUS           = $id;
+                $bayar->STATUS_BAYAR          = 1;
+                $bayar->NAMA_BANK_PENGIRIM    = $request->namabank;
+                $bayar->NOREK_PENGIRIM        = $request->norek;
+                $bayar->KETERANGAN            = $request->keterangan;
+                $bayar->ATAS_NAMA             = $request->pemilikrekening;
+                $bayar->BUKTI_TF              = $fileName;
+                $file->move(public_path().'/buktiTF', $fileName);
+                $bayar->save();
+        }
+        
+        // DB::table('pembayaran')->insert([
+        //     'CARA_BAYAR'            => $request->CARA_BAYAR,
+        //     'ID_REKENING'            => $request->ID_REKENING,
+        //     'TGL_BAYAR'             => $request->TGL_BAYAR,
+        //     'JUMLAH_BAYAR'          => $request->JUMLAH_BAYAR,
+        //     'ID_SEWA_BUS'           => $request->ID_SEWA_BUS,
+        //     'STATUS_BAYAR'          => 1,
+        //     'NAMA_BANK_PENGIRIM'    => $request->NAMA_BANK_PENGIRIM,
+        //     'NOREK_PENGIRIM'        => $request->NOREK_PENGIRIM,
+        //     'KETERANGAN'            => $request->KETERANGAN,
+        //     'BUKTI_TF'              => $request->BUKTI_TF
+        // ]);
+
+        return Redirect::back()->with('insert','data berhasil di tambah');
+    }
+
+    public function store_pembayaran_paket(Request $request, $id)
+    {
+        //dd($request->all());
+        $sewa_paket_wisata= Sewa_Paket_Wisata::find($id);
+       
+        if($request->hasFile('file')) {
+
+            $file = $request->file('file');
+        
+            $fileName = $file->getClientOriginalName();
+
+            $bayar_paket = new Pembayaran_Paket;
+                $bayar_paket->CARA_BAYAR            = $request->carabayar;
+                $bayar_paket->ID_REKENING           = $request->ID_REKENING;
+                $bayar_paket->TGL_BAYAR             = $request->tglbayar;
+                $bayar_paket->JUMLAH_BAYAR          = $request->jumlahbayar;
+                $bayar_paket->ID_SEWA_PAKET           = $id;
+                $bayar_paket->STATUS_BAYAR          = 1;
+                $bayar_paket->NAMA_BANK_PENGIRIM    = $request->namabank;
+                $bayar_paket->NOREK_PENGIRIM        = $request->norek;
+                $bayar_paket->KETERANGAN            = $request->keterangan;
+                $bayar_paket->ATAS_NAMA             = $request->pemilikrekening;
+                $bayar_paket->BUKTI_TF              = $fileName;
+                $file->move(public_path().'/buktiTF_Paket', $fileName);
+                $bayar_paket->save();
+        }
+        
+
+        return Redirect::back()->with('insert','data berhasil di tambah');
     }
 
     /**
@@ -315,12 +392,12 @@ class DataTableController extends Controller
                 'ID_SEWA_BUS' => $request->ID_SEWA_BUS,
                 'TGL_SEWA_BUS' => $request->TGL_SEWA,
                 'TGL_AKHIR_SEWA' => $request->TGL_AKHIR_SEWA,
-                'LAMA_SEWA' => $request->LAMA_SEWA,
                 'ID_CUSTOMER' => $request->ID_CUSTOMER,
                 'ID_PENGGUNA' => $request->ID_PENGGUNA,
                 'JAM_SEWA' => $request->JAM_SEWA,
                 'JAM_AKHIR_SEWA' => $request->JAM_AKHIR_SEWA,
-                'DP_BUS'        =>  $request->DP_SEWA,
+                'DP_BUS'        =>  $request->subtotal,
+                'SISA_SEWA_BUS'        =>  $request->sisa_bayar,
                 'STATUS_SEWA' => $request->statussewa
         ]);
 

@@ -1,0 +1,162 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\pembayaran;
+use App\pembayaran_paket;
+use App\rekening;
+use App\customer;
+use App\sewa_bus;
+use App\sewa_paket_wisata;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+use DB;
+
+class PembayaranController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        if(!Session::get('login')){
+            return redirect('login');
+        }
+        else{
+        $pembayaran=DB::table('pembayaran')
+        ->join('sewa_bus', 'pembayaran.ID_SEWA_BUS', 'sewa_bus.ID_SEWA_BUS')
+        ->join('customer', 'sewa_bus.ID_CUSTOMER', 'customer.ID_CUSTOMER')
+        ->select('pembayaran.*', 'customer.NAMA_CUSTOMER')
+        ->get();
+
+
+        return view('konfirmasipembayaran', ['pembayaran' =>$pembayaran]);
+    }
+}
+
+public function indexdetail(Request $request, $id)
+    {
+            $pembayaran= Pembayaran::find($id);
+            $rekening= Rekening::find($pembayaran->ID_REKENING);
+            $sewa_bus= Sewa_Bus::find($pembayaran->ID_SEWA_BUS);
+            $customer= customer::find($sewa_bus->ID_CUSTOMER);
+            // $rekening= Rekening::all();
+            // $customer= Customer::all();
+            
+            // dump($armada);
+            return view ('detailbayarpaket',['pembayaran' =>$pembayaran, 'rekening' =>$rekening, 
+            'customer' =>$customer, 'sewa_bus' =>$sewa_bus]);
+}
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    //================================================================================================================
+
+    public function indexpaket()
+    {
+        if(!Session::get('login')){
+            return redirect('login');
+        }
+        else{
+        $pembayaran_paket=DB::table('pembayaran_paket')
+        ->join('sewa_paket_wisata', 'pembayaran_paket.ID_SEWA_PAKET', 'sewa_paket_wisata.ID_SEWA_PAKET')
+        ->join('customer', 'sewa_paket_wisata.ID_CUSTOMER', 'customer.ID_CUSTOMER')
+        ->select('pembayaran_paket.*', 'customer.NAMA_CUSTOMER')
+        ->get();
+
+
+        return view('konfirmasipembayaran_paket', ['pembayaran_paket' =>$pembayaran_paket]);
+        }
+    }
+
+    public function paketdetail(Request $request, $id)
+    {
+            $pembayaran_paket= Pembayaran_Paket::find($id);
+            $rekening= Rekening::find($pembayaran_paket->ID_REKENING);
+            $sewa_paket_wisata= Sewa_Paket_Wisata::find($pembayaran_paket->ID_SEWA_PAKET);
+            $customer= customer::find($sewa_paket_wisata->ID_CUSTOMER);
+            // $rekening= Rekening::all();
+            // $customer= Customer::all();
+            
+            // dump($armada);
+            return view ('detailbayarpaket',['pembayaran_paket' =>$pembayaran_paket, 'rekening' =>$rekening, 
+            'customer' =>$customer, 'sewa_paket_wisata' =>$sewa_paket_wisata]);
+}
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $category_armada = new Category;
+
+        $category_armada->fill([
+            'NAMA_CATEGORY'   => $request->namacategory
+        ]);
+
+        $category_armada->save();
+
+        return redirect('category_armadaindex');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\category  $category
+     * @return \Illuminate\Http\Response
+     */
+    public function show(category $category)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\category  $category
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(category $category)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\category  $category
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request)
+    {
+        DB::table('category_armada')->where('ID_CATEGORY',$request->id)->update([
+            'NAMA_CATEGORY'   => $request->namacategory
+        ]);
+
+        return redirect('category_armadaindex');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\category  $category
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        DB::table('category_armada')->where('ID_CATEGORY',$id)->delete();
+		
+		// alihkan halaman ke halaman category
+		return redirect('category_armadaindex');
+    }
+}

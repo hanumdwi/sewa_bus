@@ -104,6 +104,14 @@ Route::post('category_armadaupdate', 'CategoryController@update');
 Route::get('category_armadadestroy/{id}', 'CategoryController@destroy');
 //================================================================================
 
+//Rekening
+Route::get('rekening','RekeningController@index');
+Route::post('rekeningstore', 'RekeningController@store');
+Route::get('rekeningedit/{id}', 'RekeningController@edit');
+Route::post('rekeningupdate', 'RekeningController@update');
+Route::get('rekeningdestroy/{id}', 'RekeningController@destroy');
+//================================================================================
+
 //Category Armada
 Route::get('paketwisataindex','PaketWisataController@index');
 Route::get('detailindexpaket/{id}','PaketWisataController@indexdetail');
@@ -146,14 +154,19 @@ Route::get('sewa_bus_detailsewa/{id}', 'SewaDetailController@getsewa_bus_detailB
 Route::post('updateswitch', 'SewaDetailController@update_switch');
 //===================================================================================
 
-Route::get('getstates/{id}','SewaDetailController@getCountries');
-Route::get('getkecamatan/{id}','SewaDetailController@getPrice');
+//========== Pembayaran ===========
+Route::get('konfirmasipembayaran', 'PembayaranController@index');
+Route::get('detailbayarbus/{id}', 'PembayaranController@indexdetail');
+
+Route::get('konfirmasipembayaran_paket', 'PembayaranController@indexpaket');
+Route::get('detailbayarpaket/{id}', 'PembayaranController@paketdetail');
 
 //Sewa Bus Detail
 Route::get('datatable/{id}','DataTableController@index');
 Route::post('datatable/{id}','DataTableController@update');
 Route::post('datatable_store/{id}', 'DataTableController@store');
 Route::post('schedule_store', 'DataTableController@store_schedule');
+Route::post('pembayaranstore/{id}', 'DataTableController@store_pembayaran');
 
 Route::post('datatableupdate', 'DataTableController@update');
 Route::get('datatablesewa', 'DataTableController@getAlldatatable');
@@ -177,10 +190,12 @@ Route::post('updateswitch', 'SewaPaketController@update_switch');
 //===================================================================================
 
 //Sewa Paket Detail
-Route::get('sewa_paket_detail/{id}','SewaDetailController@indexpaket')->name('sewa_paket_detail_index');
+Route::get('sewa_paket_detail/{id}','DataTableController@indexpaket')->name('sewa_paket_detail_index');
 Route::post('sewa_paket_detail/{id}','SewaPaketController@update');
-Route::post('sewa_paket_detailstore', 'SewaDetailController@store');
-Route::post('sewa_paket_detailupdate', 'SewaDetailController@update');
+Route::post('pembayaranstore_paket/{id}', 'DataTableController@store_pembayaran_paket');
+Route::post('sewa_paket_detailupdate', 'SewaPaketController@update');
+
+Route::post('sewa_paket_detailstore', 'DataTableController@store');
 Route::get('sewa_paket_detailsewa', 'SewaDetailController@getAllsewa_paket_detail');
 Route::get('sewa_paket_detailsewa/{id}', 'SewaDetailController@getsewa_paket_detailById');
 Route::post('updateswitch', 'SewaDetailController@update_switch');
