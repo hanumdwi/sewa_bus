@@ -57,6 +57,33 @@ class SewaPaketController extends Controller
         return $idsewa;
     }
 
+    public function getAllSchedule()
+    {
+        $schedule_armada=DB::table('schedule_armada')
+        ->join('armada', 'schedule_armada.ID_ARMADA', '=', 'armada.ID_ARMADA')
+        ->select(
+        DB::raw('(armada.PLAT_NOMOR) as title'), 
+        DB::raw('(TGL_SEWA) as start'), 
+        DB::raw('(TGL_AKHIR_SEWA) as end'))
+        ->get();
+
+        //$data = array_values($sewa_bus);
+        return response()->json($schedule_armada);
+    }
+
+    public function getScheduleById($id)
+    {
+        $schedule_armada=DB::table('schedule_armada')->where('ID_SCHEDULE','=',$id)
+        ->select(
+        DB::raw('(PLAT_NOMOR) as title'), 
+        DB::raw('(TGL_SEWA_BUS) as start'), 
+        DB::raw('(TGL_AKHIR_SEWA) as end'))
+        ->get();
+
+        //$data = array_values($sewa_bus);
+        return response()->json($sewa_bus);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

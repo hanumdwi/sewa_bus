@@ -76,18 +76,18 @@ class SewaBusController extends Controller
         DB::beginTransaction();
         try{
             DB::table('sewa_bus')->insert([
-                'ID_SEWA_BUS' => $request->ID_SEWA_BUS,
-                'TGL_SEWA_BUS' => $request->TGL_SEWA,
-                'TGL_AKHIR_SEWA' => $request->TGL_AKHIR_SEWA,
-                'ID_CUSTOMER' => $request->ID_CUSTOMER,
-                'ID_PENGGUNA' => $request->ID_PENGGUNA,
-                'SISA_SEWA_BUS' => $request->HARGA_SEWA_BUS,
-                'JAM_SEWA' => $request->JAM_SEWA,
-                'JAM_AKHIR_SEWA' => $request->JAM_AKHIR_SEWA,
-                'DP_BUS'        =>  $request->DP_SEWA,
-                'SISA_SEWA_BUS'        =>  $request->SISA_SEWA_BUS,
-                'total_payment' => $request->total_payment,
-                'STATUS_SEWA' => $request->statussewa
+                'ID_SEWA_BUS'       => $request->ID_SEWA_BUS,
+                'TGL_SEWA_BUS'      => $request->TGL_SEWA,
+                'TGL_AKHIR_SEWA'    => $request->TGL_AKHIR_SEWA,
+                'ID_CUSTOMER'       => $request->ID_CUSTOMER,
+                'ID_PENGGUNA'       => $request->ID_PENGGUNA,
+                'SISA_SEWA_BUS'     => $request->HARGA_SEWA_BUS,
+                'JAM_SEWA'          => $request->JAM_SEWA,
+                'JAM_AKHIR_SEWA'    => $request->JAM_AKHIR_SEWA,
+                'DP_BUS'            =>  $request->DP_SEWA,
+                'SISA_SEWA_BUS'     =>  $request->SISA_SEWA_BUS,
+                'total_payment'     => $request->total_payment,
+                'STATUS_SEWA'       => $request->statussewa
                 
             ]);
 

@@ -107,7 +107,7 @@ class ScheduleController extends Controller
     {
         $schedule_armada=DB::table('schedule_armada')
         ->select(
-        DB::raw('(PLAT_NOMOR) as title'), 
+        DB::raw('(ID_ARMADA) as title'), 
         DB::raw('(TGL_SEWA) as start'), 
         DB::raw('(TGL_AKHIR_SEWA) as end'))
         ->get();
@@ -120,7 +120,7 @@ class ScheduleController extends Controller
     {
         $schedule_armada=DB::table('schedule_armada')->where('ID_SCHEDULE','=',$id)
         ->select(
-        DB::raw('(PLAT_NOMOR) as title'), 
+        DB::raw('(ID_ARMADA) as title'), 
         DB::raw('(TGL_SEWA_BUS) as start'), 
         DB::raw('(TGL_AKHIR_SEWA) as end'))
         ->get();

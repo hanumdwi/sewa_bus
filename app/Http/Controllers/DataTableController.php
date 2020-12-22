@@ -388,6 +388,11 @@ class DataTableController extends Controller
 
     public function update(Request $request, $id)
     {
+        $total_payment = $request->total_payment;
+        $sisa_bayar=$request->sisa_bayar;
+
+        $total= str_replace(".","",$total_payment);
+        $sisa= str_replace(".","",$sisa_bayar);
         DB::table('sewa_bus')->where('ID_SEWA_BUS',$request->ID_SEWA_BUS)->update([
                 'ID_SEWA_BUS'       => $request->ID_SEWA_BUS,
                 'TGL_SEWA_BUS'      => $request->TGL_SEWA,
@@ -397,8 +402,8 @@ class DataTableController extends Controller
                 'JAM_SEWA'          => $request->JAM_SEWA,
                 'JAM_AKHIR_SEWA'    => $request->JAM_AKHIR_SEWA,
                 'DP_BUS'            =>  $request->subtotal,
-                'total_payment'     =>  $request->total_payment,
-                'SISA_SEWA_BUS'     =>  $request->sisa_bayar,
+                'total_payment'     =>  $total,
+                'SISA_SEWA_BUS'     =>  $sisa,
                 'STATUS_SEWA'       => $request->statussewa
         ]);
 
