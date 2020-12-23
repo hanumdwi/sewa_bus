@@ -116,24 +116,19 @@ class SewaDetailController extends Controller
         ['sewa_bus_category'=>$sewa_bus_category, 'pricelist_sewa_armada'=>$pricelist_sewa_armada, 'category_armada'=>$category_armada]);
     }
 
-    public function pdf_paket(Request $request, $id)
+    public function pdf_paket()
     {
-        $sewa_paket_wisata= Sewa_Paket_Wisata::find($id);
-        $pengguna= Pengguna::find($sewa_paket_wisata->ID_PENGGUNA);
-        $customer= customer::find($sewa_paket_wisata->ID_CUSTOMER);
-
-        $paket_wisata=DB::table('paket_wisata')->get();
         $sewa_paket_wisata=DB::table('sewa_paket_wisata')
+        ->join('customer','sewa_paket_wisata.ID_CUSTOMER', '=', 'customer.ID_CUSTOMER')
+        ->join('pengguna','sewa_paket_wisata.ID_PENGGUNA', '=', 'pengguna.ID_PENGGUNA')
         ->join('paket_wisata','sewa_paket_wisata.ID_PAKET', '=', 'paket_wisata.ID_PAKET')
-        ->where('ID_SEWA_PAKET', '=', $id)
         ->select('sewa_paket_wisata.ID_SEWA_PAKET','sewa_paket_wisata.TGL_SEWA_PAKET',
-        'sewa_paket_wisata.TGL_AKHIR_SEWA_PAKET', 'sewa_paket_wisata.DP_PAKET',
-        'sewa_paket_wisata.HARGA_SEWA_PAKET','sewa_paket_wisata.JAM_SEWA_PAKET',
-        'sewa_paket_wisata.JAM_AKHIR_SEWA_PAKET','paket_wisata.NAMA_PAKET')
+        'sewa_paket_wisata.TGL_AKHIR_SEWA_PAKET','customer.*', 'sewa_paket_wisata.DP_PAKET',
+        'sewa_paket_wisata.SISA_SEWA_PAKET','sewa_paket_wisata.JAM_SEWA_PAKET', 'paket_wisata.HARGA_JUAL','paket_wisata.HARGA_PAKET',
+        'sewa_paket_wisata.JAM_AKHIR_SEWA_PAKET','pengguna.NAMA_PENGGUNA','paket_wisata.NAMA_PAKET', 'sewa_paket_wisata.STATUS_PAKET_WISATA')
         ->get();
 
-        return view('invoicepaket',['sewa_paket_wisata'=>$sewa_paket_wisata, 'pengguna'=>$pengguna,
-        'customer'=>$customer, 'paket_wisata'=>$paket_wisata]);
+        return view('invoicepaket',['sewa_paket_wisata'=>$sewa_paket_wisata]);
     }
 
     /**

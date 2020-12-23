@@ -17,9 +17,7 @@ Route::get('/', function () {
     return view('ecommerce-dashboard');
 })->name('index');
 
-Route::get('ecommerce-dashboard', function () {
-    return view('ecommerce-dashboard');
-})->name('ecommerce-dashboard');
+Route::get('ecommerce-dashboard', 'DashboardController@index');
 // Download File
 // user-manual
 Route::get('user-manual', 'Data2Controller@user_manual');
@@ -157,9 +155,12 @@ Route::post('updateswitch', 'SewaDetailController@update_switch');
 //========== Pembayaran ===========
 Route::get('konfirmasipembayaran', 'PembayaranController@index');
 Route::get('detailbayarbus/{id}', 'PembayaranController@indexdetail');
+Route::get('printbayarbus/{id}', 'PembayaranController@cetakKwitansi');
 
 Route::get('konfirmasipembayaran_paket', 'PembayaranController@indexpaket');
 Route::get('detailbayarpaket/{id}', 'PembayaranController@paketdetail');
+Route::get('printbayarpaket/{id}', 'PembayaranController@cetakKwitansi_Paket');
+
 
 //Sewa Bus Detail
 Route::get('datatable/{id}','DataTableController@index');
@@ -175,8 +176,11 @@ Route::post('updateswitch', 'DataTableController@update_switch');
 //===================================================================================
 Route::get('ajax/{id}','DataTableController@index');
 Route::post('ajax/{id}','DataTableController@update');
+
 //Sewa Bus Invoice
 Route::get('invoice/{id}','SewaDetailController@pdf');
+Route::get('cetak_invoice/{id}','DataTableController@cetak_invoice_bus');
+
 Route::get('invoicepaket/{id}','SewaDetailController@pdf_paket');
 //===================================================================================
 

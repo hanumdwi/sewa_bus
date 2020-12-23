@@ -124,9 +124,9 @@ class DataTableController extends Controller
         //
     }
 
-    public function pdf(Request $request, $ids)
+    public function pdf(Request $request, $id)
     {
-        $sewa_bus= Sewa_Bus::find($ids);
+        $sewa_bus= Sewa_Bus::find($id);
         $pengguna= Pengguna::find($sewa_bus->ID_PENGGUNA);
         $customer= customer::find($sewa_bus->ID_CUSTOMER);
         
@@ -146,6 +146,30 @@ class DataTableController extends Controller
         ['sewa_bus_category'=>$sewa_bus_category, 'pricelist_sewa_armada'=>$pricelist_sewa_armada, 'category_armada'=>$category_armada]);
     }
 
+    public function cetak_invoice_bus($id){
+        $sewa_bus= Sewa_Bus::find($id);
+        $pengguna= Pengguna::find($sewa_bus->ID_PENGGUNA);
+        $customer= customer::find($sewa_bus->ID_CUSTOMER);
+        
+        $category_armada=DB::table('category_armada')->get();
+        $pricelist_sewa_armada=DB::table('pricelist_sewa_armada')->get();
+        $sewa_bus_category=DB::table('sewa_bus_category')
+        ->join('sewa_bus','sewa_bus_category.ID_SEWA_BUS', '=', 'sewa_bus.ID_SEWA_BUS')
+        ->join('pricelist_sewa_armada','sewa_bus_category.ID_PRICELIST', '=', 'pricelist_sewa_armada.ID_PRICELIST')
+        ->join('category_armada', 'pricelist_sewa_armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
+        ->select('sewa_bus_category.ID_SEWA_BUS', 'sewa_bus_category.ID_PRICELIST',
+        'sewa_bus_category.QUANTITY', 'sewa_bus_category.TOTAL',
+        'category_armada.NAMA_CATEGORY', 'pricelist_sewa_armada.TUJUAN_SEWA', 'pricelist_sewa_armada.PRICELIST_SEWA')
+        ->get();
+
+            $customPaper = array(0,0,567.00,283.80);
+    
+            $pdf = PDF::loadview('cetak_invoice',['sewa_bus'=>$sewa_bus, 'pengguna'=>$pengguna,'customer'=>$customer],
+            ['sewa_bus_category'=>$sewa_bus_category, 'pricelist_sewa_armada'=>$pricelist_sewa_armada, 
+            'category_armada'=>$category_armada])->setPaper('A4', 'landscape');
+            return $pdf->stream();
+    }
+
     public function pdf_paket(Request $request, $id)
     {
         $sewa_paket_wisata= Sewa_Paket_Wisata::find($id);
@@ -155,10 +179,9 @@ class DataTableController extends Controller
         $paket_wisata=DB::table('paket_wisata')->get();
         $sewa_paket_wisata=DB::table('sewa_paket_wisata')
         ->join('paket_wisata','sewa_paket_wisata.ID_PAKET', '=', 'paket_wisata.ID_PAKET')
-        ->where('ID_SEWA_PAKET', '=', $id)
         ->select('sewa_paket_wisata.ID_SEWA_PAKET','sewa_paket_wisata.TGL_SEWA_PAKET',
         'sewa_paket_wisata.TGL_AKHIR_SEWA_PAKET', 'sewa_paket_wisata.DP_PAKET',
-        'sewa_paket_wisata.HARGA_SEWA_PAKET','sewa_paket_wisata.JAM_SEWA_PAKET',
+        'paket_wisata.HARGA_PAKET','sewa_paket_wisata.JAM_SEWA_PAKET',
         'sewa_paket_wisata.JAM_AKHIR_SEWA_PAKET','paket_wisata.NAMA_PAKET')
         ->get();
 

@@ -51,6 +51,12 @@
                                     </button>
                                     </a>
                                     
+                                    <a href="{{ url('printbayarbus', ['id'=>$c -> id]) }}">
+                                    <button type="button" class="btn btn-outline-warning">
+                                        <i class="ti-printer mr-2"></i>Print
+                                    </button>
+                                    </a>
+
                                     </td>
                                     </tr>
                                     @endforeach

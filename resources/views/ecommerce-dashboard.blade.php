@@ -35,391 +35,216 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-lg-8 col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h6 class="card-title mb-3">Weekly Average New Sales</h6>
-                            <h1>$1,720</h1>
-                        </div>
-                        <div class="d-flex">
-                            <div class="icon-block icon-block-floating bg-danger mr-2">
-                                <i class="ti-arrow-up"></i>
-                            </div>
-                            <div class="d-flex flex-column">
-                                <small class="text-muted">Last 7 Days</small>
-                                <div class="text-danger">+52,50%</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="sales"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <h6 class="card-title mb-2">Monthly Sales</h6>
-                        <div>
-                            <a href="#" class="btn btn-outline-light btn-sm btn-floating mr-2">
-                                <i class="fa fa-refresh"></i>
-                            </a>
-                            <div class="dropdown">
-                                <a href="#" data-toggle="dropdown"
-                                   class="btn btn-outline-light btn-sm btn-floating"
-                                   aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="small text-muted">Avarage total sales +25,5%</p>
-                    <div id="monthly-sales"></div>
-                    <ul class="list-inline text-center">
-                        <li class="list-inline-item">
-                            <i class="fa fa-circle mr-1 text-success"></i> Bank Card <br>
-                            <small class="text-muted">25,45% over</small>
-                        </li>
-                        <li class="list-inline-item">
-                            <i class="fa fa-circle mr-1 text-primary"></i> Credit Card <br>
-                            <small class="text-muted">75,55% over</small>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+    
+
+<div class="card">
+    <div class="card-body">
+        <h6 class="card-title mb-0">Recent Orders Bus</h6>
     </div>
-
-    <div class="row">
-        <div class="col-lg-4 col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <h6 class="card-title d-flex justify-content-between">
-                        Sales
-                        <small class="text-muted">Last 30 days</small>
-                    </h6>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <h2 class="mb-3">25,400</h2>
-                            <small class="text-success">
-                                <i class="ti-angle-up mr-1"></i>
-                                2.00%
-                            </small>
-                        </div>
-                        <div
-                            class="icon-block icon-block-xl icon-block-floating bg-secondary opacity-7">
-                            <i class="ti-bar-chart"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <h6 class="card-title d-flex justify-content-between">
-                        Orders
-                        <small class="text-muted">Last 30 days</small>
-                    </h6>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <h2 class="mb-3">62,033</h2>
-                            <small class="text-danger">
-                                <i class="ti-angle-down mr-1"></i>
-                                1.59%
-                            </small>
-                        </div>
-                        <div class="icon-block icon-block-xl icon-block-floating bg-success opacity-7">
-                            <i class="ti-package"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <h6 class="card-title d-flex justify-content-between">
-                        Customers
-                        <small class="text-muted">Last 30 days</small>
-                    </h6>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <h2 class="mb-3">34,518</h2>
-                            <small class="text-success">
-                                <i class="ti-angle-up mr-1"></i>
-                                2.07%
-                            </small>
-                        </div>
-                        <div class="icon-block icon-block-xl icon-block-floating bg-warning opacity-7">
-                            <i class="ti-user"></i>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-body">
-            <h6 class="card-title mb-0">Recent Orders</h6>
-        </div>
         <div class="table-responsive">
-            <table id="recent-orders" class="table table-lg">
-                <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Customer</th>
-                    <th>Total Price</th>
-                    <th>Status</th>
-                    <th>Date</th>
-                    <th class="text-right">Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>
-                        <a href="{{ route('product-detail') }}" class="d-flex align-items-center">
-                            <img width="40" src="{{ url('assets/media/image/products/product1.png') }}"
-                                 class="rounded mr-3" alt="Vase">
-                            <span>Vase</span>
-                        </a>
-                    </td>
-                    <td>Dollie Bullock</td>
-                    <td>$230</td>
-                    <td>
-                        <span class="badge bg-secondary-bright text-secondary">On pre-order (not paid)</span>
-                    </td>
-                    <td>2020/02/28</td>
-                    <td class="text-right">
-                        <a href="#" class="btn btn-outline-primary btn-sm btn-floating" data-toggle="tooltip" title="Edit">
-                            <i class="ti-pencil"></i>
-                        </a>
-                        <a href="#" class="btn btn-outline-danger btn-sm btn-floating ml-2" data-toggle="tooltip" title="Delete">
-                            <i class="ti-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="{{ route('product-detail') }}" class="d-flex align-items-center">
-                            <img width="40" src="{{ url('assets/media/image/products/product2.png') }}"
-                                 class="rounded mr-3" alt="Glasses">
-                            <span>Glasses</span>
-                        </a>
-                    </td>
-                    <td>Holmes Hines</td>
-                    <td>$300</td>
-                    <td>
-                        <span class="badge bg-success-bright text-success">Payment accepted</span>
-                    </td>
-                    <td>2020/08/28</td>
-                    <td class="text-right">
-                        <a href="#" class="btn btn-outline-primary btn-sm btn-floating" data-toggle="tooltip" title="Edit">
-                            <i class="ti-pencil"></i>
-                        </a>
-                        <a href="#" class="btn btn-outline-danger btn-sm btn-floating ml-2" data-toggle="tooltip" title="Delete">
-                            <i class="ti-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="{{ route('product-detail') }}" class="d-flex align-items-center">
-                            <img width="40" src="{{ url('assets/media/image/products/product3.png') }}"
-                                 class="rounded mr-3" alt="Plate">
-                            <span>Plate</span>
-                        </a>
-                    </td>
-                    <td>Serena Glover</td>
-                    <td>$250</td>
-                    <td>
-                        <span class="badge bg-danger-bright text-danger">Payment error</span>
-                    </td>
-                    <td>2020/08/28</td>
-                    <td class="text-right">
-                        <a href="#" class="btn btn-outline-primary btn-sm btn-floating" data-toggle="tooltip" title="Edit">
-                            <i class="ti-pencil"></i>
-                        </a>
-                        <a href="#" class="btn btn-outline-danger btn-sm btn-floating ml-2" data-toggle="tooltip" title="Delete">
-                            <i class="ti-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="{{ route('product-detail') }}" class="d-flex align-items-center">
-                            <img width="40" src="{{ url('assets/media/image/products/product4.png') }}"
-                                 class="rounded mr-3" alt="Pen">
-                            <span>Pen</span>
-                        </a>
-                    </td>
-                    <td>Dianne Prince</td>
-                    <td>$550</td>
-                    <td>
-                        <span class="badge bg-success-bright text-success">Payment accepted</span>
-                    </td>
-                    <td>2020/08/28</td>
-                    <td class="text-right">
-                        <a href="#" class="btn btn-outline-primary btn-sm btn-floating" data-toggle="tooltip" title="Edit">
-                            <i class="ti-pencil"></i>
-                        </a>
-                        <a href="#" class="btn btn-outline-danger btn-sm btn-floating ml-2" data-toggle="tooltip" title="Delete">
-                            <i class="ti-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="{{ route('product-detail') }}" class="d-flex align-items-center">
-                            <img width="40" src="{{ url('assets/media/image/products/product5.png') }}"
-                                 class="rounded mr-3" alt="Armchair">
-                            <span>Armchair</span>
-                        </a>
-                    </td>
-                    <td>Morgan Pitts</td>
-                    <td>$280</td>
-                    <td>
-                        <span class="badge bg-warning-bright text-warning">Preparing the order</span>
-                    </td>
-                    <td>2020/03/30</td>
-                    <td class="text-right">
-                        <a href="#" class="btn btn-outline-primary btn-sm btn-floating" data-toggle="tooltip" title="Edit">
-                            <i class="ti-pencil"></i>
-                        </a>
-                        <a href="#" class="btn btn-outline-danger btn-sm btn-floating ml-2" data-toggle="tooltip" title="Delete">
-                            <i class="ti-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="{{ route('product-detail') }}" class="d-flex align-items-center">
-                            <img width="40" src="{{ url('assets/media/image/products/product6.png') }}"
-                                 class="rounded mr-3" alt="Flowerpot">
-                            <span>Flowerpot</span>
-                        </a>
-                    </td>
-                    <td>Merrill Richardson</td>
-                    <td>$128</td>
-                    <td>
-                        <span class="badge bg-info-bright text-info">Awaiting PayPal payment</span>
-                    </td>
-                    <td>2020/01/14</td>
-                    <td class="text-right">
-                        <a href="#" class="btn btn-outline-primary btn-sm btn-floating" data-toggle="tooltip" title="Edit">
-                            <i class="ti-pencil"></i>
-                        </a>
-                        <a href="#" class="btn btn-outline-danger btn-sm btn-floating ml-2" data-toggle="tooltip" title="Delete">
-                            <i class="ti-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="{{ route('product-detail') }}" class="d-flex align-items-center">
-                            <img width="40" src="{{ url('assets/media/image/products/product7.png') }}"
-                                 class="rounded mr-3" alt="Wall Clock">
-                            <span>Wall Clock</span>
-                        </a>
-                    </td>
-                    <td>Krista Mathis</td>
-                    <td>$500</td>
-                    <td>
-                        <span class="badge bg-secondary-bright text-secondary">Shipped</span>
-                    </td>
-                    <td>2020/02/28</td>
-                    <td class="text-right">
-                        <a href="#" class="btn btn-outline-primary btn-sm btn-floating" data-toggle="tooltip" title="Edit">
-                            <i class="ti-pencil"></i>
-                        </a>
-                        <a href="#" class="btn btn-outline-danger btn-sm btn-floating ml-2" data-toggle="tooltip" title="Delete">
-                            <i class="ti-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="{{ route('product-detail') }}" class="d-flex align-items-center">
-                            <img width="40" src="{{ url('assets/media/image/products/product8.png') }}"
-                                 class="rounded mr-3" alt="Desk">
-                            <span>Desk</span>
-                        </a>
-                    </td>
-                    <td>Frankie Hewitt</td>
-                    <td>$300</td>
-                    <td>
-                        <span class="badge bg-success-bright text-success">Remote payment accepted</span>
-                    </td>
-                    <td>2020/02/09</td>
-                    <td class="text-right">
-                        <a href="#" class="btn btn-outline-primary btn-sm btn-floating" data-toggle="tooltip" title="Edit">
-                            <i class="ti-pencil"></i>
-                        </a>
-                        <a href="#" class="btn btn-outline-danger btn-sm btn-floating ml-2" data-toggle="tooltip" title="Delete">
-                            <i class="ti-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="{{ route('product-detail') }}" class="d-flex align-items-center">
-                            <img width="40" src="{{ url('assets/media/image/products/product9.png') }}"
-                                 class="rounded mr-3" alt="Night Light">
-                            <span>Night Light</span>
-                        </a>
-                    </td>
-                    <td>Hayden Fitzgerald</td>
-                    <td>$200</td>
-                    <td>
-                        <span class="badge bg-success-bright text-success">Delivered</span>
-                    </td>
-                    <td>2020/01/14</td>
-                    <td class="text-right">
-                        <a href="#" class="btn btn-outline-primary btn-sm btn-floating" data-toggle="tooltip" title="Edit">
-                            <i class="ti-pencil"></i>
-                        </a>
-                        <a href="#" class="btn btn-outline-danger btn-sm btn-floating ml-2" data-toggle="tooltip" title="Delete">
-                            <i class="ti-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="{{ route('product-detail') }}" class="d-flex align-items-center">
-                            <img width="40" src="{{ url('assets/media/image/products/product10.png') }}"
-                                 class="rounded mr-3" alt="Shoe">
-                            <span>Shoe</span>
-                        </a>
-                    </td>
-                    <td>Cole Holcomb</td>
-                    <td>$700</td>
-                    <td>
-                        <span class="badge bg-secondary-bright text-secondary">On pre-order (not paid)</span>
-                    </td>
-                    <td>2020/02/28</td>
-                    <td class="text-right">
-                        <a href="#" class="btn btn-outline-primary btn-sm btn-floating" data-toggle="tooltip" title="Edit">
-                            <i class="ti-pencil"></i>
-                        </a>
-                        <a href="#" class="btn btn-outline-danger btn-sm btn-floating ml-2" data-toggle="tooltip" title="Delete">
-                            <i class="ti-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-                </tbody>
+        <table id="myTable" class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Status Sewa</th>
+                            <th>Id Sewa Bus</th>
+                            <th>Nama User</th>
+                            <th>Nama Customer</th>
+                            <th>Start Date</th>
+                            <th>Start Time</th>
+                            <th>End Date</th>
+                            <th>End Time</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            @foreach($sewa_bus as $sb)
+                                    @if($sb -> STATUS_SEWA == 'Booking')
+                                    <td><span class="badge bg-success-bright text-secondary">{{ $sb -> STATUS_SEWA}}</span></td>
+                                    @endif
+                                    @if($sb -> STATUS_SEWA == 'Lunas')
+                                    <td><span class="badge bg-success-bright text-success">{{ $sb -> STATUS_SEWA}}</span></td>
+                                    @endif
+                                    @if($sb -> STATUS_SEWA == 'On Schedule')
+                                    <td><span class="badge bg-success-bright text-danger">{{ $sb -> STATUS_SEWA}}</span></td>
+                                    @endif
+                                    <td>{{ $sb -> ID_SEWA_BUS }}</td>
+                                    <td>{{ $sb -> NAMA_PENGGUNA }}</td>
+                                    <td>{{ $sb -> NAMA_CUSTOMER }}</td>
+                                    <td>{{ $sb -> TGL_SEWA_BUS }}</td>
+                                    <td>{{ $sb -> JAM_SEWA }}</td>
+                                    <td>{{ $sb -> TGL_AKHIR_SEWA }}</td>
+                                    <td>{{ $sb -> JAM_AKHIR_SEWA }}</td>
+                                    <td>
+                                    <a href="{{ url('datatable', ['id'=>$sb -> ID_SEWA_BUS]) }}">
+                                    <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit" data-toggle="modal" data-target="#exampleModal12">
+                                        <i class="ti-pencil"></i>
+                                    </button>
+                                    </a>
+                                    <button type="button" class="btn btn-outline-danger btn-sm btn-floating ml-2" title="Delete" data-toggle="modal" data-target="#exampleModal13">
+                                        <i class="ti-trash"></i>
+                                    </button>
+                                    <a href="invoice/{{$sb -> ID_SEWA_BUS}}">
+                                    <button type="button" class="btn btn-outline-warning btn-sm btn-floating ml-2" title="Print Invoice" data-toggle="modal" data-target="#exampleModal14">
+                                        <i class="ti-printer"></i>
+                                    </button>
+                                    </a>
+
+                                        <!-- modal -->
+                                            <div class="modal fade" id="exampleModal13" tabindex="-1" role="dialog"
+                                                aria-labelledby="exampleModal13Label" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModal13Label">Delete Data Sewa Bus</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <i class="ti-close"></i>
+                                                            </button>
+                                                        </div>
+                                                        
+                                                        <div class="modal-body">
+                                                            <p>Are you sure to Delete this Data?</p>
+                                                        </div>
+                                                        
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <a href="sewa_busdestroy/{{$sb -> ID_SEWA_BUS}}">
+                                                        <button type="button" class="btn btn-primary" id="delete">Delete</button>
+                                                        </a>
+                                                    </div>
+                                                    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </td>
+                                    </tr>
+                                    @endforeach
+                                    </tbody>
+                                    <tfoot>
+                        <tr>
+                            <th>Status Sewa</th>
+                            <th>Id Sewa Bus</th>
+                            <th>Nama User</th>
+                            <th>Nama Customer</th>
+                            <th>Start Date</th>
+                            <th>Start Time</th>
+                            <th>End Date</th>
+                            <th>End Time</th>
+                            <th>Action</th>
+                            </tr>
+                        </tfoot>
             </table>
         </div>
     </div>
+
+<div class="card">
+    <div class="card-body">
+        <h6 class="card-title mb-0">Recent Orders Packages</h6>
+    </div>
+        <div class="table-responsive">
+        <table id="myTable" class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Status Sewa</th>
+                            <th>Id Sewa Paket Wisata</th>
+                            <th>Nama User</th>
+                            <th>Nama Customer</th>
+                            <th>Nama Paket</th>
+                            <th>Start Date</th>
+                            <th>Start Time</th>
+                            <th>End Date</th>
+                            <th>End Time</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            @foreach($sewa_paket_wisata as $spw)
+
+                                    @if($spw -> STATUS_PAKET_WISATA == 'Booking')
+                                    <td><span class="badge bg-success-bright text-secondary">{{ $spw -> STATUS_PAKET_WISATA}}</span></td>
+                                    @endif
+                                    @if($spw -> STATUS_PAKET_WISATA == 'Lunas')
+                                    <td><span class="badge bg-success-bright text-success">{{ $spw -> STATUS_PAKET_WISATA}}</span></td>
+                                    @endif
+                                    @if($spw -> STATUS_PAKET_WISATA == 'On Schedule')
+                                    <td><span class="badge bg-success-bright text-danger">{{ $spw -> STATUS_PAKET_WISATA}}</span></td>
+                                    @endif
+                                    <!-- <tr class="table-light"> -->
+                                    <td>{{ $spw -> ID_SEWA_PAKET }}</td>
+                                    <td>{{ $spw -> NAMA_PENGGUNA }}</td>
+                                    <td>{{ $spw -> NAMA_CUSTOMER }}</td>
+                                    <td>{{ $spw -> NAMA_PAKET }}</td>
+                                    <td>{{ $spw -> TGL_SEWA_PAKET }}</td>
+                                    <td>{{ $spw -> JAM_SEWA_PAKET }}</td>
+                                    <td>{{ $spw -> TGL_AKHIR_SEWA_PAKET }}</td>
+                                    <td>{{ $spw -> JAM_AKHIR_SEWA_PAKET }}</td>
+                                    <td>
+                                    <a href="sewa_paket_detail/{{$spw -> ID_SEWA_PAKET}}">
+                                    <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit" data-toggle="modal" data-target="#exampleModal12">
+                                        <i class="ti-pencil"></i>
+                                    </button>
+                                    </a>
+                                    <button type="button" class="btn btn-outline-danger btn-sm btn-floating ml-2" title="Delete" data-toggle="modal" data-target="#exampleModal13">
+                                        <i class="ti-trash"></i>
+                                    </button>
+                                    <a href="{{ url('invoicepaket', ['ID_SEWA_PAKET'=>$spw -> ID_SEWA_PAKET]) }}">
+                                    <button type="button" class="btn btn-outline-warning btn-sm btn-floating ml-2" title="Print Invoice" data-toggle="modal" data-target="#exampleModal14">
+                                        <i class="ti-printer"></i>
+                                    </button>
+                                    </a>
+                                        <!-- modal -->
+                                            <div class="modal fade" id="exampleModal13" tabindex="-1" role="dialog"
+                                                aria-labelledby="exampleModal13Label" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModal13Label">Delete Data Sewa Paket Wisata</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <i class="ti-close"></i>
+                                                            </button>
+                                                        </div>
+                                                        
+                                                        <div class="modal-body">
+                                                            <p>Are you sure to Delete this Data?</p>
+                                                        </div>
+                                                        
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <a href="sewa_paketdestroy/{{$spw -> ID_SEWA_PAKET}}">
+                                                        <button type="button" class="btn btn-primary" id="delete">Delete</button>
+                                                        </a>
+                                                    </div>
+                                                    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </td>
+                                    </tr>
+                                    @endforeach
+                                    <!-- </tr> -->
+                                    </tbody>
+                                    <tfoot>
+                        <tr>
+                            <th>Status Sewa</th>
+                            <th>Id Sewa Bus</th>
+                            <th>Nama User</th>
+                            <th>Nama Customer</th>
+                            <th>Nama Paket</th>
+                            <th>Start Date</th>
+                            <th>Start Time</th>
+                            <th>End Date</th>
+                            <th>End Time</th>
+                            <!-- <th>DP Sewa</th>
+                            <th>Harga Sewa</th> -->
+                            <th>Action</th>
+                        </tr>
+                        </tfoot>
+                        
+            </table>
+        </div>
+    </div>
+
 
     <div class="row">
         <div class="col-lg-9 col-md-12">
@@ -792,6 +617,7 @@
             </div>
         </div>
     </div>
+
 @endif
 @endsection
 

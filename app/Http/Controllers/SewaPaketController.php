@@ -110,9 +110,9 @@ class SewaPaketController extends Controller
                 'ID_PENGGUNA'           => $request->ID_PENGGUNA,
                 'JAM_SEWA_PAKET'        => $request->JAM_SEWA_PAKET,
                 'JAM_AKHIR_SEWA_PAKET'  => $request->JAM_AKHIR_SEWA_PAKET,
-                'DP_PAKET'  => $request->DP_PAKET,
-                'SISA_SEWA_PAKET'  => $request->SISA_SEWA_PAKET,
-                'STATUS_PAKET_WISATA'              =>  $request->STATUS_PAKET_WISATA
+                'DP_PAKET'              => $request->DP_PAKET,
+                'SISA_SEWA_PAKET'       => $request->SISA_SEWA_PAKET,
+                'STATUS_PAKET_WISATA'   =>  $request->STATUS_PAKET_WISATA
             ]);
 
              return redirect('sewa_paket')->with('insert','data berhasil di tambah');

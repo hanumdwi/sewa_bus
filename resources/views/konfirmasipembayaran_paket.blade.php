@@ -50,6 +50,12 @@
                                         <i class="ti-money mr-2"></i>Detail
                                     </button>
                                     </a>
+
+                                    <a href="{{ url('printbayarpaket', ['id_paket'=>$c -> id_paket]) }}">
+                                    <button type="button" class="btn btn-outline-warning">
+                                        <i class="ti-printer mr-2"></i>Print
+                                    </button>
+                                    </a>
                                     
                                     </td>
                                     </tr>

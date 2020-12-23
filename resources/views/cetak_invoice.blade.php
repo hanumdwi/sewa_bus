@@ -1,9 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-
-@if(\Session::has('kasir') || \Session::has('admin'))
-    <div class="page-header">
+<!DOCTYPE html>  
+ <html>   
+ <head>   
+  <title>Kuitansi Sederhana</title>   
+ </head>   
+ <body>   
+ <style>
+    /* @page { size: 15cm 22cm landscape; } */
+</style>
+<div class="page-header">
         <div class="page-title">
             <h3>Invoice</h3>
         </div>
@@ -16,7 +23,7 @@
                 <div class="card-body">
                     <div class="invoice">
                         <div class="d-md-flex justify-content-between align-items-center">
-                            <img src="{{ url('assets/media/image/logo/mdc.png') }}" alt="logo">
+                            
                             <h3 class="text-xs-left m-b-0">#INV-{{$sewa_bus->ID_SEWA_BUS}}</h3>
                         </div>
                         <hr class="m-t-b-50">
@@ -78,17 +85,12 @@
                             </span>
                         </p>
                     </div>
-                    <div class="text-right d-print-none">
-                        <hr class="my-5">
-                        <!-- <a href="#" class="btn btn-primary">Send Invoice</a> -->
-                        <a href="javascript:window.print()" class="btn btn-success m-l-5">
-                            <i class="ti-printer mr-2"></i> Print
-                        </a>
-                    </div>
+                    
                 </div>
             </div>
 
         </div>
     </div>
-@endif
+</body>   
+</html> 
 @endsection

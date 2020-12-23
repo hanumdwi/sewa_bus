@@ -761,56 +761,14 @@
                     <ul id="dashboards">
                         <li class="navigation-divider">Dashboards</li>
                         <li>
-                            <a @if(!request()->segment(1) || request()->segment(1) == 'ecommerce-dashboard') class="active"
-                               @endif href="{{ route('ecommerce-dashboard') }}">
-                                <span class="nav-link-icon" data-feather="shopping-cart"></span>
-                                <span>E-commerce</span>
+                            <aclass="active" href="{{ url('ecommerce-dashboard') }}">
+                                <span class="nav-link-icon">
+                                    <i class="fa fa-user-o"></i>
+                                </span>
+                                <span>E-commerce Dashboard</span>
                             </a>
                         </li>
-                        <li>
-                            <a @if(request()->segment(1) == 'analytics-dashboard') class="active"
-                               @endif href="{{ route('analytics-dashboard') }}">
-                                <span class="nav-link-icon" data-feather="bar-chart-2"></span>
-                                <span>Analytics</span>
-                                <span class="badge badge-success">New</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a @if(request()->segment(1) == 'helpdesk-dashboard') class="active"
-                               @endif href="{{ route('helpdesk-dashboard') }}">
-                                <span class="nav-link-icon" data-feather="life-buoy"></span>
-                                <span>Helpdesk</span>
-                            </a>
-                        </li>
-                        <li class="navigation-divider">E-commerce Pages</li>
-                        <li>
-                            <a @if(request()->segment(1) == 'orders') class="active"
-                               @endif href="{{ route('orders') }}">
-                                <span class="nav-link-icon" data-feather="box"></span>
-                                <span>Orders</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a @if(request()->segment(1) == 'product-list') class="active"
-                               @endif href="{{ route('product-list') }}">
-                                <span class="nav-link-icon" data-feather="list"></span>
-                                <span>Product List</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a @if(request()->segment(1) == 'product-grid') class="active"
-                               @endif href="{{ route('product-grid') }}">
-                                <span class="nav-link-icon" data-feather="grid"></span>
-                                <span>Product Grid</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a @if(request()->segment(1) == 'product-detail') class="active"
-                               @endif href="{{ route('product-detail') }}">
-                                <span class="nav-link-icon" data-feather="file-text"></span>
-                                <span>Product Detail</span>
-                            </a>
-                        </li>
+                        
                     </ul>
                     @if(\Session::has('admin'))
                     <ul id="customer">

@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use DB;
+use PDF;
 
 class PembayaranController extends Controller
 {
@@ -49,6 +50,19 @@ public function indexdetail(Request $request, $id)
             // dump($armada);
             return view ('detailbayarpaket',['pembayaran' =>$pembayaran, 'rekening' =>$rekening, 
             'customer' =>$customer, 'sewa_bus' =>$sewa_bus]);
+}
+
+public function cetakKwitansi(){
+    $pembayaran=DB::table('pembayaran')
+        ->join('sewa_bus', 'pembayaran.ID_SEWA_BUS', 'sewa_bus.ID_SEWA_BUS')
+        ->join('customer', 'sewa_bus.ID_CUSTOMER', 'customer.ID_CUSTOMER')
+        ->select('pembayaran.*', 'customer.NAMA_CUSTOMER')
+        ->get();
+
+        $customPaper = array(0,0,567.00,283.80);
+
+    	$pdf = PDF::loadview('printbayarbus',['pembayaran'=>$pembayaran])->setPaper($customPaper, 'landscape');
+    	return $pdf->stream();
 }
 
     /**
@@ -89,6 +103,18 @@ public function indexdetail(Request $request, $id)
             'customer' =>$customer, 'sewa_paket_wisata' =>$sewa_paket_wisata]);
 }
 
+public function cetakKwitansi_Paket(){
+    $pembayaran_paket=DB::table('pembayaran_paket')
+        ->join('sewa_paket_wisata', 'pembayaran_paket.ID_SEWA_PAKET', 'sewa_paket_wisata.ID_SEWA_PAKET')
+        ->join('customer', 'sewa_paket_wisata.ID_CUSTOMER', 'customer.ID_CUSTOMER')
+        ->select('pembayaran_paket.*', 'customer.NAMA_CUSTOMER')
+        ->get();
+
+        $customPaper = array(0,0,567.00,283.80);
+
+    	$pdf = PDF::loadview('printbayarpaket',['pembayaran_paket'=>$pembayaran_paket])->setPaper($customPaper, 'landscape');
+    	return $pdf->stream();
+}
     /**
      * Store a newly created resource in storage.
      *

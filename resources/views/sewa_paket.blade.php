@@ -212,7 +212,7 @@
                                     <button type="button" class="btn btn-outline-danger btn-sm btn-floating ml-2" title="Delete" data-toggle="modal" data-target="#exampleModal13">
                                         <i class="ti-trash"></i>
                                     </button>
-                                    <a href="invoicepaket/{{$spw -> ID_SEWA_PAKET}}">
+                                    <a href="{{ url('invoicepaket', ['ID_SEWA_PAKET'=>$spw -> ID_SEWA_PAKET]) }}">
                                     <button type="button" class="btn btn-outline-warning btn-sm btn-floating ml-2" title="Print Invoice" data-toggle="modal" data-target="#exampleModal14">
                                         <i class="ti-printer"></i>
                                     </button>
