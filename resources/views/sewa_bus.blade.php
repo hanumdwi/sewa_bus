@@ -44,6 +44,8 @@
                                 <div class="modal-body">
                                 <form action="sewa_busstore" method="post">
                                 @csrf
+                                <!-- <input type="hidden" name="ID_PENGGUNA" value="{{Session::get('coba2')}}"> -->
+                                <!-- <input type="hidden" name="TGL" id="TGL1" value=""> -->
                                 <div class="form-group">
                                     <label for="nama" class="col-form-label">Nama User :</label>
                                     <select name="ID_PENGGUNA" class="form-control" id="ID_PENGGUNA">
@@ -210,6 +212,13 @@
     $(document).ready(function (){
     $('#myTable').DataTable();
 });
+
+var bulan = new Array('01','02','03','04','05','06','07','08','09','10','11','12');
+var now;
+var day = new Date();
+now = day.getFullYear()+"-"+bulan[day.getMonth()]+"-"+day.getDate();
+document.getElementById('TGL1').value = now;
+
 </script>
     <!-- Sweet alert -->
     <script src="{{ url('assets/js/examples/sweet-alert.js') }}"></script>

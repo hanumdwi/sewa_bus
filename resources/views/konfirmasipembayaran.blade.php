@@ -31,6 +31,7 @@
                         <thead>
                         <tr>
                             <th>Id Pembayaran</th>
+                            <th>Id Pembayaran</th>
                             <th>Id Sewa Bus</th>
                             <th>Nama Customer</th>
                             <th>Action</th>
@@ -40,6 +41,23 @@
                         <tr>
                         @foreach($pembayaran as $c)
                                     <!-- <tr class="table-light"> -->
+                                    <td>
+                                        <form class="post0" method="post" action="pembayaranupdateswitch">
+                                        @csrf
+                                            <input type="hidden" name="update1" value="{{$c->id}}">
+                                            @if($c -> STATUS_BAYAR == 1)
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" checked id="switch{{$c->id}}">
+                                                <label class="custom-control-label" for="switch{{$c->id}}">New</label>
+                                            </div>
+                                            @else 
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" id="switch{{$c->id}}">
+                                                <label class="custom-control-label" for="switch{{$c->id}}">Done</label>
+                                            </div>
+                                            @endif
+                                        </form>
+                                    </td>
                                     <td>KonfPemb00{{ $c -> id }}</td>
                                     <td>{{ $c -> ID_SEWA_BUS }}</td>
                                     <td>{{ $c -> NAMA_CUSTOMER }}</td>
@@ -65,6 +83,7 @@
                                     <tfoot>
                         <tr>
                             <th>Id Pembayaran</th>
+                            <th>Id Pembayaran</th>
                             <th>Id Sewa Bus</th>
                             <th>Nama Customer</th>
                             <th>Action</th>
@@ -86,12 +105,12 @@
     $(document).ready(function (){
     $('#myTable').DataTable();
 });
-
-    function modal(id){
-        const y=document.getElementById(id);
-            $("#exampleModal12").modal();
-        }
-
+const x = document.getElementsByClassName('post0');
+            for(let i=0;i<x.length;i++){
+                x[i].addEventListener('click',function(){
+                    x[i].submit();
+                });
+            }
 </script>
     <!-- Sweet alert -->
     <script src="{{ url('assets/js/examples/sweet-alert.js') }}"></script>
@@ -119,8 +138,5 @@
 toastr.success('Successfully completed');
     </script>
 
-<script> 
-swal(berhasil,"Good job!", "You clicked the button!", "success");
-</script>
 
 @endsection

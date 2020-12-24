@@ -48,9 +48,24 @@ public function indexdetail(Request $request, $id)
             // $customer= Customer::all();
             
             // dump($armada);
-            return view ('detailbayarpaket',['pembayaran' =>$pembayaran, 'rekening' =>$rekening, 
+            return view ('detailbayarbus',['pembayaran' =>$pembayaran, 'rekening' =>$rekening, 
             'customer' =>$customer, 'sewa_bus' =>$sewa_bus]);
 }
+public function update_switch_bayar(Request $request)
+    {
+        $pembayaran=DB::table('pembayaran')->where('id',$request->update1)->value('STATUS_BAYAR','=','1');
+        if($pembayaran){
+            DB::table('pembayaran')
+                ->where('id',$request->update1)
+                ->update(['STATUS_BAYAR'=>0]);
+        }
+        else{
+            DB::table('pembayaran')
+                ->where('id',$request->update1)
+                ->update(['STATUS_BAYAR'=>1]);
+        }
+        return redirect('konfirmasipembayaran');
+    }
 
 public function cetakKwitansi(){
     $pembayaran=DB::table('pembayaran')

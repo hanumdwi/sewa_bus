@@ -35,7 +35,76 @@
         </div>
     </div>
 
-    
+    <div class="card">
+    <div class="card-body">
+        <h6 class="card-title mb-0">Recent Orders Bus</h6>
+    </div>
+        <div class="table-responsive">
+        <table id="myTable" class="table table-striped table-bordered">
+        <thead>
+                        <tr>
+                            <th>Status Pengecekan</th>
+                            <th>Id Pembayaran</th>
+                            <th>Id Sewa Bus</th>
+                            <th>Nama Customer</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                        @foreach($pembayaran as $c)
+                                    <!-- <tr class="table-light"> -->
+                                    <td>
+                                        <form class="post0" method="post" action="pembayaranupdateswitch">
+                                        @csrf
+                                            <input type="hidden" name="id" value="{{$c->id}}">
+                                            @if($c -> STATUS_BAYAR == 1)
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" checked id="switch{{$c->id}}">
+                                                <label class="custom-control-label" for="switch{{$c->id}}">New</label>
+                                            </div>
+                                            @else 
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" id="switch{{$c->id}}">
+                                                <label class="custom-control-label" for="switch{{$c->id}}">Selesai</label>
+                                            </div>
+                                            @endif
+                                        </form>
+                                    </td>
+                                    <td>KonfPemb00{{ $c -> id }}</td>
+                                    <td>{{ $c -> ID_SEWA_BUS }}</td>
+                                    <td>{{ $c -> NAMA_CUSTOMER }}</td>
+                                    <td>
+                                    
+                                    <a href="{{ url('detailbayarbus', ['id'=>$c -> id]) }}">
+                                    <button type="button" class="btn btn-outline-success">
+                                        <i class="ti-money mr-2"></i>Detail
+                                    </button>
+                                    </a>
+                                    
+                                    <a href="{{ url('printbayarbus', ['id'=>$c -> id]) }}">
+                                    <button type="button" class="btn btn-outline-warning">
+                                        <i class="ti-printer mr-2"></i>Print
+                                    </button>
+                                    </a>
+
+                                    </td>
+                                    </tr>
+                                    @endforeach
+                                    <!-- </tr> -->
+                                    </tbody>
+                                    <tfoot>
+                        <tr>
+                            <th>Status Pengecekan</th>
+                            <th>Id Pembayaran</th>
+                            <th>Id Sewa Bus</th>
+                            <th>Nama Customer</th>
+                            <th>Action</th>
+                        </tr>
+                        </tfoot>
+            </table>
+        </div>
+    </div>
 
 <div class="card">
     <div class="card-body">
@@ -622,6 +691,14 @@
 @endsection
 
 @section('script')
+<script>
+const x = document.getElementsByClassName('post0');
+            for(let i=0;i<x.length;i++){
+                x[i].addEventListener('click',function(){
+                    x[i].submit();
+                });
+            }
+</script>
 <!-- Apex chart -->
 <script src="https://apexcharts.com/samples/assets/irregular-data-series.js"></script>
 <script src="{{ url('/vendors/charts/apex/apexcharts.min.js') }}"></script>

@@ -18,6 +18,7 @@ Route::get('/', function () {
 })->name('index');
 
 Route::get('ecommerce-dashboard', 'DashboardController@index');
+Route::post('pembayaranupdateswitch', 'DashboardController@update_switch');
 // Download File
 // user-manual
 Route::get('user-manual', 'Data2Controller@user_manual');
@@ -156,6 +157,7 @@ Route::post('updateswitch', 'SewaDetailController@update_switch');
 Route::get('konfirmasipembayaran', 'PembayaranController@index');
 Route::get('detailbayarbus/{id}', 'PembayaranController@indexdetail');
 Route::get('printbayarbus/{id}', 'PembayaranController@cetakKwitansi');
+Route::post('pembayaranupdateswitch', 'PembayaranController@update_switch_bayar');
 
 Route::get('konfirmasipembayaran_paket', 'PembayaranController@indexpaket');
 Route::get('detailbayarpaket/{id}', 'PembayaranController@paketdetail');

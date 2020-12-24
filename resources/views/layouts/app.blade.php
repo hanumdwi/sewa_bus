@@ -761,7 +761,7 @@
                     <ul id="dashboards">
                         <li class="navigation-divider">Dashboards</li>
                         <li>
-                            <aclass="active" href="{{ url('ecommerce-dashboard') }}">
+                            <a class="active" href="{{ url('ecommerce-dashboard') }}">
                                 <span class="nav-link-icon">
                                     <i class="fa fa-user-o"></i>
                                 </span>

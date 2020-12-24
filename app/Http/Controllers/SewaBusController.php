@@ -87,6 +87,7 @@ class SewaBusController extends Controller
                 'DP_BUS'            =>  $request->DP_SEWA,
                 'SISA_SEWA_BUS'     =>  $request->SISA_SEWA_BUS,
                 'total_payment'     => $request->total_payment,
+                // 'TGL'               => $request->TGL,
                 'STATUS_SEWA'       => $request->statussewa
                 
             ]);

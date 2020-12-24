@@ -142,6 +142,7 @@ class PenggunaController extends Controller
             if($data->PASSWORD==$PASSWORD){
                 Session::put('coba',$data->NAMA_PENGGUNA);
                 Session::put('coba1',$data->JOB_STATUS);
+                Session::put('coba2',$data->ID_PENGGUNA);
                     Session::put('login', TRUE);
                     if($data->JOB_STATUS == 'Admin'){
                         Session::put('admin', TRUE);
@@ -155,7 +156,7 @@ class PenggunaController extends Controller
                 return redirect('login');
             }
         }
-       
+       dd($data);
     }
 
     public function logout(){

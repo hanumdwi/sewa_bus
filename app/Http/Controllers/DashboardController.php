@@ -55,9 +55,30 @@ class DashboardController extends Controller
         ->get();
 
         
-        return view('ecommerce-dashboard', ['sewa_bus' =>$sewa_bus,'customer'=>$customer,'pengguna'=>$pengguna,
-        'sewa_paket_wisata' =>$sewa_paket_wisata,'paket_wisata'=>$paket_wisata, 'armada'=>$armada]);
-    }
-}
+        
+            $pembayaran=DB::table('pembayaran')
+            ->join('sewa_bus', 'pembayaran.ID_SEWA_BUS', 'sewa_bus.ID_SEWA_BUS')
+            ->join('customer', 'sewa_bus.ID_CUSTOMER', 'customer.ID_CUSTOMER')
+            ->select('pembayaran.*', 'customer.NAMA_CUSTOMER')
+            ->get();
 
+            return view('ecommerce-dashboard', ['sewa_bus' =>$sewa_bus,'customer'=>$customer,'pengguna'=>$pengguna,
+            'sewa_paket_wisata' =>$sewa_paket_wisata,'paket_wisata'=>$paket_wisata, 'armada'=>$armada, 'pembayaran' =>$pembayaran]);
+        }
+    }
+    public function update_switch(Request $request)
+    {
+        $pembayaran=DB::table('pembayaran')->where('id',$request->id)->value('STATUS_BAYAR','=','1');
+        if($pembayaran){
+            DB::table('pembayaran')
+                ->where('id',$request->id)
+                ->update(['STATUS_BAYAR'=>0]);
+        }
+        else{
+            DB::table('pembayaran')
+                ->where('id',$request->id)
+                ->update(['STATUS_BAYAR'=>1]);
+        }
+        return redirect('ecommerce-dashboard');
+    }
 }
