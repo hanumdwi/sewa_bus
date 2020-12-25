@@ -44,18 +44,21 @@
                                 <div class="modal-body">
                                 <form action="sewa_busstore" method="post">
                                 @csrf
-                                <!-- <input type="hidden" name="ID_PENGGUNA" value="{{Session::get('coba2')}}"> -->
+                               
                                 <!-- <input type="hidden" name="TGL" id="TGL1" value=""> -->
-                                <div class="form-group">
-                                    <label for="nama" class="col-form-label">Nama User :</label>
-                                    <select name="ID_PENGGUNA" class="form-control" id="ID_PENGGUNA">
+                                <!-- <div class="form-group"> -->
+                                    <!-- <label for="nama" class="col-form-label">Nama User :</label> -->
+                                    @php $nama_pengg=Session::get('coba'); @endphp
+                                    <!-- <select name="ID_PENGGUNA" class="form-control" id="ID_PENGGUNA"> -->
                                         @foreach($pengguna as $png)
-                                       
-                                        <option value="{{$png->ID_PENGGUNA}}">{{$png->NAMA_PENGGUNA}}</option>
+                                       @if($png->NAMA_PENGGUNA==$nama_pengg)
+                                       <input type="hidden" value="{{$png->ID_PENGGUNA}}" name="ID_PENGGUNA">
+                                       @endif
+                                      
                                        
                                         @endforeach                 
-                                </select>
-                                </div>
+                                <!-- </select> -->
+                                <!-- </div> -->
                                 <div class="form-group">
                                     <label for="nama" class="col-form-label">Nama Customer :</label>
                                     <select name="ID_CUSTOMER" class="form-control" id="ID_CUSTOMER">

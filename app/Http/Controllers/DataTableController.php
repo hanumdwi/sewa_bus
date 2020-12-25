@@ -61,7 +61,7 @@ class DataTableController extends Controller
         ->join('pricelist_sewa_armada', 'pricelist_sewa_armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
         ->join('sewa_bus_category', 'sewa_bus_category.ID_PRICELIST', '=', 'pricelist_sewa_armada.ID_PRICELIST')
         ->leftjoin('schedule_armada', 'armada.ID_ARMADA', '=', 'schedule_armada.ID_ARMADA','and','schedule_armada.STATUS_ARMADA', '=', 1)
-        ->select('armada.ID_ARMADA', 'armada.PLAT_NOMOR', 'category_armada.NAMA_CATEGORY')
+        ->select('armada.ID_ARMADA', 'armada.PLAT_NOMOR', 'category_armada.NAMA_CATEGORY', 'schedule_armada.TGL_SEWA')
         ->distinct()
         ->get();
         // $armada=DB::table('armada')
@@ -97,10 +97,11 @@ class DataTableController extends Controller
         $armada=DB::table('armada')
         ->join('category_armada', 'armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
         ->leftjoin('schedule_armada', 'armada.ID_ARMADA', '=', 'schedule_armada.ID_ARMADA')
-        ->select('armada.ID_ARMADA', 'armada.PLAT_NOMOR', 'category_armada.NAMA_CATEGORY')
-        ->where('schedule_armada.STATUS_ARMADA', '=', 1)
+        ->select('armada.ID_ARMADA', 'armada.PLAT_NOMOR', 'category_armada.NAMA_CATEGORY', 'schedule_armada.TGL_SEWA')
+        ->where('armada.STATUS_ARMADA', '=', 1)
+        // ->where('schedule_armada.STATUS_ARMADA', '=', 1)
         ->get();
-
+//dd($armada);
         $rekening=DB::table('rekening')->get();
         $pembayaran_paket=DB::table('pembayaran_paket')
         ->join('rekening', 'pembayaran_paket.ID_REKENING', 'rekening.ID_REKENING')
@@ -250,13 +251,13 @@ class DataTableController extends Controller
     {
         
             DB::table('schedule_armada')->insert([
-                'TGL_SEWA' => $request->TGL_SEWA,
-                'TGL_AKHIR_SEWA' => $request->TGL_AKHIR_SEWA,
-                'ID_ARMADA' => $request->ID_ARMADA,
-                'ID_SEWA_BUS' => $request->ID_SEWA_BUS,
-                'STATUS_ARMADA' => 0,
-                'JAM_SEWA' => $request->JAM_SEWA,
-                'JAM_AKHIR_SEWA' => $request->JAM_AKHIR_SEWA
+                'TGL_SEWA'          => $request->TGL_SEWA,
+                'TGL_AKHIR_SEWA'    => $request->TGL_AKHIR_SEWA,
+                'ID_ARMADA'         => $request->ID_ARMADA,
+                'ID_SEWA_BUS'       => $request->ID_SEWA_BUS,
+                'STATUS_ARMADA'     => 0,
+                'JAM_SEWA'          => $request->JAM_SEWA,
+                'JAM_AKHIR_SEWA'    => $request->JAM_AKHIR_SEWA
             ]);
 
             

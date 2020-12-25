@@ -339,11 +339,12 @@
                                                         <label for="ID_ARMADA">Armada</label>
                                                             <select name="ID_ARMADA" class="form-control" id="ID_ARMADA">
                                                                 @foreach($armada as $c)
-                                                                        
+                                                                @if($c->TGL_SEWA != $sewa_bus->TGL_SEWA_BUS) && ($c->TGL_AKHIR_SEWA != $sewa_bus->TGL_AKHIR_SEWA)
                                                                     <option value="{{$c->ID_ARMADA}}">{{$c->NAMA_CATEGORY}}   -  {{$c->PLAT_NOMOR}}</option>
-                                                                        
+                                                                @endif
                                                                 @endforeach                 
                                                             </select>
+                                                            </br>
                                                         <button type="submit" class="btn btn-primary" id="berhasil">Add</button>
                                                 </form>
                                             </div>

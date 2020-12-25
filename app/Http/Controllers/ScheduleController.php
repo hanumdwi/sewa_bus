@@ -94,6 +94,8 @@ class ScheduleController extends Controller
                 'JAM_AKHIR_SEWA' => $request->JAM_AKHIR_SEWA
             ]);
 
+            
+
         DB::commit();
         }
         Catch (\Exception $ex){

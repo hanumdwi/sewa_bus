@@ -106,9 +106,9 @@
                                     <label for="ID_ARMADA">Armada</label>
                                     <select name="ID_ARMADA" class="form-control" id="ID_ARMADA">
                                         @foreach($armada as $c)
-                                       
-                                        <option value="{{$c->ID_ARMADA}}">{{$c->NAMA_CATEGORY}}   -  {{$c->PLAT_NOMOR}}</option>
-                                       
+                                        @if($c->TGL_SEWA != $sewa_paket_wisata->TGL_SEWA_PAKET) && ($c->TGL_AKHIR_SEWA != $sewa_paket_wisata->TGL_AKHIR_SEWA_PAKET)
+                                            <option value="{{$c->ID_ARMADA}}">{{$c->NAMA_CATEGORY}}   -  {{$c->PLAT_NOMOR}}</option>
+                                        @endif
                                         @endforeach                 
                                         </select>
                                 </div>
@@ -121,12 +121,12 @@
                                 <div class="col-md-4 mb-3">
                                     <label for="gender">Total Payment</label>
                                     <input type="text" class="form-control" name="totalpayment" id="totalpayment1" onchange="getDP()"
-                                    value="<?php echo number_format($paket_wisata->HARGA_JUAL,'0',',','.'); ?>" readonly=""></div>
+                                    value="{{$paket_wisata->HARGA_JUAL}}" readonly=""></div>
                                     
                                 <div class="col-md-4 mb-3">
                                     <label for="profession">DP (25%)</label>
                                     <input type="text" class="form-control" name="dp" id="dp1"
-                                    value="<?php echo number_format($sewa_paket_wisata->DP_PAKET,'0',',','.'); ?>">
+                                    value="{{$sewa_paket_wisata->DP_PAKET}}">
                                 </div>
                                 <!-- <div class="col-md-4 mb-3">
                                     <label for="profession">Harus Bayar</label>
@@ -135,7 +135,7 @@
                                 <div class="col-md-4 mb-3">
                                     <label for="profession">Sisa Bayar</label>
                                     <input type="sisabayar" class="form-control" name="sisabayar" id="sisabayar1"
-                                    value="<?php echo number_format($sewa_paket_wisata->SISA_SEWA_PAKET,'0',',','.'); ?>">
+                                    value="{{$sewa_paket_wisata->SISA_SEWA_PAKET}}">
                                 </div>
                             </div>
 

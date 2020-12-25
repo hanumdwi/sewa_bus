@@ -167,14 +167,14 @@ class SewaPaketController extends Controller
                 // 'DP_PAKET'              =>  $request->DP_PAKET
         ]);
 
-        DB::table('schedule_armada')->where('ID_SEWA_PAKET',$request->ID_SEWA_PAKET)->update([
-            'ID_SEWA_PAKET' => $request->ID_SEWA_PAKET,
-            'ID_ARMADA' => $request->ID_ARMADA,
-            'TGL_SEWA' => $request->TGL_SEWA_PAKET,
-            'TGL_AKHIR_SEWA' => $request->TGL_AKHIR_SEWA_PAKET,
-            'JAM_SEWA' => $request->JAM_SEWA_PAKET,
-            'JAM_AKHIR_SEWA' => $request->JAM_AKHIR_SEWA_PAKET,
-            'STATUS_ARMADA' => 1,
+        DB::table('schedule_armada')->insert([
+            'ID_SEWA_PAKET'     => $request->ID_SEWA_PAKET,
+            'ID_ARMADA'         => $request->ID_ARMADA,
+            'TGL_SEWA'          => $request->TGL_SEWA_PAKET,
+            'TGL_AKHIR_SEWA'    => $request->TGL_AKHIR_SEWA_PAKET,
+            'JAM_SEWA'          => $request->JAM_SEWA_PAKET,
+            'JAM_AKHIR_SEWA'    => $request->JAM_AKHIR_SEWA_PAKET,
+            'STATUS_ARMADA'     => 0,
         ]);
 
 
