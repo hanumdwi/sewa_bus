@@ -27,9 +27,11 @@
                 </div>
                 <div class="table-responsive">
                 <center>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
+                <a href="createpengguna">
+                <button type="button" class="btn btn-primary">
                 Tambah Data User
                     </button>
+                    </a>
                     </center>
                         <!-- modal -->
                         <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
@@ -114,10 +116,17 @@
                                     <td>{{ $png -> PASSWORD }}</td>
                                     <td>{{ $png -> JOB_STATUS }}</td>
                                     <td>
-                                    
-                                    <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit" data-toggle="modal" data-target="#exampleModal12{{$png -> ID_PENGGUNA}}">
+                                    <a href="{{ url('editpengguna', ['id'=>$png -> ID_PENGGUNA]) }}">
+                                    <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit">
                                         <i class="ti-pencil"></i>
                                     </button>
+                                    </a>
+
+                                    <a href="{{ url('profile', ['id'=>$png -> ID_PENGGUNA]) }}">
+                                    <button type="button" class="btn btn-outline-warning btn-sm btn-floating" title="Profile">
+                                        <i class="ti-user"></i>
+                                    </button>
+                                    </a>
                                     
                                     <!-- modal -->
                                         <div class="modal fade" id="exampleModal12{{$png -> ID_PENGGUNA}}" tabindex="-1" role="dialog"

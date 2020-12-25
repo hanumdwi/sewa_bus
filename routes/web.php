@@ -22,6 +22,7 @@ Route::post('pembayaranupdateswitch', 'DashboardController@update_switch');
 // Download File
 // user-manual
 Route::get('user-manual', 'Data2Controller@user_manual');
+Route::get('profile/{id}', 'PenggunaController@profile');
 //====================================================================
 
 Route::get('login', 'PenggunaController@login');
@@ -45,9 +46,10 @@ Route::get('customerdestroy/{id}', 'CustomerController@destroy');
 
 //Customer
 Route::get('penggunaindex','PenggunaController@index');
+Route::get('createpengguna','PenggunaController@create');
 Route::post('penggunastore', 'PenggunaController@store');
-Route::get('penggunaedit/{id}', 'PenggunaController@edit');
-Route::post('penggunaupdate', 'PenggunaController@update');
+Route::get('editpengguna/{id}', 'PenggunaController@edit');
+Route::post('penggunaupdate/{id}', 'PenggunaController@update');
 Route::get('penggunadestroy/{id}', 'PenggunaController@destroy');
 //================================================================================
 

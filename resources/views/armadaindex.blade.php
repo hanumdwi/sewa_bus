@@ -154,7 +154,7 @@
                                     <td><span class="badge bg-success-bright text-success">{{ $ar -> NAMA_CATEGORY }}</span></td>
                                     @endif
                                     <td><a href="{{ url('fotoarmada', ['id'=>$ar -> ID_ARMADA]) }}">{{ $ar -> PLAT_NOMOR }}</a></td>
-                                    <td>{{ $ar -> KAPASITAS }}</td>
+                                    <td>{{ $ar -> KAPASITAS }} (Orang)</td>
                                     <!-- <td>{{ $ar -> FASILITAS_ARMADA }}</td> -->
                                    
                                     <td>

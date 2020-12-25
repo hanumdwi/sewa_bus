@@ -20,6 +20,7 @@ class Pengguna extends Model
         'TELEPHONE_PENGGUNA',
         'ALAMAT_PENGGUNA',
         'PASSWORD',
-        'JOB_STATUS'
+        'JOB_STATUS',
+        'FOTO'
     ];
 }

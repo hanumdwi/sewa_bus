@@ -52,7 +52,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Pilih Foto</label>
-                                                            <input type="file" name="file" class="form-control" required>
+                                                            <input type="file" name="file" class="form-control">
                                                     </div>
                                                     </div>
                                                     <div><label>&nbsp;</label></div>

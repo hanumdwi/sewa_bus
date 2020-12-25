@@ -36,7 +36,7 @@ class PenggunaController extends Controller
      */
     public function create()
     {
-        //
+        return view('createpengguna');
     }
 
     /**
@@ -48,21 +48,27 @@ class PenggunaController extends Controller
     public function store(Request $request)
     {
         
-        $password = md5($request->pass);
+        if($request->hasFile('file')) {
+
+            $file = $request->file('file');
+        
+            $fileName = $file->getClientOriginalName();
 
         $pengguna = new Pengguna;
+        $password = md5($request->password);
 
-        $pengguna->fill([
-            'NAMA_PENGGUNA'         => $request->nama,
-            'EMAIL_PENGGUNA'        => $request->email,
-            'USERNAME'              => $request->email,
-            'TELEPHONE_PENGGUNA'    => $request->telephone,
-            'ALAMAT_PENGGUNA'       => $request->alamat,
-            'PASSWORD'              => $request->password,
-            'JOB_STATUS'            => $request->JOB_STATUS
-        ]);
-
+        
+        $pengguna->NAMA_PENGGUNA         = $request->nama;
+        $pengguna->EMAIL_PENGGUNA        = $request->email;
+        $pengguna->USERNAME              = $request->email;
+        $pengguna->TELEPHONE_PENGGUNA    = $request->telephone;
+        $pengguna->ALAMAT_PENGGUNA       = $request->alamat;
+        $pengguna->PASSWORD              = $request->password;
+        $pengguna->JOB_STATUS            = $request->JOB_STATUS;
+        $pengguna->FOTO                  = $fileName;
+        $file->move(public_path().'/foto_user', $fileName);
         $pengguna->save();
+        }
 
         return redirect('penggunaindex');
     }
@@ -78,6 +84,15 @@ class PenggunaController extends Controller
         //
     }
 
+    public function profile($id)
+    {
+        $pengguna = DB::table('pengguna')
+        ->where('ID_PENGGUNA',$id)
+        ->get();
+
+        return view('profile',['pengguna' => $pengguna]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -89,7 +104,7 @@ class PenggunaController extends Controller
         // mengambil data customer berdasarkan id yang dipilih
 		$pengguna = DB::table('pengguna')->where('ID_PENGGUNA',$id)->get();
 		// passing data pengguna yang didapat ke view edit.blade.php
-		return view('penggunaindex',['pengguna' => $pengguna]);
+		return view('editpengguna',['pengguna' => $pengguna]);
     }
 
     /**
@@ -101,14 +116,23 @@ class PenggunaController extends Controller
      */
     public function update(Request $request)
     {
-        DB::table('pengguna')->where('ID_PENGGUNA',$request->id)->update([
+        $pengguna = Pengguna::find($request->id);
+
+        $filename=$pengguna->FOTO;
+        if($request->hasFile('FOTO')){
+            $request->file('FOTO')->move('foto_user/',$request->file('FOTO')->getClientOriginalName());
+            $filename=$request->file('FOTO')->getClientOriginalName();
+        }
+
+        $pengguna->update([
 			'NAMA_PENGGUNA'         => $request->nama,
             'EMAIL_PENGGUNA'        => $request->email,
             'USERNAME'              => $request->email,
             'TELEPHONE_PENGGUNA'    => $request->telephone,
             'ALAMAT_PENGGUNA'       => $request->alamat,
             'PASSWORD'              => $request->password,
-            'JOB_STATUS'            => $request->JOB_STATUS
+            'JOB_STATUS'            => $request->JOB_STATUS,
+            'FOTO'                  => $filename
 		]);
 		// alihkan halaman ke halaman customer
 		return redirect('penggunaindex');

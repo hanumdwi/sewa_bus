@@ -70,21 +70,37 @@
                                 </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="TGL_SEWA" class="col-form-label">Start Date :</label>
-                                    <input type="date" class="form-control" id="TGL_SEWA" name="TGL_SEWA">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label for="TGL_SEWA" class="col-form-label">Start Date :</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                        <label for="JAM_SEWA" class="col-form-label">Start Time :</label>
+                                        
+                                        </div>
                                     </div>
-                                <div class="form-group">
-                                    <label for="TGL_AKHIR_SEWA">End Date :</label>
-                                    <input type="date" class="form-control create-event-datepicker" id="TGL_AKHIR_SEWA" name="TGL_AKHIR_SEWA">
+                                    <div class="row">
+                                        <div class="col-lg-6"><input type="date" class="form-control" id="TGL_SEWA" name="TGL_SEWA"></div>
+                                        <div class="col-lg-6"><input type="time" class="form-control" id="JAM_SEWA" name="JAM_SEWA"></div>
+                                    
                                     </div>
-                                <div class="form-group">
-                                    <label for="JAM_SEWA" class="col-form-label">Start Time :</label>
-                                    <input type="time" class="form-control" id="JAM_SEWA" name="JAM_SEWA">
                                     </div>
-                                <div class="form-group">
-                                    <label for="JAM_AKHIR_SEWA" class="col-form-label">End Time :</label>
-                                    <input type="time" class="form-control" id="JAM_AKHIR_SEWA" name="JAM_AKHIR_SEWA">
+                                    <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                        <label for="TGL_AKHIR_SEWA">End Date :</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                        <label for="JAM_AKHIR_SEWA" class="col-form-label">End Time :</label>
+                                        </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-lg-6"><input type="date" class="form-control create-event-datepicker" id="TGL_AKHIR_SEWA" name="TGL_AKHIR_SEWA"></div>
+                                        <div class="col-lg-6"><input type="time" class="form-control" id="JAM_AKHIR_SEWA" name="JAM_AKHIR_SEWA"></div>
+                                    
+                                    </div>
+                                    </div>
+                                
                                 <div class="form-group">
                                 <div class="form-group">
                                     <label for="statussewa" class="col-form-label">Status Sewa :</label>

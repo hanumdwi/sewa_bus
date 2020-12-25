@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Baston - Responsive Admin Dashboard Template</title>
+    <title>PT. MDC Trans Lamongan</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ url('assets/media/image/bus.png') }}"/>
@@ -90,7 +90,7 @@
     <!-- ./ Sidebar >>> Settings -->
 
     <!-- Sidebar >>> Chat list -->
-    <div class="sidebar" id="chat-list">
+    <!-- <div class="sidebar" id="chat-list">
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between mb-4">
@@ -302,7 +302,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- ./ Sidebar >>> Chat list -->
 </div>
 <!-- ./ Sidebar group -->
@@ -476,14 +476,14 @@
                         </div>
                     </li>
 
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a href="{{ route('chat') }}" title="Chat" class="nav-link">
                             <span class="badge badge-danger nav-link-notify">4</span>
                             <i data-feather="message-circle"></i>
                         </a>
-                    </li>
+                    </li> -->
 
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a href="#" title="Cart" class="nav-link" data-toggle="dropdown">
                             <i data-feather="shopping-bag"></i>
                         </a>
@@ -595,7 +595,7 @@
                                 </button>
                             </div>
                         </div>
-                    </li>
+                    </li> -->
 
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link" title="Settings" data-sidebar-target="#settings">
@@ -629,7 +629,7 @@
                                 <a href="logout" class="list-group-item text-danger">Sign Out!</a>
                             </div>
                             <div class="pb-0 p-4">
-                                <div class="mb-4">
+                                <!-- <div class="mb-4">
                                     <h6 class="d-flex justify-content-between">
                                         Completed Tasks
                                         <span class="float-right">%68</span>
@@ -639,12 +639,12 @@
                                              style="width: 68%;" aria-valuenow="68" aria-valuemin="0"
                                              aria-valuemax="100"></div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div>
-                                    <h6 class="d-flex justify-content-between">
+                                    <!-- <h6 class="d-flex justify-content-between">
                                         Storage
                                         <span>%25</span>
-                                    </h6>
+                                    </h6> -->
                                     <div class="progress" style="height: 5px;">
                                         <div class="progress-bar bg-success" role="progressbar" style="width: 40%;"
                                              aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
@@ -673,11 +673,11 @@
         <div class="navigation">
             <!-- Logo -->
             <div class="navigation-header">
-                <a class="navigation-logo" href="{{ url('/') }}">
-                    <img class="logo" src="{{ url('assets/media/image/logo/logo.png') }}" alt="logo">
-                    <img class="dark-logo" src="{{ url('assets/media/image/logo/dark-logo.png') }}" alt="dark logo">
-                    <img class="small-logo" src="{{ url('assets/media/image/logo/small-logo.png') }}" alt="small logo">
-                    <img class="small-dark-logo" src="{{ url('assets/media/image/logo/small-dark-logo.png') }}" alt="small dark logo">
+                <a class="navigation-logo" href="{{ url('assets/media/image/logo/rsz_mdc1.png') }}">
+                    <img class="logo" src="{{ url('assets/media/image/logo/rsz_mdc1.png') }}" alt="logo">
+                    <img class="dark-logo" src="{{ url('assets/media/image/logo/rsz_mdc1.png') }}" alt="dark logo">
+                    <img class="small-logo" src="{{ url('assets/media/image/logo/rsz_mdc1.png') }}" alt="small logo">
+                    <img class="small-dark-logo" src="{{ url('assets/media/image/logo/rsz_mdc1.png') }}" alt="small dark logo">
                 </a>
                 <a href="#" class="small-navigation-toggler"></a>
                 <a href="#" class="btn btn-danger mobile-navigation-toggler">
