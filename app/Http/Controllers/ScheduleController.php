@@ -3,6 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\schedule;
+use App\sewa_bus;
+use App\pengguna;
+use App\customer;
+use App\category;
+use App\paket_wisata;
+use App\sewa_bus_category;
+use App\sewa_paket_wisata;
+use App\Pricelist_Sewa_Armada;
+use App\Armada;
+use App\rekening;
+use App\pembayaran;
+use App\Pembayaran_Paket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -25,32 +37,28 @@ class ScheduleController extends Controller
         ->join('category_armada', 'armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
         ->select('category_armada.NAMA_CATEGORY', 'armada.PLAT_NOMOR', 'armada.ID_ARMADA')
         ->get();
-        $sewa_bus_category=DB::table('sewa_bus_category')->get();
-        $sewa_paket_wisata=DB::table('sewa_paket_wisata')->get();
-        $schedule_armada=DB::table('schedule_armada')
-        ->join('armada','schedule_armada.ID_ARMADA', '=', 'armada.ID_ARMADA')
-        ->join('category_armada', 'armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
-        ->join('sewa_bus_category','schedule_armada.ID_SEWA_BUS', '=', 'sewa_bus_category.ID_SEWA_BUS')
-        ->join('sewa_paket_wisata','schedule_armada.ID_SEWA_PAKET', '=', 'sewa_paket_wisata.ID_SEWA_PAKET')
-        ->select('schedule_armada.ID_SCHEDULE','schedule_armada.TGL_SEWA',
-        'schedule_armada.TGL_AKHIR_SEWA','armada.NAMA_ARMADA', 'sewa_paket_wisata.ID_SEWA_PAKET',
-        'schedule_armada.STATUS_ARMADA','schedule_armada.JAM_SEWA','schedule_armada.JAM_AKHIR_SEWA','sewa_bus_category.ID_SEWA_BUS')
+
+
+        $customer=DB::table('customer')->get();
+
+        $sewa_bus=DB::table('sewa_bus')
+        ->join('customer', 'sewa_bus.ID_CUSTOMER', '=', 'customer.ID_CUSTOMER')
         ->get();
 
-        // $max = DB::table('sewa_bus')->max('ID_SEWA_BUS');
-        // date_default_timezone_set('Asia/Jakarta');
-        // $date=date("ymd",time());
 
-        // $max=substr($max,6);
-        // if($max>=1){
-        //     $ID_SEWA_BUS=$date.str_pad($max+1,4,"0",STR_PAD_LEFT);
-        // }
-        // else{
-        //     $ID_SEWA_BUS=$date.str_pad(1,4,"0",STR_PAD_LEFT);
-        // }
+        $schedule_armada=DB::table('schedule_armada')
+        ->join('armada','schedule_armada.ID_ARMADA', '=', 'armada.ID_ARMADA')
+        ->get();
+
+        $sb=DB::table('schedule_armada')
+        ->join('sewa_bus','schedule_armada.ID_SEWA_BUS', '=', 'sewa_bus.ID_SEWA_BUS')
+        ->join('customer', 'sewa_bus.ID_CUSTOMER', '=', 'customer.ID_CUSTOMER')
+        ->get();
+
+
         
-        return view('scheduleindex',['schedule_armada'=> $schedule_armada, 'sewa_bus_category' =>$sewa_bus_category,
-        'armada'=>$armada,'sewa_paket_wisata'=>$sewa_paket_wisata]);
+        return view('scheduleindex',['schedule_armada'=> $schedule_armada,
+        'armada'=>$armada, 'sewa_bus'=>$sewa_bus, 'customer'=>$customer, 'sb'=>$sb]);
     }
 }
 
@@ -160,9 +168,13 @@ class ScheduleController extends Controller
      * @param  \App\sewa_bus  $sewa_bus
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, sewa_bus $sewa_bus)
+    public function update(Request $request)
     {
-        
+        DB::table('schedule_armada')->where('ID_SCHEDULE',$request->ID_SCHEDULE)->update([
+            'STATUS_ARMADA'     => 1
+        ]);
+
+        return redirect('scheduleindex');
     }
 
     public function update_switch(Request $request)

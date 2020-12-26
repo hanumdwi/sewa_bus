@@ -59,13 +59,21 @@ class SewaPaketController extends Controller
 
     public function getAllSchedule()
     {
-        $schedule_armada=DB::table('schedule_armada')
-        ->join('armada', 'schedule_armada.ID_ARMADA', '=', 'armada.ID_ARMADA')
-        ->select(
-        DB::raw('(armada.PLAT_NOMOR) as title'), 
-        DB::raw('(TGL_SEWA) as start'), 
-        DB::raw('(TGL_AKHIR_SEWA) as end'))
+        $schedule_armada=DB::table('vw_schedule_armada')
+        // ->join('armada', 'schedule_armada.ID_ARMADA', '=', 'armada.ID_ARMADA')
+        // ->join('category_armada', 'armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
+        // ->join('sewa_bus','schedule_armada.ID_SEWA_BUS', '=', 'sewa_bus.ID_SEWA_BUS')
+        // ->join('sewa_bus_category','sewa_bus.ID_SEWA_BUS', '=', 'sewa_bus_category.ID_SEWA_BUS')
+        // ->join('pricelist_sewa_armada','sewa_bus_category.ID_PRICELIST', '=', 'pricelist_sewa_armada.ID_PRICELIST')
+        // ->join('customer', 'sewa_bus.ID_CUSTOMER', '=', 'customer.ID_CUSTOMER')
+        // ->select('customer.NAMA_CUSTOMER', 'pricelist_sewa_armada.TUJUAN_SEWA', 'schedule_armada.ID_SCHEDULE',
+        // DB::raw('(armada.PLAT_NOMOR) as title'), 
+        // DB::raw('(schedule_armada.TGL_SEWA) as start'), 
+        // DB::raw('(schedule_armada.TGL_AKHIR_SEWA) as end'),
+        // DB::raw('case when schedule_armada.STATUS_ARMADA=1 then "Selesai" else "On Schedule" end as STATUS_ARMADA'),
+        // DB::raw('case when schedule_armada.STATUS_ARMADA=1 then "bg-danger" else "bg-primary" end as className'),)
         ->get();
+
 
         //$data = array_values($sewa_bus);
         return response()->json($schedule_armada);
@@ -74,14 +82,18 @@ class SewaPaketController extends Controller
     public function getScheduleById($id)
     {
         $schedule_armada=DB::table('schedule_armada')->where('ID_SCHEDULE','=',$id)
-        ->select(
-        DB::raw('(PLAT_NOMOR) as title'), 
-        DB::raw('(TGL_SEWA_BUS) as start'), 
-        DB::raw('(TGL_AKHIR_SEWA) as end'))
+        ->join('armada', 'schedule_armada.ID_ARMADA', '=', 'armada.ID_ARMADA')
+        ->join('category_armada', 'armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
+        ->join('sewa_bus','schedule_armada.ID_SEWA_BUS', '=', 'sewa_bus.ID_SEWA_BUS')
+        ->join('customer', 'sewa_bus.ID_CUSTOMER', '=', 'customer.ID_CUSTOMER')
+        ->select('customer.NAMA_CUSTOMER',
+        DB::raw('(armada.PLAT_NOMOR) as title'), 
+        DB::raw('(schedule_armada.TGL_SEWA) as start'), 
+        DB::raw('(schedule_armada.TGL_AKHIR_SEWA) as end'))
         ->get();
 
         //$data = array_values($sewa_bus);
-        return response()->json($sewa_bus);
+        return response()->json($schedule_armada);
     }
 
     /**

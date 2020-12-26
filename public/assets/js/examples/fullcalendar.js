@@ -104,11 +104,15 @@ $(document).ready(function () {
             }
         },
         dayClick: function () {
-            $('#viewEventModal').modal();
+            $('#createEventModal').modal();
         },
         eventClick: function (event, jsEvent, view) {
             var modal = $('#viewEventModal');
             modal.find('.event-title').html("Schedule");
+            modal.find('.NAMA_CUSTOMER').html(event.NAMA_CUSTOMER);
+            modal.find('.TUJUAN_SEWA').html(event.TUJUAN_SEWA);
+            modal.find('.STATUS_ARMADA').html(event.STATUS_ARMADA);
+            modal.find('#ID_SCHEDULE').val(event.ID_SCHEDULE);
             modal.modal();
         },
     });

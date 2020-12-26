@@ -33,11 +33,15 @@
                     <h6 class="card-title mb-2">Armada</h6>
                     <p class="text-muted">Armada On Schedule</p>
                     <div class="list-group mb-3" id="external-events">
+                    @foreach($schedule_armada as $schdl)
                     @foreach($armada as $ar)
+                    @if($schdl->ID_ARMADA ==  $ar->ID_ARMADA)
                         <div class="list-group-item px-0 fc-event">
                             <i class="fa fa-bus text-success" data-icon="car"></i>
-                            {{$ar->PLAT_NOMOR}}
+                            {{$ar->NAMA_CATEGORY}} - {{$ar->PLAT_NOMOR}}
                         </div>
+                    @endif
+                    @endforeach
                     @endforeach
                     </div>
                     <!-- <div class="custom-control custom-checkbox">
@@ -61,11 +65,54 @@
     </div>
     
     <!-- begin::Create Event Modal -->
-         
-    <!-- end::Create Event Modal -->
+    <div class="modal fade" id="viewEventModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Detail Schedule</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i class="ti-close"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                
+                    <form method="post" autocomplete="off" action="/scheduleupdate">
+                    @csrf
+                    <input type="hidden" name="ID_SCHEDULE" id="ID_SCHEDULE">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Customer</label>
+                            <div class="col-sm-9">
+                                <div class="NAMA_CUSTOMER"></div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Tujuan</label>
+                            <div class="col-sm-9">
+                                <div class="TUJUAN_SEWA"></div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Status Schedule</label>
+                            <div class="col-sm-9">
+                                <div class="STATUS_ARMADA"></div>
+
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label class="col-sm-3"></label>
+                            <div class="col-sm-9">
+                                <button type="submit" id="btn-save" class="btn btn-primary">Update</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- begin::Event Info Modal -->
-    <div class="modal fade" id="viewEventModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="createEventModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">

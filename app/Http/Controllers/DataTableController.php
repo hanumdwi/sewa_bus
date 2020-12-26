@@ -42,18 +42,19 @@ class DataTableController extends Controller
         $category_armada=DB::table('category_armada')->get();
 
         $pricelist_sewa_armada=DB::table('pricelist_sewa_armada')
-        ->join('category_armada', 'pricelist_sewa_armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
-        ->select('pricelist_sewa_armada.ID_PRICELIST', 'category_armada.NAMA_CATEGORY', 'pricelist_sewa_armada.TUJUAN_SEWA', 
-        'pricelist_sewa_armada.PRICELIST_SEWA', 'pricelist_sewa_armada.ID_CATEGORY')
+        ->join('vw_bus_ready', 'vw_bus_ready.ID_CATEGORY', '=', 'pricelist_sewa_armada.ID_CATEGORY')
+        ->select('pricelist_sewa_armada.ID_PRICELIST', 'vw_bus_ready.NAMA_CATEGORY', 'pricelist_sewa_armada.TUJUAN_SEWA', 
+        'pricelist_sewa_armada.PRICELIST_SEWA', 'pricelist_sewa_armada.ID_CATEGORY', 'vw_bus_ready.jmlbis')
         ->get();
 
         $sewa_bus_category=DB::table('sewa_bus_category')
         ->join('sewa_bus','sewa_bus_category.ID_SEWA_BUS', '=', 'sewa_bus.ID_SEWA_BUS')
         ->join('pricelist_sewa_armada','sewa_bus_category.ID_PRICELIST', '=', 'pricelist_sewa_armada.ID_PRICELIST')
         ->join('category_armada', 'pricelist_sewa_armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
-        ->select('sewa_bus_category.ID_SEWA_BUS', 'sewa_bus_category.ID_PRICELIST',
+        ->select('sewa_bus_category.ID_SEWA_BUS', 'sewa_bus_category.ID_PRICELIST', 'sewa_bus_category.id',
         'sewa_bus_category.QUANTITY', 'sewa_bus_category.TOTAL', 
         'category_armada.NAMA_CATEGORY', 'pricelist_sewa_armada.TUJUAN_SEWA', 'pricelist_sewa_armada.PRICELIST_SEWA')
+        ->where('sewa_bus.ID_SEWA_BUS', '=', $id)
         ->get();
 
         $armada=DB::table('armada')
@@ -61,7 +62,7 @@ class DataTableController extends Controller
         ->join('pricelist_sewa_armada', 'pricelist_sewa_armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
         ->join('sewa_bus_category', 'sewa_bus_category.ID_PRICELIST', '=', 'pricelist_sewa_armada.ID_PRICELIST')
         ->leftjoin('schedule_armada', 'armada.ID_ARMADA', '=', 'schedule_armada.ID_ARMADA','and','schedule_armada.STATUS_ARMADA', '=', 1)
-        ->select('armada.ID_ARMADA', 'armada.PLAT_NOMOR', 'category_armada.NAMA_CATEGORY', 'schedule_armada.TGL_SEWA')
+        ->select('armada.ID_ARMADA', 'armada.PLAT_NOMOR', 'category_armada.NAMA_CATEGORY', 'schedule_armada.TGL_SEWA',)
         ->distinct()
         ->get();
         // $armada=DB::table('armada')
@@ -96,9 +97,11 @@ class DataTableController extends Controller
 
         $armada=DB::table('armada')
         ->join('category_armada', 'armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
-        ->leftjoin('schedule_armada', 'armada.ID_ARMADA', '=', 'schedule_armada.ID_ARMADA')
+        ->join('paket_wisata',  'paket_wisata.ID_CATEGORY', '=', 'armada.ID_CATEGORY')
+        ->leftjoin('schedule_armada', 'armada.ID_ARMADA', '=', 'schedule_armada.ID_ARMADA','and', 'schedule_armada.STATUS_ARMADA', '=', 1)
         ->select('armada.ID_ARMADA', 'armada.PLAT_NOMOR', 'category_armada.NAMA_CATEGORY', 'schedule_armada.TGL_SEWA')
-        ->where('armada.STATUS_ARMADA', '=', 1)
+        ->where( 'paket_wisata.ID_PAKET','=', $sewa_paket_wisata->ID_PAKET)
+        ->where('armada.STATUS_ARMADA','=',1)
         // ->where('schedule_armada.STATUS_ARMADA', '=', 1)
         ->get();
 //dd($armada);
@@ -253,11 +256,12 @@ class DataTableController extends Controller
             DB::table('schedule_armada')->insert([
                 'TGL_SEWA'          => $request->TGL_SEWA,
                 'TGL_AKHIR_SEWA'    => $request->TGL_AKHIR_SEWA,
-                'ID_ARMADA'         => $request->ID_ARMADA,
+                'ID_ARMADA'         => $request->ID_ARMADA1,
                 'ID_SEWA_BUS'       => $request->ID_SEWA_BUS,
                 'STATUS_ARMADA'     => 0,
                 'JAM_SEWA'          => $request->JAM_SEWA,
-                'JAM_AKHIR_SEWA'    => $request->JAM_AKHIR_SEWA
+                'JAM_AKHIR_SEWA'    => $request->JAM_AKHIR_SEWA,
+                'id_bus_category'  => $request->id
             ]);
 
             
@@ -432,5 +436,22 @@ class DataTableController extends Controller
         ]);
 
         return redirect('sewa_bus');
+    }
+
+    public function getTujuan(){
+        // $tmp = DB::table('armada')->where('ID_CATEGORY', request()->category)
+        // ->get();
+        
+        $armada=DB::table('armada')
+        ->join('category_armada', 'armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
+        ->join('pricelist_sewa_armada', 'pricelist_sewa_armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
+        ->join('sewa_bus_category', 'sewa_bus_category.ID_PRICELIST', '=', 'pricelist_sewa_armada.ID_PRICELIST')
+        ->leftjoin('schedule_armada', 'armada.ID_ARMADA', '=', 'schedule_armada.ID_ARMADA','and','schedule_armada.STATUS_ARMADA', '=', 1)
+        ->select('armada.ID_ARMADA', 'armada.PLAT_NOMOR', 'category_armada.NAMA_CATEGORY', 'schedule_armada.TGL_SEWA')
+        ->where('sewa_bus_category.ID_PRICELIST', request()->category)
+        ->distinct()
+        ->get();
+
+        return response()->json(['status'=>'success','data'=>$armada]);
     }
 }

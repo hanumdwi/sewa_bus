@@ -209,6 +209,7 @@
                                                                     <th class="datatable-nosort sorting_disabled" rowspan="1" colspan="1">Armada</th>
                                                                     <th class="datatable-nosort sorting_disabled" rowspan="1" colspan="1">Tujuan Sewa</th>
                                                                     <th class="datatable-nosort sorting_disabled" rowspan="1" colspan="1">Price</th>
+                                                                    <th class="datatable-nosort sorting_disabled" rowspan="1" colspan="1">Quantity</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -217,6 +218,7 @@
                                                                     <td value="{{$p->ID_CATEGORY}}">{{ $p->NAMA_CATEGORY }}</td>
                                                                     <td>{{ $p->TUJUAN_SEWA }}</td>
                                                                     <td>Rp. <?php echo number_format($p->PRICELIST_SEWA,'0',',','.'); ?></td>
+                                                                    <td>{{ $p->jmlbis }}</td>
                                                                 </tr>
                                                                 @endforeach
                                                             </tbody>
@@ -301,8 +303,18 @@
 
                         <h3>Schedule Armada</h3>
                         <section class="card card-body border mb-0">
-                            <h5>Schedule Sewa Armada</h5>
-                                
+                            <!-- <h5>Schedule Sewa Armada</h5> -->
+                            <div class="page-header">
+                                <div class="page-title">
+                                    <h3>Schedule Armada</h3>
+                                    <div>
+                                        <button class="btn btn-primary" data-toggle="modal"
+                                                data-target="#createEventModal">
+                                            <i class="ti-plus mr-2"></i> Create Schedule
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                                     <div class="col-md-9 app-content">
                                         <div class="app-content-overlay"></div>
                                         <div class="card app-content-body">
@@ -316,7 +328,7 @@
                                     </div>
                                 </div>
 
-                                <div class="modal fade" id="viewEventModal" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal fade" id="createEventModal" tabindex="-1" role="dialog" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -336,15 +348,24 @@
                                                     <input type="hidden" class="form-control" id="JAM_SEWA" name="JAM_SEWA" value="{{$sewa_bus->JAM_SEWA}}">
                                                     <input type="hidden" class="form-control" id="TGL_AKHIR_SEWA" name="TGL_AKHIR_SEWA" value="{{$sewa_bus->TGL_AKHIR_SEWA}}">
                                                     <input type="hidden" class="form-control" id="TGL_SEWA" name="TGL_SEWA" value="{{$sewa_bus->TGL_SEWA_BUS}}">
-                                                        <label for="ID_ARMADA">Armada</label>
-                                                            <select name="ID_ARMADA" class="form-control" id="ID_ARMADA">
-                                                                @foreach($armada as $c)
-                                                                @if($c->TGL_SEWA != $sewa_bus->TGL_SEWA_BUS) && ($c->TGL_AKHIR_SEWA != $sewa_bus->TGL_AKHIR_SEWA)
-                                                                    <option value="{{$c->ID_ARMADA}}">{{$c->NAMA_CATEGORY}}   -  {{$c->PLAT_NOMOR}}</option>
-                                                                @endif
+                                                        <label for="id">Tujuan</label>
+                                                            <select name="id" class="form-control" id="id1" onchange="getTujuan()">
+                                                                @foreach($sewa_bus_category as $sbc)
+                                                               
+                                                                    <option id="id1{{$sbc->id}}" value="{{$sbc->id}}" data-pricelist="{{$sbc->ID_PRICELIST}}">{{$sbc->TUJUAN_SEWA}}</option>
+                                                                
                                                                 @endforeach                 
                                                             </select>
                                                             </br>
+                                                        <label for="ID_ARMADA1">Armada</label>
+                                                            <select name="ID_ARMADA1" class="form-control" id="ID_ARMADA1">
+                                                                
+                                                                   
+                                                               
+                                                                               
+                                                            </select>
+                                                            </br>
+                                                            
                                                         <button type="submit" class="btn btn-primary" id="berhasil">Add</button>
                                                 </form>
                                             </div>
@@ -364,6 +385,29 @@
 @endsection
 
 @section('script')
+
+<script>
+$(document).ready(function(){
+    function getTujuan(){
+    var cat = document.getElementById('id1').value;
+    var ratings =  $('#id1'+cat).data('pricelist');
+       $.ajax({
+           url:"{{url('armada')}}",
+           data:"category="+ratings,
+           dataType: "json",
+           type: "GET",
+           success:function(response){
+            // alert("Percoban");
+                $('#ID_ARMADA1').empty();
+                 $.each(response.data,function(key,item){
+                     $('#ID_ARMADA1').append('<option id="ID_ARMADA1'+item.ID_ARMADA+'"value="'+item.ID_ARMADA+'">'+item.NAMA_CATEGORY+'-'+item.PLAT_NOMOR+'</option>');
+                 });
+           }
+       });
+   }
+   getTujuan();
+});
+</script>
 
 <script>
 var barang = <?php echo json_encode($pricelist_sewa_armada); ?>;
@@ -535,6 +579,9 @@ var barang = <?php echo json_encode($pricelist_sewa_armada); ?>;
        
         console.log(sisa);
         }
+
+    
+   
 
 </script>
 

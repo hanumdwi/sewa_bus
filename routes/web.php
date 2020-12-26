@@ -129,7 +129,8 @@ Route::post('sewa_busupdate', 'SewaBusController@update');
 
 Route::get('schedulesewa', 'SewaBusController@getAllSchedule');
 Route::get('schedulesewa/{id}', 'SewaBusController@getScheduleById');
-Route::post('updateswitch', 'SewaBusController@update_switch');
+
+// Route::post('updateschedule', 'ScheduleController@update');
 // Route::post('invoice/{id}', 'SewaBusController@update_switch');
 Route::get('sewa_buscetak_pdf/{id}', 'SewaBusController@cetak_pdf');
 //===================================================================================
@@ -172,6 +173,7 @@ Route::post('datatable/{id}','DataTableController@update');
 Route::post('datatable_store/{id}', 'DataTableController@store');
 Route::post('schedule_store', 'DataTableController@store_schedule');
 Route::post('pembayaranstore/{id}', 'DataTableController@store_pembayaran');
+Route::get('armada', 'DataTableController@getTujuan');
 
 Route::post('datatableupdate', 'DataTableController@update');
 Route::get('datatablesewa', 'DataTableController@getAlldatatable');

@@ -167,6 +167,7 @@ class PenggunaController extends Controller
                 Session::put('coba',$data->NAMA_PENGGUNA);
                 Session::put('coba1',$data->JOB_STATUS);
                 Session::put('coba2',$data->ID_PENGGUNA);
+                Session::put('coba3',$data->FOTO);
                     Session::put('login', TRUE);
                     if($data->JOB_STATUS == 'Admin'){
                         Session::put('admin', TRUE);
