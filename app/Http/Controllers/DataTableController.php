@@ -95,14 +95,21 @@ class DataTableController extends Controller
         
         $paket_wisata= Paket_Wisata::find($sewa_paket_wisata->ID_PAKET);
 
+        $x = DB::table('vw_listallschedule')
+        ->where('TGL_SEWA', '>=', $sewa_paket_wisata->TGL_SEWA_PAKET)
+        ->where('TGL_AKHIR_SEWA', '<=', $sewa_paket_wisata->TGL_AKHIR_SEWA_PAKET)
+        ->where('STATUS_ARMADA','=', 0)
+        ->select('vw_listallschedule.ID_ARMADA')
+        ->get();
+        $array = json_decode(json_encode($x),true);
+
         $armada=DB::table('armada')
         ->join('category_armada', 'armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
         ->join('paket_wisata',  'paket_wisata.ID_CATEGORY', '=', 'armada.ID_CATEGORY')
-        ->leftjoin('schedule_armada', 'armada.ID_ARMADA', '=', 'schedule_armada.ID_ARMADA','and', 'schedule_armada.STATUS_ARMADA', '=', 1)
-        ->select('armada.ID_ARMADA', 'armada.PLAT_NOMOR', 'category_armada.NAMA_CATEGORY', 'schedule_armada.TGL_SEWA')
+        ->select('armada.ID_ARMADA', 'armada.PLAT_NOMOR', 'category_armada.NAMA_CATEGORY')
         ->where( 'paket_wisata.ID_PAKET','=', $sewa_paket_wisata->ID_PAKET)
         ->where('armada.STATUS_ARMADA','=',1)
-        // ->where('schedule_armada.STATUS_ARMADA', '=', 1)
+        ->whereNotIn('ID_ARMADA', $array)
         ->get();
 //dd($armada);
         $rekening=DB::table('rekening')->get();

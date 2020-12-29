@@ -51,6 +51,7 @@ public function indexdetail(Request $request, $id)
             return view ('detailbayarbus',['pembayaran' =>$pembayaran, 'rekening' =>$rekening, 
             'customer' =>$customer, 'sewa_bus' =>$sewa_bus]);
 }
+
 public function update_switch_bayar(Request $request)
     {
         $pembayaran=DB::table('pembayaran')->where('id',$request->update1)->value('STATUS_BAYAR','=','1');
@@ -65,7 +66,7 @@ public function update_switch_bayar(Request $request)
                 ->update(['STATUS_BAYAR'=>1]);
         }
         return redirect('konfirmasipembayaran');
-    }
+}
 
 public function cetakKwitansi(){
     $pembayaran=DB::table('pembayaran')
@@ -129,6 +130,22 @@ public function cetakKwitansi_Paket(){
 
     	$pdf = PDF::loadview('printbayarpaket',['pembayaran_paket'=>$pembayaran_paket])->setPaper($customPaper, 'landscape');
     	return $pdf->stream();
+}
+
+public function update_switch_paket(Request $request)
+    {
+        $pembayaran_paket=DB::table('pembayaran_paket')->where('id_paket',$request->update1)->value('STATUS_BAYAR','=','1');
+        if($pembayaran_paket){
+            DB::table('pembayaran_paket')
+                ->where('id_paket',$request->update1)
+                ->update(['STATUS_BAYAR'=>0]);
+        }
+        else{
+            DB::table('pembayaran_paket')
+                ->where('id_paket',$request->update1)
+                ->update(['STATUS_BAYAR'=>1]);
+        }
+        return redirect('konfirmasipembayaran_paket');
 }
     /**
      * Store a newly created resource in storage.

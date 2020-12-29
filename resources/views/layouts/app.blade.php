@@ -609,7 +609,7 @@
                                 Hi! <strong>{{Session::get('coba')}}</strong>
                             </span>
                             <figure class="avatar avatar-sm">
-                                <img src="{{ url('assets/media/image/user/man_avatar3.jpg') }}"
+                                <img src="{{Session::get('coba3')}}"
                                      class="rounded-circle"
                                      alt="avatar">
                             </figure>
@@ -624,9 +624,9 @@
                                 <h5 class="mb-0">{{Session::get('coba')}}</h5>
                             </div>
                             <div class="list-group list-group-flush">
-                                <a href="{{ route('profile') }}" class="list-group-item">Profile</a>
+                                <a href="{{ url('profile',['id'=>Session::get('coba2')]) }}" class="list-group-item">Profile</a>
                                 <a href="#" class="list-group-item" data-sidebar-target="#settings">Settings</a>
-                                <a href="logout" class="list-group-item text-danger">Sign Out!</a>
+                                <a href="{{ url('logout') }}" class="list-group-item text-danger">Sign Out!</a>
                             </div>
                             <div class="pb-0 p-4">
                                 <!-- <div class="mb-4">

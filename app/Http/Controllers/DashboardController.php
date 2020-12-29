@@ -62,21 +62,29 @@ class DashboardController extends Controller
             ->select('pembayaran.*', 'customer.NAMA_CUSTOMER')
             ->get();
 
+            $pembayaran_paket=DB::table('pembayaran_paket')
+            ->join('sewa_paket_wisata', 'pembayaran_paket.ID_SEWA_PAKET', 'sewa_paket_wisata.ID_SEWA_PAKET')
+            ->join('customer', 'sewa_paket_wisata.ID_CUSTOMER', 'customer.ID_CUSTOMER')
+            ->select('pembayaran_paket.*', 'customer.NAMA_CUSTOMER')
+            ->get();
+    
+
             return view('ecommerce-dashboard', ['sewa_bus' =>$sewa_bus,'customer'=>$customer,'pengguna'=>$pengguna,
-            'sewa_paket_wisata' =>$sewa_paket_wisata,'paket_wisata'=>$paket_wisata, 'armada'=>$armada, 'pembayaran' =>$pembayaran]);
+            'sewa_paket_wisata' =>$sewa_paket_wisata,'paket_wisata'=>$paket_wisata, 'armada'=>$armada, 
+            'pembayaran' =>$pembayaran, 'pembayaran_paket' =>$pembayaran_paket]);
         }
     }
     public function update_switch(Request $request)
     {
-        $pembayaran=DB::table('pembayaran')->where('id',$request->id)->value('STATUS_BAYAR','=','1');
+        $pembayaran=DB::table('pembayaran')->where('id',$request->update1)->value('STATUS_BAYAR','=','1');
         if($pembayaran){
             DB::table('pembayaran')
-                ->where('id',$request->id)
+                ->where('id',$request->update1)
                 ->update(['STATUS_BAYAR'=>0]);
         }
         else{
             DB::table('pembayaran')
-                ->where('id',$request->id)
+                ->where('id',$request->update1)
                 ->update(['STATUS_BAYAR'=>1]);
         }
         return redirect('ecommerce-dashboard');

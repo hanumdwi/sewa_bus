@@ -106,9 +106,7 @@
                                     <label for="ID_ARMADA">Armada</label>
                                     <select name="ID_ARMADA" class="form-control" id="ID_ARMADA">
                                         @foreach($armada as $c)
-                                        @if($c->TGL_SEWA != $sewa_paket_wisata->TGL_SEWA_PAKET) && ($c->TGL_AKHIR_SEWA != $sewa_paket_wisata->TGL_AKHIR_SEWA_PAKET)
                                             <option value="{{$c->ID_ARMADA}}">{{$c->NAMA_CATEGORY}}   -  {{$c->PLAT_NOMOR}}</option>
-                                        @endif
                                         @endforeach                 
                                         </select>
                                 </div>

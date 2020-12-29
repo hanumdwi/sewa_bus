@@ -53,8 +53,8 @@
             </li>
         </ul> -->
         <hr>
-        <p class="text-muted">Don't have an account?</p>
-        <a href="{{ route('register') }}" class="btn btn-outline-light">Register now!</a>
+        <!-- <p class="text-muted">Don't have an account?</p>
+        <a href="{{ route('register') }}" class="btn btn-outline-light">Register now!</a> -->
         
     </form>
     <!-- ./ form -->

@@ -23,14 +23,14 @@
 @if(\Session::has('kasir') || \Session::has('admin'))  
 <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title mb-0">Table Category</h6>
+                    <h6 class="card-title mb-0">Table Pembayaran</h6>
                 </div>
                 <div class="table-responsive">
                 
                     <table id="myTable" class="table table-striped table-bordered">
                         <thead>
                         <tr>
-                            <th>Id Pembayaran</th>
+                            <th>Status Pengechekan</th>
                             <th>Id Pembayaran</th>
                             <th>Id Sewa Bus</th>
                             <th>Nama Customer</th>
@@ -82,7 +82,7 @@
                                     </tbody>
                                     <tfoot>
                         <tr>
-                            <th>Id Pembayaran</th>
+                            <th>Status Pengechekan</th>
                             <th>Id Pembayaran</th>
                             <th>Id Sewa Bus</th>
                             <th>Nama Customer</th>

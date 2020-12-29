@@ -79,9 +79,9 @@ class PenggunaController extends Controller
      * @param  \App\customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show(customer $customer)
+    public function recovery(Request $request)
     {
-        //
+        return view ('recovery_pw');
     }
 
     public function profile($id)
@@ -161,13 +161,17 @@ class PenggunaController extends Controller
         $EMAIL_PENGGUNA = $request->EMAIL_PENGGUNA;
         $PASSWORD       = $request->PASSWORD;
 
-        $data = Pengguna::where('EMAIL_PENGGUNA',$EMAIL_PENGGUNA)->first();
+        // $data = Pengguna::where('EMAIL_PENGGUNA',$EMAIL_PENGGUNA)->first();
+        $data = DB::table('pengguna')
+        ->where('EMAIL_PENGGUNA', '=', $EMAIL_PENGGUNA)
+        ->first();
         if($data){
             if($data->PASSWORD==$PASSWORD){
+                $request->session()->put('coba2',$data->ID_PENGGUNA);
                 Session::put('coba',$data->NAMA_PENGGUNA);
                 Session::put('coba1',$data->JOB_STATUS);
-                Session::put('coba2',$data->ID_PENGGUNA);
-                Session::put('coba3',$data->FOTO);
+                //Session::put('coba2','USR001');
+                //Session::put('coba3', '//foto_user//'+$data->FOTO);
                     Session::put('login', TRUE);
                     if($data->JOB_STATUS == 'Admin'){
                         Session::put('admin', TRUE);
@@ -176,6 +180,7 @@ class PenggunaController extends Controller
                         Session::put('kasir', TRUE);
                     }
                     return redirect('ecommerce-dashboard');
+                   // return response()->json($data);
             }
             else{
                 return redirect('login');

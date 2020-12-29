@@ -34,14 +34,10 @@
                     <p class="text-muted">Armada On Schedule</p>
                     <div class="list-group mb-3" id="external-events">
                     @foreach($schedule_armada as $schdl)
-                    @foreach($armada as $ar)
-                    @if($schdl->ID_ARMADA ==  $ar->ID_ARMADA)
-                        <div class="list-group-item px-0 fc-event">
+                        <div class="list-group-item px-0">
                             <i class="fa fa-bus text-success" data-icon="car"></i>
-                            {{$ar->NAMA_CATEGORY}} - {{$ar->PLAT_NOMOR}}
+                                {{$schdl->NAMA_CATEGORY}} - {{$schdl->PLAT_NOMOR}}
                         </div>
-                    @endif
-                    @endforeach
                     @endforeach
                     </div>
                     <!-- <div class="custom-control custom-checkbox">

@@ -7,7 +7,7 @@
     <title>Baston - Responsive Admin Dashboard Template</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ url('assets/media/image/favicon.png') }}"/>
+    <link rel="shortcut icon" href="{{ url('assets/media/image/logo/mdc.png') }}"/>
 
     <!-- Plugin styles -->
     <link rel="stylesheet" href="{{ url('vendors/bundle.css') }}" type="text/css">
@@ -18,8 +18,8 @@
 <body class="form-membership" style="background: url({{ url('assets/media/image/bgd.jpg') }})">
 <!-- Preloader -->
 <div class="preloader">
-    <img class="logo" src="{{ url('assets/media/image/logo/logo.png') }}" alt="logo">
-    <img class="dark-logo" src="{{ url('assets/media/image/logo/dark-logo.png') }}" alt="logo dark">
+    <img class="logo" src="{{ url('assets/media/image/logo/mdc.png') }}" alt="logo">
+    <img class="dark-logo" src="{{ url('assets/media/image/logo/mdc.png') }}" alt="logo dark">
     <div class="preloader-icon"></div>
 </div>
 <!-- ./ Preloader -->
@@ -28,7 +28,7 @@
 
     <!-- logo -->
     <div id="logo">
-        <img class="logo" src="{{ url('assets/media/image/logo/logo.png') }}" alt="logo">
+        <img class="logo" src="{{ url('assets/media/image/logo/mdc.png') }}" alt="logo">
     </div>
     <!-- ./ logo -->
 

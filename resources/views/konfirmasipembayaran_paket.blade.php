@@ -23,13 +23,14 @@
 @if(\Session::has('kasir') || \Session::has('admin'))  
 <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title mb-0">Table Category</h6>
+                    <h6 class="card-title mb-0">Table Pembayaran</h6>
                 </div>
                 <div class="table-responsive">
                 
                     <table id="myTable" class="table table-striped table-bordered">
                         <thead>
                         <tr>
+                            <th>Status Pengechekan</th>
                             <th>Id Pembayaran</th>
                             <th>Id Sewa Paket</th>
                             <th>Nama Customer</th>
@@ -40,6 +41,23 @@
                         <tr>
                         @foreach($pembayaran_paket as $c)
                                     <!-- <tr class="table-light"> -->
+                                    <td>
+                                        <form class="post0" method="post" action="pembayaran_paketupdateswitch">
+                                        @csrf
+                                            <input type="hidden" name="update1" value="{{$c->id_paket}}">
+                                            @if($c -> STATUS_BAYAR == 1)
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" checked id="switch{{$c->id_paket}}">
+                                                <label class="custom-control-label" for="switch{{$c->id_paket}}">New</label>
+                                            </div>
+                                            @else 
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" id="switch{{$c->id_paket}}">
+                                                <label class="custom-control-label" for="switch{{$c->id_paket}}">Done</label>
+                                            </div>
+                                            @endif
+                                        </form>
+                                    </td>
                                     <td>KonfPemb00{{ $c -> id_paket }}</td>
                                     <td>{{ $c -> ID_SEWA_PAKET }}</td>
                                     <td>{{ $c -> NAMA_CUSTOMER }}</td>
@@ -64,6 +82,7 @@
                                     </tbody>
                                     <tfoot>
                         <tr>
+                            <th>Status Pengechekan</th>
                             <th>Id Pembayaran</th>
                             <th>Id Sewa Paket</th>
                             <th>Nama Customer</th>
@@ -87,10 +106,12 @@
     $('#myTable').DataTable();
 });
 
-    function modal(id){
-        const y=document.getElementById(id);
-            $("#exampleModal12").modal();
-        }
+const x = document.getElementsByClassName('post0');
+            for(let i=0;i<x.length;i++){
+                x[i].addEventListener('click',function(){
+                    x[i].submit();
+                });
+            }
 
 </script>
     <!-- Sweet alert -->

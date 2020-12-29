@@ -35,7 +35,7 @@ class ScheduleController extends Controller
         else{
         $armada=DB::table('armada')
         ->join('category_armada', 'armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
-        ->select('category_armada.NAMA_CATEGORY', 'armada.PLAT_NOMOR', 'armada.ID_ARMADA')
+        ->select('category_armada.NAMA_CATEGORY', 'armada.PLAT_NOMOR', 'armada.ID_ARMADA', 'armada.STATUS_ARMADA')
         ->get();
 
 
@@ -48,17 +48,21 @@ class ScheduleController extends Controller
 
         $schedule_armada=DB::table('schedule_armada')
         ->join('armada','schedule_armada.ID_ARMADA', '=', 'armada.ID_ARMADA')
-        ->get();
+        ->join('category_armada', 'armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
+        ->select('category_armada.NAMA_CATEGORY', 'armada.PLAT_NOMOR', 'armada.ID_ARMADA', 'armada.STATUS_ARMADA')
+        ->where('schedule_armada.STATUS_ARMADA', '=', 0)
+        ->orWhere('armada.STATUS_ARMADA', '=', 1)
+        ->distinct()->get();
 
-        $sb=DB::table('schedule_armada')
-        ->join('sewa_bus','schedule_armada.ID_SEWA_BUS', '=', 'sewa_bus.ID_SEWA_BUS')
-        ->join('customer', 'sewa_bus.ID_CUSTOMER', '=', 'customer.ID_CUSTOMER')
-        ->get();
+        // $sb=DB::table('schedule_armada')
+        // ->join('sewa_bus','schedule_armada.ID_SEWA_BUS', '=', 'sewa_bus.ID_SEWA_BUS')
+        // ->join('customer', 'sewa_bus.ID_CUSTOMER', '=', 'customer.ID_CUSTOMER')
+        // ->get();
 
 
         
         return view('scheduleindex',['schedule_armada'=> $schedule_armada,
-        'armada'=>$armada, 'sewa_bus'=>$sewa_bus, 'customer'=>$customer, 'sb'=>$sb]);
+        'armada'=>$armada, 'sewa_bus'=>$sewa_bus, 'customer'=>$customer]);
     }
 }
 

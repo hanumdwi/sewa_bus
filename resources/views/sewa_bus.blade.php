@@ -232,11 +232,6 @@
     $('#myTable').DataTable();
 });
 
-var bulan = new Array('01','02','03','04','05','06','07','08','09','10','11','12');
-var now;
-var day = new Date();
-now = day.getFullYear()+"-"+bulan[day.getMonth()]+"-"+day.getDate();
-document.getElementById('TGL1').value = now;
 
 </script>
     <!-- Sweet alert -->

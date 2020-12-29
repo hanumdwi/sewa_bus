@@ -387,7 +387,6 @@
 @section('script')
 
 <script>
-$(document).ready(function(){
     function getTujuan(){
     var cat = document.getElementById('id1').value;
     var ratings =  $('#id1'+cat).data('pricelist');
@@ -406,7 +405,6 @@ $(document).ready(function(){
        });
    }
    getTujuan();
-});
 </script>
 
 <script>

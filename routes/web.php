@@ -27,6 +27,7 @@ Route::get('profile/{id}', 'PenggunaController@profile');
 
 Route::get('login', 'PenggunaController@login');
 Route::post('postlogin', 'PenggunaController@postlogin');
+Route::get('recovery_pw', 'PenggunaController@recovery');
 
 Route::get('logout', 'PenggunaController@logout');
 
@@ -165,6 +166,7 @@ Route::post('pembayaranupdateswitch', 'PembayaranController@update_switch_bayar'
 Route::get('konfirmasipembayaran_paket', 'PembayaranController@indexpaket');
 Route::get('detailbayarpaket/{id}', 'PembayaranController@paketdetail');
 Route::get('printbayarpaket/{id}', 'PembayaranController@cetakKwitansi_Paket');
+Route::post('pembayaran_paketupdateswitch', 'PembayaranController@update_switch_paket');
 
 
 //Sewa Bus Detail

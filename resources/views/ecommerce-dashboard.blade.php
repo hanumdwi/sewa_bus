@@ -37,7 +37,7 @@
 
     <div class="card">
     <div class="card-body">
-        <h6 class="card-title mb-0">Recent Orders Bus</h6>
+        <h6 class="card-title mb-0">Recent Payments Bus</h6>
     </div>
         <div class="table-responsive">
         <table id="myTable" class="table table-striped table-bordered">
@@ -53,11 +53,12 @@
                         <tbody>
                         <tr>
                         @foreach($pembayaran as $c)
+                        @if($c->STATUS_BAYAR == 1)
                                     <!-- <tr class="table-light"> -->
                                     <td>
                                         <form class="post0" method="post" action="pembayaranupdateswitch">
                                         @csrf
-                                            <input type="hidden" name="id" value="{{$c->id}}">
+                                            <input type="hidden" name="update1" value="{{$c->id}}">
                                             @if($c -> STATUS_BAYAR == 1)
                                             <div class="custom-control custom-switch">
                                                 <input type="checkbox" class="custom-control-input" checked id="switch{{$c->id}}">
@@ -66,7 +67,7 @@
                                             @else 
                                             <div class="custom-control custom-switch">
                                                 <input type="checkbox" class="custom-control-input" id="switch{{$c->id}}">
-                                                <label class="custom-control-label" for="switch{{$c->id}}">Selesai</label>
+                                                <label class="custom-control-label" for="switch{{$c->id}}">Done</label>
                                             </div>
                                             @endif
                                         </form>
@@ -90,6 +91,80 @@
 
                                     </td>
                                     </tr>
+                                    @endif
+                                    @endforeach
+                                    <!-- </tr> -->
+                                    </tbody>
+                                    <tfoot>
+                        <tr>
+                            <th>Status Pengecekan</th>
+                            <th>Id Pembayaran</th>
+                            <th>Id Sewa Bus</th>
+                            <th>Nama Customer</th>
+                            <th>Action</th>
+                        </tr>
+                        </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+    <div class="card-body">
+        <h6 class="card-title mb-0">Recent Payments Packages</h6>
+    </div>
+        <div class="table-responsive">
+        <table id="myTable" class="table table-striped table-bordered">
+        <thead>
+                        <tr>
+                            <th>Status Pengecekan</th>
+                            <th>Id Pembayaran</th>
+                            <th>Id Sewa Paket</th>
+                            <th>Nama Customer</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                        @foreach($pembayaran_paket as $p)
+                        @if($p -> STATUS_BAYAR == 1)
+                                    <!-- <tr class="table-light"> -->
+                                    <td>
+                                        <form class="post0" method="post" action="pembayaran_paketupdateswitch">
+                                        @csrf
+                                            <input type="hidden" name="update1" value="{{$p->id_paket}}">
+                                            @if($p -> STATUS_BAYAR == 1)
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" checked id="switch{{$p->id_paket}}">
+                                                <label class="custom-control-label" for="switch{{$p->id_paket}}">New</label>
+                                            </div>
+                                            @else 
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" id="switch{{$p->id_paket}}">
+                                                <label class="custom-control-label" for="switch{{$p->id_paket}}">Done</label>
+                                            </div>
+                                            @endif
+                                        </form>
+                                    </td>
+                                    <td>KonfPemb00{{ $p -> id_paket }}</td>
+                                    <td>{{ $p -> ID_SEWA_PAKET }}</td>
+                                    <td>{{ $p -> NAMA_CUSTOMER }}</td>
+                                    <td>
+                                    
+                                    <a href="{{ url('detailbayarpaket', ['id_paket'=>$p -> id_paket]) }}">
+                                    <button type="button" class="btn btn-outline-success">
+                                        <i class="ti-money mr-2"></i>Detail
+                                    </button>
+                                    </a>
+
+                                    <a href="{{ url('printbayarpaket', ['id_paket'=>$p -> id_paket]) }}">
+                                    <button type="button" class="btn btn-outline-warning">
+                                        <i class="ti-printer mr-2"></i>Print
+                                    </button>
+                                    </a>
+                                    
+                                    </td>
+                                    </tr>
+                                    @endif
                                     @endforeach
                                     <!-- </tr> -->
                                     </tbody>
@@ -128,6 +203,7 @@
                         <tbody>
                         <tr>
                             @foreach($sewa_bus as $sb)
+                            @if($sb->STATUS_SEWA == 'Booking')
                                     @if($sb -> STATUS_SEWA == 'Booking')
                                     <td><span class="badge bg-success-bright text-secondary">{{ $sb -> STATUS_SEWA}}</span></td>
                                     @endif
@@ -187,6 +263,7 @@
                                             </div>
                                     </td>
                                     </tr>
+                                    @endif
                                     @endforeach
                                     </tbody>
                                     <tfoot>
@@ -229,7 +306,7 @@
                         <tbody>
                         <tr>
                             @foreach($sewa_paket_wisata as $spw)
-
+                            @if($spw->STATUS_PAKET_WISATA == 'Booking')
                                     @if($spw -> STATUS_PAKET_WISATA == 'Booking')
                                     <td><span class="badge bg-success-bright text-secondary">{{ $spw -> STATUS_PAKET_WISATA}}</span></td>
                                     @endif
@@ -290,6 +367,7 @@
                                             </div>
                                     </td>
                                     </tr>
+                                    @endif
                                     @endforeach
                                     <!-- </tr> -->
                                     </tbody>
