@@ -87,11 +87,22 @@
                                 
                                         <div class="col-md-4 mb-3">
                                             <label for="statussewa" class="col-form-label">Status Sewa :</label>
-                                            <select name="statussewa" class="form-control" id="statussewa" value="{{$sewa_bus->STATUS_SEWA}}">
-                                                <option selected="selected">-- Status --</option>
-                                                    <option>Booking</option>
-                                                    <option>On Schedule</option>
-                                                    <option>Lunas</option>
+                                            <select name="statussewa" class="form-control" id="statussewa">
+                                            @if($sewa_bus-> STATUS_SEWA == 'Booking')
+                                                <option selected="selected" value="Booking">Booking</option>
+                                                    <option value="On Schedule">On Schedule</option>
+                                                    <option value="Lunas">Lunas</option>
+                                            @endif
+                                            @if($sewa_bus-> STATUS_SEWA == 'On Schedule')
+                                            <option selected="selected" value="On Schedule">On Schedule</option>
+                                                    <option value="Booking">Booking</option>
+                                                    <option value="Lunas">Lunas</option>
+                                            @endif
+                                            @if($sewa_bus-> STATUS_SEWA == 'Lunas')
+                                            <option selected="selected" value="Lunas">Lunas</option>
+                                                    <option value="On Schedule">On Schedule</option>
+                                                    <option value="Booking">Booking</option>
+                                            @endif
                                             </select>
                                             </div>
                                     </div>

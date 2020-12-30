@@ -87,9 +87,13 @@
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <select name="JOB_STATUS" class="form-control" id="JOB_STATUS" value="{{ $png -> JOB_STATUS }}">
-                                                <option selected="selected">--Pilih Job Status--</option>
-                                                <option>Admin</option>
-                                                <option>Kasir</option>
+                                            @if($png-> JOB_STATUS == 'Admin')
+                                                <option selected="selected" value="Admin">Admin</option>
+                                                <option value="Kasir">Kasir</option>
+                                            @else
+                                                <option selected="selected" value="Kasir">Kasir</option>
+                                                <option value="Admin">Admin</option>
+                                            @endif
                                             </select> 
                                         </div>
                                         <div class="col-lg-6"><input type="file" name="FOTO" class="form-control"></div>
