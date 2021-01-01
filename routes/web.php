@@ -23,6 +23,7 @@ Route::post('pembayaranupdateswitch', 'DashboardController@update_switch');
 // user-manual
 Route::get('user-manual', 'Data2Controller@user_manual');
 Route::get('profile/{id}', 'PenggunaController@profile');
+Route::post('profileupdate', 'PenggunaController@profile_update');
 //====================================================================
 
 Route::get('login', 'PenggunaController@login');

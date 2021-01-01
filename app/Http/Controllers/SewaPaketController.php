@@ -189,6 +189,13 @@ class SewaPaketController extends Controller
             'STATUS_ARMADA'     => 0,
         ]);
 
+        // DB::table('schedule_armada')->where('ID_SEWA_PAKET',$request->ID_SEWA_PAKET)->update([
+        //     'TGL_SEWA'          => $request->TGL_SEWA,
+        //     'TGL_AKHIR_SEWA'    => $request->TGL_AKHIR_SEWA,
+        //     'JAM_SEWA'          => $request->JAM_SEWA,
+        //     'JAM_AKHIR_SEWA'    => $request->JAM_AKHIR_SEWA
+        // ]);
+
 
         return redirect('sewa_paket');
     }

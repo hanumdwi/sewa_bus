@@ -371,28 +371,6 @@ class DataTableController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\category  $category
-     * @return \Illuminate\Http\Response
-     */
-    // public function update(Request $request)
-    // {
-    //     DB::table('category_armada')->where('ID_CATEGORY',$request->id)->update([
-    //         'NAMA_CATEGORY'   => $request->namacategory
-    //     ]);
-
-    //     return redirect('category_armadaindex');
-    // }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\category  $category
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         DB::table('category_armada')->where('ID_CATEGORY',$id)->delete();
@@ -440,6 +418,13 @@ class DataTableController extends Controller
                 'total_payment'     =>  $total,
                 'SISA_SEWA_BUS'     =>  $sisa,
                 'STATUS_SEWA'       => $request->statussewa
+        ]);
+
+        DB::table('schedule_armada')->where('ID_SEWA_BUS',$request->ID_SEWA_BUS)->update([
+            'TGL_SEWA'          => $request->TGL_SEWA,
+            'TGL_AKHIR_SEWA'    => $request->TGL_AKHIR_SEWA,
+            'JAM_SEWA'          => $request->JAM_SEWA,
+            'JAM_AKHIR_SEWA'    => $request->JAM_AKHIR_SEWA
         ]);
 
         return redirect('sewa_bus');

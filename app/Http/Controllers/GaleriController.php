@@ -58,7 +58,9 @@ class GaleriController extends Controller
     
     public function create()
     {
-        $armada = DB::table('armada')->get();
+        $armada = DB::table('armada')
+        ->join('category_armada','armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
+        ->get();
 
         return view('tambahfoto',['armada' =>$armada]);
     }

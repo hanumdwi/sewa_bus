@@ -347,7 +347,7 @@
                         </a>
                     </li>
 
-                    <li class="nav-item dropdown">
+                    <!-- <li class="nav-item dropdown">
                         <a href="#" class="nav-link" title="Notifications" data-toggle="dropdown">
                             <span class="badge badge-danger nav-link-notify">1</span>
                             <i data-feather="bell"></i>
@@ -474,7 +474,7 @@
                                 </ul>
                             </div>
                         </div>
-                    </li>
+                    </li> -->
 
                     <!-- <li class="nav-item">
                         <a href="{{ route('chat') }}" title="Chat" class="nav-link">
@@ -597,22 +597,22 @@
                         </div>
                     </li> -->
 
-                    <li class="nav-item dropdown">
+                    <!-- <li class="nav-item dropdown">
                         <a href="#" class="nav-link" title="Settings" data-sidebar-target="#settings">
                             <i data-feather="settings"></i>
                         </a>
-                    </li>
+                    </li> -->
 
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" title="User menu" data-toggle="dropdown">
                             <span class="mr-2 d-sm-inline d-none">
                                 Hi! <strong>{{Session::get('coba')}}</strong>
                             </span>
-                            <figure class="avatar avatar-sm">
+                            <!-- <figure class="avatar avatar-sm">
                                 <img src="{{Session::get('coba3')}}"
                                      class="rounded-circle"
                                      alt="avatar">
-                            </figure>
+                            </figure> -->
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-big">
                             <div class="text-center py-4"
@@ -625,7 +625,7 @@
                             </div>
                             <div class="list-group list-group-flush">
                                 <a href="{{ url('profile',['id'=>Session::get('coba2')]) }}" class="list-group-item">Profile</a>
-                                <a href="#" class="list-group-item" data-sidebar-target="#settings">Settings</a>
+                                <!-- <a href="#" class="list-group-item" data-sidebar-target="#settings">Settings</a> -->
                                 <a href="{{ url('logout') }}" class="list-group-item text-danger">Sign Out!</a>
                             </div>
                             <div class="pb-0 p-4">
@@ -646,8 +646,8 @@
                                         <span>%25</span>
                                     </h6> -->
                                     <div class="progress" style="height: 5px;">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 40%;"
-                                             aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <!-- <div class="progress-bar bg-success" role="progressbar" style="width: 40%;"
+                                             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div> -->
                                     </div>
                                 </div>
                             </div>

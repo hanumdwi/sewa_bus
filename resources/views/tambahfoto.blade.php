@@ -33,7 +33,7 @@
                                             <select name="ID_ARMADA" class="form-control" id="ID_ARMADA">
                                                 @foreach($armada as $ar)
                                                                                 
-                                                    <option value="{{$ar->ID_ARMADA}}">{{$ar->PLAT_NOMOR}}</option>
+                                                    <option value="{{$ar->ID_ARMADA}}">{{$ar->NAMA_CATEGORY}} - {{$ar->PLAT_NOMOR}}</option>
                                                                                 
                                                 @endforeach                 
                                             </select>

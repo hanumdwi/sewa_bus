@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use DB;
+use Redirect;
 
 class PenggunaController extends Controller
 {
@@ -93,6 +94,17 @@ class PenggunaController extends Controller
         return view('profile',['pengguna' => $pengguna]);
     }
 
+    public function profile_update(Request $request)
+    {
+
+        DB::table('pengguna')->where('ID_PENGGUNA',$request->id)->update([
+            'EMAIL_PENGGUNA'   => $request->email,
+            'PASSWORD'         => $request->password
+        ]);
+
+        return Redirect::back();
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -127,7 +139,7 @@ class PenggunaController extends Controller
         $pengguna->update([
 			'NAMA_PENGGUNA'         => $request->nama,
             'EMAIL_PENGGUNA'        => $request->email,
-            'USERNAME'              => $request->email,
+            'USERNAME'              => $request->username,
             'TELEPHONE_PENGGUNA'    => $request->telephone,
             'ALAMAT_PENGGUNA'       => $request->alamat,
             'PASSWORD'              => $request->password,

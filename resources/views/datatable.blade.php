@@ -68,7 +68,7 @@
                                             
                                         <div class="col-md-4 mb-3">
                                             <label for="TGL_AKHIR_SEWA">End Date :</label>
-                                            <input type="date" class="form-control create-event-datepicker" id="TGL_AKHIR_SEWA" name="TGL_AKHIR_SEWA" value="{{$sewa_bus->TGL_AKHIR_SEWA}}">
+                                            <input type="date" class="form-control" id="TGL_AKHIR_SEWA" name="TGL_AKHIR_SEWA" value="{{$sewa_bus->TGL_AKHIR_SEWA}}">
                                         </div>
                                     </div>
                                         

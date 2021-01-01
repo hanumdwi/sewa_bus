@@ -38,7 +38,7 @@
                             </div>
                         </div>
                    
-                        <div class="col-md-4">
+                        <div class="col-md-8">
                             <div class="d-flex justify-content-between mb-2">
                                 <p class="text-muted mb-0">User</p>
                             </div>
@@ -47,28 +47,68 @@
                             <table id="myTable" class="table table-striped table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>Id User</th>
-                                    <th>Nama User</th>
-                                    <th>Username</th>
-                                    <th>Email User</th>
-                                    <th>Telephone User</th>
-                                    <th>Alamat User</th>
-                                    <th>Password</th>
+                                    <!-- <th>Id User</th> -->
+                                    <th>Nama</th>
+                                    <!-- <th>Username</th> -->
+                                    <th>Email</th>
+                                    <!-- <th>Telephone</th> -->
+                                    <!-- <th>Alamat</th> -->
+                                    <!-- <th>Password</th> -->
                                     <th>Job Status</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
                                 @foreach($pengguna as $png)
                                     <!-- <tr class="table-light"> -->
-                                    <td>{{ $png -> ID_PENGGUNA }}</td>
+                                    <!-- <td>{{ $png -> ID_PENGGUNA }}</td> -->
                                     <td>{{ $png -> NAMA_PENGGUNA }}</td>
-                                    <td>{{ $png -> USERNAME }}</td>
+                                    <!-- <td>{{ $png -> USERNAME }}</td> -->
                                     <td>{{ $png -> EMAIL_PENGGUNA }}</td>
-                                    <td>{{ $png -> TELEPHONE_PENGGUNA }}</td>
-                                    <td>{{ $png -> ALAMAT_PENGGUNA }}</td>
-                                    <td>{{ $png -> PASSWORD }}</td>
+                                    <!-- <td>{{ $png -> TELEPHONE_PENGGUNA }}</td>
+                                    <td>{{ $png -> ALAMAT_PENGGUNA }}</td> -->
+                                    <!-- <td>{{ $png -> PASSWORD }}</td> -->
                                     <td>{{ $png -> JOB_STATUS }}</td>
+                                    <td>
+                                    
+                                    <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit" data-toggle="modal" data-target="#exampleModal12{{$png -> ID_PENGGUNA}}">
+                                        <i class="ti-pencil"></i>
+                                    </button>
+
+                                    <!-- modal -->
+                                    <div class="modal fade" id="exampleModal12{{$png -> ID_PENGGUNA}}" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModal12Label" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModal12Label">Edit Data pengguna</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <i class="ti-close"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="/profileupdate" method="post">
+                                                        {{ csrf_field() }}
+                                                            <input type="hidden" name="id" value="{{ $png->ID_PENGGUNA }}"> <br/>
+                                                                <div class="form-group">
+                                                                    <label for="email" class="col-form-label">Email :</label>
+                                                                        <input type="email" class="form-control" id="email" name="email" value="{{ $png->EMAIL_PENGGUNA }}">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="password" class="col-form-label">Password :</label>
+                                                                        <input type="password" class="form-control" id="password" name="password" value="{{ $png->PASSWORD }}">
+                                                                </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary" id="edit">Save Changes</button>
+                                                </div>
+                                                    </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </td>
                                     </tr>
                                     @endforeach
                                     <!-- </tr> -->

@@ -93,17 +93,17 @@ class ScheduleController extends Controller
         DB::beginTransaction();
         try{
             DB::table('schedule_armada')->insert([
-                'ID_SCHEDULE' => $request->ID_SCHEDULE,
-                'TGL_SEWA' => $request->TGL_SEWA,
-                'TGL_AKHIR_SEWA' => $request->TGL_AKHIR_SEWA,
-                'LAMA_SEWA' => $request->LAMA_SEWA,
-                'ID_ARMADA' => $request->ID_ARMADA,
-                'ID_SEWA_BUS' => $request->ID_SEWA_BUS,
-                'ID_SEWA_PAKET' => $request->ID_SEWA_PAKET,
-                'HARGA_SEWA_BUS' => $request->HARGA_SEWA_BUS,
-                'STATUS_SEWA' => 1,
-                'JAM_SEWA' => $request->JAM_SEWA,
-                'JAM_AKHIR_SEWA' => $request->JAM_AKHIR_SEWA
+                'ID_SCHEDULE'       => $request->ID_SCHEDULE,
+                'TGL_SEWA'          => $request->TGL_SEWA,
+                'TGL_AKHIR_SEWA'    => $request->TGL_AKHIR_SEWA,
+                'LAMA_SEWA'         => $request->LAMA_SEWA,
+                'ID_ARMADA'         => $request->ID_ARMADA,
+                'ID_SEWA_BUS'       => $request->ID_SEWA_BUS,
+                'ID_SEWA_PAKET'     => $request->ID_SEWA_PAKET,
+                'HARGA_SEWA_BUS'    => $request->HARGA_SEWA_BUS,
+                'STATUS_SEWA'       => 1,
+                'JAM_SEWA'          => $request->JAM_SEWA,
+                'JAM_AKHIR_SEWA'    => $request->JAM_AKHIR_SEWA
             ]);
 
             

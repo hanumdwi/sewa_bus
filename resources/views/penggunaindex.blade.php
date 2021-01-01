@@ -98,7 +98,7 @@
                             <th>Email User</th>
                             <th>Telephone User</th>
                             <th>Alamat User</th>
-                            <th>Password</th>
+                            <!-- <th>Password</th> -->
                             <th>Job Status</th>
                             <th>Action</th>
                         </tr>
@@ -113,7 +113,7 @@
                                     <td>{{ $png -> EMAIL_PENGGUNA }}</td>
                                     <td>{{ $png -> TELEPHONE_PENGGUNA }}</td>
                                     <td>{{ $png -> ALAMAT_PENGGUNA }}</td>
-                                    <td>{{ $png -> PASSWORD }}</td>
+                                    <!-- <td>{{ $png -> PASSWORD }}</td> -->
                                     <td>{{ $png -> JOB_STATUS }}</td>
                                     <td>
                                     <a href="{{ url('editpengguna', ['id'=>$png -> ID_PENGGUNA]) }}">
