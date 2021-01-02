@@ -117,7 +117,7 @@
                                     <label for="ID_ARMADA">Armada</label>
                                     <select name="ID_ARMADA" class="form-control" id="ID_ARMADA">
                                         @foreach($armada as $c)
-                                            <option value="{{$c->ID_ARMADA}}">{{$c->NAMA_CATEGORY}}   -  {{$c->PLAT_NOMOR}}</option>
+                                            <option selected="{{$c->ID_PAKET}}" value="{{$c->ID_ARMADA}}">{{$c->NAMA_CATEGORY}}   -  {{$c->PLAT_NOMOR}}</option>
                                         @endforeach                 
                                         </select>
                                 </div>

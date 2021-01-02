@@ -149,6 +149,15 @@
                                             <option>Lunas</option>
                                     </select>
                                     </div>
+
+                                <!-- <div class="form-group">
+                                    <label for="STATUS_PAKET_WISATA" class="col-form-label">Armada :</label>
+                                    <select name="ID_ARMADA" class="form-control" id="ID_ARMADA">
+                                        @foreach($armada as $c)
+                                            <option value="{{$c->ID_ARMADA}}">{{$c->NAMA_CATEGORY}}   -  {{$c->PLAT_NOMOR}}</option>
+                                        @endforeach                 
+                                        </select>
+                                    </div> -->
                                 
                             </div>
                             <div class="modal-footer">

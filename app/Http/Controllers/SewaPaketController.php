@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\sewa_paket_wisata;
 use App\rekening;
 use App\pembayaran_paket;
+use App\paket_wisata;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -43,6 +44,23 @@ class SewaPaketController extends Controller
         ->select('armada.ID_ARMADA', 'armada.PLAT_NOMOR', 'category_armada.NAMA_CATEGORY')
         ->where('schedule_armada.STATUS_ARMADA', '=', 1)
         ->get();
+        
+        // $x = DB::table('vw_listallschedule')
+        // ->where('TGL_SEWA', '>=', 'sewa_paket_wisata.TGL_SEWA_PAKET')
+        // ->where('TGL_AKHIR_SEWA', '<=', 'sewa_paket_wisata.TGL_AKHIR_SEWA_PAKET')
+        // ->where('STATUS_ARMADA','=', 0)
+        // ->select('vw_listallschedule.ID_ARMADA')
+        // ->get();
+        // $array = json_decode(json_encode($x),true);
+
+        // $armada=DB::table('armada')
+        // ->join('category_armada', 'armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
+        // ->join('paket_wisata',  'paket_wisata.ID_CATEGORY', '=', 'armada.ID_CATEGORY')
+        // ->select('armada.ID_ARMADA', 'armada.PLAT_NOMOR', 'category_armada.NAMA_CATEGORY')
+        // ->where( 'paket_wisata.ID_PAKET','=', 'sewa_paket_wisata.ID_PAKET')
+        // ->where('armada.STATUS_ARMADA','=',1)
+        // ->whereNotIn('ID_ARMADA', $array)
+        // ->get();
 
         
 
@@ -127,6 +145,16 @@ class SewaPaketController extends Controller
                 'STATUS_PAKET_WISATA'   =>  $request->STATUS_PAKET_WISATA
             ]);
 
+            // DB::table('schedule_armada')->insert([
+            //     'ID_SEWA_PAKET'     => $request->ID_SEWA_PAKET,
+            //     'ID_ARMADA'         => $request->ID_ARMADA,
+            //     'TGL_SEWA'          => $request->TGL_SEWA_PAKET,
+            //     'TGL_AKHIR_SEWA'    => $request->TGL_AKHIR_SEWA_PAKET,
+            //     'JAM_SEWA'          => $request->JAM_SEWA_PAKET,
+            //     'JAM_AKHIR_SEWA'    => $request->JAM_AKHIR_SEWA_PAKET,
+            //     'STATUS_ARMADA'     => 0,
+            // ]);
+
              return redirect('sewa_paket')->with('insert','data berhasil di tambah');
     }
 
@@ -178,6 +206,8 @@ class SewaPaketController extends Controller
                 'SISA_SEWA_PAKET'       => $request->sisabayar
                 // 'DP_PAKET'              =>  $request->DP_PAKET
         ]);
+
+        DB::table('schedule_armada')->where('ID_SEWA_PAKET',$request->ID_SEWA_PAKET)->delete();
 
         DB::table('schedule_armada')->insert([
             'ID_SEWA_PAKET'     => $request->ID_SEWA_PAKET,

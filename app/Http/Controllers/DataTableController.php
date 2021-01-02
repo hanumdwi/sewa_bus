@@ -106,7 +106,7 @@ class DataTableController extends Controller
         $armada=DB::table('armada')
         ->join('category_armada', 'armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
         ->join('paket_wisata',  'paket_wisata.ID_CATEGORY', '=', 'armada.ID_CATEGORY')
-        ->select('armada.ID_ARMADA', 'armada.PLAT_NOMOR', 'category_armada.NAMA_CATEGORY')
+        ->select('armada.ID_ARMADA', 'armada.PLAT_NOMOR', 'category_armada.NAMA_CATEGORY', 'paket_wisata.ID_PAKET')
         ->where( 'paket_wisata.ID_PAKET','=', $sewa_paket_wisata->ID_PAKET)
         ->where('armada.STATUS_ARMADA','=',1)
         ->whereNotIn('ID_ARMADA', $array)
