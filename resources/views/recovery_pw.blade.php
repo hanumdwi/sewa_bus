@@ -5,7 +5,8 @@
     <h5>Reset password</h5>
 
     <!-- form -->
-    <form>
+    <form action=" {{ url('email/send') }}" method="POST">
+    {{ csrf_field() }}
         <div class="form-group">
             <input type="text" class="form-control" placeholder="Username or email" required autofocus>
         </div>

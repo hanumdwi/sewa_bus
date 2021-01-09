@@ -22,10 +22,10 @@ class PaketWisataController extends Controller
             return redirect('login');
         }
         else{
-        $paket_wisata = DB::table('paket_wisata')
-        ->get();
+        $sewa_paket_wisata = DB::table('sewa_paket_wisata')->get();
+        $paket_wisata = DB::table('paket_wisata')->get();
 
-        return view ('paketwisataindex',['paket_wisata' =>$paket_wisata]);
+        return view ('paketwisataindex',['paket_wisata' =>$paket_wisata, 'sewa_paket_wisata' =>$sewa_paket_wisata]);
     }
 }
 

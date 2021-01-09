@@ -21,10 +21,11 @@ class CategoryController extends Controller
             return redirect('login');
         }
         else{
+        $armada = DB::table('armada')->get();
         $category_armada=DB::table('category_armada')->get();
 
 
-        return view('category_armadaindex', ['category_armada' =>$category_armada]);
+        return view('category_armadaindex', ['category_armada' =>$category_armada, 'armada' =>$armada]);
     }
 }
 

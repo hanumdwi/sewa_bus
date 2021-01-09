@@ -89,11 +89,17 @@ class DataTableController extends Controller
             return redirect('login');
         }
         else{
-        $sewa_paket_wisata= Sewa_Paket_Wisata::find($id);
+            $sewa_paket_wisata=DB::table('sewa_paket_wisata')
+        ->join('schedule_armada', 'sewa_paket_wisata.ID_SEWA_PAKET', '=', 'schedule_armada.ID_SEWA_PAKET')
+        ->where( 'sewa_paket_wisata.ID_SEWA_PAKET','=', $id)
+        ->first();
+        // $sewa_paket_wisata= Sewa_Paket_Wisata::find($id);
         $pengguna= Pengguna::find($sewa_paket_wisata->ID_PENGGUNA);
         $customer= Customer::find($sewa_paket_wisata->ID_CUSTOMER);
         
         $paket_wisata= Paket_Wisata::find($sewa_paket_wisata->ID_PAKET);
+
+        
 
         $x = DB::table('vw_listallschedule')
         ->where('TGL_SEWA', '>=', $sewa_paket_wisata->TGL_SEWA_PAKET)
@@ -122,7 +128,7 @@ class DataTableController extends Controller
         'customer'=>$customer,'paket_wisata'=>$paket_wisata, 'armada'=>$armada, 
         'pembayaran_paket'=>$pembayaran_paket, 'rekening'=>$rekening]);
         // return response()->json( ['sewa_paket_wisata' =>$sewa_paket_wisata,'pengguna'=>$pengguna,
-        // 'customer'=>$customer,'paket_wisata'=>$paket_wisata, 'armada'=>$armada]);
+        // 'customer'=>$customer,'paket_wisata'=>$paket_wisata, 'armada'=>$armada, 'pembayaran_paket'=>$pembayaran_paket, 'rekening'=>$rekening]);
     }
 }
     /**

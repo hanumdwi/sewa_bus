@@ -866,7 +866,7 @@
                                 <span>Sewa Paket Wisata</span>
                             </a>
                         </li>
-                        <li class="navigation-divider">Invoice Sewa</li>
+                        <!-- <li class="navigation-divider">Invoice Sewa</li>
                         <li>
                             <a  class="active" href="{{ url('invoice') }}">
                                 <span class="nav-link-icon" data-feather="file"></span>
@@ -878,7 +878,7 @@
                                 <span class="nav-link-icon" data-feather="file"></span>
                                 <span>Paket Wisata</span>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="navigation-divider">Pembayaran</li>
                         <li>
                             <a  class="active" href="{{ url('rekening') }}">

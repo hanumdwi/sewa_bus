@@ -231,7 +231,7 @@
                             <th>Email User</th>
                             <th>Telephone User</th>
                             <th>Alamat User</th>
-                            <th>Password</th>
+                            <!-- <th>Password</th> -->
                             <th>Job Status</th>
                             <th>Action</th>
                         </tr>

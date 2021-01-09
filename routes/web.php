@@ -17,6 +17,9 @@ Route::get('/', function () {
     return view('ecommerce-dashboard');
 })->name('index');
 
+Route::get('formmail','SendMailController@index');
+Route::post('email/send','SendMailController@send');
+
 Route::get('ecommerce-dashboard', 'DashboardController@index');
 Route::post('pembayaranupdateswitch', 'DashboardController@update_switch');
 // Download File
@@ -29,6 +32,13 @@ Route::post('profileupdate', 'PenggunaController@profile_update');
 Route::get('login', 'PenggunaController@login');
 Route::post('postlogin', 'PenggunaController@postlogin');
 Route::get('recovery_pw', 'PenggunaController@recovery');
+
+Route::get('pemulihan_pw', 'PenggunaController@pemulihan');
+Route::get('pertanyaan', 'PenggunaController@pertanyaan');
+Route::post('pw_update', 'PenggunaController@pw_update');
+
+Route::get('ganti_pw/{email}', 'PenggunaController@ganti_pw')->name('ganti_pw');
+Route::post('sandi_update', 'PenggunaController@sandi_update');
 
 Route::get('logout', 'PenggunaController@logout');
 

@@ -22,10 +22,12 @@ class CustomerController extends Controller
         }
         else{
         $customer=DB::table('customer')->get();
+        $sewa_bus=DB::table('sewa_bus')->get();
+        $sewa_paket_wisata=DB::table('sewa_paket_wisata')->get();
 
 
 
-        return view('customerindex', ['customer' =>$customer]);
+        return view('customerindex', ['customer' =>$customer, 'sewa_bus' =>$sewa_bus, 'sewa_paket_wisata' =>$sewa_paket_wisata]);
     }
 }
 

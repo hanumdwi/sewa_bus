@@ -22,6 +22,7 @@ class PricelistSewaArmadaController extends Controller
             return redirect('login');
         }
         else{
+        $sewa_bus_category=DB::table('sewa_bus_category')->get();
         $category_armada = DB::table('category_armada')->get();
         $pricelist_sewa_armada=DB::table('pricelist_sewa_armada')
         ->join('category_armada','pricelist_sewa_armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
@@ -30,7 +31,8 @@ class PricelistSewaArmadaController extends Controller
         ->get();
 
 
-        return view('pricelistsewaarmada', ['pricelist_sewa_armada' =>$pricelist_sewa_armada, 'category_armada' =>$category_armada]);
+        return view('pricelistsewaarmada', ['pricelist_sewa_armada' =>$pricelist_sewa_armada, 
+        'category_armada' =>$category_armada, 'sewa_bus_category' =>$sewa_bus_category]);
     }
 }
 

@@ -77,7 +77,7 @@ class SewaPaketController extends Controller
 
     public function getAllSchedule()
     {
-        $schedule_armada=DB::table('vw_schedule_armada_paket')
+        $schedule_armada=DB::table('vw_tampil_schedule')
         // ->join('armada', 'schedule_armada.ID_ARMADA', '=', 'armada.ID_ARMADA')
         // ->join('category_armada', 'armada.ID_CATEGORY', '=', 'category_armada.ID_CATEGORY')
         // ->join('sewa_bus','schedule_armada.ID_SEWA_BUS', '=', 'sewa_bus.ID_SEWA_BUS')

@@ -61,10 +61,12 @@ class PenggunaController extends Controller
         
         $pengguna->NAMA_PENGGUNA         = $request->nama;
         $pengguna->EMAIL_PENGGUNA        = $request->email;
-        $pengguna->USERNAME              = $request->email;
+        $pengguna->USERNAME              = $request->username;
         $pengguna->TELEPHONE_PENGGUNA    = $request->telephone;
         $pengguna->ALAMAT_PENGGUNA       = $request->alamat;
-        $pengguna->PASSWORD              = $request->password;
+        $pengguna->PASSWORD              = Hash::make($request->password);
+        $pengguna->PERTANYAAN            = $request->pertanyaan;
+        $pengguna->JAWABAN               = $request->jawaban;
         $pengguna->JOB_STATUS            = $request->JOB_STATUS;
         $pengguna->FOTO                  = $fileName;
         $file->move(public_path().'/foto_user', $fileName);
@@ -83,6 +85,61 @@ class PenggunaController extends Controller
     public function recovery(Request $request)
     {
         return view ('recovery_pw');
+    }
+
+    public function pemulihan(Request $request)
+    {
+        $pengguna = DB::table('pengguna')->get();
+
+        return view ('pemulihan_pw', ['pengguna' => $pengguna]);
+    }
+
+    public function ganti_pw($email)
+    {
+        $pengguna = DB::table('pengguna')->where('ID_PENGGUNA', '=', $email)
+        ->first();
+
+        return view ('ganti_pw', ['pengguna' => $pengguna]);
+    }
+
+    public function pertanyaan()
+    {
+        $pengguna = DB::table('pengguna')->where('EMAIL_PENGGUNA',request()->email)->get();
+
+        return response()->json(['status'=>'success','data'=>$pengguna]);
+        // return view ('pemulihan_pw', ['pengguna' => $pengguna]);
+    }
+
+    public function pw_update(Request $request)
+    {
+        $EMAIL_PENGGUNA     = $request->EMAIL_PENGGUNA;
+        $PERTANYAAN         = $request->PERTANYAAN;
+        $JAWABAN            = $request->JAWABAN;
+
+        // $data = Pengguna::where('EMAIL_PENGGUNA',$EMAIL_PENGGUNA)->first();
+        $data = DB::table('pengguna')
+        ->where('JAWABAN', '=', $JAWABAN)
+        ->first();
+        
+        if($data){
+                return redirect()->route('ganti_pw',$data->ID_PENGGUNA);
+        }
+
+        // DB::table('pengguna')->where('ID_PENGGUNA',$request->id)->update([
+        //     'EMAIL_PENGGUNA'   => $request->email,
+        //     'PASSWORD'         => $request->password
+        // ]);
+
+        return view ('login');
+    }
+
+    public function sandi_update(Request $request)
+    {
+        DB::table('pengguna')->where('ID_PENGGUNA',$request->id)->update([
+            'PASSWORD'   => Hash::make($request->password)
+        ]);
+		// alihkan halaman ke halaman customer
+		return redirect('login');
     }
 
     public function profile($id)
@@ -142,7 +199,9 @@ class PenggunaController extends Controller
             'USERNAME'              => $request->username,
             'TELEPHONE_PENGGUNA'    => $request->telephone,
             'ALAMAT_PENGGUNA'       => $request->alamat,
-            'PASSWORD'              => $request->password,
+            'PASSWORD'              => Hash::make($request->password),
+            'PERTANYAAN'            => $request->pertanyaan,
+            'JAWABAN'               => $request->jawaban,
             'JOB_STATUS'            => $request->JOB_STATUS,
             'FOTO'                  => $filename
 		]);
@@ -178,7 +237,7 @@ class PenggunaController extends Controller
         ->where('EMAIL_PENGGUNA', '=', $EMAIL_PENGGUNA)
         ->first();
         if($data){
-            if($data->PASSWORD==$PASSWORD){
+            if(Hash::check($PASSWORD,$data->PASSWORD)){
                 $request->session()->put('coba2',$data->ID_PENGGUNA);
                 Session::put('coba',$data->NAMA_PENGGUNA);
                 Session::put('coba1',$data->JOB_STATUS);
