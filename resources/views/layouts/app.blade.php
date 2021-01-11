@@ -828,11 +828,19 @@
                             </a>
                         </li>
 
-                        <li class="navigation-divider">Galeri</li>
+                        <!-- <li class="navigation-divider">Galeri</li>
                         <li>
                             <a  class="active" href="{{ url('galeriindex') }}">
                                 <span class="nav-link-icon" data-feather="image"></span>
                                 <span>Galeri Armada</span>
+                            </a>
+                        </li> -->
+
+                        <li class="navigation-divider">Testimony</li>
+                        <li>
+                            <a  class="active" href="{{ url('testimony') }}">
+                                <span class="nav-link-icon" data-feather="star"></span>
+                                <span>Testimony</span>
                             </a>
                         </li>
                     

@@ -158,6 +158,43 @@
                                     <!-- <td>{{ $ar -> FASILITAS_ARMADA }}</td> -->
                                    
                                     <td>
+                                    @php $x=0; @endphp
+                                        @foreach($schedule_armada as $schdl)
+                                            @if($ar->ID_ARMADA == $schdl->ID_ARMADA)
+                                    @php $x=1; @endphp
+                                            @endif
+                                        @endforeach
+
+                                    @if($x==1)
+                                    <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit" data-toggle="modal" data-target="#tampil">
+                                                <i class="ti-pencil"></i>
+                                            </button>
+
+                                            <button type="button" class="btn btn-outline-danger btn-sm btn-floating ml-2" title="Delete" data-toggle="modal" data-target="#tampil">
+                                                <i class="ti-trash"></i>
+                                            </button>
+
+                                            <div class="modal" id="tampil" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content border">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Modal title</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <i class="ti-close"></i>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Sorry, data sedang digunakan</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    @else
+
                                     @if($ar -> STATUS_ARMADA == 1)
                                     <a href="{{ url('editarmada', ['id'=>$ar -> ID_ARMADA]) }}">
                                     <button type="button" class="btn btn-outline-success btn-sm btn-floating" title="Edit">
@@ -188,7 +225,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @endif
+                                        @endif
                                     
                                     
                                     <button type="button" class="btn btn-outline-danger btn-sm btn-floating ml-2" title="Delete" data-toggle="modal" data-target="#exampleModal13{{$ar -> ID_ARMADA}}">
@@ -221,6 +258,8 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            
+                                            @endif
                                     </td>
                                     <!-- <td>{{ $ar -> avatar }}</td>
                                     <td>

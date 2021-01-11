@@ -17,7 +17,7 @@
         <div class="form-group d-flex justify-content-between align-items-center">
             <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" checked="" id="customCheck1">
-                <label class="custom-control-label" for="customCheck1">Remember me</label>
+                <!-- <label class="custom-control-label" for="customCheck1">Remember me</label> -->
             </div>
             <a class="small" href="{{ url('pemulihan_pw') }}">Reset password</a>
         </div>

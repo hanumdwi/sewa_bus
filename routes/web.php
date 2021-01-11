@@ -109,6 +109,13 @@ Route::get('galeridestroy/{id}', 'GaleriController@destroy');
 Route::post('galeriupdateswitch', 'GaleriController@update_switch');
 //================================================================================
 
+//========== Testimony ===========
+Route::get('testimony', 'TestimonyController@index');
+Route::post('testimony_store', 'TestimonyController@store');
+Route::post('testimony_update', 'TestimonyController@update');
+Route::get('testimony_destroy/{id}', 'TestimonyController@destroy');
+Route::post('testimony_updateswitch', 'TestimonyController@update_switch');
+
 //Category Armada
 Route::get('category_armadaindex','CategoryController@index');
 Route::post('category_armadastore', 'CategoryController@store');
